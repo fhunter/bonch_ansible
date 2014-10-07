@@ -1,0 +1,7 @@
+---
+  - hosts: a445
+    remote_user: root
+    tasks:
+    - name: deploy admin access
+      copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+
