@@ -1,0 +1,11 @@
+# Выключение лаборатории 445
+#
+---
+
+- hosts: a445
+  user: root
+
+  tasks:
+
+    - name: Power off
+      action: command /sbin/poweroff
