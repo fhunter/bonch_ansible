@@ -38,6 +38,8 @@
     repo_url: git://eniac.dcti.sut.ru/srv/ansible/
 
   tasks:
+    - name: Adde wheezy-backports repo
+      action: apt_repository repo='deb http://mirror.mephi.ru/debian/ wheezy-backports main' state=present 
 
     - name: Install ansible
       action: apt name=ansible state=installed
@@ -54,3 +56,8 @@
 
     - name: Create logrotate entry for ansible-pull.log
       action: template src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
+
+    - name: Add eniac's ssh key to /etc/ssh/ssh_known_hosts
+      shell: ssh-keyscan > /etc/ssh/ssh_known_hosts
+      args:
+       creates: /etc/ssh/ssh_known_hosts
