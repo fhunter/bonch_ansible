@@ -1,0 +1,2 @@
+   - name: Add local PIVT repo to machine
+     action: apt_repository repo='deb http://apt.dcti.sut.ru/debian/ bonch essential' state=present 
