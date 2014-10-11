@@ -1,7 +1,24 @@
 ---
   - hosts: a445
+    vars:
+      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
+        
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
+    - name: install packages for time sync
+      action: apt name=openntpd state=installed
+
+    - name: Install openntpd config
+      template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
+      notify: restart openntpd
+
+    - name: Install openntpd defaults
+      copy: src=files/a445/etc/default/openntpd dest=/etc/default/openntpd
+      notify: restart openntpd
+
+    handlers:
+    - name: restart openntpd
+      service: name=openntpd state=restarted
