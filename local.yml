@@ -19,6 +19,8 @@
       copy: src=files/a445/etc/default/openntpd dest=/etc/default/openntpd
       notify: restart openntpd
 
+    - include: tasks/addlocalrepo.yml
+
     handlers:
     - name: restart openntpd
       service: name=openntpd state=restarted
