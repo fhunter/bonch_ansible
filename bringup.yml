@@ -13,8 +13,67 @@
        - krb5-user
        - krb5-clients
        - libpam-krb5
+    
+    - name: install autofs packages
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - autofs
+    
+    - name: update autofs config
+      lineinfile: dest=/etc/auto.master line="/net    /etc/auto.net" insertbefore="\+auto.master"
+      notify: restart autofs
+
+    - name: make home directories link
+      shell: "mkdir /afs;cd /afs;ln -s /net/eniac.dcti.sut.ru/srv/nfs4/homes/ dcti.sut.ru"
+      args:
+        creates: "/afs/dcti.sut.ru"
+
+    - name: enable quota applet
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - quota
+       - python-glade2
+       - python-eggtrayicon
 
     - include: tasks/addlocalrepo.yml
+
+    - name: install base packages
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - xdm
+       - xserver-xorg
+      notify: restart xdm
+
+    - name: install DCTI packages
+      action: apt pkg={{item}} state=installed install_recommends=no
+      with_items:
+       - dia
+       - scribus
+       - librecad
+       - ristretto
+       - xfce4
+       - xfwm4-themes
+       - xfce4-utils
+       - xdg-user-dirs
+       - xfdesktop4
+       - xfprint4
+       - dosemu
+       - codeblocks
+       - ipython
+       - xfce4-session
+       - inkscape
+       - libreoffice
+       - xterm
+       - wxmaxima
+       - lazarus
+       - fpc
+       - netsurf-gtk
+       - iceweasel
+       - chromium
+       - gnome-extra-icons
+       - netbeans
+       - dfu-util
+       - minicom
     
     - name: deploy nsswitch configuration files
       copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
@@ -41,3 +100,5 @@
 
     handlers:
     - include: handlers/restartopenntpd.yml
+    - include: handlers/restartxdm.yml
+    - include: handlers/restartautofs.yml
