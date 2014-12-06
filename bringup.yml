@@ -70,6 +70,7 @@
        - netsurf-gtk
        - iceweasel
        - chromium
+       - virtualbox
        - gnome-extra-icons
        - gnome-icon-theme
        - netbeans
