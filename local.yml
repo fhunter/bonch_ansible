@@ -21,6 +21,8 @@
 
     - include: tasks/addlocalrepo.yml
 
+    - include: tasks/addemdebianrepo.yml
+
     handlers:
     - name: restart openntpd
       service: name=openntpd state=restarted
