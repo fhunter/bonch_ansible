@@ -71,7 +71,9 @@
        - iceweasel
        - chromium
        - gnome-extra-icons
+       - gnome-icon-theme
        - netbeans
+       - build-essential
        - dfu-util
        - minicom
     
