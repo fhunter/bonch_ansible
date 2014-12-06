@@ -76,6 +76,8 @@
        - build-essential
        - dfu-util
        - minicom
+       - vim
+       - vim-gtk
     
     - name: deploy nsswitch configuration files
       copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
@@ -88,6 +90,15 @@
 
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+
+    - name: fix pam configs for session
+      copy: src=files/a441/etc/pam.d/common-session dest=/etc/pam.d/commion-sessiion owner=root group=root mode="0644"
+
+    - name: add pam group config
+      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
+
+    - name: fix pam configs for auth
+      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
     - name: install packages for time sync
       action: apt name=openntpd state=installed
