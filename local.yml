@@ -23,6 +23,8 @@
 
     - include: tasks/addemdebianrepo.yml
 
+    - include: tasks/install_arm_toolchain.yml
+
     handlers:
     - name: restart openntpd
       service: name=openntpd state=restarted

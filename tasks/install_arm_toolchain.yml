@@ -1,0 +1,6 @@
+   - name: Install arm toolchain
+     action: apt pkg={{item}} state=installed
+     with_items:
+       - gcc-4.7-arm-linux-gnueabi
+       - g++-4.7-arm-linux-gnueabi
+
