@@ -1,4 +1,8 @@
-   - name: Add local PIVT repo to machine
+   - name: Add key for local PIVT repo to machine
      action: apt_key url=http://apt.dcti.sut.ru/apt.gpg state=present
+
+   - name: Remove old repo
      action: apt_repository repo='deb http://apt.dcti.sut.ru/debian/ bonch essential' state=absent
+
+   - name: Add new repo
      action: apt_repository repo='deb http://apt.dcti.sut.ru/debian/ bonch main' state=present
