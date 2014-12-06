@@ -44,6 +44,9 @@
        - xserver-xorg
       notify: restart xdm
 
+    - name: install linux linux-headers
+      action: apt pkg=linux-headers-{{ansible_kernel}} state=installed
+
     - name: install DCTI packages
       action: apt pkg={{item}} state=installed install_recommends=no
       with_items:
@@ -71,6 +74,10 @@
        - iceweasel
        - chromium
        - virtualbox
+       - virtualbox-qt
+       - virtualbox-dkms
+       - virtualbox-source
+       - fakeroot
        - gnome-extra-icons
        - gnome-icon-theme
        - netbeans
