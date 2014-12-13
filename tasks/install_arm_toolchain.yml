@@ -1,6 +1,10 @@
-   - name: Install arm toolchain
-     action: apt pkg={{item}} state=installed
+   - name: Deinstall arm toolchain
+     action: apt pkg={{item}} state=absent
      with_items:
        - gcc-4.7-arm-linux-gnueabi
        - g++-4.7-arm-linux-gnueabi
 
+   - name: Install arm toolchain
+     action: apt pkg={{item}} state=present
+     with_items:
+       - arm-none-eabi-toolchain
