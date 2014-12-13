@@ -5,6 +5,6 @@
        - g++-4.7-arm-linux-gnueabi
 
    - name: Install arm toolchain
-     action: apt pkg={{item}} state=present update_cache=yes
+     action: apt pkg={{item}} state=installed update_cache=yes
      with_items:
-       - arm-none-eabi-toolchain
+       - arm-none-eabi-toolchain:i386
