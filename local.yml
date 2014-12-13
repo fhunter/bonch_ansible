@@ -10,6 +10,9 @@
 
     - name: install packages for time sync
       action: apt name=openntpd state=installed
+    
+    - name: install packages for gss api auth to work
+      action: apt name=libsasl2-modules-gssapi-mit state=installed
 
     - name: Install openntpd config
       template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
