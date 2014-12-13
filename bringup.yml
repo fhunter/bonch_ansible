@@ -54,6 +54,7 @@
        - scribus
        - librecad
        - ristretto
+       - libsasl2-modules-gssapi-mit
        - xfce4
        - xfwm4-themes
        - xfce4-utils
