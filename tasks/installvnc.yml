@@ -1,0 +1,2 @@
+   - name: Install vnc
+     action: apt name=vncviewer state=present update_cache=yes

@@ -1,0 +1,2 @@
+   - name: Fix xsession-errors generation
+     lineinfile: dest=/etc/X11/Xsession line='ERRFILE=/tmp/xsession-$USER' state=present backrefs=yes regexp='^ERRFILE=.*'

@@ -51,6 +51,7 @@
       action: apt pkg={{item}} state=installed install_recommends=no
       with_items:
        - dia
+       - runit
        - scribus
        - librecad
        - ristretto
