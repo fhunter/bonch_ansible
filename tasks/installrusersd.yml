@@ -1,0 +1,2 @@
+   - name: Install vnc
+     action: apt name=rusersd state=present update_cache=yes

@@ -32,6 +32,8 @@
 
     - include: tasks/installvnc.yml
 
+    - include: tasks/installrusersd.yml
+
     handlers:
     - name: restart openntpd
       service: name=openntpd state=restarted
