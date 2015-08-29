@@ -1,0 +1,20 @@
+   - name: Install pptp and pppd
+     action: apt pkg={{item}} state=present
+     with_items:
+       - ppp
+       - pptp-linux
+
+   - name: Set the rights right
+     action: file path=/usr/sbin/pptp mode=104755
+  
+   - name: Put config files in proper places
+     template: dest=/etc/ppp/peers/internet src=files/common/etc/ppp/peers/internet.j2 owner=root
+
+   - name: Put config files in proper places
+     template: dest=/etc/ppp/options.pptp src=files/common/etc/ppp/options.pptp.j2 owner=root
+
+   - name: Add i386 architecture support
+     shell: dpkg --add-architecture i386
+
+   - name: Install i386 support libraries
+     action: apt pkg=ia32-libs-gtk update-cache=yes state=present
