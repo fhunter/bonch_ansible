@@ -1,0 +1,7 @@
+---
+  - hosts: a437
+        
+    remote_user: root
+    tasks:
+    - include: tasks/fixxsessionerrors.yml
+
