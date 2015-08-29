@@ -1,0 +1,211 @@
+---
+  - hosts: all
+    vars:
+      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
+        
+    remote_user: root
+    tasks:
+    - name: enable kerberos ssh
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - ssh-krb5
+       - sshpass
+       - krb5-user
+       - krb5-clients
+       - libpam-krb5
+
+    - name: add pam_group to configs
+      lineinfile: dest=/etc/pam.d/common-auth line="auth optional pam_group.so" state=present insertafter=EOF
+    
+    - name: install autofs packages
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - autofs
+    
+    - name: update autofs config
+      lineinfile: dest=/etc/auto.master line="/net    /etc/auto.net" insertbefore="\+auto.master"
+      notify: restart autofs
+
+    - name: make home directories link
+      shell: "mkdir /afs;cd /afs;ln -s /net/eniac.dcti.sut.ru/srv/nfs4/homes/ dcti.sut.ru"
+      args:
+        creates: "/afs/dcti.sut.ru"
+
+    - name: enable quota applet
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - quota
+       - python-glade2
+       - python-eggtrayicon
+
+    - include: tasks/addlocalrepo.yml
+
+    - name: install base packages
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - lightdm
+       - xserver-xorg
+      notify: restart lightdm
+
+    - name: install linux linux-headers
+      action: apt pkg=linux-headers-{{ansible_kernel}} state=installed
+
+    - name: install DCTI packages
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
+      notify: restart apache
+      with_items:
+       - dia
+       - dia2code
+       - runit
+       - mc
+       - tcsh
+       - pmount
+       - scribus
+       - librecad
+       - ristretto
+       - vncviewer
+       - libsasl2-modules-gssapi-mit
+       - xfce4
+       - xfwm4-themes
+       - xfce4-utils
+       - xfce4-mount-plugin
+       - policykit-1-gnome
+       - udisks
+       - ntfs-3g
+       - eject
+       - gvfs
+       - thunar-archive-plugin
+       - thunar-vcs-plugin
+       - thunar-volman
+       - xdg-user-dirs
+       - xfdesktop4
+       - xfprint4
+       - dosemu
+       - dosfstools
+       - codeblocks
+       - ipython
+       - ipython-notebook
+       - eric
+       - xfce4-session
+       - inkscape
+       - libreoffice5.0
+       - libreoffice5.0-base
+       - libreoffice5.0-calc
+       - libreoffice5.0-debian-menus
+       - libreoffice5.0-dict-en
+       - libreoffice5.0-dict-ru
+       - libreoffice5.0-draw
+       - libreoffice5.0-ru
+       - libreoffice5.0-impress
+       - libreoffice5.0-math
+       - libreoffice5.0-writer
+       - xterm
+       - rxvt-unicode-256color
+       - wxmaxima
+       - lazarus
+       - fpc
+       - netsurf-gtk
+       - iceweasel
+       - chromium
+       - virtualbox
+       - virtualbox-qt
+       - virtualbox-dkms
+       - virtualbox-source
+       - fakeroot
+       - gnome-extra-icons
+       - gnome-icon-theme
+       - netbeans
+       - build-essential
+       - dfu-util
+       - subversion
+       - git
+       - gitk
+       - git-gui
+       - minicom
+       - p7zip-full
+       - zip
+       - unzip
+       - unrar
+       - rar
+       - squeeze
+       - mysql-workbench
+       - sqlite3
+       - libsqlite3-dev
+       - gimp
+       - vim
+       - vim-gtk
+       - octave
+       - qtoctave
+       - qt-sdk
+       - gdb
+       - ruby
+       - evince-gtk
+       - openjdk-7-jdk
+       - nasm
+       - x11-utils
+       - mysql-server
+       - gedit
+       - gedit-plugins
+       - python-mysqldb
+       - apache2.2-bin
+       - libapache2-mod-php5
+       - libapache2-mod-python
+       - firmware-linux
+
+    - name: adjust /var/www rights
+      action: file mode=777 path=/var/www recurse=yes
+
+    - name: deploy dosemu autoexec.bat
+      copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
+
+    - name: create test table in mysql
+      action: mysql_db login_user=root login_password="" name=Test 
+    
+    - name: remove java6
+      action: apt pkg={{item}} state=removed 
+      with_items:
+       - openjdk-6-jdk
+       - openjdk-6-jre
+       - openjdk-6-jre-headless
+       - openjdk-6-jre-lib
+       - default-jre-headless
+       - default-jre
+
+    
+    - name: deploy nsswitch configuration files
+      copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
+
+    - name: deploy hesiod configuration files
+      copy: src=files/a441/etc/nsswitch.conf dest=/etc/nsswitch.conf owner=root group=root mode="0644"
+    
+    - name: deploy kerberos configuration files
+      copy: src=files/a441/etc/krb5.conf dest=/etc/krb5.conf owner=root group=root mode="0644"
+
+    - name: deploy admin access
+      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+
+    - name: add pam group config
+      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
+
+#    - name: fix pam configs for auth
+#      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
+
+    - name: install packages for time sync
+      action: apt name=openntpd state=installed
+
+    - name: Install openntpd config
+      template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
+      notify: restart openntpd
+
+    - name: Install openntpd defaults
+      copy: src=files/a441/etc/default/openntpd dest=/etc/default/openntpd
+      notify: restart openntpd
+
+#    - name: add virtual machines mount point
+#      mount: fstype=ext4 name=/vm passno=2 src=/dev/mapper/a515-win7tmp state=mounted
+
+    handlers:
+    - include: handlers/restartopenntpd.yml
+    - include: handlers/restartlightdm.yml
+    - include: handlers/restartautofs.yml
+    - include: handlers/restartapache.yml
