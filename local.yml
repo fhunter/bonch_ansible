@@ -12,7 +12,10 @@
       action: apt name=openntpd state=installed
     
     - name: install packages for gss api auth to work
-      action: apt name=libsasl2-modules-gssapi-mit state=installed
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+        - libsasl2-modules-gssapi-mit
+        - libncurses5:i386
 
     - name: Install openntpd config
       template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
