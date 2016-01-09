@@ -1,0 +1,11 @@
+# Выключение лаборатории 441
+#
+---
+
+- hosts: a443
+  user: root
+
+  tasks:
+
+    - name: Power off
+      action: command /sbin/poweroff
