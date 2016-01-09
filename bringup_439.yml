@@ -69,6 +69,7 @@
        - xfwm4-themes
        - xfce4-utils
        - xfce4-mount-plugin
+       - xfce4-goodies
        - policykit-1-gnome
        - udisks
        - ntfs-3g
@@ -114,7 +115,7 @@
        - fakeroot
        - gnome-extra-icons
        - gnome-icon-theme
-       - netbeans
+       - netbeans=8.0.2
        - build-essential
        - dfu-util
        - subversion
@@ -132,6 +133,8 @@
        - sqlite3
        - libsqlite3-dev
        - gimp
+       - gimp-plugin-registry
+       - xsane
        - vim
        - vim-gtk
        - octave
@@ -203,6 +206,7 @@
 
 #    - name: add virtual machines mount point
 #      mount: fstype=ext4 name=/vm passno=2 src=/dev/mapper/a515-win7tmp state=mounted
+    - include: tasks/install_internet.yml
 
     handlers:
     - include: handlers/restartopenntpd.yml
