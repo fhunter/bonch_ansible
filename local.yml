@@ -40,3 +40,39 @@
     handlers:
     - name: restart openntpd
       service: name=openntpd state=restarted
+  
+  - hosts: a439
+    vars:
+      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
+        
+    remote_user: root
+    tasks:
+    - name: install packages for time sync
+      action: apt name=openntpd state=installed
+  
+  - hosts: a437
+    vars:
+      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
+        
+    remote_user: root
+    tasks:
+    - name: install packages for time sync
+      action: apt name=openntpd state=installed
+  
+  - hosts: a443
+    vars:
+      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
+        
+    remote_user: root
+    tasks:
+    - name: install packages for time sync
+      action: apt name=openntpd state=installed
+  
+  - hosts: a441
+    vars:
+      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
+        
+    remote_user: root
+    tasks:
+    - name: install packages for time sync
+      action: apt name=openntpd state=installed
