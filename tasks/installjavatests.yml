@@ -1,0 +1,31 @@
+    - name: install gtest
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - libgtest-dev
+    
+    - name: install junit
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - junit
+       - junit4
+     
+    - name: install tomcat8
+      action: apt pkg={{item}} state=installed update_cache=yes
+      with_items:
+       - tomcat8
+       - tomcat8-admin
+       - tomcat8-common
+       - tomcat8-examples
+       - tomcat8-user
+       - tomcat8-docs
+       - libtomcat8-java
+       - libecj-java=3.10.1-1~bpo70+1
+
+    - name: setup tomcat8 users and roles
+      action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat8/tomcat-users.xml
+      with_items: 
+        - { line: '<role rolename=\"tomcat\" />' }
+        - { line: '<role rolename=\"manager-gui\" />' }
+        - { line: '<role rolename=\"admin-gui\" />' }
+        - { line: '<user username=\"tomcat\" password=\"tomcat\" roles=\"tomcat,manager-gui,admin-gui\"/>' }
+
