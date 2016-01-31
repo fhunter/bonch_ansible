@@ -89,16 +89,6 @@
        - junit
        - junit4
      
-    - name: remove glassfish
-      action: apt pkg={{item}} state=removed
-      with_items:
-       - glassfish-activation
-       - glassfish-appserv
-       - glassfish-javaee
-       - glassfish-jmac-api
-       - glassfish-mail
-       - glassfish-toplink-essentials
-    
     - name: install tomcat8
       action: apt pkg={{item}} state=installed
       with_items:
@@ -108,3 +98,5 @@
        - tomcat8-examples
        - tomcat8-user
        - tomcat8-docs
+       - libtomcat8-java
+       - libecj-java=3.10.1-1~bpo70+1
