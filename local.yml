@@ -102,7 +102,7 @@
        - libecj-java=3.10.1-1~bpo70+1
 
     - name: setup tomcat8 users and roles
-      action: lineinfile insertbefore="</tomcat-users>" insertafter="<tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat8/tomcat-users.xml
+      action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat8/tomcat-users.xml
       with_items: 
         - { line: '<role rolename="tomcat" />' }
         - { line: '<user username="tomcat" password="tomcat" roles="tomcat,manager-gui,admin-gui"/>' }
