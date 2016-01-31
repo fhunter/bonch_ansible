@@ -78,6 +78,11 @@
     - name: install packages for time sync
       action: apt name=openntpd state=installed
     
+    - name: install gtest
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - libgtest-dev
+    
     - name: install junit
       action: apt pkg={{item}} state=installed
       with_items:
