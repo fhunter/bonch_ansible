@@ -100,3 +100,10 @@
        - tomcat8-docs
        - libtomcat8-java
        - libecj-java=3.10.1-1~bpo70+1
+
+    - name: setup tomcat8 users and roles
+      action: lineinfile insertbefore="</tomcat-users>" insertafter="<tomcat-users>" state=present line={{item}}
+      with_items:
+        - "<role rolename=\"tomcat\" />"
+	- "<user username=\"tomcat\" password=\"tomcat\" roles=\"tomcat,manager-gui,admin-gui\"/>"
+
