@@ -38,7 +38,7 @@
         - graphviz
     
     - name: install codeblocks
-      action: apt name=codeblocks state=latest install_recomments=no update_cache=no
+      action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - include: tasks/addlocalrepo.yml
 
