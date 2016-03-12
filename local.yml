@@ -35,7 +35,7 @@
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
       with_items:
         - doxygen
-	- graphviz
+        - graphviz
 
     - include: tasks/addlocalrepo.yml
 
@@ -72,7 +72,7 @@
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
       with_items:
         - doxygen
-	- graphviz
+        - graphviz
     
     - include: tasks/installjavatests.yml
     
@@ -96,7 +96,7 @@
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
       with_items:
         - doxygen
-	- graphviz
+        - graphviz
   
   - hosts: a443
     vars:
@@ -117,7 +117,7 @@
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
       with_items:
         - doxygen
-	- graphviz
+        - graphviz
   
   - hosts: a441
     vars:
@@ -138,6 +138,6 @@
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
       with_items:
         - doxygen
-	- graphviz
+        - graphviz
 
     - include: tasks/installjavatests.yml
