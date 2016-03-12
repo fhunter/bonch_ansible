@@ -1,20 +1,4 @@
 ---
-  - hosts: all
-    remote_user: root
-
-    tasks:
-    - name: install common lisp
-      action: apt name=clisp state=installed update_cache=no install_recommends=no
-
-    - name: install swi prolog
-      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
-
-    - name: install doxygen
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-        - doxygen
-	- graphviz
-
   - hosts: a445
     vars:
       openntpd_ntp_servers: "timeserver.dcti.sut.ru"
@@ -40,6 +24,18 @@
     - name: Install openntpd defaults
       copy: src=files/a445/etc/default/openntpd dest=/etc/default/openntpd
       notify: restart openntpd
+    
+    - name: install common lisp
+      action: apt name=clisp state=installed update_cache=no install_recommends=no
+
+    - name: install swi prolog
+      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+
+    - name: install doxygen
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+        - doxygen
+	- graphviz
 
     - include: tasks/addlocalrepo.yml
 
@@ -66,6 +62,18 @@
     - name: install packages for time sync
       action: apt name=openntpd state=installed
     
+    - name: install common lisp
+      action: apt name=clisp state=installed update_cache=no install_recommends=no
+
+    - name: install swi prolog
+      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+
+    - name: install doxygen
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+        - doxygen
+	- graphviz
+    
     - include: tasks/installjavatests.yml
     
   
@@ -77,6 +85,18 @@
     tasks:
     - name: install packages for time sync
       action: apt name=openntpd state=installed
+    
+    - name: install common lisp
+      action: apt name=clisp state=installed update_cache=no install_recommends=no
+
+    - name: install swi prolog
+      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+
+    - name: install doxygen
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+        - doxygen
+	- graphviz
   
   - hosts: a443
     vars:
@@ -86,6 +106,18 @@
     tasks:
     - name: install packages for time sync
       action: apt name=openntpd state=installed
+    
+    - name: install common lisp
+      action: apt name=clisp state=installed update_cache=no install_recommends=no
+
+    - name: install swi prolog
+      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+
+    - name: install doxygen
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+        - doxygen
+	- graphviz
   
   - hosts: a441
     vars:
@@ -95,5 +127,17 @@
     tasks:
     - name: install packages for time sync
       action: apt name=openntpd state=installed
+    
+    - name: install common lisp
+      action: apt name=clisp state=installed update_cache=no install_recommends=no
+
+    - name: install swi prolog
+      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+
+    - name: install doxygen
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+        - doxygen
+	- graphviz
 
     - include: tasks/installjavatests.yml
