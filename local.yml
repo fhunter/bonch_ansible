@@ -1,4 +1,20 @@
 ---
+  - hosts: all
+    remote_user: root
+
+    tasks:
+    - name: install common lisp
+      action: apt name=clisp state=installed update_cache=no install_recommends=no
+
+    - name: install swi prolog
+      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+
+    - name: install doxygen
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+        - doxygen
+	- graphviz
+
   - hosts: a445
     vars:
       openntpd_ntp_servers: "timeserver.dcti.sut.ru"

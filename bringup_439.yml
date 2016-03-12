@@ -194,7 +194,10 @@
 #      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
     - name: install packages for time sync
-      action: apt name=openntpd state=installed
+      action: apt name={{item}} state=installed
+      with_items:
+       - openntpd
+       - ntpdate
 
     - name: Install openntpd config
       template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
