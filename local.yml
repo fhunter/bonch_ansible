@@ -12,7 +12,7 @@
       action: apt name=openntpd state=installed
     
     - name: install packages for gss api auth to work
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
       with_items:
         - libsasl2-modules-gssapi-mit
         - libncurses5:i386
@@ -26,7 +26,10 @@
       notify: restart openntpd
     
     - name: install common lisp
-      action: apt name=clisp state=installed update_cache=no install_recommends=no
+      action: apt name={{item}} state=installed update_cache=no install_recommends=no
+      with_items:
+      	- clisp
+	- clisp-module-\*
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
@@ -36,6 +39,29 @@
       with_items:
         - doxygen
         - graphviz
+
+    - name: Install libreoffice
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+       - libreoffice5.0
+       - libreoffice5.0-base
+       - libreoffice5.0-calc
+       - libreoffice5.0-debian-menus
+       - libreoffice5.0-dict-en
+       - libreoffice5.0-dict-ru
+       - libreoffice5.0-draw
+       - libreoffice5.0-ru
+       - libreoffice5.0-impress
+       - libreoffice5.0-math
+       - libreoffice5.0-writer
+       - libobasis5.0-ooolinguistic
+       - libobasis5.0-graphicfilter
+       - libobasis5.0-extension-nlpsolver
+       - libobasis5.0-extension-pdf-import
+       - libobasis5.0-ru-help
+    
+    - name: install pdf viewer
+      action: apt pkg=evince-gtk state=installed install_recommends=no update_cache=no
     
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
@@ -63,10 +89,13 @@
     remote_user: root
     tasks:
     - name: install packages for time sync
-      action: apt name=openntpd state=installed
+      action: apt name=openntpd state=installed update_cache=yes
     
     - name: install common lisp
-      action: apt name=clisp state=installed update_cache=no install_recommends=no
+      action: apt name={{item}} state=installed update_cache=no install_recommends=no
+      with_items:
+      	- clisp
+	- clisp-module-\*
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
@@ -87,7 +116,7 @@
     remote_user: root
     tasks:
     - name: install packages for time sync
-      action: apt name=openntpd state=installed
+      action: apt name=openntpd state=installed update_cache=yes
     
     - name: install common lisp
       action: apt name=clisp state=installed update_cache=no install_recommends=no
@@ -108,10 +137,13 @@
     remote_user: root
     tasks:
     - name: install packages for time sync
-      action: apt name=openntpd state=installed
+      action: apt name=openntpd state=installed update_cache=yes
     
     - name: install common lisp
-      action: apt name=clisp state=installed update_cache=no install_recommends=no
+      action: apt name={{item}} state=installed update_cache=no install_recommends=no
+      with_items:
+        - clisp
+	- clisp-module-*
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
@@ -129,10 +161,13 @@
     remote_user: root
     tasks:
     - name: install packages for time sync
-      action: apt name=openntpd state=installed
+      action: apt name=openntpd state=installed update_cache=yes
     
     - name: install common lisp
-      action: apt name=clisp state=installed update_cache=no install_recommends=no
+      action: apt name={{item}} state=installed update_cache=no install_recommends=no
+      with_items:
+      	- clisp
+	- clisp-module-\*
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
