@@ -5,6 +5,9 @@
         
     remote_user: root
     tasks:
+    - name: Add emdebian repo for toolchains
+      action: apt_repository repo='deb http://ftp.uk.debian.org/emdebian/toolchains wheezy main' state=absent
+
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
@@ -67,8 +70,6 @@
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - include: tasks/addlocalrepo.yml
-
-    - include: tasks/addemdebianrepo.yml
 
     - include: tasks/install_arm_toolchain.yml
 
