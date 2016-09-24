@@ -100,6 +100,11 @@
        - libreoffice5.0-impress
        - libreoffice5.0-math
        - libreoffice5.0-writer
+       - libobasis5.0-ooolinguistic
+       - libobasis5.0-graphicfilter
+       - libobasis5.0-extension-nlpsolver
+       - libobasis5.0-extension-pdf-import
+       - libobasis5.0-ru-help
        - xterm
        - rxvt-unicode-256color
        - wxmaxima
@@ -154,6 +159,9 @@
        - libapache2-mod-php5
        - libapache2-mod-python
        - firmware-linux
+       - clisp
+       - clisp-module-\*
+       - swi-prolog
 
     - name: adjust /var/www rights
       action: file mode=777 path=/var/www recurse=yes
