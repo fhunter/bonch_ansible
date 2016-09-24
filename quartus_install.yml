@@ -1,0 +1,15 @@
+---
+  - hosts: all
+        
+    remote_user: root
+    tasks:
+    - name: unpack quartus
+      action: unarchive copy=no dest=/opt src=/afs/dcti.sut.ru/distrib/tmp/altera15.0.tar.bz2
+
+    - name: add lines to rc.local
+      lineinfile: dest=/etc/rc.local insertbefore="exit 0" line="{{item.line}}" state=present
+      with_items:                                                                                                                                           
+       - { line: 'mount -t debugfs none /sys/kernel/debug' }
+       - { line: 'ln -s /sys/kernel/debug/usb/devices /dev/bus/usb/' }
+       - { line: 'mount -o bind /dev/bus/ /proc/bus/' }
+    
