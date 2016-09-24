@@ -28,8 +28,8 @@
     - name: install common lisp
       action: apt name={{item}} state=installed update_cache=no install_recommends=no
       with_items:
-      	- clisp
-	- clisp-module-\*
+        - clisp
+        - clisp-module-*
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
@@ -94,8 +94,8 @@
     - name: install common lisp
       action: apt name={{item}} state=installed update_cache=no install_recommends=no
       with_items:
-      	- clisp
-	- clisp-module-\*
+        - clisp
+        - clisp-module-*
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
@@ -143,7 +143,7 @@
       action: apt name={{item}} state=installed update_cache=no install_recommends=no
       with_items:
         - clisp
-	- clisp-module-*
+        - clisp-module-*
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
@@ -166,8 +166,8 @@
     - name: install common lisp
       action: apt name={{item}} state=installed update_cache=no install_recommends=no
       with_items:
-      	- clisp
-	- clisp-module-\*
+        - clisp
+        - clisp-module-*
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
