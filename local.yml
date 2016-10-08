@@ -68,6 +68,9 @@
     
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
+    
+    - name: install netbeans
+      action: apt name=netbeans state=latest install_recommends=no update_cache=no
 
     - include: tasks/addlocalrepo.yml
 
