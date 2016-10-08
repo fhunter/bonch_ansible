@@ -162,7 +162,10 @@
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
+    
+    - name: setup scanner
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
 
     - name: install doxygen
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
@@ -189,7 +192,10 @@
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
     
     - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
+    
+    - name: setup scanner2
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
     
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
