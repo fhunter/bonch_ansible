@@ -82,6 +82,10 @@
 
     - include: tasks/installrusersd.yml
 
+    - include: tasks/addscratch.yml
+      vars:
+        volume_group: "a445"
+
     handlers:
     - name: restart openntpd
       service: name=openntpd state=restarted
@@ -115,6 +119,10 @@
     
     - include: tasks/installjavatests.yml
     
+    - include: tasks/addscratch.yml
+      vars:
+        volume_group: "a515"
+    
   
   - hosts: a437
     vars:
@@ -139,6 +147,11 @@
       with_items:
         - doxygen
         - graphviz
+    
+    - include: tasks/addscratch.yml
+      vars:
+        volume_group: "a437"
+    
   
   - hosts: a443
     vars:
@@ -172,6 +185,11 @@
       with_items:
         - doxygen
         - graphviz
+    
+    - include: tasks/addscratch.yml
+      vars:
+        volume_group: "a443"
+    
   
   - hosts: a441
     vars:
@@ -207,3 +225,8 @@
         - graphviz
 
     - include: tasks/installjavatests.yml
+    
+    - include: tasks/addscratch.yml
+      vars:
+        volume_group: "a441"
+    

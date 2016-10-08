@@ -1,0 +1,8 @@
+   - name: Add scratch lvm location
+     action: lvol vg={{volume_group}} lv=scratch size=100g
+   
+   - name: Make filesystem on scratch volume
+     action: filesystem fstype=ext4 dev=/dev/mapper/{{volume_group}}/scratch
+   
+   - name: Add scratch to fstab
+     action: mount name=/scratch/ src=/dev/mapper{{volume_group}}/scratch state=mounted fstype=ext4
