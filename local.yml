@@ -100,6 +100,9 @@
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+    
+    - name: install codeblocks
+      action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - name: install doxygen
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
@@ -124,6 +127,9 @@
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+    
+    - name: install codeblocks
+      action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - name: install doxygen
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
@@ -148,6 +154,9 @@
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+    
+    - name: install codeblocks
+      action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - name: install doxygen
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
@@ -172,6 +181,9 @@
 
     - name: install swi prolog
       action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
+    
+    - name: install codeblocks
+      action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - name: install doxygen
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
