@@ -213,7 +213,7 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
     
     - name: setup scanner2
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu 9400"
     
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
