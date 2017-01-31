@@ -1,0 +1,24 @@
+# This script is supposed to create user in group teachers passed in the create_username variable
+---
+
+  - hosts: 127.0.0.1
+    remote_user: root
+
+    tasks:
+    - name: Add the user itself   
+      user: createhome=yes generate_ssh_key=yes group=teachers home=/afs/dcti.sut.ru/homes/teachers/{{create_username}} name={{create_username}} shell=/bin/bash state=present system=no
+
+    - name: Make home directory    
+      file: group=teachers owner={{create_username}} mode=0750 path=/afs/dcti.sut.ru/homes/teachers/{{create_username}} state=directory
+
+    - name: add kerberos principal 
+      script: scripts/create_principal.sh teachers {{create_username}}
+
+    - name: Update database for password resetter script
+      command: sqlite3 /var/www/selfreg/database.sqlite3 'insert or ignore into "users" (username, fio, studnum) values ( "{{create_username}}", "","");insert or ignore into "quota" (username, usedspace, softlimit) values ( "{{create_username}}", 0, 0);'
+
+    - name: Patch passwd  # to replace password field with *K*
+      command: sed 's/^{{create_username}}:x:/{{create_username}}:*K*:/' -i /etc/passwd
+
+    - name: Setup quota
+      command: setquota -u {{create_username}} 9000000 9500000 0 0 /home
