@@ -1,0 +1,8 @@
+#!/bin/bash
+L1=`echo $PAM_USER|cut -c 1-1`
+L2=`echo $PAM_USER|cut -c 1-2`
+USER_PATH="/scratch/${L1}/${L2}/${PAM_USER}"
+mkdir -p "$USER_PATH"
+chown "$PAM_USER" -R "$USER_PATH"
+
+exit 0

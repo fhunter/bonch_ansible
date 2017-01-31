@@ -1,0 +1,27 @@
+---
+  - hosts: all
+        
+    remote_user: root
+    tasks:
+    - name: list files                                                                              
+      shell: "vgdisplay -c|head -n 1|awk -F: '{print $1}'|sed 's/^ *//g'"
+      register: vgname
+
+    - name: create logical volume for /scratch
+      lvol: lv=scratch vg={{vgname.stdout}} size=50G force=yes
+
+    - name: create filesystem on volume for /scratch
+      filesystem: fstype=ext4 dev=/dev/{{vgname.stdout}}/scratch
+
+    - name: create mountpoint for /scratch
+      mount: fstype=ext4 state=mounted name=/scratch passno=3 src=/dev/{{vgname.stdout}}/scratch 
+
+    - name: deploy libpam-script script for directory creation
+      apt: name=libpam-script state=present
+
+    - name: add libpam-script in pam.d
+      lineinfile: line='session required pam_script.so' insertafter=EOF state=present dest=/etc/pam.d/common-session
+    
+    - name: deploy link creation script
+      copy: src=files/pam_script_ses_open dest=/usr/share/libpam-script/pam_script_ses_open force=yes owner=root group=root mode=0755
+
