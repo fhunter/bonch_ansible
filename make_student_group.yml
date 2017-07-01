@@ -1,4 +1,6 @@
 # This script is supposed to create users for student group passed in the create_group variable
+# Like this:
+# for i in ist511 ist521 ;do ansible-playbook -e create_group=$i make_student_group.yml ;done
 ---
 
   - hosts: 127.0.0.1
@@ -32,7 +34,7 @@
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
     - name: Setup quota
-      command: setquota -u {{item}} 3000000 350000 0 0 /home
+      command: setquota -u {{item}} 300000 350000 0 0 /home
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
     - name: Setup svn server 1

@@ -1,0 +1,33 @@
+# This script is supposed to create users for student group passed in the remove_group variable
+# Like this:
+# for i in ist511 ist521 ;do ansible-playbook -e remove_group=$i remove_student_group.yml ;done
+---
+
+  - hosts: 127.0.0.1
+    remote_user: root
+
+    tasks:
+    - name: Remove svn server
+      file: path=/srv/svn/{{remove_group}} state=absent
+    
+    - name: Remove the users itself
+      user: name={{item}} state=absent remove=yes
+      with_sequence: start=0 end=50 stride=1 format={{remove_group}}n%02d
+    
+    - name: Remove home directory
+      file: path=/afs/dcti.sut.ru/homes/students/{{remove_group}}/{{item}} state=absent
+      with_sequence: start=0 end=50 stride=1 format={{remove_group}}n%02d
+    
+    - name: Remove group directory
+      file: path=/afs/dcti.sut.ru/homes/students/{{remove_group}} state=absent
+
+    - name: delete kerberos principal
+      script: scripts/delete_principal.sh students {{item}}
+      with_sequence: start=0 end=50 stride=1 format={{remove_group}}n%02d
+
+#    - name: Remove users from database for password resetter script
+#      command: sqlite3 /var/www/selfreg/database.sqlite3 'insert or ignore into "users" (username, fio, studnum) values ( "{{item}}", "","");insert or ignore into "quota" (username, usedspace, softlimit) values ( "{{item}}", 0, 0);'
+#      with_sequence: start=0 end=50 stride=1 format={{remove_group}}n%02d
+
+    - name: delete group
+      group: name={{remove_group}} state=absent system=no
