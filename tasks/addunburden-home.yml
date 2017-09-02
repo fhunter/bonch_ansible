@@ -1,0 +1,9 @@
+    - name: install unburden-home-dir
+      action: apt name=unburden-home-dir state=present update_cache=no
+
+    - name: enable unburden-home-dir
+      lineinfile:
+      	path: /etc/defaults/unburden-home-dir
+	regexp: '^UNBURDEN_HOME='
+	state: present
+	line: 'UNBURDEN_HOME=true'
