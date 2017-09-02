@@ -72,6 +72,9 @@
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
 
+    - name: install unburden-home-dir
+      action: apt name=unburden-home-dir state=present update_cache=no
+
     - include: tasks/addlocalrepo.yml
 
     - include: tasks/install_arm_toolchain.yml
@@ -117,6 +120,9 @@
         - doxygen
         - graphviz
     
+    - name: install unburden-home-dir
+      action: apt name=unburden-home-dir state=present update_cache=no
+    
     - include: tasks/installjavatests.yml
     
     - include: tasks/addscratch.yml
@@ -147,6 +153,9 @@
       with_items:
         - doxygen
         - graphviz
+    
+    - name: install unburden-home-dir
+      action: apt name=unburden-home-dir state=present update_cache=no
     
     - include: tasks/addscratch.yml
       vars:
@@ -186,6 +195,9 @@
         - doxygen
         - graphviz
     
+    - name: install unburden-home-dir
+      action: apt name=unburden-home-dir state=present update_cache=no
+    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a443"
@@ -223,6 +235,9 @@
       with_items:
         - doxygen
         - graphviz
+    
+    - name: install unburden-home-dir
+      action: apt name=unburden-home-dir state=present update_cache=no
 
     - include: tasks/installjavatests.yml
     
