@@ -1,9 +1,19 @@
     - name: install unburden-home-dir
       action: apt name=unburden-home-dir state=present update_cache=no
 
+    - name: make directory
+      file: path=/scratch/.unburden/ mode=0777 state=directory
+    
+    - name: location of unburden-home-dir
+      lineinfile:
+        path: /etc/unburden-home-dir
+        regexp: '^TARGETDIR='
+        state: present
+        line: 'TARGETDIR=/scratch/.unburden/'
+
     - name: enable unburden-home-dir
       lineinfile:
-      	path: /etc/defaults/unburden-home-dir
-	regexp: '^UNBURDEN_HOME='
-	state: present
-	line: 'UNBURDEN_HOME=true'
+        path: /etc/defaults/unburden-home-dir
+        regexp: '^UNBURDEN_HOME='
+        state: present
+        line: 'UNBURDEN_HOME=true'
