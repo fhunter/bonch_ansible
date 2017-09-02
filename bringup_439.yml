@@ -59,6 +59,7 @@
        - doxygen
        - runit
        - mc
+       - unburden-home-dir
        - tcsh
        - pmount
        - scribus
