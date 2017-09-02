@@ -56,6 +56,7 @@
       with_items:
        - dia
        - dia2code
+       - doxygen
        - runit
        - mc
        - tcsh
