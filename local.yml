@@ -1,71 +1,16 @@
 ---
   - hosts: a445
-    vars:
-      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
-        
     remote_user: root
     tasks:
-    - name: Add emdebian repo for toolchains
-      action: apt_repository repo='deb http://ftp.uk.debian.org/emdebian/toolchains wheezy main' state=absent
-
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
-    - name: install packages for time sync
-      action: apt name=openntpd state=installed
-    
     - name: install packages for gss api auth to work
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
       with_items:
         - libsasl2-modules-gssapi-mit
         - libncurses5:i386
 
-    - name: Install openntpd config
-      template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
-      notify: restart openntpd
-
-    - name: Install openntpd defaults
-      copy: src=files/a445/etc/default/openntpd dest=/etc/default/openntpd
-      notify: restart openntpd
-    
-    - name: install common lisp
-      action: apt name={{item}} state=installed update_cache=no install_recommends=no
-      with_items:
-        - clisp
-        - clisp-module-*
-
-    - name: install swi prolog
-      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
-
-    - name: install doxygen
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-        - doxygen
-        - graphviz
-
-    - name: Install libreoffice
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-       - libreoffice5.0
-       - libreoffice5.0-base
-       - libreoffice5.0-calc
-       - libreoffice5.0-debian-menus
-       - libreoffice5.0-dict-en
-       - libreoffice5.0-dict-ru
-       - libreoffice5.0-draw
-       - libreoffice5.0-ru
-       - libreoffice5.0-impress
-       - libreoffice5.0-math
-       - libreoffice5.0-writer
-       - libobasis5.0-ooolinguistic
-       - libobasis5.0-graphicfilter
-       - libobasis5.0-extension-nlpsolver
-       - libobasis5.0-extension-pdf-import
-       - libobasis5.0-ru-help
-    
-    - name: install pdf viewer
-      action: apt pkg=evince-gtk state=installed install_recommends=no update_cache=no
-    
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
     
@@ -73,8 +18,6 @@
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
-
-    - include: tasks/addlocalrepo.yml
 
     - include: tasks/install_arm_toolchain.yml
 
@@ -88,37 +31,12 @@
       vars:
         volume_group: "a445"
 
-    handlers:
-    - name: restart openntpd
-      service: name=openntpd state=restarted
-  
   - hosts: a439
-    vars:
-      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
-        
     remote_user: root
     tasks:
-    - name: install packages for time sync
-      action: apt name=openntpd state=installed update_cache=yes
-    
-    - name: install common lisp
-      action: apt name={{item}} state=installed update_cache=no install_recommends=no
-      with_items:
-        - clisp
-        - clisp-module-*
-
-    - name: install swi prolog
-      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
-    
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
-    - name: install doxygen
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-        - doxygen
-        - graphviz
-    
     - include: tasks/addunburden-home.yml
 
     - include: tasks/installjavatests.yml
@@ -126,57 +44,22 @@
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a515"
-    
   
   - hosts: a437
-    vars:
-      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
-        
     remote_user: root
     tasks:
-    - name: install packages for time sync
-      action: apt name=openntpd state=installed update_cache=yes
-    
-    - name: install common lisp
-      action: apt name=clisp state=installed update_cache=no install_recommends=no
-
-    - name: install swi prolog
-      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
-    
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
-    - name: install doxygen
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-        - doxygen
-        - graphviz
-    
     - include: tasks/addunburden-home.yml
     
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a437"
-    
   
   - hosts: a443
-    vars:
-      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
-        
     remote_user: root
     tasks:
-    - name: install packages for time sync
-      action: apt name=openntpd state=installed update_cache=yes
-    
-    - name: install common lisp
-      action: apt name={{item}} state=installed update_cache=no install_recommends=no
-      with_items:
-        - clisp
-        - clisp-module-*
-
-    - name: install swi prolog
-      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
-    
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
@@ -186,37 +69,15 @@
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
 
-    - name: install doxygen
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-        - doxygen
-        - graphviz
-    
     - include: tasks/addunburden-home.yml
     
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a443"
     
-  
   - hosts: a441
-    vars:
-      openntpd_ntp_servers: "timeserver.dcti.sut.ru"
-        
     remote_user: root
     tasks:
-    - name: install packages for time sync
-      action: apt name=openntpd state=installed update_cache=yes
-    
-    - name: install common lisp
-      action: apt name={{item}} state=installed update_cache=no install_recommends=no
-      with_items:
-        - clisp
-        - clisp-module-*
-
-    - name: install swi prolog
-      action: apt name=swi-prolog state=installed update_cache=no install_recommends=no
-    
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
     
@@ -226,12 +87,6 @@
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
-    - name: install doxygen
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-        - doxygen
-        - graphviz
-    
     - include: tasks/addunburden-home.yml
 
     - include: tasks/installjavatests.yml

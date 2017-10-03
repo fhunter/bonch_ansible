@@ -57,6 +57,7 @@
        - dia
        - dia2code
        - doxygen
+       - graphviz
        - runit
        - mc
        - unburden-home-dir
