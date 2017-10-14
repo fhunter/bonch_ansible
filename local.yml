@@ -19,6 +19,8 @@
 
     - include: tasks/addunburden-home.yml
 
+    - include: tasks/installwebstormclion.yml
+
     - include: tasks/install_arm_toolchain.yml
 
     - include: tasks/fixxsessionerrors.yml
@@ -38,6 +40,8 @@
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
+    
+    - include: tasks/installwebstormclion.yml
 
     - include: tasks/installjavatests.yml
     
@@ -71,6 +75,8 @@
 
     - include: tasks/addunburden-home.yml
     
+    - include: tasks/installwebstormclion.yml
+    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a443"
@@ -88,6 +94,8 @@
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
+    
+    - include: tasks/installwebstormclion.yml
 
     - include: tasks/installjavatests.yml
     

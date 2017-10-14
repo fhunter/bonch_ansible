@@ -165,6 +165,8 @@
        - clisp
        - clisp-module-\*
        - swi-prolog
+       - webstorm
+       - clion
 
     - name: adjust /var/www rights
       action: file mode=777 path=/var/www recurse=yes
