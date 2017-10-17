@@ -1,0 +1,2 @@
+    - name: install nscd
+      action: apt name=nscd state=present update_cache=no

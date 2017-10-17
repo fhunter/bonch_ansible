@@ -103,3 +103,11 @@
       vars:
         volume_group: "a441"
     
+  - hosts: termserver.dcti.sut.ru
+    remote_user: root
+    tasks:
+    - include: tasks/installnscd.yml
+    
+    - include: tasks/addscratch.yml
+      vars:
+        volume_group: "a443"

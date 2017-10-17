@@ -5,4 +5,4 @@
      action: filesystem fstype=ext4 dev=/dev/mapper/{{volume_group}}-scratch
    
    - name: Add scratch to fstab
-     action: mount name=/scratch/ src=/dev/mapper{{volume_group}}-scratch state=mounted fstype=ext4
+     action: mount name=/scratch/ src=/dev/mapper/{{volume_group}}-scratch state=mounted fstype=ext4
