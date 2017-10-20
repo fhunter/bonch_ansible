@@ -3,4 +3,4 @@
    - name: deploy report script
      copy: src=files/common/usr/local/bin/computer_report.py dest=/usr/local/bin/computer_report.py owner=root group=root mode=755
    - name: add to periodic execution
-     cron: day=* hour=* minute=*/5 month=* weekday=* job=/usr/local/bin/computer_report.py
+     cron: day=* hour=* minute=*/5 month=* weekday=* job=/usr/local/bin/computer_report.py name=computerreport
