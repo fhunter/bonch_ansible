@@ -13,7 +13,7 @@
 
     - name: enable unburden-home-dir
       lineinfile:
-        path: /etc/defaults/unburden-home-dir
+        dest: /etc/defaults/unburden-home-dir
         regexp: '^UNBURDEN_HOME='
         state: present
         line: 'UNBURDEN_HOME=true'
