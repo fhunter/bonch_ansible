@@ -17,6 +17,8 @@
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
 
+    - include: tasks/installstatusreport.yml
+
     - include: tasks/addunburden-home.yml
 
     - include: tasks/installwebstormclion.yml
@@ -41,6 +43,8 @@
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
+    - include: tasks/installstatusreport.yml
+
     - include: tasks/addunburden-home.yml
     
     - include: tasks/installwebstormclion.yml
@@ -58,6 +62,8 @@
     tasks:
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
+
+    - include: tasks/installstatusreport.yml
 
     - include: tasks/addunburden-home.yml
     
@@ -81,6 +87,8 @@
 
     - include: tasks/addunburden-home.yml
     
+    - include: tasks/installstatusreport.yml
+
     - include: tasks/installwebstormclion.yml
     
     - include: tasks/installnscd.yml
@@ -100,6 +108,8 @@
     
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
+    
+    - include: tasks/installstatusreport.yml
 
     - include: tasks/addunburden-home.yml
     
