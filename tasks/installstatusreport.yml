@@ -1,0 +1,6 @@
+   - name: Install python-requests
+     action: apt name=python-requests state=present update_cache=no
+   - name: deploy report script
+     copy: src=files/common/usr/local/bin/computer_report.py dest=/usr/local/bin/computer_report.py owner=root group=root mode=755
+   - name: add to periodic execution
+     cron: day=* hour=* minute=*/5 month=* weekday=* job=/usr/local/bin/computer_report.py

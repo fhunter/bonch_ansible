@@ -106,6 +106,8 @@
   - hosts: termserver.dcti.sut.ru
     remote_user: root
     tasks:
+    - include: tasks/installstatusreport.yml
+
     - include: tasks/installnscd.yml
     
     - include: tasks/addscratch.yml
