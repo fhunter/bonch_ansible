@@ -28,6 +28,8 @@
     - include: tasks/installvnc.yml
 
     - include: tasks/installrusersd.yml
+    
+    - include: tasks/installnscd.yml
 
     - include: tasks/addscratch.yml
       vars:
@@ -45,6 +47,8 @@
 
     - include: tasks/installjavatests.yml
     
+    - include: tasks/installnscd.yml
+    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a515"
@@ -56,6 +60,8 @@
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
+    
+    - include: tasks/installnscd.yml
     
     - include: tasks/addscratch.yml
       vars:
@@ -76,6 +82,8 @@
     - include: tasks/addunburden-home.yml
     
     - include: tasks/installwebstormclion.yml
+    
+    - include: tasks/installnscd.yml
     
     - include: tasks/addscratch.yml
       vars:
@@ -99,6 +107,8 @@
 
     - include: tasks/installjavatests.yml
     
+    - include: tasks/installnscd.yml
+    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a441"
@@ -108,6 +118,13 @@
     tasks:
     - include: tasks/installstatusreport.yml
 
+    - name: install codeblocks
+      action: apt name=codeblocks state=latest install_recommends=no update_cache=no
+
+    - include: tasks/addunburden-home.yml
+    
+    - include: tasks/installwebstormclion.yml
+    
     - include: tasks/installnscd.yml
     
     - include: tasks/addscratch.yml

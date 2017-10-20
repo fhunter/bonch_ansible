@@ -1,2 +1,9 @@
     - name: install nscd
       action: apt name=nscd state=present update_cache=no
+    - name: update nscd config
+      copy:
+        src: files/common/etc/nscd.conf
+        dest: /etc/nscd.conf
+        owner: root
+        group: root
+        mode: 0644
