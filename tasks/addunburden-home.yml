@@ -6,7 +6,7 @@
     
     - name: location of unburden-home-dir
       lineinfile:
-        path: /etc/unburden-home-dir
+        dest: /etc/unburden-home-dir
         regexp: '^TARGETDIR='
         state: present
         line: 'TARGETDIR=/scratch/.unburden/'
