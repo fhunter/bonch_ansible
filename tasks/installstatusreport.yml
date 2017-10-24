@@ -1,5 +1,8 @@
-   - name: Install python-requests
-     action: apt name=python-requests state=present update_cache=no
+   - name: Install python modules
+     action: apt name={{item}} state=present update_cache=no
+     with_items:
+       - python-requests
+       - python-psutil
    - name: deploy report script
      copy: src=files/common/usr/local/bin/computer_report.py dest=/usr/local/bin/computer_report.py owner=root group=root mode=755
    - name: add to periodic execution
