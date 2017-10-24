@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#import requests
+import requests
 import os
 import psutil
 import subprocess
@@ -45,4 +45,4 @@ data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 
 
 print data
 
-#t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = data)
+t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = data)
