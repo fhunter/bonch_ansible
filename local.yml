@@ -14,6 +14,9 @@
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
     
+    - name: install php5-mysql
+      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
 
@@ -42,6 +45,9 @@
     tasks:
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
+    
+    - name: install php5-mysql
+      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/installstatusreport.yml
 
@@ -62,6 +68,9 @@
     tasks:
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
+    
+    - name: install php5-mysql
+      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/installstatusreport.yml
 
@@ -78,6 +87,9 @@
     tasks:
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
+    
+    - name: install php5-mysql
+      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
@@ -109,6 +121,9 @@
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
     
+    - name: install php5-mysql
+      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    
     - include: tasks/installstatusreport.yml
 
     - include: tasks/addunburden-home.yml
@@ -130,6 +145,9 @@
 
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no update_cache=no
+    
+    - name: install php5-mysql
+      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
     
