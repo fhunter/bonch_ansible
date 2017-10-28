@@ -161,6 +161,7 @@
        - apache2.2-bin
        - libapache2-mod-php5
        - libapache2-mod-python
+       - php5-mysql
        - firmware-linux
        - clisp
        - clisp-module-\*
