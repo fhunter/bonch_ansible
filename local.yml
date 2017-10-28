@@ -20,6 +20,8 @@
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
 
+    - include: tasks/installhaskell.yml
+
     - include: tasks/installstatusreport.yml
 
     - include: tasks/addunburden-home.yml
@@ -50,6 +52,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/installstatusreport.yml
+    
+    - include: tasks/installhaskell.yml
 
     - include: tasks/addunburden-home.yml
     
@@ -73,6 +77,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/installstatusreport.yml
+
+    - include: tasks/installhaskell.yml
 
     - include: tasks/addunburden-home.yml
     
@@ -98,6 +104,8 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
 
     - include: tasks/addunburden-home.yml
+    
+    - include: tasks/installhaskell.yml
     
     - include: tasks/installstatusreport.yml
 
@@ -125,6 +133,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     
     - include: tasks/installstatusreport.yml
+    
+    - include: tasks/installhaskell.yml
 
     - include: tasks/addunburden-home.yml
     
@@ -150,6 +160,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
+    
+    - include: tasks/installhaskell.yml
     
     - include: tasks/installwebstormclion.yml
     

@@ -168,6 +168,9 @@
        - swi-prolog
        - webstorm
        - clion
+       - ghc
+       - ghc-doc
+       - ghc-dynamic
 
     - name: adjust /var/www rights
       action: file mode=777 path=/var/www recurse=yes

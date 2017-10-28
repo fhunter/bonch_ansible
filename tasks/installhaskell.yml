@@ -1,0 +1,6 @@
+   - name: Install vnc
+     action: apt name={{item}} state=present update_cache=no
+     with_items:
+       - ghc
+       - ghc-dynamic
+       - ghc-doc
