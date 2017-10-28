@@ -3,6 +3,7 @@ import requests
 import os
 import psutil
 import subprocess
+import json
 
 uptime_seconds = 0
 with open('/proc/uptime', 'r') as f:
@@ -42,7 +43,6 @@ for i in disks:
     diskspace.append(temp)
 
 data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 'netspeed': networkspeed, 'cpu': cpu, 'disks': diskspace }
+headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
-print data
-
-t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = data)
+t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers)
