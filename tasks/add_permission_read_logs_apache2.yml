@@ -1,0 +1,5 @@
+- name: Add permission to read logs /var/log/apache2
+  file:
+    path: /var/log/apache2
+    mode: u=rwX,g=rX,o=rX
+    recurse: yes

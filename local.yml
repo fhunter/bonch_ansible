@@ -20,6 +20,8 @@
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
 
+    - include: tasks/add_permission_read_logs_apache2.yml
+
     - include: tasks/installhaskell.yml
 
     - include: tasks/installstatusreport.yml
@@ -51,6 +53,8 @@
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
+    - include: tasks/add_permission_read_logs_apache2.yml
+
     - include: tasks/installstatusreport.yml
     
     - include: tasks/installhaskell.yml
@@ -75,6 +79,8 @@
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+
+    - include: tasks/add_permission_read_logs_apache2.yml
 
     - include: tasks/installstatusreport.yml
 
