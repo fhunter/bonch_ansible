@@ -23,6 +23,8 @@
     - include: tasks/add_permission_read_logs_apache2.yml
 
     - include: tasks/installhaskell.yml
+    
+    - include: tasks/installsmartgit.yml
 
     - include: tasks/installstatusreport.yml
 
@@ -58,6 +60,8 @@
     - include: tasks/installstatusreport.yml
     
     - include: tasks/installhaskell.yml
+    
+    - include: tasks/installsmartgit.yml
 
     - include: tasks/addunburden-home.yml
     
@@ -85,6 +89,8 @@
     - include: tasks/installstatusreport.yml
 
     - include: tasks/installhaskell.yml
+    
+    - include: tasks/installsmartgit.yml
 
     - include: tasks/addunburden-home.yml
     
@@ -112,6 +118,8 @@
     - include: tasks/addunburden-home.yml
     
     - include: tasks/installhaskell.yml
+    
+    - include: tasks/installsmartgit.yml
     
     - include: tasks/installstatusreport.yml
 
@@ -141,6 +149,8 @@
     - include: tasks/installstatusreport.yml
     
     - include: tasks/installhaskell.yml
+    
+    - include: tasks/installsmartgit.yml
 
     - include: tasks/addunburden-home.yml
     
@@ -168,6 +178,8 @@
     - include: tasks/addunburden-home.yml
     
     - include: tasks/installhaskell.yml
+    
+    - include: tasks/installsmartgit.yml
     
     - include: tasks/installwebstormclion.yml
     
