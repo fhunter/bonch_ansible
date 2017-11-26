@@ -1,5 +1,7 @@
     - name: install nscd
-      action: apt name=nscd state=present update_cache=no
+      action: apt name=nscd state=absent update_cache=no
+    - name: install unscd
+      action: apt name=unscd state=present update_cache=no
     - name: update nscd config
       copy:
         src: files/common/etc/nscd.conf
