@@ -1,5 +1,3 @@
-   - name: Update git to >1.8.2
-     action: apt name=git=1.9.1-1~bpo70+2 state=present update_cache=no
    - name: Install smartgit
      action: apt name={{item}} state=present update_cache=no
      with_items:
