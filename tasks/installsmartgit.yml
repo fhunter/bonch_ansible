@@ -1,5 +1,5 @@
    - name: Install latest git
-     action: apt name=git state=latest update_cache=no
+     action: apt name=git state=latest update_cache=no default_release=wheezy-backports
    - name: Install smartgit
      action: apt name={{item}} state=present update_cache=no
      with_items:
