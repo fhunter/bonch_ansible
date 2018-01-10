@@ -42,6 +42,8 @@
     
     - include: tasks/installnscd.yml
 
+    - include: tasks/installcollectd.yml
+
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a445"
@@ -96,6 +98,8 @@
     
     - include: tasks/installnscd.yml
     
+    - include: tasks/installcollectd.yml
+    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a437"
@@ -126,6 +130,8 @@
     - include: tasks/installwebstormclion.yml
     
     - include: tasks/installnscd.yml
+    
+    - include: tasks/installcollectd.yml
     
     - include: tasks/addscratch.yml
       vars:
@@ -160,6 +166,8 @@
     
     - include: tasks/installnscd.yml
     
+    - include: tasks/installcollectd.yml
+    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a441"
@@ -184,6 +192,8 @@
     - include: tasks/installwebstormclion.yml
     
     - include: tasks/installnscd.yml
+    
+    - include: tasks/installcollectd.yml
     
     - include: tasks/addscratch.yml
       vars:

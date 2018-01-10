@@ -1,0 +1,9 @@
+    - name: install collectd
+      action: apt name=collectd state=present update_cache=no install_recommends=no
+    - name: deploy collectd config
+      copy:
+        src: files/common/etc/collectd/collectd.conf
+        dest: /etc/collectd/collectd.conf
+        owner: root
+        group: root
+        mode: 0644
