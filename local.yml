@@ -73,6 +73,8 @@
     
     - include: tasks/installnscd.yml
     
+    - include: tasks/installcollectd.yml
+    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a515"
