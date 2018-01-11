@@ -1,0 +1,2 @@
+    - name: install latest linux
+      action: apt name=linux-image state=latest update_cache=no install_recommends=no

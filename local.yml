@@ -11,39 +11,27 @@
         - libsasl2-modules-gssapi-mit
         - libncurses5:i386
 
-    - name: install codeblocks
-      action: apt name=codeblocks state=latest install_recommends=no update_cache=no
-    
-    - name: install php5-mysql
-      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    - include: tasks/installcodeblocks.yml
+    - include: tasks/fix_meltdown.yml
     
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
 
+    - name: install php5-mysql
+      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    
     - include: tasks/add_permission_read_logs_apache2.yml
-
     - include: tasks/installhaskell.yml
-    
     - include: tasks/installsmartgit.yml
-
     - include: tasks/installstatusreport.yml
-
     - include: tasks/addunburden-home.yml
-
     - include: tasks/installwebstormclion.yml
-
     - include: tasks/install_arm_toolchain.yml
-
     - include: tasks/fixxsessionerrors.yml
-
     - include: tasks/installvnc.yml
-
     - include: tasks/installrusersd.yml
-    
     - include: tasks/installnscd.yml
-
     - include: tasks/installcollectd.yml
-
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a445"
@@ -51,30 +39,20 @@
   - hosts: a439
     remote_user: root
     tasks:
-    - name: install codeblocks
-      action: apt name=codeblocks state=latest install_recommends=no update_cache=yes
-    
+    - include: tasks/installcodeblocks.yml
+    - include: tasks/fix_meltdown.yml
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/add_permission_read_logs_apache2.yml
-
     - include: tasks/installstatusreport.yml
-    
     - include: tasks/installhaskell.yml
-    
     - include: tasks/installsmartgit.yml
-
     - include: tasks/addunburden-home.yml
-    
     - include: tasks/installwebstormclion.yml
-
     - include: tasks/installjavatests.yml
-    
     - include: tasks/installnscd.yml
-    
     - include: tasks/installcollectd.yml
-    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a515"
@@ -82,26 +60,19 @@
   - hosts: a437
     remote_user: root
     tasks:
-    - name: install codeblocks
-      action: apt name=codeblocks state=latest install_recommends=no update_cache=yes
+    - include: tasks/installcodeblocks.yml
+    - include: tasks/fix_meltdown.yml
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/add_permission_read_logs_apache2.yml
-
     - include: tasks/installstatusreport.yml
-
     - include: tasks/installhaskell.yml
-    
     - include: tasks/installsmartgit.yml
-
     - include: tasks/addunburden-home.yml
-    
     - include: tasks/installnscd.yml
-    
     - include: tasks/installcollectd.yml
-    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a437"
@@ -109,8 +80,8 @@
   - hosts: a443
     remote_user: root
     tasks:
-    - name: install codeblocks
-      action: apt name=codeblocks state=latest install_recommends=no update_cache=yes
+    - include: tasks/installcodeblocks.yml
+    - include: tasks/fix_meltdown.yml
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
@@ -122,19 +93,12 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
 
     - include: tasks/addunburden-home.yml
-    
     - include: tasks/installhaskell.yml
-    
     - include: tasks/installsmartgit.yml
-    
     - include: tasks/installstatusreport.yml
-
     - include: tasks/installwebstormclion.yml
-    
     - include: tasks/installnscd.yml
-    
     - include: tasks/installcollectd.yml
-    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a443"
@@ -148,28 +112,20 @@
     - name: setup scanner2
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu 9400"
     
-    - name: install codeblocks
-      action: apt name=codeblocks state=latest install_recommends=no update_cache=yes
+    - include: tasks/installcodeblocks.yml
+    - include: tasks/fix_meltdown.yml
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     
     - include: tasks/installstatusreport.yml
-    
     - include: tasks/installhaskell.yml
-    
     - include: tasks/installsmartgit.yml
-
     - include: tasks/addunburden-home.yml
-    
     - include: tasks/installwebstormclion.yml
-
     - include: tasks/installjavatests.yml
-    
     - include: tasks/installnscd.yml
-    
     - include: tasks/installcollectd.yml
-    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a441"
@@ -177,26 +133,20 @@
   - hosts: termserver.dcti.sut.ru
     remote_user: root
     tasks:
+    
+    - include: tasks/installcodeblocks.yml
     - include: tasks/installstatusreport.yml
-
-    - name: install codeblocks
-      action: apt name=codeblocks state=latest install_recommends=no update_cache=yes
+    - include: tasks/fix_meltdown.yml
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
-    
     - include: tasks/installhaskell.yml
-    
     - include: tasks/installsmartgit.yml
-    
     - include: tasks/installwebstormclion.yml
-    
     - include: tasks/installnscd.yml
-    
     - include: tasks/installcollectd.yml
-    
     - include: tasks/addscratch.yml
       vars:
         volume_group: "a443"
