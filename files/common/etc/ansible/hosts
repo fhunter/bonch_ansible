@@ -1,0 +1,46 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+walloftears.dcti.sut.ru
+kdc.dcti.sut.ru
+termserver.dcti.sut.ru
+
+[a445]
+a445[01:12].dcti.sut.ru
+
+[a439]
+a439[01:12].dcti.sut.ru
+
+[a437]
+a437[01:14].dcti.sut.ru
+
+[a441]
+a44101.dcti.sut.ru
+a44102.dcti.sut.ru
+a44103.dcti.sut.ru
+a44104.dcti.sut.ru
+
+[a443]
+a443[01:06].dcti.sut.ru
+
+[boards]
+board445.dcti.sut.ru
+board439.dcti.sut.ru
+
+[a456]
+darkstar.dcti.sut.ru
+vladimirpc.dcti.sut.ru
+
+[classes:children]
+a437
+a439
+a445
