@@ -112,6 +112,8 @@
        - xterm
        - rxvt-unicode-256color
        - wxmaxima
+       - maxima
+       - maxima-share
        - lazarus
        - fpc
        - netsurf-gtk
