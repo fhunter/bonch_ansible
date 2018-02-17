@@ -16,6 +16,9 @@
     
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
+    
+    - name: install maxima-share
+      action: apt name=maxima-share state=latest install_recommends=no update_cache=no
 
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
@@ -44,6 +47,8 @@
     - include: tasks/fix_meltdown.yml
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    - name: install maxima-share
+      action: apt name=maxima-share state=latest install_recommends=no update_cache=no
 
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
@@ -67,6 +72,8 @@
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    - name: install maxima-share
+      action: apt name=maxima-share state=latest install_recommends=no update_cache=no
 
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
@@ -88,6 +95,8 @@
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    - name: install maxima-share
+      action: apt name=maxima-share state=latest install_recommends=no update_cache=no
 
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
@@ -121,6 +130,8 @@
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    - name: install maxima-share
+      action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     
     - include: tasks/copyansiblehosts.yml
     - include: tasks/installstatusreport.yml
@@ -146,6 +157,8 @@
     
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    - name: install maxima-share
+      action: apt name=maxima-share state=latest install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
     - include: tasks/installhaskell.yml
