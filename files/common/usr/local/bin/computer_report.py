@@ -4,6 +4,24 @@ import os
 import psutil
 import subprocess
 import json
+import dbus
+import pwd
+
+def cksessions():
+    users = []
+    try:
+        system_bus = dbus.SystemBus()
+        proxy = system_bus.get_object('org.freedesktop.ConsoleKit','/org/freedesktop/ConsoleKit/Manager')
+        sessions=proxy.GetSessions(dbus_interface='org.freedesktop.ConsoleKit.Manager')
+        for session in sessions:
+            proxy1=system_bus.get_object('org.freedesktop.ConsoleKit', str(session))
+	    userid=proxy1.GetUnixUser(dbus_interface='org.freedesktop.ConsoleKit.Session')
+	    username=pwd.getpwuid(userid).pw_name
+	    users.append(username)
+    finally:
+        return users
+
+
 
 uptime_seconds = 0
 with open('/proc/uptime', 'r') as f:
@@ -15,6 +33,10 @@ for i in subprocess.check_output('who').splitlines():
     user = i.split()[0]
     if not user in loggedusers:
 	loggedusers.append(user)
+for j in cksessions():
+    if not j in loggedusers:
+	loggedusers.append(j)
+
 
 networkspeed = 0
 

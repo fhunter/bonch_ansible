@@ -3,6 +3,7 @@
      with_items:
        - python-requests
        - python-psutil
+       - python-dbus
    - name: deploy report script
      copy: src=files/common/usr/local/bin/computer_report.py dest=/usr/local/bin/computer_report.py owner=root group=root mode=755
    - name: add to periodic execution
