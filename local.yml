@@ -19,6 +19,8 @@
     
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
+    - name: install latest firefox
+      action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
 
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
@@ -49,6 +51,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
+    - name: install latest firefox
+      action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
 
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
@@ -74,6 +78,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
+    - name: install latest firefox
+      action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
 
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
@@ -97,6 +103,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
+    - name: install latest firefox
+      action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
 
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
@@ -132,6 +140,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
+    - name: install latest firefox
+      action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     
     - include: tasks/copyansiblehosts.yml
     - include: tasks/installstatusreport.yml
@@ -159,6 +169,8 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
+    - name: install latest firefox
+      action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
 
     - include: tasks/addunburden-home.yml
     - include: tasks/installhaskell.yml
