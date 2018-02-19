@@ -16,8 +16,9 @@ def cksessions():
         for session in sessions:
             proxy1=system_bus.get_object('org.freedesktop.ConsoleKit', str(session))
 	    userid=proxy1.GetUnixUser(dbus_interface='org.freedesktop.ConsoleKit.Session')
-	    username=pwd.getpwuid(userid).pw_name
-	    users.append(username)
+	    if userid >= 1000:
+	        username=pwd.getpwuid(userid).pw_name
+	        users.append(username)
     finally:
         return users
 
