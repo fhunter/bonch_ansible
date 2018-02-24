@@ -2,6 +2,8 @@
   - hosts: a445
     remote_user: root
     tasks:
+    - include: tasks/installdebiankeyring.yml
+
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
@@ -45,6 +47,7 @@
   - hosts: a439
     remote_user: root
     tasks:
+    - include: tasks/installdebiankeyring.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     - name: install php5-mysql
@@ -71,6 +74,7 @@
   - hosts: a437
     remote_user: root
     tasks:
+    - include: tasks/installdebiankeyring.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     
@@ -96,6 +100,7 @@
   - hosts: a443
     remote_user: root
     tasks:
+    - include: tasks/installdebiankeyring.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     
@@ -127,6 +132,7 @@
   - hosts: a441
     remote_user: root
     tasks:
+    - include: tasks/installdebiankeyring.yml
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
     
@@ -159,7 +165,7 @@
   - hosts: termserver.dcti.sut.ru
     remote_user: root
     tasks:
-    
+    - include: tasks/installdebiankeyring.yml
     - include: tasks/copyansiblehosts.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/installstatusreport.yml
