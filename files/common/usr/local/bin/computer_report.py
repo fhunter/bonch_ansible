@@ -39,8 +39,6 @@ for j in cksessions():
 	loggedusers.append(j)
 
 
-networkspeed = 0
-
 loadavg = 0
 with open('/proc/loadavg', 'r') as f:
     loadavg = float(f.readline().split()[1])
@@ -54,18 +52,7 @@ for i in loadbycpu:
 
 cpu = {'cores': cores, 'load': load, 'loadavg': loadavg } #load - immediate, in percents. cores - number of processors. loadavg - 5 minute average load
 
-disks = psutil.disk_partitions()
-diskspace = [] #total, free, volume
-for i in disks:
-    temp = {}
-    mountpoint = i.mountpoint
-    usage = psutil.disk_usage(mountpoint)
-    temp['total']=usage.total
-    temp['free']=usage.free
-    temp['volume']=mountpoint
-    diskspace.append(temp)
-
-data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 'netspeed': networkspeed, 'cpu': cpu, 'disks': diskspace }
+data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 'cpu': cpu }
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
 t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers)
