@@ -29,6 +29,9 @@
 
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
+    - include: tasks/install_internet.yml
+      vars:
+        gateway: "172.16.1.253"
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
     - include: tasks/installstatusreport.yml
@@ -56,7 +59,9 @@
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
-
+    - include: tasks/install_internet.yml
+      vars:
+        gateway: "172.16.1.253"
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installstatusreport.yml
@@ -77,14 +82,15 @@
     - include: tasks/installdebiankeyring.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
-    
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
-
+    - include: tasks/install_internet.yml
+      vars:
+        gateway: "172.16.1.253"
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installstatusreport.yml
@@ -141,7 +147,9 @@
     
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
-    
+    - include: tasks/install_internet.yml
+      vars:
+        gateway: "172.16.1.253"
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
@@ -170,7 +178,9 @@
     - include: tasks/installcodeblocks.yml
     - include: tasks/installstatusreport.yml
     - include: tasks/fix_meltdown.yml
-    
+    - include: tasks/install_internet.yml
+      vars:
+        gateway: "172.16.1.253"
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share

@@ -1,4 +1,4 @@
-pty "/usr/sbin/pptp 172.16.1.254 --nolaunchpppd"
+pty "/usr/sbin/pptp {{ gateway |default('172.16.1.254') }} --nolaunchpppd"
 require-mppe
 file /etc/ppp/options.pptp
 ipparam internet
