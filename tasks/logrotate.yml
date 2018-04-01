@@ -1,0 +1,6 @@
+- cron:
+    hour: 12
+    job: /etc/cron.daily/logrotate
+    name: logrotate_at_day
+    minute: 0
+    state: present

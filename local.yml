@@ -3,6 +3,7 @@
     remote_user: root
     tasks:
     - include: tasks/installdebiankeyring.yml
+    - include: tasks/logrotate.yml
 
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
@@ -51,6 +52,7 @@
     remote_user: root
     tasks:
     - include: tasks/installdebiankeyring.yml
+    - include: tasks/logrotate.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     - name: install php5-mysql
@@ -80,6 +82,7 @@
     remote_user: root
     tasks:
     - include: tasks/installdebiankeyring.yml
+    - include: tasks/logrotate.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     - name: install php5-mysql
@@ -107,6 +110,7 @@
     remote_user: root
     tasks:
     - include: tasks/installdebiankeyring.yml
+    - include: tasks/logrotate.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     
@@ -139,6 +143,7 @@
     remote_user: root
     tasks:
     - include: tasks/installdebiankeyring.yml
+    - include: tasks/logrotate.yml
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
     
@@ -174,6 +179,7 @@
     remote_user: root
     tasks:
     - include: tasks/installdebiankeyring.yml
+    - include: tasks/logrotate.yml
     - include: tasks/copyansiblehosts.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/installstatusreport.yml
