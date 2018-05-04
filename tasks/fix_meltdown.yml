@@ -1,2 +1,4 @@
     - name: install latest linux
       action: apt name=linux-image-amd64 state=latest update_cache=no install_recommends=no
+    - name: install linux linux-headers
+      action: apt pkg=linux-headers-{{ansible_kernel}} state=installed
