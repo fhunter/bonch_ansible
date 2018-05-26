@@ -1,7 +1,6 @@
 ---
   - hosts: a445
     remote_user: root
-    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
@@ -10,24 +9,21 @@
 
     - name: install packages for gss api auth to work
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
       with_items:
         - libsasl2-modules-gssapi-mit
         - libncurses5:i386
 
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
-    
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
-    
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
-
     - name: install php5-mysql
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
-
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_internet.yml
@@ -45,12 +41,9 @@
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
     - include: tasks/addscratch.yml
-      vars:
-        volume_group: "a445"
 
   - hosts: a439
     remote_user: root
-    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
@@ -78,12 +71,9 @@
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
     - include: tasks/addscratch.yml
-      vars:
-        volume_group: "a515"
   
   - hosts: a437
     remote_user: root
-    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
@@ -109,12 +99,9 @@
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
     - include: tasks/addscratch.yml
-      vars:
-        volume_group: "a437"
   
   - hosts: a443
     remote_user: root
-    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
@@ -145,12 +132,9 @@
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
     - include: tasks/addscratch.yml
-      vars:
-        volume_group: "a443"
     
   - hosts: a441
     remote_user: root
-    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
@@ -184,12 +168,9 @@
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
     - include: tasks/addscratch.yml
-      vars:
-        volume_group: "a441"
     
   - hosts: termserver.dcti.sut.ru
     remote_user: root
-    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
@@ -216,5 +197,3 @@
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
     - include: tasks/addscratch.yml
-      vars:
-        volume_group: "a443"

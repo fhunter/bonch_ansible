@@ -1,8 +1,12 @@
+   - name: list files                                                                              
+     shell: "vgdisplay -c|head -n 1|awk -F: '{print $1}'|sed 's/^ *//g'"
+     register: vgname
+
    - name: Add scratch lvm location
-     action: lvol vg={{volume_group}} lv=scratch size=100g
+     action: lvol vg={{vgname.stdout}} lv=scratch size=100g
    
    - name: Make filesystem on scratch volume
-     action: filesystem fstype=ext4 dev=/dev/mapper/{{volume_group}}-scratch
+     action: filesystem fstype=ext4 dev=/dev/mapper/{{vgname.stdout}}-scratch
    
    - name: Add scratch to fstab
-     action: mount name=/scratch/ src=/dev/mapper/{{volume_group}}-scratch state=mounted fstype=ext4
+     action: mount name=/scratch/ src=/dev/mapper/{{vgname.stdout}}-scratch state=mounted fstype=ext4
