@@ -18,4 +18,7 @@
 
    - name: Install i386 support libraries
      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-     action: apt pkg=ia32-libs-gtk update-cache=yes state=present
+     action: apt pkg=ia32-libs-gtk update-cache=no state=present
+
+   - name: install python3-tk for new internet script
+     action: apt pkg=python3-tk update-cache=no state=present
