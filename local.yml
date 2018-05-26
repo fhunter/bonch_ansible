@@ -1,10 +1,10 @@
 ---
   - hosts: a445
     remote_user: root
+    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
-
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
@@ -50,9 +50,12 @@
 
   - hosts: a439
     remote_user: root
+    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
+    - name: deploy admin access
+      copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     - name: install php5-mysql
@@ -80,9 +83,12 @@
   
   - hosts: a437
     remote_user: root
+    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
+    - name: deploy admin access
+      copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     - name: install php5-mysql
@@ -108,9 +114,12 @@
   
   - hosts: a443
     remote_user: root
+    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
+    - name: deploy admin access
+      copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
     
@@ -141,9 +150,12 @@
     
   - hosts: a441
     remote_user: root
+    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
+    - name: deploy admin access
+      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
     
@@ -177,9 +189,12 @@
     
   - hosts: termserver.dcti.sut.ru
     remote_user: root
+    when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
+    - name: deploy admin access
+      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/copyansiblehosts.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/installstatusreport.yml
