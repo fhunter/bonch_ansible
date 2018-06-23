@@ -145,10 +145,10 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
     
     - name: setup scanner2
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu 9400"
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     
     - include: tasks/installcodeblocks.yml
     - include: tasks/fix_meltdown.yml
