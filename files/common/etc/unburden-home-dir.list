@@ -1,6 +1,6 @@
 # Generic cache locations
-#m D .cache cache
-#m D .thumbnails thumbnails
+m D .cache cache
+m D .thumbnails thumbnails
 
 # Common browser caches
 #m f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
