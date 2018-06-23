@@ -1,6 +1,13 @@
 # Generic cache locations
 m D .cache/chromium cache_chromium
 m D .cache/mozilla cache_mozilla
+m D .cache/netbeans cache_netbeans
+m D .cache/epiphany-browser cache_epiphanybrowser
+m D .cache/tracker cache_tracker
+m D .cache/MonoDevelop-3.0 cache_monodevelop_3.0
+m D .cache/google-chrome cache_googlechrome
+m D .netbeans/*/var/cache netbeans_%1_var_cache
+m D .local/share/tracker local_share_tracker
 m D .thumbnails thumbnails
 
 # Common browser caches
