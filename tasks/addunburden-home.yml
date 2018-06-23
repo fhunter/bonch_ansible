@@ -19,6 +19,5 @@
         line: 'UNBURDEN_HOME=true'
     - name: update rules for unburden
       copy:
-        backup: no
 	dest: /etc/unburden-home-dir.list
 	src: files/common/etc/unburden-home-dir.list
