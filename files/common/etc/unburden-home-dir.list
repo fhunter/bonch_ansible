@@ -1,5 +1,6 @@
 # Generic cache locations
-m D .cache cache
+m D .cache/chromium cache_chromium
+m D .cache/mozilla cache_mozilla
 m D .thumbnails thumbnails
 
 # Common browser caches
