@@ -74,6 +74,7 @@
     remote_user: root
     tasks:
     - include: tasks/installdebiankeyring.yml
+    - include: tasks/installlightdmback.yml
     - include: tasks/logrotate.yml
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
