@@ -86,7 +86,6 @@
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
-    - include: tasks/install_internet.yml
     - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installstatusreport.yml
@@ -96,6 +95,7 @@
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
     - include: tasks/addscratch.yml
+    - include: tasks/install_internet.yml
   
   - hosts: a443
     remote_user: root
