@@ -9,6 +9,9 @@
   
    - name: Put config files in proper places
      template: dest=/etc/ppp/peers/internet src=files/common/etc/ppp/peers/internet.j2 owner=root
+   
+   - name: Put config files in proper places
+     template: dest=/etc/ppp/peers/internet_old src=files/common/etc/ppp/peers/internet_old.j2 owner=root
 
    - name: Put config files in proper places
      template: dest=/etc/ppp/options.pptp src=files/common/etc/ppp/options.pptp.j2 owner=root
