@@ -98,7 +98,6 @@
     - include: tasks/addunburden-home.yml
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
-    - include: tasks/addscratch.yml
     - include: tasks/install_internet.yml
   
   - hosts: a443
