@@ -80,10 +80,11 @@
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/installcodeblocks.yml
+    - include: tasks/installwebstormclion.yml
     - include: tasks/fix_meltdown.yml
-    - name: install netbeans
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
-      action: apt name=netbeans=8.0.2.1 state=present install_recommends=no update_cache=no
+#    - name: install netbeans
+#      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+#      action: apt name=netbeans=8.0.2.1 state=present install_recommends=no update_cache=no
     - name: install php5-mysql
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
