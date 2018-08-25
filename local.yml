@@ -111,6 +111,8 @@
     - name: install php5-mysql
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    - name: install netbeans
+      action: apt name=netbeans=8.0.2 state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     - name: install latest firefox
