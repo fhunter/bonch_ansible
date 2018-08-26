@@ -26,10 +26,11 @@
       lineinfile: dest=/etc/auto.master line="/net    /etc/auto.net" insertbefore="\+auto.master"
       notify: restart autofs
 
-    - name: make home directories link
-      shell: "mkdir /afs;cd /afs;ln -s /net/eniac.dcti.sut.ru/srv/nfs4/homes/ dcti.sut.ru"
-      args:
-        creates: "/afs/dcti.sut.ru"
+    - name: make /afs directory
+      file: dest=/afs state=directory mode=0755 owner=root group=root
+
+    - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
+      file: dest=/afs/dcti.sut.ru/ src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes
 
     - name: enable quota applet
       action: apt pkg={{item}} state=installed
