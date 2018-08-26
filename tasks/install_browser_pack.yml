@@ -1,0 +1,6 @@
+    - name: install browsers
+      action: apt pkg={{item}} state=installed
+      with_items:
+       - netsurf-gtk
+       - iceweasel
+       - chromium

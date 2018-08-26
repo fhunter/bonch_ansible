@@ -92,9 +92,6 @@
        - maxima-share
        - lazarus
        - fpc
-       - netsurf-gtk
-       - iceweasel
-       - chromium
        - virtualbox
        - virtualbox-qt
        - virtualbox-dkms
@@ -102,20 +99,9 @@
        - fakeroot
        - gnome-extra-icons
        - gnome-icon-theme
-#       - netbeans=8.0.2.1
        - build-essential
        - dfu-util
-       - subversion
-       - git
-       - gitk
-       - git-gui
        - minicom
-       - p7zip-full
-       - zip
-       - unzip
-       - unrar
-       - rar
-       - xarchiver
        - mysql-workbench
        - sqlite3
        - libsqlite3-dev
@@ -149,6 +135,10 @@
     - include: tasks/install_lisp.yml
     - include: tasks/install_swiprolog.yml
     - include: tasks/installwebstormclion.yml
+    - include: tasks/install_netbeans.yml
+    - include: tasks/install_subversion_git.yml
+    - include: tasks/install_archive_tools.yml
+    - include: tasks/install_browser_pack.yml
 
     - name: deploy dosemu autoexec.bat
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
