@@ -25,13 +25,7 @@
     - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
       file: dest=/afs/dcti.sut.ru/ src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes
 
-    - name: enable quota applet
-      action: apt pkg={{item}} state=installed
-      with_items:
-       - quota
-       - python-glade2
-#       - python-eggtrayicon
-
+    - include: tasks/enable_quota_applet.yml
     - include: tasks/addlocalrepo.yml
 
     - name: install base packages
@@ -67,7 +61,6 @@
        - scribus
        - librecad
        - ristretto
-       - xtightvncviewer
        - libsasl2-modules-gssapi-mit
        - xfce4
        - xfwm4-themes
@@ -92,18 +85,6 @@
        - eric
        - xfce4-session
        - inkscape
-       - libreoffice
-       - libreoffice-base
-       - libreoffice-calc
-       - libreoffice-draw
-       - libreoffice-help-ru
-       - libreoffice-l10n-ru
-       - libreoffice-lightproof-ru-ru
-       - libreoffice-impress
-       - libreoffice-math
-       - libreoffice-writer
-       - libreoffice-nlpsolver
-       - libreoffice-pdfimport
        - xterm
        - rxvt-unicode-256color
        - wxmaxima
@@ -149,49 +130,31 @@
        - gdb
        - ruby
        - evince-gtk
-       - openjdk-8-jdk
        - nasm
        - x11-utils
        - mysql-server
        - gedit
        - gedit-plugins
        - python-mysqldb
-       - apache2
-       - libapache2-mod-php
-       - libapache2-mod-python
-       - php-mysql
        - firmware-linux
-       - cl-launch
-       - sbcl
-#       - clisp
-#       - clisp-module-\*
-       - swi-prolog
-       - webstorm
-       - clion
        - ghc
        - ghc-doc
        - ghc-dynamic
        - pidgin
-
-    - name: adjust /var/www rights
-      action: file mode=777 path=/var/www recurse=yes
+    
+    - include: tasks/install_libreoffice.yml
+    - include: tasks/install_jdk.yml
+    - include: tasks/installvnc.yml
+    - include: tasks/install_apache2_and_php5.yml
+    - include: tasks/install_lisp.yml
+    - include: tasks/install_swiprolog.yml
+    - include: tasks/installwebstormclion.yml
 
     - name: deploy dosemu autoexec.bat
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
 
     - name: create test table in mysql
       action: mysql_db login_user=root login_password="" name=Test 
-    
-    - name: remove java6
-      action: apt pkg={{item}} state=removed 
-      with_items:
-       - openjdk-6-jdk
-       - openjdk-6-jre
-       - openjdk-6-jre-headless
-       - openjdk-6-jre-lib
-       - default-jre-headless
-       - default-jre
-
     
     - name: deploy nsswitch configuration files
       copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"

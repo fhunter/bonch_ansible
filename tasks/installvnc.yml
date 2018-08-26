@@ -1,2 +1,7 @@
-   - name: Install vnc
-     action: apt name=vncviewer state=present update_cache=yes
+   - name: Install vnc viewer
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
+     action: apt name=vncviewer state=present update_cache=no
+   
+   - name: Install vnc viewer
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+     action: apt name=xtightvncviewer state=present update_cache=no
