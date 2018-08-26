@@ -24,6 +24,24 @@
 
     - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
       file: dest=/afs/dcti.sut.ru/ src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes
+    
+    - name: deploy nsswitch configuration files
+      copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
+
+    - name: deploy hesiod configuration files
+      copy: src=files/a441/etc/nsswitch.conf dest=/etc/nsswitch.conf owner=root group=root mode="0644"
+    
+    - name: deploy kerberos configuration files
+      copy: src=files/a441/etc/krb5.conf dest=/etc/krb5.conf owner=root group=root mode="0644"
+
+    - name: deploy admin access
+      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+
+    - name: add pam group config
+      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
+
+#    - name: fix pam configs for auth
+#      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
     - include: tasks/enable_quota_applet.yml
     - include: tasks/addlocalrepo.yml
@@ -146,23 +164,6 @@
     - name: create test table in mysql
       action: mysql_db login_user=root login_password="" name=Test 
     
-    - name: deploy nsswitch configuration files
-      copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
-
-    - name: deploy hesiod configuration files
-      copy: src=files/a441/etc/nsswitch.conf dest=/etc/nsswitch.conf owner=root group=root mode="0644"
-    
-    - name: deploy kerberos configuration files
-      copy: src=files/a441/etc/krb5.conf dest=/etc/krb5.conf owner=root group=root mode="0644"
-
-    - name: deploy admin access
-      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-
-    - name: add pam group config
-      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
-
-#    - name: fix pam configs for auth
-#      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
     - name: install packages for time sync
       action: apt name={{item}} state=installed
