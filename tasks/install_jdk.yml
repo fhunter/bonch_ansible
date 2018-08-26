@@ -1,0 +1,22 @@
+    - name: install JDK
+      action: apt pkg={{item}} state=installed
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+      with_items:
+       - openjdk-8-jdk
+
+    - name: install JDK
+      action: apt pkg={{item}} state=installed
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
+      with_items:
+       - openjdk-7-jdk
+    
+    - name: remove java6
+      action: apt pkg={{item}} state=removed 
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
+      with_items:
+       - openjdk-6-jdk
+       - openjdk-6-jre
+       - openjdk-6-jre-headless
+       - openjdk-6-jre-lib
+       - default-jre-headless
+       - default-jre

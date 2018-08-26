@@ -1,0 +1,37 @@
+    - name: install libreoffice
+      action: apt pkg={{item}} state=installed
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+      with_items:
+       - libreoffice
+       - libreoffice-base
+       - libreoffice-calc
+       - libreoffice-draw
+       - libreoffice-help-ru
+       - libreoffice-l10n-ru
+       - libreoffice-lightproof-ru-ru
+       - libreoffice-impress
+       - libreoffice-math
+       - libreoffice-writer
+       - libreoffice-nlpsolver
+       - libreoffice-pdfimport
+
+    - name: install libreoffice 5.0
+      action: apt pkg={{item}} state=installed
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
+      with_items:
+       - libreoffice5.0
+       - libreoffice5.0-base
+       - libreoffice5.0-calc
+       - libreoffice5.0-debian-menus
+       - libreoffice5.0-dict-en
+       - libreoffice5.0-dict-ru
+       - libreoffice5.0-draw
+       - libreoffice5.0-ru
+       - libreoffice5.0-impress
+       - libreoffice5.0-math
+       - libreoffice5.0-writer
+       - libobasis5.0-ooolinguistic
+       - libobasis5.0-graphicfilter
+       - libobasis5.0-extension-nlpsolver
+       - libobasis5.0-extension-pdf-import
+       - libobasis5.0-ru-help
