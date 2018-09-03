@@ -25,4 +25,4 @@
      action: apt pkg=ia32-libs-gtk update-cache=no state=present
 
    - name: install new internet script
-     action: apt pkg=internet update-cache=no state=latest
+     action: apt pkg=internetapp update-cache=no state=latest
