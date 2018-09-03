@@ -12,7 +12,6 @@
 
 walloftears.dcti.sut.ru
 kdc.dcti.sut.ru
-termserver.dcti.sut.ru
 
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
@@ -42,11 +41,13 @@ board439.dcti.sut.ru
 darkstar.dcti.sut.ru
 vladimirpc.dcti.sut.ru
 
+[terminalservers]
+termserver.dcti.sut.ru
+
 [classes:children]
 a437
 a439
 a445
 a441
 a443
-termserver.dcti.sut.ru
-
+terminalservers
