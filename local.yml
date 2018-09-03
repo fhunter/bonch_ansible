@@ -1,4 +1,10 @@
 ---
+  - hosts: classes
+    remote_user: root
+    tasks:
+    - include: tasks/installdebiankeyring.yml
+    - include: tasks/logrotate.yml
+
   - hosts: a445
     remote_user: root
     tasks:
