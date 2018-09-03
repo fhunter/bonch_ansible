@@ -1,0 +1,11 @@
+    # For a44306 - include into deploy
+    - name: Add remote printer support
+      action: apt pkg=p910nd state=present
+    - name: Enable p910nd
+      lineinfile: dest=/etc/default/p910nd regexp="^P910ND_START=" line="P910ND_START=1"
+    - name: Set printer for p910nd
+      register: p910nd_deploy
+      lineinfile: dest=/etc/default/p910nd regexp="^P910ND_OPTS=" line="P910ND_OPTS=\"-f /dev/usb/lp0 -b\""
+    - name: Service p910nd restart
+      when: p910nd_deploy.changed
+      service: name=p910nd state=restarted

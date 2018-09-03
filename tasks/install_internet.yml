@@ -17,6 +17,7 @@
      template: dest=/etc/ppp/options.pptp src=files/common/etc/ppp/options.pptp.j2 owner=root
 
    - name: Add i386 architecture support
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
      shell: dpkg --add-architecture i386
 
    - name: Install i386 support libraries
