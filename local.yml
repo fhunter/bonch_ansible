@@ -9,11 +9,17 @@
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
+    - include: tasks/installstatusreport.yml
     - include: tasks/addunburden-home.yml
     - include: tasks/fix_meltdown.yml
     - include: tasks/installcodeblocks.yml
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
+    - include: tasks/installsmartgit.yml
+    - include: tasks/installwebstormclion.yml
+    - include: tasks/installhaskell.yml
+    - include: tasks/installcollectd.yml
+    - include: tasks/installnscd.yml
 
   - hosts: a445
     remote_user: root
@@ -26,7 +32,6 @@
       with_items:
         - libsasl2-modules-gssapi-mit
         - libncurses5:i386
-
     - name: install netbeans
       action: apt name=netbeans state=latest install_recommends=no update_cache=no
     - name: install maxima-share
@@ -36,16 +41,9 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_internet.yml
-    - include: tasks/installhaskell.yml
-    - include: tasks/installsmartgit.yml
-    - include: tasks/installstatusreport.yml
-    - include: tasks/installwebstormclion.yml
     - include: tasks/install_arm_toolchain.yml
     - include: tasks/fixxsessionerrors.yml
     - include: tasks/installvnc.yml
-    - include: tasks/installrusersd.yml
-    - include: tasks/installnscd.yml
-    - include: tasks/installcollectd.yml
 
   - hosts: a439
     remote_user: root
@@ -59,13 +57,8 @@
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     - include: tasks/install_internet.yml
     - include: tasks/add_permission_read_logs_apache2.yml
-    - include: tasks/installstatusreport.yml
     - include: tasks/installhaskell.yml
-    - include: tasks/installsmartgit.yml
-    - include: tasks/installwebstormclion.yml
     - include: tasks/installjavatests.yml
-    - include: tasks/installnscd.yml
-    - include: tasks/installcollectd.yml
   
   - hosts: a437
     remote_user: root
@@ -84,11 +77,6 @@
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     - include: tasks/add_permission_read_logs_apache2.yml
-    - include: tasks/installstatusreport.yml
-    - include: tasks/installhaskell.yml
-    - include: tasks/installsmartgit.yml
-    - include: tasks/installnscd.yml
-    - include: tasks/installcollectd.yml
     - include: tasks/install_internet.yml
   
   - hosts: a443
@@ -108,12 +96,6 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
-    - include: tasks/installhaskell.yml
-    - include: tasks/installsmartgit.yml
-    - include: tasks/installstatusreport.yml
-    - include: tasks/installwebstormclion.yml
-    - include: tasks/installnscd.yml
-    - include: tasks/installcollectd.yml
     
   - hosts: a441
     remote_user: root
@@ -130,28 +112,16 @@
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
-    - include: tasks/installstatusreport.yml
-    - include: tasks/installhaskell.yml
-    - include: tasks/installsmartgit.yml
-    - include: tasks/installwebstormclion.yml
     - include: tasks/installjavatests.yml
-    - include: tasks/installnscd.yml
-    - include: tasks/installcollectd.yml
     
   - hosts: termserver.dcti.sut.ru
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/installstatusreport.yml
     - include: tasks/install_internet.yml
     - name: install php5-mysql
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - name: install maxima-share
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
-    - include: tasks/installhaskell.yml
-    - include: tasks/installsmartgit.yml
-    - include: tasks/installwebstormclion.yml
-    - include: tasks/installnscd.yml
-    - include: tasks/installcollectd.yml
