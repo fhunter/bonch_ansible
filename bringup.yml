@@ -100,9 +100,6 @@
        - inkscape
        - xterm
        - rxvt-unicode-256color
-       - wxmaxima
-       - maxima
-       - maxima-share
        - lazarus
        - fpc
        - virtualbox
@@ -152,6 +149,7 @@
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
     - include: tasks/install_browser_pack.yml
+    - include: tasks/install_maxima.yml
 
     - name: deploy dosemu autoexec.bat
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"

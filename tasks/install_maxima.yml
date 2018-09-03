@@ -1,0 +1,6 @@
+    - name: install maxima
+      action: apt pkg={{item}} state=installed install_recommends=no
+      with_items:
+       - wxmaxima
+       - maxima
+       - maxima-share
