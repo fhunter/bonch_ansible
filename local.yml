@@ -23,6 +23,7 @@
     - include: tasks/installnscd.yml
     - include: tasks/install_php5mysql.yml
     - include: tasks/install_internet.yml
+    - include: tasks/install_netbeans.yml
 
   - hosts: a445
     remote_user: root
@@ -35,7 +36,6 @@
       with_items:
         - libsasl2-modules-gssapi-mit
         - libncurses5:i386
-    - include: tasks/install_netbeans.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_arm_toolchain.yml
     - include: tasks/fixxsessionerrors.yml
@@ -56,7 +56,6 @@
     - include: tasks/addlocalrepo.yml
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    # - include: tasks/install_netbeans.yml
     - include: tasks/add_permission_read_logs_apache2.yml
   
   - hosts: a443
@@ -64,7 +63,6 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_netbeans.yml
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: setup scanner
