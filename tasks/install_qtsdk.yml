@@ -1,0 +1,12 @@
+    - name: install qtsdk
+      action: apt pkg={{item}} state=installed install_recommends=no
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+      with_items:
+       - qt-sdk
+       - qt5-default
+
+    - name: install qtsdk
+      action: apt pkg={{item}} state=installed install_recommends=no
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
+      with_items:
+       - qt-sdk

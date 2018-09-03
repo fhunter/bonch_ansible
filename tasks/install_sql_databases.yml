@@ -1,0 +1,10 @@
+    - name: install sql databases (mysql, sqlite)
+      action: apt pkg={{item}} state=installed install_recommends=no
+      with_items:
+       - mysql-workbench
+       - sqlite3
+       - libsqlite3-dev
+       - python-mysqldb
+       - mysql-server
+    - name: create test table in mysql
+      action: mysql_db login_user=root login_password="" name=Test 

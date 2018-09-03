@@ -92,7 +92,6 @@
        - xfprint4
        - dosemu
        - dosfstools
-       - codeblocks
        - ipython
        - ipython-notebook
        - eric
@@ -112,9 +111,6 @@
        - build-essential
        - dfu-util
        - minicom
-       - mysql-workbench
-       - sqlite3
-       - libsqlite3-dev
        - gimp
        - gimp-plugin-registry
        - xsane
@@ -122,20 +118,14 @@
        - vim-gtk
        - octave
        - qtoctave
-       - qt-sdk
        - gdb
        - ruby
        - evince-gtk
        - nasm
        - x11-utils
-       - mysql-server
        - gedit
        - gedit-plugins
-       - python-mysqldb
        - firmware-linux
-       - ghc
-       - ghc-doc
-       - ghc-dynamic
        - pidgin
     
     - include: tasks/install_libreoffice.yml
@@ -144,19 +134,19 @@
     - include: tasks/install_apache2_and_php5.yml
     - include: tasks/install_lisp.yml
     - include: tasks/install_swiprolog.yml
+    - include: tasks/installcodeblocks.yml
     - include: tasks/installwebstormclion.yml
     - include: tasks/install_netbeans.yml
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
     - include: tasks/install_browser_pack.yml
     - include: tasks/install_maxima.yml
+    - include: tasks/install_sql_databases.yml
+    - include: tasks/installhaskell.yml
+    - include: tasks/install_qtsdk.yml
 
     - name: deploy dosemu autoexec.bat
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
-
-    - name: create test table in mysql
-      action: mysql_db login_user=root login_password="" name=Test 
-    
 
     - name: install packages for time sync
       action: apt name={{item}} state=installed
