@@ -9,6 +9,7 @@
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
+    - include: tasks/addunburden-home.yml
 
   - hosts: a445
     remote_user: root
@@ -39,7 +40,6 @@
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
     - include: tasks/installstatusreport.yml
-    - include: tasks/addunburden-home.yml
     - include: tasks/installwebstormclion.yml
     - include: tasks/install_arm_toolchain.yml
     - include: tasks/fixxsessionerrors.yml
@@ -47,7 +47,6 @@
     - include: tasks/installrusersd.yml
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
-    - include: tasks/addscratch.yml
 
   - hosts: a439
     remote_user: root
@@ -68,12 +67,10 @@
     - include: tasks/installstatusreport.yml
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
-    - include: tasks/addunburden-home.yml
     - include: tasks/installwebstormclion.yml
     - include: tasks/installjavatests.yml
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
-    - include: tasks/addscratch.yml
   
   - hosts: a437
     remote_user: root
@@ -99,7 +96,6 @@
     - include: tasks/installstatusreport.yml
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
-    - include: tasks/addunburden-home.yml
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
     - include: tasks/install_internet.yml
@@ -129,14 +125,12 @@
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
 
-    - include: tasks/addunburden-home.yml
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
     - include: tasks/installstatusreport.yml
     - include: tasks/installwebstormclion.yml
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
-    - include: tasks/addscratch.yml
     
   - hosts: a441
     remote_user: root
@@ -163,12 +157,10 @@
     - include: tasks/installstatusreport.yml
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
-    - include: tasks/addunburden-home.yml
     - include: tasks/installwebstormclion.yml
     - include: tasks/installjavatests.yml
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
-    - include: tasks/addscratch.yml
     
   - hosts: termserver.dcti.sut.ru
     remote_user: root
@@ -187,10 +179,8 @@
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
 
-    - include: tasks/addunburden-home.yml
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
     - include: tasks/installwebstormclion.yml
     - include: tasks/installnscd.yml
     - include: tasks/installcollectd.yml
-    - include: tasks/addscratch.yml
