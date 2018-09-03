@@ -4,12 +4,11 @@
     tasks:
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
+    - include: tasks/copyansiblehosts.yml
 
   - hosts: a445
     remote_user: root
     tasks:
-    - include: tasks/installdebiankeyring.yml
-    - include: tasks/logrotate.yml
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
@@ -31,7 +30,6 @@
     - name: install php5-mysql
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
       action: apt name=php5-mysql state=present install_recommends=no update_cache=no
-    - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_internet.yml
     - include: tasks/installhaskell.yml
@@ -50,8 +48,6 @@
   - hosts: a439
     remote_user: root
     tasks:
-    - include: tasks/installdebiankeyring.yml
-    - include: tasks/logrotate.yml
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/installcodeblocks.yml
@@ -64,7 +60,6 @@
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - include: tasks/install_internet.yml
-    - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installstatusreport.yml
     - include: tasks/installhaskell.yml
@@ -79,10 +74,8 @@
   - hosts: a437
     remote_user: root
     tasks:
-    - include: tasks/installdebiankeyring.yml
     - include: tasks/installlightdmback.yml
     - include: tasks/addlocalrepo.yml
-    - include: tasks/logrotate.yml
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/installcodeblocks.yml
@@ -98,7 +91,6 @@
       action: apt name=maxima-share state=latest install_recommends=no update_cache=no
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
-    - include: tasks/copyansiblehosts.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installstatusreport.yml
     - include: tasks/installhaskell.yml
@@ -111,8 +103,6 @@
   - hosts: a443
     remote_user: root
     tasks:
-    - include: tasks/installdebiankeyring.yml
-    - include: tasks/logrotate.yml
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/installcodeblocks.yml
@@ -135,7 +125,6 @@
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
 
-    - include: tasks/copyansiblehosts.yml
     - include: tasks/addunburden-home.yml
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
@@ -148,8 +137,6 @@
   - hosts: a441
     remote_user: root
     tasks:
-    - include: tasks/installdebiankeyring.yml
-    - include: tasks/logrotate.yml
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - name: setup scanner
@@ -169,7 +156,6 @@
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     
-    - include: tasks/copyansiblehosts.yml
     - include: tasks/installstatusreport.yml
     - include: tasks/installhaskell.yml
     - include: tasks/installsmartgit.yml
@@ -183,11 +169,8 @@
   - hosts: termserver.dcti.sut.ru
     remote_user: root
     tasks:
-    - include: tasks/installdebiankeyring.yml
-    - include: tasks/logrotate.yml
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/copyansiblehosts.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/installstatusreport.yml
     - include: tasks/fix_meltdown.yml
