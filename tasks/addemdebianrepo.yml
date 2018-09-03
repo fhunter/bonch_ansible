@@ -1,5 +1,0 @@
-   - name: Add emdebian repo for toolchains
-     action: apt_repository repo='deb http://ftp.uk.debian.org/emdebian/toolchains wheezy main' state=absent
-
-   - name: Install keyring for emdebian
-     action: apt name=emdebian-archive-keyring state=present update_cache=yes
