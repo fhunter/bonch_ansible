@@ -98,7 +98,6 @@
 #       - xfprint4
        - dosemu
        - dosfstools
-       - ipython
        - eric
        - xfce4-session
        - inkscape
@@ -148,6 +147,7 @@
     - include: tasks/installhaskell.yml
     - include: tasks/install_qtsdk.yml
     - include: tasks/install_octave.yml
+    - include: tasks/install_ipython.yml
 
     - name: deploy dosemu autoexec.bat
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
