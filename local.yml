@@ -21,6 +21,7 @@
     - include: tasks/installhaskell.yml
     - include: tasks/installcollectd.yml
     - include: tasks/installnscd.yml
+    - include: tasks/install_php5mysql.yml
 
   - hosts: a445
     remote_user: root
@@ -33,11 +34,7 @@
       with_items:
         - libsasl2-modules-gssapi-mit
         - libncurses5:i386
-    - name: install netbeans
-      action: apt name=netbeans state=latest install_recommends=no update_cache=no
-    - name: install php5-mysql
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    - include: tasks/install_netbeans.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_internet.yml
     - include: tasks/install_arm_toolchain.yml
@@ -49,12 +46,8 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - name: install php5-mysql
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - include: tasks/install_internet.yml
     - include: tasks/add_permission_read_logs_apache2.yml
-    - include: tasks/installhaskell.yml
     - include: tasks/installjavatests.yml
   
   - hosts: a437
@@ -64,13 +57,7 @@
     - include: tasks/addlocalrepo.yml
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/installwebstormclion.yml
-#    - name: install netbeans
-#      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
-#      action: apt name=netbeans=8.0.2.1 state=present install_recommends=no update_cache=no
-    - name: install php5-mysql
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
+    # - include: tasks/install_netbeans.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_internet.yml
   
@@ -79,12 +66,7 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - name: install php5-mysql
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
-    - name: install netbeans
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
-      action: apt name=netbeans=8.0.2.1 state=present install_recommends=no update_cache=no
+    - include: tasks/install_netbeans.yml
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: setup scanner
@@ -100,9 +82,6 @@
     - name: setup scanner2
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - include: tasks/install_internet.yml
-    - name: install php5-mysql
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
     - include: tasks/installjavatests.yml
     
   - hosts: termserver.dcti.sut.ru
@@ -111,6 +90,3 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_internet.yml
-    - name: install php5-mysql
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      action: apt name=php5-mysql state=present install_recommends=no update_cache=no
