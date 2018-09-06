@@ -76,4 +76,4 @@ for i in t:
 	elif p[0] == 'failed':
 	    data['failed'] = int(p[1])
 
-t = request.post("http://eniac.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers)
+t = requests.post("http://eniac.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers)
