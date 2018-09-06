@@ -56,3 +56,24 @@ data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
 t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers)
+
+p1, p2 = os.popen2("tail -n 3 /var/log/ansible-pull.log")
+p1.close()
+t = p2.readlines()
+p2.close()
+t = t[1]
+t = t.split(':')[1].split()
+data = {}
+for i in t:
+    p=i.split('=')
+    if len(p)>1:
+	if p[0] == 'ok':
+	    data['ok']=int(p[1])
+	elif p[0] == 'changed':
+	    data['change']=int(p[1])
+	elif p[0] == 'unreachable':
+	    data['unreachable']=int(p[1])
+	elif p[0] == 'failed':
+	    data['failed'] = int(p[1])
+
+t = request.post("http://eniac.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers)
