@@ -1,5 +1,5 @@
     - name: install netbeans
-      action: apt pkg={{item}} state=installed install_recommends=no
+      action: apt pkg={{item}} state=installed install_recommends=no force=yes
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       with_items:
        - netbeans=8.0.2.1
