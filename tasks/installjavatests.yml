@@ -10,7 +10,7 @@
        - junit4
      
     - name: install tomcat8
-      action: apt pkg={{item}} state=installed update_cache=yes
+      action: apt pkg={{item}} state=installed
       with_items:
        - tomcat8
        - tomcat8-admin

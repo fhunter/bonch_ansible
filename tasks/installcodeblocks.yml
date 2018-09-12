@@ -1,2 +1,2 @@
     - name: install codeblocks
-      action: apt name=codeblocks state=latest update_cache=yes install_recommends=no
+      action: apt name=codeblocks state=latest install_recommends=no
