@@ -1,0 +1,2 @@
+    - name: install intelliJ Idea
+      action: apt name=intellijidea state=latest update_cache=no

@@ -19,6 +19,7 @@
     - include: tasks/install_maxima.yml
     - include: tasks/installsmartgit.yml
     - include: tasks/installwebstormclion.yml
+    - include: tasks/installidea.yml
     - include: tasks/installhaskell.yml
     - include: tasks/installcollectd.yml
     - include: tasks/installnscd.yml
