@@ -1,0 +1,2 @@
+   - name: Fix root access in mysql
+     command: mysql -uroot -p' ' mysql -e 'update user set plugin="" where User="root";flush privileges;'
