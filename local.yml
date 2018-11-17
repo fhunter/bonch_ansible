@@ -17,10 +17,10 @@
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - name: install qemu-system
-      action: apt name={{item}} state=installed install_recommends=no update_cache=no
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
       with_items:
         - qemu-system
-	- qemu-kvm
+        - qemu-kvm
     - include: tasks/install_maxima.yml
     - include: tasks/installsmartgit.yml
     - include: tasks/installwebstormclion.yml
