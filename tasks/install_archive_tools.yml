@@ -10,9 +10,11 @@
     - name: install archive tools gui
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       action: apt pkg={{item}} state=installed
+      with_items:
        - xarchiver
 
     - name: install archive tools gui
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
       action: apt pkg={{item}} state=installed
+      with_items:
        - squeeze
