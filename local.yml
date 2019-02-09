@@ -3,6 +3,8 @@
     remote_user: root
     tasks: 
     - include: tasks/copyansiblehosts.yml
+    - name: install lm-sensors
+      action: apt name=lm-sensors state=present install_recommends=no update_cache=no
 
   - hosts: classes
     remote_user: root
