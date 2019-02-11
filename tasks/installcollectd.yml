@@ -1,5 +1,7 @@
-    - name: install collectd
+    - name: remove collectd
       action: apt name=collectd state=absent update_cache=no install_recommends=no
+    - name: remove collectd-core
+      action: apt name=collectd-core state=absent update_cache=no install_recommends=no
 #    - name: deploy collectd config
 #      register: collectd_deploy
 #      copy:
