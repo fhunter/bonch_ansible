@@ -6,6 +6,7 @@
     remote_user: root
     tasks:
     - include: tasks/enable_kerberos_ssh.yml
+    - include: tasks/addlocalrepo.yml
 
     - name: add pam_group to configs
       lineinfile: dest=/etc/pam.d/common-auth line="auth optional pam_group.so" state=present insertafter=EOF
@@ -44,13 +45,13 @@
 #      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
     - include: tasks/enable_quota_applet.yml
-    - include: tasks/addlocalrepo.yml
 
     - name: install base packages
       action: apt pkg={{item}} state=installed
       with_items:
        - lightdm
        - xserver-xorg
+       - x11-xserver-utils
       notify: restart lightdm
 
     - name: install linux linux-headers
@@ -76,11 +77,11 @@
        - libsasl2-modules-gssapi-mit
        - xfce4
        - xfwm4-themes
-       - xfce4-utils
+#       - xfce4-utils
        - xfce4-mount-plugin
        - xfce4-goodies
        - policykit-1-gnome
-       - udisks
+       - udisks2
        - ntfs-3g
        - eject
        - gvfs
@@ -89,7 +90,7 @@
        - thunar-volman
        - xdg-user-dirs
        - xfdesktop4
-       - xfprint4
+#       - xfprint4
        - dosemu
        - dosfstools
        - eric
@@ -123,6 +124,7 @@
        - gedit-plugins
        - firmware-linux
        - pidgin
+       - libpng12
     
     - include: tasks/install_libreoffice.yml
     - include: tasks/install_jdk.yml
