@@ -124,7 +124,7 @@
        - gedit-plugins
        - firmware-linux
        - pidgin
-       - libpng12
+       - libpng12-0
     
     - include: tasks/install_libreoffice.yml
     - include: tasks/install_jdk.yml

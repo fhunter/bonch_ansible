@@ -6,7 +6,7 @@
     - name: install lm-sensors
       action: apt name=lm-sensors state=present install_recommends=no update_cache=no
     - name: install libpng12 for quartus
-      action: apt name=libpng12 state=present install_recommends=no update_cache=no
+      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
 
   - hosts: classes
     remote_user: root
