@@ -18,6 +18,7 @@
     - include: tasks/addunburden-home.yml
     - include: tasks/fix_meltdown.yml
     - include: tasks/installcodeblocks.yml
+    - include: tasks/fix_autofs_systemd.yml
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - name: install qemu-system
