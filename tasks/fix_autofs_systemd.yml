@@ -1,7 +1,7 @@
    - name: Set _netdev flag in autofs mount
      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
      lineinfile:
-       path: /etc/auto.net
+       dest: /etc/auto.net
        regexp: '^opts='
        line: 'opts="-fstype=nfs,hard,intr,nodev,nosuid,_netdev"'
    - name: Set KillUserProcesses to yes
