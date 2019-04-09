@@ -1,12 +1,5 @@
-- name: Add permission to read logs /var/log/apache2
-  file:
-    path: /var/log/apache2
-    mode: 0644
-    recurse: yes
-    state: directory
-
-- name: Add permission to read logs /var/log/apache2 part2
-  file:
-    path: /var/log/apache2
-    mode: 0755
-    state: directory
+- name: Add permission to read logs in /var/log/apache2
+  lineinfile: dest=/etc/rc.local insertbefore="exit 0" line="{{item.line}}" state=present                                               
+  with_items:
+    - { line: 'chmod a+rX -R /var/log/apache2' }
+    - { line: 'chmod a+rx /var/log/apache2' }
