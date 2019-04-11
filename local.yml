@@ -12,6 +12,7 @@
     remote_user: root
     tasks:
     - include: tasks/aptgetupdate.yml
+    - include: tasks/create_rc_local.yml
     - include: tasks/installdebiankeyring.yml
     - include: tasks/logrotate.yml
     - include: tasks/installstatusreport.yml
