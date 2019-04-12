@@ -1,2 +1,8 @@
    - name: Fix root access in mysql
-     command: mysql -uroot -p' ' mysql -e 'update user set plugin="" where User="root";flush privileges;'
+     mysql_user:
+       user=root
+       password=''
+       check_implicit_admin=yes
+
+#   - name: Fix root access in mysql 2
+#     command: mysql -uroot -p' ' mysql -e 'update user set plugin="" where User="root";flush privileges;'
