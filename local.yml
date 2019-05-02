@@ -11,6 +11,7 @@
   - hosts: classes
     remote_user: root
     tasks:
+    - include: tasks/fix_apt_repos.yml
     - include: tasks/aptgetupdate.yml
     - include: tasks/updatetimezone.yml
     - include: tasks/create_rc_local.yml
