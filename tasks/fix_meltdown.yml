@@ -1,3 +1,6 @@
+    - name: install latest initramfs-tools
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
+      action: apt name=initramfs-tools state=latest update_cache=no install_recomments=no
     - name: install latest linux
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
       action: apt name=linux-image-amd64 state=latest update_cache=no install_recommends=no
