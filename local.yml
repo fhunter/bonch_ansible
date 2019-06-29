@@ -38,6 +38,7 @@
     - include: tasks/installnscd.yml
     - include: tasks/install_php5mysql.yml
     - include: tasks/install_internet.yml
+    - include: tasks/install_localca.yml
     - include: tasks/install_netbeans.yml
 
   - hosts: a445
