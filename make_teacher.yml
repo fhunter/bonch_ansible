@@ -12,6 +12,11 @@
 
     - name: Make home directory    
       file: group=teachers owner={{create_username}} mode=0750 path=/afs/dcti.sut.ru/homes/teachers/{{create_username}} state=directory
+    
+    - name: Fix jabber configuration
+      template: dest=/afs/dcti.sut.ru/homes/teachers/{{create_username}}/.purple/accounts.xml src=templates/accounts.xml.j2 mode='0600' owner={{create_username}} group=teachers 
+      with_items:
+        - "{{ create_username }}"
 
     - name: add kerberos principal 
       script: scripts/create_principal.sh teachers {{create_username}}

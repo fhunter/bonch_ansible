@@ -12,6 +12,11 @@
 
     - name: Make home directory    
       file: group=personal owner={{create_username}} mode=0750 path=/afs/dcti.sut.ru/homes/personal/{{create_username}} state=directory
+    
+    - name: Fix jabber configuration
+      template: dest=/afs/dcti.sut.ru/homes/personal/{{create_username}}/.purple/accounts.xml src=templates/accounts.xml.j2 mode='0600' owner={{create_username}} group=personal 
+      with_items:
+        - "{{ create_username }}"
 
     - name: add kerberos principal 
       script: scripts/create_principal.sh personal {{create_username}}

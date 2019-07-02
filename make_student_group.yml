@@ -21,6 +21,10 @@
       file: group={{create_group}} owner={{item}} mode=0750 path=/afs/dcti.sut.ru/homes/students/{{create_group}}/{{item}} state=directory
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
+    - name: Fix jabber configuration
+      with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
+      template: dest=/afs/dcti.sut.ru/homes/students/{{create_group}}/{{item}}/.purple/accounts.xml src=templates/accounts.xml.j2 mode='0600' owner={{item}} group={{create_group}}
+
     - name: add kerberos principal
       script: scripts/create_principal.sh students {{item}}
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
@@ -42,6 +46,8 @@
 
     - name: Setup svn server 2
       command: svnadmin create /srv/svn/{{create_group}}
+      args:
+        creates: /srv/svn/{{create_group}}/db
 
     - name: Setup svn server 3
       command: cp /srv/svn/sandbox/conf/svnserve.conf /srv/svn/{{create_group}}/conf
