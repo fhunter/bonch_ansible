@@ -56,6 +56,7 @@
     - include: tasks/install_arm_toolchain.yml
     - include: tasks/fixxsessionerrors.yml
     - include: tasks/installvnc.yml
+    - include: tasks/install_quartus_15.yml
 
   - hosts: a439
     remote_user: root
