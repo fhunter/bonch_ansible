@@ -66,6 +66,7 @@
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installjavatests.yml
+    - include: tasks/install_quartus_15.yml
   
   - hosts: a437
     remote_user: root
