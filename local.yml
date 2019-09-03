@@ -91,6 +91,8 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
+    - name: install sane-utils
+      action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
     
   - hosts: a441
     remote_user: root
@@ -101,6 +103,8 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
     - name: setup scanner2
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
+    - name: install sane-utils
+      action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
     - include: tasks/installjavatests.yml
     
   - hosts: termserver.dcti.sut.ru
