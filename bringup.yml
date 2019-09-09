@@ -6,7 +6,12 @@
     remote_user: root
     tasks:
     - include: tasks/enable_kerberos_ssh.yml
+
+    - name: Add i386 architecture support
+      shell: dpkg --add-architecture i386
+
     - include: tasks/addlocalrepo.yml
+    - include: tasks/addstretchbackports.yml
 
     - name: add pam_group to configs
       lineinfile: dest=/etc/pam.d/common-auth line="auth optional pam_group.so" state=present insertafter=EOF
@@ -22,6 +27,9 @@
 
     - name: make /afs directory
       file: dest=/afs state=directory mode=0755 owner=root group=root
+
+    - name: restart autofs
+      service: name=autofs state=restarted
 
     - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
       file: dest=/afs/dcti.sut.ru/ src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes
@@ -45,6 +53,7 @@
 #      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
     - include: tasks/enable_quota_applet.yml
+    - include: tasks/addlocalrepo.yml
 
     - name: install base packages
       action: apt pkg={{item}} state=installed
@@ -61,6 +70,12 @@
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
       notify: restart apache
       with_items:
+       - firmware-realtek
+       - pm-utils
+       - upower
+       - x11-xserver-utils
+       - libpam-ck-connector
+       - aptitude
        - imagemagick
        - dia
        - dia2code
@@ -77,6 +92,7 @@
        - libsasl2-modules-gssapi-mit
        - xfce4
        - xfwm4-themes
+       - libxfce4ui-utils
        - xfce4-mount-plugin
        - xfce4-goodies
        - policykit-1-gnome
@@ -124,6 +140,9 @@
        - firmware-linux
        - pidgin
        - libpng12-0
+    
+    - name: install mate desktop
+      action: apt pkg=mate-desktop-environment state=installed update_cache=no
     
     - include: tasks/install_libreoffice.yml
     - include: tasks/install_jdk.yml
