@@ -2,7 +2,7 @@
   - hosts: all
     vars:
       openntpd_ntp_servers: "timeserver.dcti.sut.ru"
-        
+
     remote_user: root
     tasks:
     - include: tasks/enable_kerberos_ssh.yml
@@ -77,7 +77,6 @@
        - libsasl2-modules-gssapi-mit
        - xfce4
        - xfwm4-themes
-#       - xfce4-utils
        - xfce4-mount-plugin
        - xfce4-goodies
        - policykit-1-gnome
