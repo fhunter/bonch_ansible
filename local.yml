@@ -110,5 +110,6 @@
   - hosts: termserver.dcti.sut.ru
     remote_user: root
     tasks:
+    - include: tasks/install_quartus_15.yml
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
