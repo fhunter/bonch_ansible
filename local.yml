@@ -41,6 +41,7 @@
     - include: tasks/install_internet.yml
     - include: tasks/install_localca.yml
     - include: tasks/install_netbeans.yml
+    - include: tasks/fix_access_mysql.yml
 
   - hosts: a445
     remote_user: root
@@ -58,7 +59,7 @@
     - include: tasks/fixxsessionerrors.yml
     - include: tasks/installvnc.yml
     - include: tasks/install_quartus_15.yml
-    - include: tasks/fix_access_mysql.yml
+
   - hosts: a439
     remote_user: root
     tasks:
@@ -67,7 +68,6 @@
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installjavatests.yml
     - include: tasks/install_quartus_15.yml
-    - include: tasks/fix_access_mysql.yml
   
   - hosts: a437
     remote_user: root
@@ -79,7 +79,6 @@
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/add_permission_read_logs_apache2.yml
-    - include: tasks/fix_access_mysql.yml
     handlers:
       - include: handlers/restartmysql.yml
        
