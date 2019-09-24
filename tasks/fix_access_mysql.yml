@@ -1,9 +1,9 @@
    - name: Fix root access in mysql
      mysql_user:
-       host=localhost
-       user=user
-       password='user'
-       priv: '*.*:ALL,GRANT'
+       host: "localhost"
+       user: "user"
+       password: "user"
+       priv: "*.*:ALL,GRANT"
 
 #   - name: Fix root access in mysql 2
 #     command: mysql -uroot -p' ' mysql -e 'update user set plugin="" where User="root";flush privileges;'
