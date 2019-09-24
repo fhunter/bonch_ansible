@@ -58,7 +58,7 @@
     - include: tasks/fixxsessionerrors.yml
     - include: tasks/installvnc.yml
     - include: tasks/install_quartus_15.yml
-
+    - include: tasks/fix_access_mysql.yml
   - hosts: a439
     remote_user: root
     tasks:
