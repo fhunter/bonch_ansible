@@ -79,6 +79,8 @@
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/add_permission_read_logs_apache2.yml
+    handlers:
+      - include: handlers/restartmysql.yml
  
   - hosts: a443
     remote_user: root
