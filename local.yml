@@ -41,6 +41,7 @@
     - include: tasks/install_internet.yml
     - include: tasks/install_localca.yml
     - include: tasks/install_netbeans.yml
+    - include: tasks/install_pycharm.yml
     - include: tasks/fix_access_mysql.yml
 
   - hosts: a445
