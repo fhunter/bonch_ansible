@@ -32,7 +32,7 @@
       service: name=autofs state=restarted
 
     - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
-      file: dest=/afs/dcti.sut.ru/ src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes
+      file: dest=/afs/dcti.sut.ru src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes
     
     - name: deploy nsswitch configuration files
       copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
