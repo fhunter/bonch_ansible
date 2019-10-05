@@ -11,6 +11,8 @@ m D .local/share/tracker local_share_tracker
 m D .thumbnails thumbnails
 m D .CLion2017.2/system CLion2017.2
 m D .IdeaIC2018.1/system IdeaIC2018.1
+m D .WebStorm2017.2/system WebStorm2017.2
+m D .PyCharmCE2019.2/system PyCharmCE2019.2
 
 # Common browser caches
 #m f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
