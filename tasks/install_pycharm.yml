@@ -1,8 +1,9 @@
     - name: install pycharm
       action: apt name=pycharm state=latest update_cache=no
+
     - name: install virtualenvironment
-      action: apt name={{item}} state=present update_cache=no
+      action: apt pkg={{item}} state=present update_cache=no
       with_items:
         - python-virtualenv
-	- python3-virtualenv
-	- virtualenv
+        - python3-virtualenv
+        - virtualenv
