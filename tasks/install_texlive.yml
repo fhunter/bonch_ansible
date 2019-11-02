@@ -1,0 +1,4 @@
+    - name: install tex-live
+      action: apt name=texlive state=installed
+    - name: install pandoc
+      action: apt name=pandoc state=installed

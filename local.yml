@@ -97,6 +97,7 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
     - name: install sane-utils
       action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
+    - include: tasks/install_texlive.yml
     
   - hosts: a441
     remote_user: root
@@ -110,6 +111,7 @@
     - name: install sane-utils
       action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
     - include: tasks/installjavatests.yml
+    - include: tasks/install_texlive.yml
     
   - hosts: termserver.dcti.sut.ru
     remote_user: root
@@ -117,3 +119,4 @@
     - include: tasks/install_quartus_15.yml
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+    - include: tasks/install_texlive.yml
