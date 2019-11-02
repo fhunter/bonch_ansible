@@ -54,6 +54,7 @@
 
     - include: tasks/enable_quota_applet.yml
     - include: tasks/addlocalrepo.yml
+    - include: tasks/install_dosemu.yml
 
     - name: install base packages
       action: apt pkg={{item}} state=installed

@@ -11,6 +11,7 @@
   - hosts: classes
     remote_user: root
     tasks:
+    - include: tasks/install_dosemu.yml
     - include: tasks/fix_apt_repos.yml
     - include: tasks/addstretchbackports.yml
     - include: tasks/aptgetupdate.yml
