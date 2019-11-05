@@ -2,8 +2,8 @@
   - hosts: all
     remote_user: root
     tasks:
-    - name: apt update
-      action: apt update_cache=yes
+#    - name: apt update
+#      action: apt update_cache=yes
     - include: tasks/copyansiblehosts.yml
     - name: install lm-sensors
       action: apt name=lm-sensors state=present install_recommends=no update_cache=no
@@ -13,6 +13,7 @@
   - hosts: classes
     remote_user: root
     tasks:
+    - include: tasks/remove_wheezy_backports.yml
     - include: tasks/install_dosemu.yml
     - include: tasks/fix_apt_repos.yml
     - include: tasks/addstretchbackports.yml

@@ -38,10 +38,6 @@
     repo_url: git://eniac.dcti.sut.ru/srv/ansible/
 
   tasks:
-    - name: Adde wheezy-backports repo
-      when: ansible_distribution == 'Debian' and ansible_distribution_version == '7'
-      action: apt_repository repo='deb http://mirror.mephi.ru/debian/ wheezy-backports main' state=present 
-
     - name: Install ansible
       action: apt name=ansible state=installed
 

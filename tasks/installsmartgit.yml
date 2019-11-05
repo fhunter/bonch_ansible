@@ -1,8 +1,6 @@
    - name: Install latest git
-     when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-     action: apt name=git state=latest update_cache=no default_release=wheezy-backports
+     action: apt name=git state=latest update_cache=no
    - name: Install smartgit
-     when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
      action: apt name={{item}} state=present update_cache=no
      with_items:
        - openjdk-8-jdk
