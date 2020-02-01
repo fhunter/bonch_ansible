@@ -99,6 +99,7 @@
     - name: install sane-utils
       action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
     - include: tasks/install_texlive.yml
+    - include: tasks/install_texmaker.yml
     
   - hosts: a441
     remote_user: root
@@ -113,6 +114,7 @@
       action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
     - include: tasks/installjavatests.yml
     - include: tasks/install_texlive.yml
+    - include: tasks/install_texmaker.yml
     
   - hosts: termserver.dcti.sut.ru
     remote_user: root
