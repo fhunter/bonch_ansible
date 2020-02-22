@@ -47,6 +47,7 @@
     - include: tasks/install_netbeans.yml
     - include: tasks/install_pycharm.yml
     - include: tasks/fix_access_mysql.yml
+    - include: tasks/autostart_pidgin.yml
 
   - hosts: a445
     remote_user: root
@@ -124,3 +125,4 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_texlive.yml
+    - include: tasks/autostart_pidgin.yml
