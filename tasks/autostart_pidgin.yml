@@ -1,3 +1,5 @@
+- name: Install pidgin
+  action: apt name=pidgin state=installed
 - name: Add pidgin to autostart
   copy:
     src: /usr/share/applications/pidgin.desktop
