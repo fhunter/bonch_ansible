@@ -1,9 +1,13 @@
 - name: Install pidgin
   action: apt name=pidgin state=installed install_recommends=no
 - name: Add pidgin to autostart
-  copy:
-    src: /usr/share/applications/pidgin.desktop
-    dest: /etc/xdg/autostart/
-    mode: 0755
-    remote_src: yes
+  file:
+    dest: /etc/xdg/autostart/pidgin.desktop
+    state: absent
+#- name: Add pidgin to autostart
+#  copy:
+#    src: /usr/share/applications/pidgin.desktop
+#    dest: /etc/xdg/autostart/
+#    mode: 0755
+#    remote_src: yes
 
