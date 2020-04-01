@@ -46,6 +46,7 @@
     - include: tasks/install_localca.yml
     - include: tasks/install_netbeans.yml
     - include: tasks/install_pycharm.yml
+    - include: tasks/install_rustc.yml
     - include: tasks/fix_access_mysql.yml
     - include: tasks/autostart_pidgin.yml
 
