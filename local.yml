@@ -131,5 +131,10 @@
   - hosts: remoteteaching
     remote_user: root
     tasks:
+    - name: install pulseaudio for discord
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+      - pulseaudio
+      - pavucontrol
     - name: install discord
       action: apt pkg=discord state=installed install_recommends=no update_cache=no
