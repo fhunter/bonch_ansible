@@ -1,5 +1,11 @@
 # Generic cache locations
 m D .cache/chromium cache_chromium
+
+m D .config/discord/0.* discord_updates_0.%1
+m D .config/discord/Cache  discord_cache
+m D .config/discord/Code*Cache discord_code_cache
+m D .config/discord/GPUCache discord_gpucache
+
 m D .cache/mozilla cache_mozilla
 m D .cache/netbeans cache_netbeans
 m D .cache/epiphany-browser cache_epiphanybrowser
