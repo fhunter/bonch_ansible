@@ -194,5 +194,9 @@
   - hosts: a44306.dcti.sut.ru
     remote_user: root
     tasks:
-    - include: tasks/add_remote_printer_access.yml
     - include: tasks/add_scanner_snapscan.yml
+
+  - hosts: remoteprinters
+    remote_user: root
+    tasks:
+    - include: tasks/add_remote_printer_access.yml
