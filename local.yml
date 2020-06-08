@@ -29,6 +29,11 @@
     - include: tasks/fix_autofs_systemd.yml
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
+    - name: install latest chromium
+      action: apt name={{item}} state=latest install_recommends=no update_cache=no
+      with_items:
+        - chromium
+        - chromium-l10n
     - name: install qemu-system
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
       with_items:

@@ -3,4 +3,6 @@
       with_items:
        - netsurf-gtk
        - iceweasel
+       - firefox-esr
        - chromium
+       - chromium-l10n
