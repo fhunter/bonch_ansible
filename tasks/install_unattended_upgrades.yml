@@ -1,0 +1,15 @@
+    - name: install unattended-upgrades
+      action: apt name=unattended-upgrades state=present update_cache=no install_recommends=no
+
+    - name: install anacron
+      action: apt name=anacron state=present update_cache=no install_recommends=no
+
+    - name: Blacklist netbeans and dosemu
+      lineinfile:
+        dest: /etc/apt/apt.conf.d/50unattended-upgrades
+        insertafter: "Unattended-Upgrade::Package-Blacklist.*{.*"
+        state: present
+        line: {{item}}
+      with_items:
+        - '"netbeans";'
+        - '"dosemu";'
