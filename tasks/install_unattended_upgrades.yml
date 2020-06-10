@@ -11,5 +11,5 @@
         state: present
         line: "{{item.line}}"
       with_items:
-        - { line:'"netbeans";' }
-        - { line: '"dosemu";' }
+        - { line: 'netbeans;' }
+        - { line: 'dosemu;' }
