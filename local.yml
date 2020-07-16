@@ -86,6 +86,8 @@
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installjavatests.yml
     - include: tasks/install_quartus_15.yml
+    - name: install nasm
+      action: apt pkg=nasm state=installed update_cache=no
   
   - hosts: a437
     remote_user: root
