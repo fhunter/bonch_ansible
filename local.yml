@@ -92,8 +92,6 @@
   - hosts: a437
     remote_user: root
     tasks:
-    - name: install mate desktop
-      action: apt pkg=mate-desktop-environment state=installed update_cache=no
     - include: tasks/installlightdmback.yml
     - include: tasks/addlocalrepo.yml
     - name: deploy admin access
