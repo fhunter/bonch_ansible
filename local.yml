@@ -137,7 +137,7 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - name: install mate desktop
-          action: apt pkg=mate-desktop-environment state=installed update_cache=no
+      action: apt pkg=mate-desktop-environment state=installed update_cache=no
     - include: tasks/install_texlive.yml
     - include: tasks/autostart_pidgin.yml
 
