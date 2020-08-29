@@ -9,6 +9,8 @@
       action: apt name=lm-sensors state=present install_recommends=no update_cache=no
     - name: install libpng12 for quartus
       action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+    - name: install hddtemp
+      action: apt name=hddtemp state=present install_recommends=no update_cache=no
 
   - hosts: classes
     remote_user: root
