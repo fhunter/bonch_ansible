@@ -150,7 +150,7 @@
     remote_user: root
     tasks:
     - name: install discord
-      action: apt pkg=discord state=installed install_recommends=no update_cache=no
+      action: apt pkg=discord state=latest install_recommends=no update_cache=no
   - hosts: remoteprinters
     remote_user: root
     tasks:
