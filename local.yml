@@ -80,6 +80,8 @@
     - include: tasks/installvnc.yml
     - include: tasks/install_quartus_15.yml
     - include: tasks/install_unattended_upgrades.yml
+    - name: install x11vnc to allow remote access
+      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
 
   - hosts: a439
     remote_user: root
@@ -91,6 +93,8 @@
     - include: tasks/install_quartus_15.yml
     - name: install nasm
       action: apt pkg=nasm state=installed update_cache=no
+    - name: install x11vnc to allow remote access
+      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
   
   - hosts: a437
     remote_user: root
@@ -101,6 +105,8 @@
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_quartus_15.yml
+    - name: install x11vnc to allow remote access
+      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
     handlers:
       - include: handlers/restartmysql.yml
  
