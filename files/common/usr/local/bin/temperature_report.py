@@ -8,7 +8,7 @@ import glob
 def readhddtemp():
     temps = []
     drives = glob.glob("/dev/sd[a-z]")
-    commandline = ["hddtemp", "-n", "-q" ]
+    commandline = ["/usr/sbin/hddtemp", "-n", "-q" ]
     for i in drives:
         commandline.append(i)
     for i in subprocess.check_output(commandline).splitlines():
