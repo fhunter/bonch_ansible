@@ -42,7 +42,7 @@ def gethwmon_values(number,name):
     temps = []
     for i in inputs:
         temp = int(readfilecontents(i))
-        temp = temp/1000.0
+        temp = temp/1000
         if (temp > 0) and (temp < 120 ):
             temps.append(temp)
     return temps
@@ -53,7 +53,7 @@ def readcputemp():
     for i in dictionary:
         if sensormatch(dictionary[i]):
             for k in gethwmon_values(i,dictionary[i]):
-                temps.append(k)
+                temps.append(int(k))
     return temps
  
 data = {}
