@@ -53,7 +53,7 @@ def readcputemp():
     for i in dictionary:
         if sensormatch(dictionary[i]):
             for k in gethwmon_values(i,dictionary[i]):
-                temps.append(int(k))
+                temps.append(k)
     return temps
  
 data = {}
