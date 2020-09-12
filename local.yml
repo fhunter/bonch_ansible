@@ -16,6 +16,7 @@
     remote_user: root
     tasks:
     - include: tasks/install_msttfcorefonts.yml
+    - include: tasks/install_tablet_support.yml
     - include: tasks/remove_wheezy_backports.yml
     - include: tasks/install_dosemu.yml
     - include: tasks/install_icecc.yml
