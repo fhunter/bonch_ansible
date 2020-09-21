@@ -24,11 +24,19 @@ def readfilecontents(name):
     f.close()
     return contents
 
+def gethwmonnumber(path):
+    if "/device/" in path:
+        return int(path.replace("/sys/class/hwmon/hwmon","").replace("/device/name",""))
+    else:
+        return int(path.replace("/sys/class/hwmon/hwmon","").replace("/name",""))
+
 def gethwmon():
     temp = {}
     names = glob.glob("/sys/class/hwmon/hwmon*/name")
+    names2 = glob.glob("/sys/class/hwmon/hwomn*/device/name")
+    names = names + names2
     for i in names:
-        number = int(i.replace("/sys/class/hwmon/hwmon","").replace("/name",""))
+        number = gethwmonnumber(i)
         temp[number]=readfilecontents(i)
     return temp
 
@@ -43,6 +51,8 @@ def sensormatch(name):
 
 def gethwmon_values(number,name):
     inputs = glob.glob("/sys/class/hwmon/hwmon%s/temp*_input" % number)
+    inputs2 = glob.glob("/sys/class/hwmon/hwmon%s/device/temp*_input" % number)
+    inputs = inputs + inputs2
     temps = []
     for i in inputs:
         temp = int(readfilecontents(i))
