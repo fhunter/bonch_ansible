@@ -35,6 +35,8 @@ def gethwmon():
 def sensormatch(name):
     if name == "coretemp":
         return True
+    if name == "f71869a-isa-0e80": #Lab 439
+	return True   
     return False
 
 def gethwmon_values(number,name):
