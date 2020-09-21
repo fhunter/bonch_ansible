@@ -5,3 +5,6 @@
        - xournal
        - xinput
        - mypaint
+    - name: install latests libwacom2 (for tablet settings)
+      action: apt pkg=libwacom2 state=latest install_recommends=no
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
