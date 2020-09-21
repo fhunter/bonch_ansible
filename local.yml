@@ -15,6 +15,7 @@
   - hosts: classes
     remote_user: root
     tasks:
+    - include: tasks/install_latest_backports_kernel.yml
     - include: tasks/install_msttfcorefonts.yml
     - include: tasks/install_tablet_support.yml
     - include: tasks/remove_wheezy_backports.yml
@@ -92,7 +93,6 @@
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installjavatests.yml
     - include: tasks/install_quartus_15.yml
-    - include: tasks/install_latest_backports_kernel.yml
     - name: install nasm
       action: apt pkg=nasm state=installed update_cache=no
     - name: install x11vnc to allow remote access
