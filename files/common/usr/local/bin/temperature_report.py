@@ -33,7 +33,7 @@ def gethwmonnumber(path):
 def gethwmon():
     temp = {}
     names = glob.glob("/sys/class/hwmon/hwmon*/name")
-    names2 = glob.glob("/sys/class/hwmon/hwomn*/device/name")
+    names2 = glob.glob("/sys/class/hwmon/hwmon*/device/name")
     names = names + names2
     for i in names:
         number = gethwmonnumber(i)
@@ -43,9 +43,9 @@ def gethwmon():
 def sensormatch(name):
     if name == "coretemp":
         return True
-    if name == "f71869a-isa-0e80": #Lab 439
+    if name == "f71869a": #Lab 439
         return True
-    if name == "atk0110-acpi-0": # for a44101
+    if name == "atk0110": # for a44101
         return True
     return False
 
