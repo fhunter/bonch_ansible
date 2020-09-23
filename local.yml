@@ -5,33 +5,18 @@
 #    - name: apt update
 #      action: apt update_cache=yes
     - include: tasks/copyansiblehosts.yml
-    - name: install lm-sensors
-      action: apt name=lm-sensors state=present install_recommends=no update_cache=no
-    - name: install libpng12 for quartus
-      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
-    - name: install hddtemp
-      action: apt name=hddtemp state=present install_recommends=no update_cache=no
 
   - hosts: classes
     remote_user: root
     tasks:
     - include: tasks/install_latest_backports_kernel.yml
-    - include: tasks/install_msttfcorefonts.yml
     - include: tasks/install_tablet_support.yml
-    - include: tasks/remove_wheezy_backports.yml
     - include: tasks/install_dosemu.yml
-    - include: tasks/install_icecc.yml
-    - include: tasks/fix_apt_repos.yml
-    - include: tasks/addstretchbackports.yml
-    - include: tasks/aptgetupdate.yml
     - include: tasks/updatetimezone.yml
-    - include: tasks/create_rc_local.yml
     - include: tasks/installdebiankeyring.yml
-    - include: tasks/logrotate.yml
     - include: tasks/installstatusreport.yml
     - include: tasks/addunburden-home.yml
     - include: tasks/installcodeblocks.yml
-    - include: tasks/fix_autofs_systemd.yml
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - name: install latest chromium
@@ -39,64 +24,35 @@
       with_items:
         - chromium
         - chromium-l10n
-    - name: install qemu-system
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-        - qemu-system
-        - qemu-kvm
-    - name: install pulseaudio for audio access
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      with_items:
-      - pulseaudio
-      - pavucontrol
-    - include: tasks/install_maxima.yml
-    - include: tasks/installsmartgit.yml
-    - include: tasks/installwebstormclion.yml
     - include: tasks/installidea.yml
-    - include: tasks/installhaskell.yml
-    - include: tasks/installnscd.yml
     - include: tasks/install_php5mysql.yml
     - include: tasks/install_internet.yml
     - include: tasks/install_localca.yml
     - include: tasks/install_netbeans.yml
     - include: tasks/install_pycharm.yml
-    - include: tasks/install_rustc.yml
-    - include: tasks/install_golang.yml
-    - include: tasks/fix_access_mysql.yml
     - include: tasks/autostart_pidgin.yml
+    - include: tasks/add_permission_read_logs_apache2.yml
+    - include: tasks/install_unattended_upgrades.yml
+    - include: tasks/installvnc.yml
+    - name: install x11vnc to allow remote access
+      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
 
   - hosts: a445
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - name: install packages for gss api auth to work
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      with_items:
-        - libsasl2-modules-gssapi-mit
-        - libncurses5:i386
-    - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_arm_toolchain.yml
     - include: tasks/fixxsessionerrors.yml
-    - include: tasks/installvnc.yml
-    - include: tasks/install_quartus_15.yml
-    - include: tasks/install_unattended_upgrades.yml
-    - name: install x11vnc to allow remote access
-      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
 
   - hosts: a439
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/installjavatests.yml
-    - include: tasks/install_quartus_15.yml
     - name: install nasm
       action: apt pkg=nasm state=installed update_cache=no
-    - name: install x11vnc to allow remote access
-      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
   
   - hosts: a437
     remote_user: root
@@ -105,10 +61,6 @@
     - include: tasks/addlocalrepo.yml
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/add_permission_read_logs_apache2.yml
-    - include: tasks/install_quartus_15.yml
-    - name: install x11vnc to allow remote access
-      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
     handlers:
       - include: handlers/restartmysql.yml
  
@@ -149,8 +101,6 @@
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - name: install mate desktop
       action: apt pkg=mate-desktop-environment state=installed update_cache=no
-    - name: install snmpd
-      action: apt pkg=snmpd state=installed install_recommends=no update_cache=no
     - include: tasks/install_texlive.yml
     - include: tasks/autostart_pidgin.yml
 

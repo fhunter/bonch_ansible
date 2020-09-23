@@ -12,6 +12,9 @@
 
     - include: tasks/addlocalrepo.yml
     - include: tasks/addstretchbackports.yml
+    - include: tasks/aptgetupdate.yml
+    - include: tasks/create_rc_local.yml
+    - include: tasks/logrotate.yml
 
     - name: add pam_group to configs
       lineinfile: dest=/etc/pam.d/common-auth line="auth optional pam_group.so" state=present insertafter=EOF
@@ -55,6 +58,7 @@
     - include: tasks/enable_quota_applet.yml
     - include: tasks/addlocalrepo.yml
     - include: tasks/install_dosemu.yml
+    - include: tasks/fix_autofs_systemd.yml
 
     - name: install base packages
       action: apt pkg={{item}} state=installed
@@ -146,6 +150,7 @@
       action: apt pkg=mate-desktop-environment state=installed update_cache=no
     
     - include: tasks/install_libreoffice.yml
+    - include: tasks/install_msttfcorefonts.yml
     - include: tasks/install_jdk.yml
     - include: tasks/installvnc.yml
     - include: tasks/install_apache2_and_php5.yml
@@ -153,6 +158,8 @@
     - include: tasks/install_swiprolog.yml
     - include: tasks/installcodeblocks.yml
     - include: tasks/installwebstormclion.yml
+    - include: tasks/installvnc.yml
+    - include: tasks/installsmartgit.yml
     - include: tasks/install_netbeans.yml
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
@@ -164,6 +171,12 @@
     - include: tasks/install_octave.yml
     - include: tasks/install_ipython.yml
     - include: tasks/install_icecc.yml
+    - include: tasks/installwebstormclion.yml
+    - include: tasks/install_rustc.yml
+    - include: tasks/install_golang.yml
+    - include: tasks/installnscd.yml
+    - name: install x11vnc to allow remote access
+      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
 
     - name: deploy dosemu autoexec.bat
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
@@ -173,6 +186,16 @@
       with_items:
        - openntpd
        - ntpdate
+    - name: install qemu-system
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+        - qemu-system
+        - qemu-kvm
+    - name: install pulseaudio for audio access
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      with_items:
+      - pulseaudio
+      - pavucontrol
 
     - name: Install openntpd config
       template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
@@ -181,10 +204,16 @@
     - name: Install openntpd defaults
       copy: src=files/a441/etc/default/openntpd dest=/etc/default/openntpd
       notify: restart openntpd
+    
+    - name: install lm-sensors
+      action: apt name=lm-sensors state=present install_recommends=no update_cache=no
+    - name: install hddtemp
+      action: apt name=hddtemp state=present install_recommends=no update_cache=no
 
 #    - name: add virtual machines mount point
 #      mount: fstype=ext4 name=/vm passno=2 src=/dev/mapper/a515-win7tmp state=mounted
     - include: tasks/install_internet.yml
+    - include: tasks/fix_access_mysql.yml
 
     handlers:
     - include: handlers/restartopenntpd.yml
@@ -201,3 +230,22 @@
     remote_user: root
     tasks:
     - include: tasks/add_remote_printer_access.yml
+  
+  - hosts: a445
+    remote_user: root
+    tasks:
+    - include: tasks/install_quartus_15.yml
+    - name: install libpng12 for quartus
+      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+  - hosts: a439
+    remote_user: root
+    tasks:
+    - include: tasks/install_quartus_15.yml
+    - name: install libpng12 for quartus
+      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+  - hosts: a437
+    remote_user: root
+    tasks:
+    - include: tasks/install_quartus_15.yml
+    - name: install libpng12 for quartus
+      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no

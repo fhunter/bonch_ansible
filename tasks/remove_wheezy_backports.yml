@@ -1,2 +1,0 @@
-    - name: Remove wheezy-backports repo
-      action: apt_repository repo='deb http://mirror.mephi.ru/debian/ wheezy-backports main' state=absent
