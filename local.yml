@@ -36,6 +36,12 @@
     - include: tasks/installvnc.yml
     - name: install vncbroadcast to allow remote access
       action: apt pkg=vncbroadcast state=latest update_cache=no install_recommends=no
+    - name: Add pidgin to autostart
+      copy:
+        src: /usr/share/applications/vncbroadcast.desktop
+        dest: /etc/xdg/autostart/
+        mode: 0755
+        remote_src: yes
 
   - hosts: a445
     remote_user: root
