@@ -1,11 +1,11 @@
     - name: enable quota applet
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{item}} state=latest
       with_items:
-       - quota
-       - python-glade2
+       - quota-applet
 
-    - name: enable quota applet 2 - install python-eggtrayicon
-      action: apt pkg={{item}} state=installed
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      with_items:
-       - python-eggtrayicon
+    - name: Add quota-applet to autostart
+      copy:
+        src: /usr/share/applications/quota-applet.desktop
+        dest: /etc/xdg/autostart/
+        mode: 0755
+        remote_src: yes

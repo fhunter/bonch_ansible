@@ -33,10 +33,10 @@
     - include: tasks/autostart_pidgin.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_unattended_upgrades.yml
-    - include: tasks/installvnc.yml
+    - include: tasks/enable_quota_applet.yml
     - name: install vncbroadcast to allow remote access
       action: apt pkg=vncbroadcast state=latest update_cache=no install_recommends=no
-    - name: Add pidgin to autostart
+    - name: Add vncbroadcast to autostart
       copy:
         src: /usr/share/applications/vncbroadcast.desktop
         dest: /etc/xdg/autostart/
