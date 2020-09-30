@@ -34,6 +34,8 @@
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_unattended_upgrades.yml
     - include: tasks/enable_quota_applet.yml
+    - name: remove sudo
+      action: apt pkg=sudo state=uninstalled update_cache=no
     - name: install vncbroadcast to allow remote access
       action: apt pkg=vncbroadcast state=latest update_cache=no install_recommends=no
     - name: Add vncbroadcast to autostart
