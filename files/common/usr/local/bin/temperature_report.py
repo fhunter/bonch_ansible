@@ -47,6 +47,8 @@ def sensormatch(name):
         return True
     if name == "atk0110": # for a44101
         return True
+    if name == "it8720": # for a43904
+	return True
     return False
 
 def gethwmon_values(number,name):
