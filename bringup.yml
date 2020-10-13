@@ -75,6 +75,7 @@
       action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
       notify: restart apache
       with_items:
+       - nfs4-acl-tools
        - firmware-realtek
        - pm-utils
        - upower
