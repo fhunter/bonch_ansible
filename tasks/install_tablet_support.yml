@@ -11,3 +11,5 @@
       with_items:
        - libwacom2
        - libwacom-bin
+    - name: copy configuration files
+      action: copy src=files/common/usr/share/X11/xorg.conf.d/71-wacom.conf dest=/usr/share/X11/xorg.conf.d/71-wacom.conf owner=root group=root mode=0644
