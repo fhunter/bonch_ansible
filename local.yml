@@ -121,6 +121,8 @@
     tasks:
     - name: install discord
       action: apt pkg=discord state=latest install_recommends=no update_cache=no
+    - name: install zoom
+      action: apt pkg=zoom state=latest install_recommends=no update_cache=no
   - hosts: remoteprinters
     remote_user: root
     tasks:
