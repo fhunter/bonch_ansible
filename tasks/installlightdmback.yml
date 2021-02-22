@@ -1,3 +1,11 @@
+    - name: install script depends
+      apt:
+        pkg:
+	  - graphicsmagick-imagemagick-compat
+	  - x11-xserver-utils
+	install_recommends: no
+	state: installed
+	update_cache: no
     - name: install script
       copy:
         src: files/a437/etc/lightdm/display.sh

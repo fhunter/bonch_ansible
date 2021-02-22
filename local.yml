@@ -70,6 +70,7 @@
   - hosts: a441
     remote_user: root
     tasks:
+    - include: tasks/installlightdmback.yml
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     
