@@ -52,17 +52,12 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_arm_toolchain.yml
-    - include: tasks/fixxsessionerrors.yml
 
   - hosts: a439
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/installjavatests.yml
-    - name: install nasm
-      action: apt pkg=nasm state=installed update_cache=no
   
   - hosts: a437
     remote_user: root
@@ -79,41 +74,22 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
-    - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
-    - name: install sane-utils
-      action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
-    - include: tasks/install_texlive.yml
-    - include: tasks/install_texmaker.yml
     
   - hosts: a441
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
-    - name: setup scanner2
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
-    - name: install sane-utils
-      action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
-    - include: tasks/installjavatests.yml
-    - include: tasks/install_texlive.yml
-    - include: tasks/install_texmaker.yml
     
   - hosts: termserver.dcti.sut.ru
     remote_user: root
     tasks:
-    - include: tasks/install_quartus_15.yml
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - name: install mate desktop
       action: apt pkg=mate-desktop-environment state=installed update_cache=no
     - name: install coquelicot-upload tool
       action: apt pkg=coquelicot-upload state=latest update_cache=no
-    - include: tasks/install_texlive.yml
     - include: tasks/autostart_pidgin.yml
 
   - hosts: remoteteaching

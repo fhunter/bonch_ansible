@@ -214,6 +214,7 @@
 #    - name: add virtual machines mount point
 #      mount: fstype=ext4 name=/vm passno=2 src=/dev/mapper/a515-win7tmp state=mounted
     - include: tasks/install_internet.yml
+    - include: tasks/installjavatests.yml
     - include: tasks/fix_access_mysql.yml
 
     handlers:
@@ -236,17 +237,51 @@
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
+    - include: tasks/fixxsessionerrors.yml
     - name: install libpng12 for quartus
       action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+
   - hosts: a439
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
     - name: install libpng12 for quartus
       action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+
   - hosts: a437
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
     - name: install libpng12 for quartus
       action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+
+  - hosts: a443
+    remote_user: root
+    tasks:
+    - include: tasks/install_texlive.yml
+    - include: tasks/install_texmaker.yml
+    - name: setup scanner
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
+    - name: setup scanner
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
+    - name: install sane-utils
+      action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
+
+  - hosts: a441
+    remote_user: root
+    tasks:
+    - include: tasks/install_texlive.yml
+    - include: tasks/install_texmaker.yml
+    - name: setup scanner
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
+    - name: setup scanner2
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
+    - name: install sane-utils
+      action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
+  
+  - hosts: termserver.dcti.sut.ru
+    remote_user: root
+    tasks:
+    - include: tasks/install_texlive.yml
+    - include: tasks/install_texmaker.yml
+    - include: tasks/install_quartus_15.yml
