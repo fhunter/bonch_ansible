@@ -293,3 +293,5 @@
     - include: tasks/install_texlive.yml
     - include: tasks/install_texmaker.yml
     - include: tasks/install_quartus_15.yml
+    - name: install coquelicot-upload tool
+      action: apt pkg=coquelicot-upload state=latest update_cache=no
