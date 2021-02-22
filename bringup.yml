@@ -216,6 +216,14 @@
     - include: tasks/install_internet.yml
     - include: tasks/installjavatests.yml
     - include: tasks/fix_access_mysql.yml
+    - name: install vncbroadcast to allow remote access
+      action: apt pkg=vncbroadcast state=latest update_cache=no install_recommends=no
+    - name: Add vncbroadcast to autostart
+      copy:
+        src: /usr/share/applications/vncbroadcast.desktop
+        dest: /etc/xdg/autostart/
+        mode: 0755
+        remote_src: yes
 
     handlers:
     - include: handlers/restartopenntpd.yml
