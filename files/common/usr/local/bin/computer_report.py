@@ -61,8 +61,8 @@ p1, p2 = os.popen2("tail -n 3 /var/log/ansible-pull.log")
 p1.close()
 t = p2.readlines()
 p2.close()
-t = t[1]
 try:
+    t = t[1]
     t = t.split(':')[1].split()
 except:
     exit()
