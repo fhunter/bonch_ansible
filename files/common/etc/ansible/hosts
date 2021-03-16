@@ -60,11 +60,14 @@ vladimirpc.dcti.sut.ru
 [terminalservers]
 termserver.dcti.sut.ru
 
-[classes:children]
+[noremote:children]
 a437
 a439
 a445
 a441
 a443
+
+[classes:children]
+noremote
 terminalservers
 

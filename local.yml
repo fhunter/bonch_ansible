@@ -6,6 +6,13 @@
 #      action: apt update_cache=yes
     - include: tasks/copyansiblehosts.yml
 
+# Labs where no remote access is used
+  - hosts: noremote
+    remote_user: root
+    tasks:
+    - include: tasks/installlightdmback.yml
+
+# All classes, including terminal server
   - hosts: classes
     remote_user: root
     tasks:
@@ -35,7 +42,6 @@
     - include: tasks/autostart_pidgin.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_unattended_upgrades.yml
-    - include: tasks/installlightdmback.yml
     - include: tasks/enable_quota_applet.yml
     - name: remove sudo
       action: apt pkg=sudo state=absent update_cache=no
