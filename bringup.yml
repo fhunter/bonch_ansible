@@ -55,7 +55,6 @@
 #    - name: fix pam configs for auth
 #      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
-    - include: tasks/enable_quota_applet.yml
     - include: tasks/addlocalrepo.yml
     - include: tasks/install_dosemu.yml
     - include: tasks/fix_autofs_systemd.yml
@@ -164,6 +163,7 @@
     - include: tasks/install_netbeans.yml
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
+    - include: tasks/enable_quota_applet.yml
     - include: tasks/install_browser_pack.yml
     - include: tasks/install_maxima.yml
     - include: tasks/install_sql_databases.yml
