@@ -22,6 +22,10 @@ m D .PyCharmCE2019.2/system PyCharmCE2019.2
 
 m D .ccache ccache
 
+# Virtual machines setup
+m D VirtualBox*VMs VirtualBox_VMs
+m D .config/VirtualBox configr_VirtualBox
+
 # Common browser caches
 #m f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
 #m f .config/google-chrome/*/Thumbnails-journal google-chrome-thumbnails-journal-%1
