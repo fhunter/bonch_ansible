@@ -57,6 +57,16 @@ headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
 t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers)
 
+# upload scratch free space
+temp = os.statvfs('/scratch')
+data = { 'scratch_total': t.f_frsize*t.f_blocks, 'scratch_free': t.f_frsize*t.f_bavail }
+headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+t = requests.post("http://eniac.dcti.sut.ru/online/api/scratch", data = json.dumps(data), headers=headers)
+
+# upload CMOS battery status
+# Not done currently
+
+# upload ansible status
 p1, p2 = os.popen2("tail -n 3 /var/log/ansible-pull.log")
 p1.close()
 t = p2.readlines()
