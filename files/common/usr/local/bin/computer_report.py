@@ -59,7 +59,7 @@ t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = json.dumps(
 
 # upload scratch free space
 temp = os.statvfs('/scratch')
-data = { 'scratch_total': t.f_frsize*t.f_blocks, 'scratch_free': t.f_frsize*t.f_bavail }
+data = { 'scratch_total': temp.f_frsize*temp.f_blocks, 'scratch_free': temp.f_frsize*temp.f_bavail }
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 t = requests.post("http://eniac.dcti.sut.ru/online/api/scratch", data = json.dumps(data), headers=headers)
 
