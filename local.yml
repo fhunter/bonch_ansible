@@ -91,6 +91,13 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/autostart_pidgin.yml
+  
+  - hosts: termserver2.dcti.sut.ru
+    remote_user: root
+    tasks:
+    - name: deploy admin access
+      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+    - include: tasks/autostart_pidgin.yml
 
   - hosts: remoteteaching
     remote_user: root
