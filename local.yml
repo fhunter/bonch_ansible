@@ -76,11 +76,10 @@
   - hosts: a437
     remote_user: root
     tasks:
-    - include: tasks/addlocalrepo.yml
+    - name: remove VM images
+      file: path=/opt/vm state=absent
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    handlers:
-      - include: handlers/restartmysql.yml
  
   - hosts: a443
     remote_user: root
@@ -94,14 +93,7 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     
-  - hosts: termserver.dcti.sut.ru
-    remote_user: root
-    tasks:
-    - name: deploy admin access
-      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/autostart_pidgin.yml
-  
-  - hosts: termserver2.dcti.sut.ru
+  - hosts: terminalservers
     remote_user: root
     tasks:
     - name: deploy admin access
