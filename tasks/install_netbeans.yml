@@ -1,2 +1,2 @@
     - name: install netbeans
-      action: apt pkg={{item}} state=latest install_recommends=no 
+      action: apt pkg=netbeans state=latest install_recommends=no 
