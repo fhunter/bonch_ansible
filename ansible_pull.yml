@@ -35,7 +35,7 @@
     # Repository to check out -- YOU MUST CHANGE THIS
     # repo must contain a local.yml file at top level
     #repo_url: git://github.com/sfromm/ansible-playbooks.git
-    repo_url: git://eniac.dcti.sut.ru/srv/ansible/
+    repo_url: https://gitea.pivt.spbgut.ru/PIVT/bonch_ansible.git
 
   tasks:
     - name: Install ansible
