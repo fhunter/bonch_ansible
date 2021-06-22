@@ -1,10 +1,24 @@
     - name: install sql databases (mysql, sqlite)
       action: apt pkg={{item}} state=installed install_recommends=no
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10']
       with_items:
-       - mysql-workbench
        - sqlite3
        - libsqlite3-dev
        - python-mysqldb
+    - name: install mysql-server
+      action: apt pkg={{item}} state=installed install_recommends=no
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
+      with_items:
+       - mariadb-server
+    - name: install mysql-server
+      action: apt pkg={{item}} state=installed install_recommends=no
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
+      with_items:
        - mysql-server
+    - name: install mysql-workbench
+      action: apt pkg={{item}} state=installed install_recommends=no
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
+      with_items:
+       - mysql-workbench
     - name: create test table in mysql
       action: mysql_db login_user=root login_password="" name=Test 

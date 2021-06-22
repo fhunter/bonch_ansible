@@ -11,6 +11,7 @@
      
     - name: install tomcat8
       action: apt pkg={{item}} state=installed
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
       with_items:
        - tomcat8
        - tomcat8-admin
@@ -20,9 +21,32 @@
        - tomcat8-docs
        - libtomcat8-java
        - libecj-java
+    
+    - name: install tomcat9
+      action: apt pkg={{item}} state=installed
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
+      with_items:
+       - tomcat9
+       - tomcat9-admin
+       - tomcat9-common
+       - tomcat9-examples
+       - tomcat9-user
+       - tomcat9-docs
+       - libtomcat9-java
+       - libecj-java
 
     - name: setup tomcat8 users and roles
       action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat8/tomcat-users.xml
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
+      with_items: 
+        - { line: '<role rolename=\"tomcat\" />' }
+        - { line: '<role rolename=\"manager-gui\" />' }
+        - { line: '<role rolename=\"admin-gui\" />' }
+        - { line: '<user username=\"tomcat\" password=\"tomcat\" roles=\"tomcat,manager-gui,admin-gui\"/>' }
+
+    - name: setup tomcat8 users and roles
+      action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat9/tomcat-users.xml
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
       with_items: 
         - { line: '<role rolename=\"tomcat\" />' }
         - { line: '<role rolename=\"manager-gui\" />' }

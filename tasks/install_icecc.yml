@@ -1,9 +1,9 @@
     - name: install icecc and ccache
       action: apt pkg={{item}} state=installed install_recommends=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10']
       with_items:
        - icecc
        - ccache
     - name: configure icecc
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10']
       action: copy src=files/common/etc/icecc/icecc.conf dest=/etc/icecc/icecc.conf owner=root mode=644

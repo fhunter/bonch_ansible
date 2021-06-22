@@ -1,8 +1,7 @@
    - name: Install latest git
      action: apt name=git state=latest update_cache=no
+   - include: tasks/install_jdk.yml
    - name: Install smartgit
      action: apt name={{item}} state=present update_cache=no
      with_items:
-       - openjdk-8-jdk
-       - openjdk-8-jre
        - smartgit
