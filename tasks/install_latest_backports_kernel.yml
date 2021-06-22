@@ -2,6 +2,7 @@
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       action: apt name=linux-image-amd64 state=latest update_cache=no install_recommends=no default_release="stretch-backports"
     - name: install latest kernel compiler
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       action: apt name=linux-compiler-gcc-6-x86 state=latest update_cache=no install_recommends=no default_release="stretch-backports"
     - name: install linux linux-headers
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
