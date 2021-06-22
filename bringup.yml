@@ -55,7 +55,6 @@
 #    - name: fix pam configs for auth
 #      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
-    - include: tasks/addlocalrepo.yml
     - include: tasks/install_dosemu.yml
     - include: tasks/fix_autofs_systemd.yml
 
@@ -287,7 +286,7 @@
     - name: install sane-utils
       action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
   
-  - hosts: termserver.dcti.sut.ru
+  - hosts: termserver2.dcti.sut.ru
     remote_user: root
     tasks:
     - include: tasks/install_texlive.yml
