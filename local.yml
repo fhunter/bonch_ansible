@@ -94,6 +94,7 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+    - include: tasks/install_qtsdk.yml
     
   - hosts: terminalservers
     remote_user: root
