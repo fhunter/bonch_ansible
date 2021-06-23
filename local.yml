@@ -18,6 +18,8 @@
   - hosts: classes
     remote_user: root
     tasks:
+    - name: Deploy ssmtp
+      action: apt name=ssmtp state=installed install_recommends=no update_cache=no
     - include: tasks/install_latest_backports_kernel.yml
     - include: tasks/install_tablet_support.yml
     - include: tasks/install_dosemu.yml
