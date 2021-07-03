@@ -8,8 +8,8 @@
     - name: install newest ansible
       apt:
         name: ansible
-	state: latest
-	update_cache: no
+        state: latest
+        update_cache: no
 
 # Labs where no remote access is used
   - hosts: noremote
