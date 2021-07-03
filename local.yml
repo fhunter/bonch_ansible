@@ -9,7 +9,7 @@
       register: bringup_complete
     - name: fact set
       set_fact:
-        bringup: {{ bringup_complete.stat.exists }}
+        bringup: "{{ bringup_complete.stat.exists }}"
       delegate_to: localhost
       delegate_facts: yes
 
