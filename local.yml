@@ -8,7 +8,7 @@
       register: bringup_complete
     - name: register fact
       when: bringup_complete.exists
-      ansible.builtin.set_fact:
+      set_fact:
         bringup: true
 #    - name: apt update
 #      action: apt update_cache=yes
