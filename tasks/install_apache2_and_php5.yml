@@ -7,14 +7,5 @@
        - libapache2-mod-python
        - php-mysql
 
-    - name: install apache2
-      action: apt pkg={{item}} state=installed
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '7'
-      with_items:
-       - apache2.2-bin
-       - libapache2-mod-php5
-       - libapache2-mod-python
-       - php5-mysql
-
     - name: adjust /var/www rights
       action: file mode=777 path=/var/www recurse=yes

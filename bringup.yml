@@ -78,7 +78,6 @@
        - pm-utils
        - upower
        - x11-xserver-utils
-       - libpam-ck-connector
        - aptitude
        - imagemagick
        - dia
@@ -94,11 +93,6 @@
        - librecad
        - ristretto
        - libsasl2-modules-gssapi-mit
-       - xfce4
-       - xfwm4-themes
-       - libxfce4ui-utils
-       - xfce4-mount-plugin
-       - xfce4-goodies
        - policykit-1-gnome
        - udisks2
        - ntfs-3g
@@ -108,21 +102,11 @@
        - thunar-vcs-plugin
        - thunar-volman
        - xdg-user-dirs
-       - xfdesktop4
-#       - xfprint4
-       - dosemu
        - dosfstools
        - eric
-       - xfce4-session
        - inkscape
        - xterm
        - rxvt-unicode-256color
-       - lazarus
-       - fpc
-       - virtualbox
-       - virtualbox-qt
-       - virtualbox-dkms
-       - virtualbox-source
        - fakeroot
        - gnome-extra-icons
        - gnome-icon-theme
@@ -136,14 +120,35 @@
        - vim-gtk
        - gdb
        - ruby
-       - evince-gtk
+       - evince
        - nasm
        - x11-utils
        - gedit
        - gedit-plugins
        - firmware-linux
        - pidgin
-       - libpng12-0
+
+    - name: install DCTI packages for debian 9
+      action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+      notify: restart apache
+      with_items:
+       - libpam-ck-connector
+       - xfce4
+       - xfwm4-themes
+       - xfdesktop4
+#       - xfprint4
+       - libxfce4ui-utils
+       - xfce4-mount-plugin
+       - xfce4-goodies
+       - xfce4-session
+       - virtualbox
+       - virtualbox-qt
+       - virtualbox-dkms
+       - virtualbox-source
+       - lazarus
+       - fpc
+
     
     - name: install mate desktop
       action: apt pkg=mate-desktop-environment state=installed update_cache=no
@@ -158,7 +163,7 @@
     - include: tasks/installcodeblocks.yml
     - include: tasks/installwebstormclion.yml
     - include: tasks/installvnc.yml
-    - include: tasks/installsmartgit.yml
+#    - include: tasks/installsmartgit.yml
     - include: tasks/install_netbeans.yml
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
@@ -175,6 +180,7 @@
     - include: tasks/install_rustc.yml
     - include: tasks/install_golang.yml
     - include: tasks/installnscd.yml
+    - include: tasks/fixxsessionerrors.yml
     - name: install x11vnc to allow remote access
       action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
 
@@ -210,10 +216,8 @@
     - name: install hddtemp
       action: apt name=hddtemp state=present install_recommends=no update_cache=no
 
-#    - name: add virtual machines mount point
-#      mount: fstype=ext4 name=/vm passno=2 src=/dev/mapper/a515-win7tmp state=mounted
     - include: tasks/install_internet.yml
-    - include: tasks/installjavatests.yml
+#    - include: tasks/installjavatests.yml
     - include: tasks/fix_access_mysql.yml
     - name: install vncbroadcast to allow remote access
       action: apt pkg=vncbroadcast state=latest update_cache=no install_recommends=no
@@ -244,7 +248,6 @@
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
-    - include: tasks/fixxsessionerrors.yml
     - name: install libpng12 for quartus
       action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
 
@@ -255,12 +258,12 @@
     - name: install libpng12 for quartus
       action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
 
-  - hosts: a437
-    remote_user: root
-    tasks:
-    - include: tasks/install_quartus_15.yml
-    - name: install libpng12 for quartus
-      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+#  - hosts: a437
+#    remote_user: root
+#    tasks:
+#    - include: tasks/install_quartus_15.yml
+#    - name: install libpng12 for quartus
+#      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
 
   - hosts: a443
     remote_user: root

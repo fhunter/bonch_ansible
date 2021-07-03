@@ -4,9 +4,19 @@
 
    - name: Add scratch lvm location
      action: lvol vg={{vgname.stdout}} lv=scratch size=100g
-   
+ 
    - name: Make filesystem on scratch volume
      action: filesystem fstype=ext4 dev=/dev/mapper/{{vgname.stdout}}-scratch
-   
+ 
    - name: Add scratch to fstab
      action: mount name=/scratch/ src=/dev/mapper/{{vgname.stdout}}-scratch state=mounted fstype=ext4
+ 
+   - name: deploy libpam-script script for directory creation
+     apt: name=libpam-script state=present
+
+   - name: add libpam-script in pam.d
+     lineinfile: line='session required pam_script.so' insertafter=EOF state=present dest=/etc/pam.d/common-session
+ 
+   - name: deploy link creation script
+     copy: src=files/pam_script_ses_open dest=/usr/share/libpam-script/pam_script_ses_open force=yes owner=root group=root mode=0755
+

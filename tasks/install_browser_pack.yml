@@ -2,12 +2,7 @@
       action: apt pkg={{item}} state=installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10']
       with_items:
-       - iceweasel
        - firefox-esr
        - chromium
        - chromium-l10n
-    - name: install browsers
-      action: apt pkg={{item}} state=installed
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
-      with_items:
        - netsurf-gtk
