@@ -1,8 +1,9 @@
    - name: Install pptp and pppd
-     action: apt pkg={{ item }} state=present
-     with_items:
-       - ppp
-       - pptp-linux
+     apt:
+       pkg:
+         - ppp
+         - pptp-linux
+       state: present
 
    - name: Set the rights right
      action: file path=/usr/sbin/pptp mode=104755
