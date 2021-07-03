@@ -1,18 +1,20 @@
     - name: enable kerberos ssh
-      action: apt pkg={{ item }} state=installed
+      apt:
+        pkg:
+          - ssh-krb5
+          - sshpass
+          - krb5-user
+          - libpam-krb5
+        state: installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
-      with_items:
-       - ssh-krb5
-       - sshpass
-       - krb5-user
-       - libpam-krb5
 
     - name: enable kerberos ssh
-      action: apt pkg={{ item }} state=installed
+      apt:
+        pkg:
+          - sshpass
+          - krb5-user
+          - libpam-krb5
+        state: installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '10'
-      with_items:
-       - sshpass
-       - krb5-user
-       - libpam-krb5
 
 # FIXME - needs to edit /etc/ssh/sshd_config (GSSAPIAuthentication yes, GSSAPIKeyExchange yes)
