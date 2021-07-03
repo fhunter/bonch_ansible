@@ -6,6 +6,10 @@
       stat:
         path: /var/bringup_complete
       register: bringup_complete
+    - name: register fact
+      when: bringup_complete.exists
+      ansible.builtin.set_fact:
+        bringup: true
 #    - name: apt update
 #      action: apt update_cache=yes
     - include: tasks/copyansiblehosts.yml
@@ -16,7 +20,7 @@
         update_cache: no
 
   - import_playbook: bringup.yml
-    when: (not hostvars['all']['bringup_complete'].exists) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10'])
+    when: (not ( 'bringup' in ansible_facts)) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10'])
 
 # Labs where no remote access is used
   - hosts: noremote
