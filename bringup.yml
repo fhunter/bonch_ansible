@@ -5,6 +5,8 @@
 
     remote_user: root
     tasks:
+    - include: tasks/fixpartitionsizes.yml
+    - include: tasks/addscratch.yml
     - include: tasks/enable_kerberos_ssh.yml
 
     - name: Add i386 architecture support

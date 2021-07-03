@@ -14,7 +14,11 @@
         name: ansible
         state: latest
         update_cache: no
-  
+ 
+  - name: check if bringup is needed
+    stat:
+      path: /var/bringup_complete
+    register: bringup_complete
   - import_playbook: bringup.yml
     when: (not bringup_complete.exists) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10'])
 
