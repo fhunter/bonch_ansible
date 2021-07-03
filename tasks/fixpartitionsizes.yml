@@ -6,7 +6,7 @@
      action: mount name=/home src=/dev/mapper/{{vgname.stdout}}-home state=unmounted
 
    - name: Delete home volume
-     action: lvol vg={{vgname.stdout}} lv=home state=absent
+     action: lvol vg={{vgname.stdout}} lv=home state=absent force=yes
 
    - name: Resize root
      action: lvol vg={{vgname.stdout}} lv=root state=present size=35g resizefs=yes shrink=yes force=yes
