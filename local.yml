@@ -1,26 +1,25 @@
 ---
-  - hosts: all
-    remote_user: root
+  - hosts: all,localhost
+    gather_facts: no
+    run_once: True
     tasks:
     - name: check if bringup is needed
       stat:
         path: /var/bringup_complete
       register: bringup_complete
-    - name: register fact
-      when: bringup_complete.exists
+    - name: fact set
       set_fact:
-        bringup: true
-#    - name: apt update
-#      action: apt update_cache=yes
+        bringup: {{ bringup_complete.stat.exists }}
+      delegate_to: localhost
+      delegate_facts: yes
+
+  - hosts: all
+    remote_user: root
+    tasks:
     - include: tasks/copyansiblehosts.yml
-    - name: install newest ansible
-      apt:
-        name: ansible
-        state: latest
-        update_cache: no
 
   - import_playbook: bringup.yml
-    when: (not ( 'bringup' in ansible_facts)) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10'])
+    when: (hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10'])
 
 # Labs where no remote access is used
   - hosts: noremote
