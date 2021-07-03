@@ -1,4 +1,4 @@
     - name: install swi prolog
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{ item }} state=installed
       with_items:
        - swi-prolog

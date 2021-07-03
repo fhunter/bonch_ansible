@@ -1,5 +1,5 @@
     - name: enable quota applet
-      action: apt pkg={{item}} state=latest
+      action: apt pkg={{ item }} state=latest
       with_items:
        - quota-applet
 

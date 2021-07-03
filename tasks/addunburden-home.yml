@@ -3,7 +3,7 @@
 
     - name: make directory
       file: path=/scratch/.unburden/ mode=0777 state=directory
-    
+
     - name: location of unburden-home-dir
       lineinfile:
         dest: /etc/unburden-home-dir

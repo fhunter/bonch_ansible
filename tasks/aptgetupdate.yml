@@ -1,4 +1,5 @@
-- cron:
+- name: Add apt-get update to cron
+  cron:
     hour: "*/3"
     minute: 7
     job: apt-get update >/dev/null 2>&1

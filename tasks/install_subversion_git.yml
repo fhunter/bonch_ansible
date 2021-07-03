@@ -1,5 +1,5 @@
     - name: install versioning tools
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{ item }} state=installed
       with_items:
        - subversion
        - git

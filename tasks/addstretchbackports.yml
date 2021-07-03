@@ -1,7 +1,7 @@
    - name: Add stretch backports repo
      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
      action: apt_repository repo='deb http://mirror.mephi.ru/debian/ stretch-backports main contrib non-free' state=present
-   
+
    - name: Add stretch backports src repo
      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
      action: apt_repository repo='deb-src http://mirror.mephi.ru/debian/ stretch-backports main contrib non-free' state=present

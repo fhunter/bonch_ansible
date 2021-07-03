@@ -13,4 +13,4 @@
       with_items:
         - { line: 'dosemu;' }
     - name: Install dedicated cron task for updates
-      cron: special_time="weekly" job=/usr/bin/unattended-upgrade name="unattended-upgrades" 
+      cron: special_time="weekly" job=/usr/bin/unattended-upgrade name="unattended-upgrades"

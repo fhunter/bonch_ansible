@@ -18,12 +18,12 @@
 
     - name: add pam_group to configs
       lineinfile: dest=/etc/pam.d/common-auth line="auth optional pam_group.so" state=present insertafter=EOF
-    
+
     - name: install autofs packages
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{ item }} state=installed
       with_items:
        - autofs
-    
+
     - name: update autofs config
       lineinfile: dest=/etc/auto.master line="/net    /etc/auto.net" insertbefore="\+auto.master"
       notify: restart autofs
@@ -36,13 +36,13 @@
 
     - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
       file: dest=/afs/dcti.sut.ru src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes
-    
+
     - name: deploy nsswitch configuration files
       copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
 
     - name: deploy hesiod configuration files
       copy: src=files/a441/etc/nsswitch.conf dest=/etc/nsswitch.conf owner=root group=root mode="0644"
-    
+
     - name: deploy kerberos configuration files
       copy: src=files/a441/etc/krb5.conf dest=/etc/krb5.conf owner=root group=root mode="0644"
 
@@ -59,7 +59,7 @@
     - include: tasks/fix_autofs_systemd.yml
 
     - name: install base packages
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{ item }} state=installed
       with_items:
        - lightdm
        - xserver-xorg
@@ -67,10 +67,10 @@
       notify: restart lightdm
 
     - name: install linux linux-headers
-      action: apt pkg=linux-headers-{{ansible_kernel}} state=installed
+      action: apt pkg=linux-headers-{{ ansible_kernel }} state=installed
 
     - name: install DCTI packages
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
+      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=yes
       notify: restart apache
       with_items:
        - nfs4-acl-tools
@@ -129,7 +129,7 @@
        - pidgin
 
     - name: install DCTI packages for debian 9
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=yes
+      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=yes
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       notify: restart apache
       with_items:
@@ -149,10 +149,10 @@
        - lazarus
        - fpc
 
-    
+
     - name: install mate desktop
       action: apt pkg=mate-desktop-environment state=installed update_cache=no
-    
+
     - include: tasks/install_libreoffice.yml
     - include: tasks/install_msttfcorefonts.yml
     - include: tasks/install_jdk.yml
@@ -188,17 +188,17 @@
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
 
     - name: install packages for time sync
-      action: apt name={{item}} state=installed
+      action: apt name={{ item }} state=installed
       with_items:
        - openntpd
        - ntpdate
     - name: install qemu-system
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=no
       with_items:
         - qemu-system
         - qemu-kvm
     - name: install pulseaudio for audio access
-      action: apt pkg={{item}} state=installed install_recommends=no update_cache=no
+      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=no
       with_items:
       - pulseaudio
       - pavucontrol
@@ -210,7 +210,7 @@
     - name: Install openntpd defaults
       copy: src=files/a441/etc/default/openntpd dest=/etc/default/openntpd
       notify: restart openntpd
-    
+
     - name: install lm-sensors
       action: apt name=lm-sensors state=present install_recommends=no update_cache=no
     - name: install hddtemp
@@ -233,7 +233,7 @@
     - include: handlers/restartlightdm.yml
     - include: handlers/restartautofs.yml
     - include: handlers/restartapache.yml
-  
+
   - hosts: a44306.dcti.sut.ru
     remote_user: root
     tasks:
@@ -243,7 +243,7 @@
     remote_user: root
     tasks:
     - include: tasks/add_remote_printer_access.yml
-  
+
   - hosts: a445
     remote_user: root
     tasks:
@@ -288,7 +288,7 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: install sane-utils
       action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
-  
+
   - hosts: termserver2.dcti.sut.ru
     remote_user: root
     tasks:
@@ -297,3 +297,9 @@
     - include: tasks/install_quartus_15.yml
     - name: install coquelicot-upload tool
       action: apt pkg=coquelicot-upload state=latest update_cache=no
+
+  - hosts: all
+    remote_user: root
+    tasks:
+    - name: Mark completion
+      file: path=/var/bringup_complete state=touch owner=root group=root mode=0644

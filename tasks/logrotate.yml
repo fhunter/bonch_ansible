@@ -1,4 +1,5 @@
-- cron:
+- name: Add log rotation
+  cron:
     hour: 12
     job: /etc/cron.daily/logrotate
     name: logrotate_at_day

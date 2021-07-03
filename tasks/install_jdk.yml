@@ -1,11 +1,11 @@
     - name: install JDK
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{ item }} state=installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
       with_items:
        - openjdk-11-jdk
 
     - name: install JDK
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{ item }} state=installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
       with_items:
        - openjdk-8-jdk

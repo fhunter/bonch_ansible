@@ -1,14 +1,14 @@
     - name: enable kerberos ssh
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{ item }} state=installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       with_items:
        - ssh-krb5
        - sshpass
        - krb5-user
        - libpam-krb5
-    
+
     - name: enable kerberos ssh
-      action: apt pkg={{item}} state=installed
+      action: apt pkg={{ item }} state=installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '10'
       with_items:
        - sshpass

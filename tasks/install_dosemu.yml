@@ -1,11 +1,11 @@
     - name: install dosemu
-      action: apt pkg={{item}} state=installed install_recommends=no force=yes
+      action: apt pkg={{ item }} state=installed install_recommends=no force=yes
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       with_items:
        - dosemu=1.4.0.7+20130105+b028d3f-1
-    
+
     - name: install dosemu
-      action: apt pkg={{item}} state=installed install_recommends=no force=yes
+      action: apt pkg={{ item }} state=installed install_recommends=no force=yes
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '10'
       with_items:
        - dosemu=1.4.0.7+20130105+b028d3f-1

@@ -6,4 +6,4 @@
       action: apt name=linux-compiler-gcc-6-x86 state=latest update_cache=no install_recommends=no default_release="stretch-backports"
     - name: install linux linux-headers
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
-      action: apt pkg=linux-headers-{{ansible_kernel}} state=installed 
+      action: apt pkg=linux-headers-{{ansible_kernel}} state=installed

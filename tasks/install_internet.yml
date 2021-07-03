@@ -1,15 +1,15 @@
    - name: Install pptp and pppd
-     action: apt pkg={{item}} state=present
+     action: apt pkg={{ item }} state=present
      with_items:
        - ppp
        - pptp-linux
 
    - name: Set the rights right
      action: file path=/usr/sbin/pptp mode=104755
-  
+
    - name: Put config files in proper places
      template: dest=/etc/ppp/peers/internet src=files/common/etc/ppp/peers/internet.j2 owner=root
-   
+
    - name: Put config files in proper places
      template: dest=/etc/ppp/peers/internet_old src=files/common/etc/ppp/peers/internet_old.j2 owner=root
 

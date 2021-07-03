@@ -1,5 +1,5 @@
    - name: Install latest debian-keyring
-     action: apt name={{item}} state=latest
+     action: apt name={{ item }} state=latest
      with_items:
      - debian-keyring
      - debian-archive-keyring
