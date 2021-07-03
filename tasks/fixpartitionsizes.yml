@@ -1,0 +1,28 @@
+   - name: list files
+     shell: "vgdisplay -c|head -n 1|awk -F: '{print $1}'|sed 's/^ *//g'"
+     register: vgname
+
+   - name: Unmount /home
+     action: mount name=/home src=/dev/mapper/{{vgname.stdout}}-home state=unmounted
+
+   - name: Delete home volume
+     action: lvol vg={{vgname.stdout}} lv=home state=absent
+
+   - name: Resize root
+     action: lvol vg={{vgname.stdout}} lv=root state=present size=35g resizefs=yes shrink=yes force=yes
+
+   - name: Resize var
+     action: lvol vg={{vgname.stdout}} lv=var state=present size=10g resizefs=yes shrink=yes force=yes
+
+   - name: Resize tmp
+     action: lvol vg={{vgname.stdout}} lv=tmp state=present size=10g resizefs=yes shrink=yes force=yes
+   
+   - name: Add opt lvm location
+     action: lvol vg={{vgname.stdout}} lv=opt size=40g
+
+   - name: Make filesystem on opt volume
+     action: filesystem fstype=ext4 dev=/dev/mapper/{{vgname.stdout}}-opt
+
+   - name: Add opt to fstab
+     action: mount name=/opt src=/dev/mapper/{{vgname.stdout}}-opt state=mounted fstype=ext4
+
