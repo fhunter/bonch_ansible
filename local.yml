@@ -5,6 +5,11 @@
 #    - name: apt update
 #      action: apt update_cache=yes
     - include: tasks/copyansiblehosts.yml
+    - name: install newest ansible
+      apt:
+        name: ansible
+	state: latest
+	update_cache: no
 
 # Labs where no remote access is used
   - hosts: noremote
@@ -82,7 +87,7 @@
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_vmshortcuts.yml
-  
+
   - hosts: a437
     remote_user: root
     tasks:
@@ -90,20 +95,20 @@
       file: path=/opt/vm state=absent
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
- 
+
   - hosts: a443
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    
+
   - hosts: a441
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_qtsdk.yml
-    
+
   - hosts: terminalservers
     remote_user: root
     tasks:
