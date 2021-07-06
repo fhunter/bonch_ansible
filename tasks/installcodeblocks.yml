@@ -1,2 +1,8 @@
     - name: install codeblocks
       action: apt name=codeblocks state=latest install_recommends=no
+    - name: install codeblocks-contrib and dependencies
+      apt:
+        name:
+         - codeblocks-contrib
+         - libwxbase3.0-dev
+         - libwxgtk3.0-dev
