@@ -1,7 +1,7 @@
     - name: enable quota applet
-      action: apt pkg={{ item }} state=latest
-      with_items:
-       - quota-applet
+      apt:
+        pkg: quota-applet
+        state: latest
 
     - name: Add quota-applet to autostart
       copy:

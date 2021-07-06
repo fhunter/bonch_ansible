@@ -74,84 +74,90 @@
       action: apt pkg=linux-headers-{{ ansible_kernel }} state=installed
 
     - name: install DCTI packages
-      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=yes
       notify: restart apache
-      with_items:
-       - nfs4-acl-tools
-       - firmware-realtek
-       - pm-utils
-       - upower
-       - x11-xserver-utils
-       - aptitude
-       - imagemagick
-       - dia
-       - dia2code
-       - doxygen
-       - graphviz
-       - runit
-       - mc
-       - unburden-home-dir
-       - tcsh
-       - pmount
-       - scribus
-       - librecad
-       - ristretto
-       - libsasl2-modules-gssapi-mit
-       - policykit-1-gnome
-       - udisks2
-       - ntfs-3g
-       - eject
-       - gvfs
-       - thunar-archive-plugin
-       - thunar-vcs-plugin
-       - thunar-volman
-       - xdg-user-dirs
-       - dosfstools
-       - eric
-       - inkscape
-       - xterm
-       - rxvt-unicode-256color
-       - fakeroot
-       - gnome-extra-icons
-       - gnome-icon-theme
-       - build-essential
-       - dfu-util
-       - minicom
-       - gimp
-       - gimp-plugin-registry
-       - xsane
-       - vim
-       - vim-gtk
-       - gdb
-       - ruby
-       - evince
-       - nasm
-       - x11-utils
-       - gedit
-       - gedit-plugins
-       - firmware-linux
-       - pidgin
+      apt:
+        pkg:
+         - nfs4-acl-tools
+         - firmware-realtek
+         - pm-utils
+         - upower
+         - x11-xserver-utils
+         - aptitude
+         - imagemagick
+         - dia
+         - dia2code
+         - doxygen
+         - graphviz
+         - runit
+         - mc
+         - unburden-home-dir
+         - tcsh
+         - pmount
+         - scribus
+         - librecad
+         - ristretto
+         - libsasl2-modules-gssapi-mit
+         - policykit-1-gnome
+         - udisks2
+         - ntfs-3g
+         - eject
+         - gvfs
+         - thunar-archive-plugin
+         - thunar-vcs-plugin
+         - thunar-volman
+         - xdg-user-dirs
+         - dosfstools
+         - eric
+         - inkscape
+         - xterm
+         - rxvt-unicode-256color
+         - fakeroot
+         - gnome-extra-icons
+         - gnome-icon-theme
+         - build-essential
+         - dfu-util
+         - minicom
+         - gimp
+         - gimp-plugin-registry
+         - xsane
+         - vim
+         - vim-gtk
+         - gdb
+         - ruby
+         - evince
+         - nasm
+         - x11-utils
+         - gedit
+         - gedit-plugins
+         - firmware-linux
+         - pidgin
+        state: installed 
+        install_recommends: no 
+        update_cache: yes
 
     - name: install DCTI packages for debian 9
-      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=yes
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       notify: restart apache
-      with_items:
-       - libpam-ck-connector
-       - xfce4
-       - xfwm4-themes
-       - xfdesktop4
-#       - xfprint4
-       - libxfce4ui-utils
-       - xfce4-mount-plugin
-       - xfce4-goodies
-       - xfce4-session
-       - virtualbox
-       - virtualbox-qt
-       - virtualbox-dkms
-       - virtualbox-source
-       - lazarus
-       - fpc
+      apt:
+        pkg:
+         - libpam-ck-connector
+         - xfce4
+         - xfwm4-themes
+         - xfdesktop4
+  #       - xfprint4
+         - libxfce4ui-utils
+         - xfce4-mount-plugin
+         - xfce4-goodies
+         - xfce4-session
+         - virtualbox
+         - virtualbox-qt
+         - virtualbox-dkms
+         - virtualbox-source
+         - lazarus
+         - fpc
+        state: installed
+        install_recommends: no
+        update_cache: no
 
 
     - name: install mate desktop
