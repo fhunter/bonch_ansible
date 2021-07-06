@@ -9,8 +9,7 @@
     - include: tasks/addscratch.yml
     - include: tasks/enable_kerberos_ssh.yml
 
-    - name: Add i386 architecture support
-      shell: dpkg --add-architecture i386
+    - include: tasks/add_i386_architecture_support.yml
 
     - include: tasks/addlocalrepo.yml
     - include: tasks/addstretchbackports.yml
