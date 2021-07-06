@@ -3,7 +3,7 @@
      register: vgname
 
    - name: Unmount /home
-     action: mount name=/home src=/dev/mapper/{{vgname.stdout}}-home state=unmounted
+     action: mount name=/home src=/dev/mapper/{{vgname.stdout}}-home state=absent
 
    - name: Delete home volume
      action: lvol vg={{vgname.stdout}} lv=home state=absent force=yes
