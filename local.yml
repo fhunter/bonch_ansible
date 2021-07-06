@@ -16,9 +16,6 @@
   - hosts: all
     remote_user: root
     tasks:
-    - name: install latest ansible
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
-      apt: name='ansible' state='installed' default_release='stretch-backports'
     - include: tasks/copyansiblehosts.yml
 
   - import_playbook: bringup.yml

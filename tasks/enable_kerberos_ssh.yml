@@ -1,5 +1,5 @@
     - name: install openssh-server
-      apt: pkg=openssh-server state=installed
+      apt: pkg=openssh-server state=present
     - name: enable kerberos ssh
       apt:
         pkg:
