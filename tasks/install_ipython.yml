@@ -1,6 +1,8 @@
     - name: install ipython
-      action: apt pkg={{ item }} state=installed install_recommends=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == ['9', '10']
-      with_items:
-       - ipython
-       - ipython3
+      apt:
+        pkg:
+         - ipython
+         - ipython3
+        state: installed
+        install_recommends: no
