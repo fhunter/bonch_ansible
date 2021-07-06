@@ -1,8 +1,11 @@
     - name: install script depends
-      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=no
-      with_items:
-        - graphicsmagick-imagemagick-compat
-        - x11-xserver-utils
+      apt:
+        pkg:
+         - graphicsmagick-imagemagick-compat
+         - x11-xserver-utils
+        state: installed
+        install_recommends: no
+        update_cache: no
     - name: install script
       copy:
         src: files/a437/etc/lightdm/display.sh

@@ -71,7 +71,7 @@
       notify: restart lightdm
 
     - name: install linux linux-headers
-      action: apt pkg=linux-headers-{{ ansible_kernel }} state=installed
+      apt: pkg=linux-headers-{{ ansible_kernel }} state=installed
 
     - name: install DCTI packages
       notify: restart apache
@@ -131,8 +131,8 @@
          - gedit-plugins
          - firmware-linux
          - pidgin
-        state: installed 
-        install_recommends: no 
+        state: installed
+        install_recommends: no
         update_cache: yes
 
     - name: install DCTI packages for debian 9
@@ -161,7 +161,7 @@
 
 
     - name: install mate desktop
-      action: apt pkg=mate-desktop-environment state=installed update_cache=no
+      apt: pkg=mate-desktop-environment state=installed update_cache=no
 
     - include: tasks/install_libreoffice.yml
     - include: tasks/install_msttfcorefonts.yml
@@ -173,7 +173,6 @@
     - include: tasks/installcodeblocks.yml
     - include: tasks/installwebstormclion.yml
     - include: tasks/installvnc.yml
-#    - include: tasks/installsmartgit.yml
     - include: tasks/install_netbeans.yml
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
@@ -192,27 +191,33 @@
     - include: tasks/installnscd.yml
     - include: tasks/fixxsessionerrors.yml
     - name: install x11vnc to allow remote access
-      action: apt pkg=x11vnc state=installed update_cache=no install_recommends=no
+      apt: pkg=x11vnc state=installed update_cache=no install_recommends=no
 
     - name: deploy dosemu autoexec.bat
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
 
     - name: install packages for time sync
-      action: apt name={{ item }} state=installed
-      with_items:
-       - openntpd
-       - ntpdate
+      apt:
+        name:
+         - openntpd
+         - ntpdate
+        state: installed
     - name: install qemu-system
-      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=no
-      with_items:
-        - qemu-system
-        - qemu-kvm
+      apt:
+        pkg:
+         - qemu-system
+         - qemu-kvm
+        state: installed
+        install_recommends: no
+        update_cache: no
     - name: install pulseaudio for audio access
-      action: apt pkg={{ item }} state=installed install_recommends=no update_cache=no
-      with_items:
-      - pulseaudio
-      - pavucontrol
-
+      apt:
+        pkg:
+         - pulseaudio
+         - pavucontrol
+        state: installed
+        install_recommends: no
+        update_cache: no
     - name: Install openntpd config
       template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
       notify: restart openntpd
@@ -222,15 +227,15 @@
       notify: restart openntpd
 
     - name: install lm-sensors
-      action: apt name=lm-sensors state=present install_recommends=no update_cache=no
+      apt: name=lm-sensors state=present install_recommends=no update_cache=no
     - name: install hddtemp
-      action: apt name=hddtemp state=present install_recommends=no update_cache=no
+      apt: name=hddtemp state=present install_recommends=no update_cache=no
 
     - include: tasks/install_internet.yml
-#    - include: tasks/installjavatests.yml
+    - include: tasks/installjavatests.yml
     - include: tasks/fix_access_mysql.yml
     - name: install vncbroadcast to allow remote access
-      action: apt pkg=vncbroadcast state=latest update_cache=no install_recommends=no
+      apt: pkg=vncbroadcast state=latest update_cache=no install_recommends=no
     - name: Add vncbroadcast to autostart
       copy:
         src: /usr/share/applications/vncbroadcast.desktop
@@ -259,21 +264,21 @@
     tasks:
     - include: tasks/install_quartus_15.yml
     - name: install libpng12 for quartus
-      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+      apt: name=libpng12-0 state=present install_recommends=no update_cache=no #FIXME - this should be quartus15 dependency
 
   - hosts: a439
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
     - name: install libpng12 for quartus
-      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+      apt: name=libpng12-0 state=present install_recommends=no update_cache=no
 
 #  - hosts: a437
 #    remote_user: root
 #    tasks:
 #    - include: tasks/install_quartus_15.yml
 #    - name: install libpng12 for quartus
-#      action: apt name=libpng12-0 state=present install_recommends=no update_cache=no
+#      apt: name=libpng12-0 state=present install_recommends=no update_cache=no
 
   - hosts: a443
     remote_user: root
@@ -285,7 +290,7 @@
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
     - name: install sane-utils
-      action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
+      apt: pkg=sane-utils state=installed install_recommends=no update_cache=no
 
   - hosts: a441
     remote_user: root
@@ -297,7 +302,7 @@
     - name: setup scanner2
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: install sane-utils
-      action: apt pkg=sane-utils state=installed install_recommends=no update_cache=no
+      apt: pkg=sane-utils state=installed install_recommends=no update_cache=no
 
   - hosts: termserver2.dcti.sut.ru
     remote_user: root
@@ -306,7 +311,7 @@
     - include: tasks/install_texmaker.yml
     - include: tasks/install_quartus_15.yml
     - name: install coquelicot-upload tool
-      action: apt pkg=coquelicot-upload state=latest update_cache=no
+      apt: pkg=coquelicot-upload state=latest update_cache=no
 
   - hosts: all
     remote_user: root

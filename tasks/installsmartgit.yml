@@ -1,7 +1,5 @@
    - name: Install latest git
-     action: apt name=git state=latest update_cache=no
-   - include: tasks/install_jdk.yml
+     apt: name=git state=latest update_cache=no
+   - include: install_jdk.yml
    - name: Install smartgit
-     action: apt name={{ item }} state=present update_cache=no
-     with_items:
-       - smartgit
+     apt: name=smartgit state=present update_cache=no
