@@ -22,9 +22,10 @@
       lineinfile: dest=/etc/pam.d/common-auth line="auth optional pam_group.so" state=present insertafter=EOF
 
     - name: install autofs packages
-      action: apt pkg={{ item }} state=installed
-      with_items:
-       - autofs
+      apt:
+        name:
+          - autofs
+        state: installed
 
     - name: update autofs config
       lineinfile: dest=/etc/auto.master line="/net    /etc/auto.net" insertbefore="\+auto.master"
@@ -61,11 +62,12 @@
     - include: tasks/fix_autofs_systemd.yml
 
     - name: install base packages
-      action: apt pkg={{ item }} state=installed
-      with_items:
-       - lightdm
-       - xserver-xorg
-       - x11-xserver-utils
+      apt:
+        pkg:
+         - lightdm
+         - xserver-xorg
+         - x11-server-utils
+        state: installed
       notify: restart lightdm
 
     - name: install linux linux-headers

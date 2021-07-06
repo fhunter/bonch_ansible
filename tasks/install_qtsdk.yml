@@ -1,29 +1,33 @@
     - name: install qtsdk
-      action: apt pkg={{ item }} state=installed install_recommends=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
-      with_items:
-       - qt5-default
-       - qtcreator
-       - qt5-doc
-       - qt5-doc-html
-       - qmlscene
-       - qtbase5-dev-tools
-       - qtbase5-dev
-       - qtbase5-private-dev
-       - qtdeclarative5-dev
-       - qtscript5-dev
-       - qtdeclarative5-dev-tools
-       - qttools5-dev-tools
-       - qttools5-dev
-       - qtxmlpatterns5-dev-tools
-       - cmake
-       - subversion
-       - make
-       - gdb
+      apt:
+        pkg:
+         - qt5-default
+         - qtcreator
+         - qt5-doc
+         - qt5-doc-html
+         - qmlscene
+         - qtbase5-dev-tools
+         - qtbase5-dev
+         - qtbase5-private-dev
+         - qtdeclarative5-dev
+         - qtscript5-dev
+         - qtdeclarative5-dev-tools
+         - qttools5-dev-tools
+         - qttools5-dev
+         - qtxmlpatterns5-dev-tools
+         - cmake
+         - subversion
+         - make
+         - gdb
+        state: installed
+        install_recommends: no
 
     - name: install qtsdk
-      action: apt pkg={{ item }} state=installed install_recommends=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
-      with_items:
-       - qt-sdk
-       - qt5-default
+      apt:
+        pkg:
+         - qt-sdk
+         - qt5-default
+        state: installed
+        install_recommends: no
