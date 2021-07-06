@@ -1,9 +1,10 @@
     - name: install lisp
-      action: apt pkg={{ item }} state=installed
+      apt:
+        pkg:
+         - cl-launch
+         - sbcl
+#         - clisp
+#         - clisp-module-\*
+        state: installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10']
-      with_items:
-       - cl-launch
-       - sbcl
-#       - clisp
-#       - clisp-module-\*
 
