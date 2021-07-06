@@ -1,15 +1,14 @@
     - name: install archive tools
-      action: apt pkg={{ item }} state=installed
-      with_items:
-       - p7zip-full
-       - zip
-       - unzip
-       - unrar
-       - rar
+      apt:
+        pkg:
+         - p7zip-full
+         - zip
+         - unzip
+         - unrar
+         - rar
+        state: installed
 
 # FIXME - check if it is needed in debian 10
     - name: install archive tools gui
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == ['9', '10']
-      action: apt pkg={{ item }} state=installed
-      with_items:
-       - xarchiver
+      apt: pkg=xarchiver state=installed
