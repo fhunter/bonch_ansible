@@ -1,20 +1,23 @@
     - name: install libreoffice
-      action: apt pkg={{ item }} state=installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10']
+      apt:
+        pkg:
+         - libreoffice
+         - libreoffice-base
+         - libreoffice-calc
+         - libreoffice-draw
+         - libreoffice-help-ru
+         - libreoffice-l10n-ru
+         - libreoffice-impress
+         - libreoffice-math
+         - libreoffice-writer
+         - libreoffice-nlpsolver
+         - libreoffice-pdfimport
+        state: installed
       with_items:
-       - libreoffice
-       - libreoffice-base
-       - libreoffice-calc
-       - libreoffice-draw
-       - libreoffice-help-ru
-       - libreoffice-l10n-ru
-       - libreoffice-impress
-       - libreoffice-math
-       - libreoffice-writer
-       - libreoffice-nlpsolver
-       - libreoffice-pdfimport
     - name: install libreoffice lightproof
-      action: apt pkg={{ item }} state=installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
-      with_items:
-       - libreoffice-lightproof-ru-ru
+      apt:
+        pkg:
+         - libreoffice-lightproof-ru-ru
+        state: installed

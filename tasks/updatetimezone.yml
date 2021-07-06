@@ -1,4 +1,6 @@
    - name: Install latest timezone data
-     action: apt name={{ item }} state=latest update_cache=no install_recommends=no
-     with_items:
-     - tzdata
+     apt:
+       name: tzdata
+       state: latest
+       update_cache: no
+       install_recommends: no
