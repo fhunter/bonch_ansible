@@ -19,11 +19,11 @@
 
    - name: Install routing script 1
      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
-     copy: dest=/etc/ppp/ip-up.d/0001route src=file/common/etc/ppp/ip-up.d/0001route mode='0755' owner=root
+     copy: dest=/etc/ppp/ip-up.d/0001route src=files/common/etc/ppp/ip-up.d/0001route mode='0755' owner=root
 
    - name: Install routing script 2
      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
-     copy: dest=/etc/ppp/ip-down.d/0001route src=file/common/etc/ppp/ip-down.d/0001route mode='0755' owner=root
+     copy: dest=/etc/ppp/ip-down.d/0001route src=files/common/etc/ppp/ip-down.d/0001route mode='0755' owner=root
 
    - name: install new internet script
      action: apt pkg=internetapp update-cache=no state=latest
