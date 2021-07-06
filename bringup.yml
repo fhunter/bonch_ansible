@@ -66,7 +66,7 @@
         pkg:
          - lightdm
          - xserver-xorg
-         - x11-server-utils
+         - x11-xserver-utils
         state: installed
       notify: restart lightdm
 
