@@ -1,5 +1,3 @@
    - name: Install local CA certificates
-     action: apt pkg={{ item }} state=latest
-     with_items:
-       - ca-certificates-local
+     apt: pkg=ca-certificates-local state=latest
 
