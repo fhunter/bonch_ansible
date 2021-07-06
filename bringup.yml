@@ -134,6 +134,8 @@
         install_recommends: no
         update_cache: yes
 
+    - include: tasks/install_virtualbox.yml
+
     - name: install DCTI packages for debian 9
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
       notify: restart apache
@@ -148,10 +150,6 @@
          - xfce4-mount-plugin
          - xfce4-goodies
          - xfce4-session
-         - virtualbox
-         - virtualbox-qt
-         - virtualbox-dkms
-         - virtualbox-source
          - lazarus
          - fpc
         state: installed
