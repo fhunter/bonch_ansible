@@ -262,15 +262,15 @@
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
-    - name: install libpng12 for quartus
-      apt: name=libpng12-0 state=present install_recommends=no update_cache=no #FIXME - this should be quartus15 dependency
+#    - name: install libpng12 for quartus
+#      apt: name=libpng12-0 state=present install_recommends=no update_cache=no #FIXME - this should be quartus15 dependency
 
   - hosts: a439
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
-    - name: install libpng12 for quartus
-      apt: name=libpng12-0 state=present install_recommends=no update_cache=no
+#    - name: install libpng12 for quartus
+#      apt: name=libpng12-0 state=present install_recommends=no update_cache=no
 
 #  - hosts: a437
 #    remote_user: root
