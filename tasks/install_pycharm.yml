@@ -3,8 +3,10 @@
 
     - name: install virtualenvironment
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
-      action: apt pkg={{ item }} state=present update_cache=no
-      with_items:
-        - python-virtualenv
-        - python3-virtualenv
-        - virtualenv
+      apt:
+        pkg:
+         - python-virtualenv
+         - python3-virtualenv
+         - virtualenv
+        state: present
+        update_cache: no
