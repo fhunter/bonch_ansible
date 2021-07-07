@@ -78,6 +78,7 @@
           - pigz
           - pv
           - ncdu
+          - net-tools
         state: present
         install_recommends: no
         update_cache: no
