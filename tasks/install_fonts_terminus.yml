@@ -1,0 +1,9 @@
+    - name: install terminus fonts
+      apt:
+        pkg:
+          - xfonts-terminus
+          - xfonts-terminus-oblique
+          - xfonts-terminus-dos
+        state: installed
+        install_recommends: no
+        update_cache: no

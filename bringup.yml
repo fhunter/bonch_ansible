@@ -162,6 +162,7 @@
 
     - include: tasks/install_libreoffice.yml
     - include: tasks/install_msttfcorefonts.yml
+    - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_jdk.yml
     - include: tasks/installvnc.yml
     - include: tasks/install_apache2_and_php5.yml
