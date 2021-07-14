@@ -5,8 +5,8 @@
          - chromium
          - chromium-l10n
          - netsurf-gtk
-	 - elinks
-	 - w3m
-	 - lynx
+         - elinks
+         - w3m
+         - lynx
         state: installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10']
