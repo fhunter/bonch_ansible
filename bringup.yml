@@ -138,6 +138,7 @@
          - firmware-linux
          - pidgin
          - gtk3-nocsd
+         - snmp
         state: installed
         install_recommends: no
         update_cache: yes
