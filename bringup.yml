@@ -137,7 +137,7 @@
          - gedit-plugins
          - firmware-linux
          - pidgin
-	 - gtk3-nocsd
+         - gtk3-nocsd
         state: installed
         install_recommends: no
         update_cache: yes
