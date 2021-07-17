@@ -5,4 +5,5 @@
          - git
          - gitk
          - git-gui
+         - tig
         state: installed
