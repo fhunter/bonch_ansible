@@ -108,6 +108,12 @@
          - xdg-user-dirs
          - dosfstools
          - eric
+         - eric-api-files
+         - python3-pyqt5.qtwebengine
+         - python3-rope
+         - pyqt5-dev-tools
+         - python-doc
+         - python3-doc
          - inkscape
          - xterm
          - rxvt-unicode-256color
