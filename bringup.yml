@@ -160,6 +160,8 @@
 
     - name: install mate desktop
       apt: pkg=mate-desktop-environment state=installed update_cache=no
+    - name: install mate-tweak
+      apt: pkg=mate-tweak state=installed install_recommends=no update_cache=no
 
     - include: tasks/install_libreoffice.yml
     - include: tasks/install_msttfcorefonts.yml
