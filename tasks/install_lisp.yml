@@ -10,7 +10,7 @@
       apt:
         pkg:
          - clisp
-         - clisp-module-\*
+         - clisp-module-*
         state: installed
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
 
