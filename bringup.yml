@@ -102,9 +102,9 @@
          - ntfs-3g
          - eject
          - gvfs
-         - thunar-archive-plugin
-         - thunar-vcs-plugin
-         - thunar-volman
+#         - thunar-archive-plugin
+#         - thunar-vcs-plugin
+#         - thunar-volman
          - xdg-user-dirs
          - dosfstools
          - eric
@@ -192,6 +192,7 @@
     - include: tasks/installhaskell.yml
     - include: tasks/install_qtsdk.yml
     - include: tasks/install_octave.yml
+    - include: tasks/install_monodevelop.yml
     - include: tasks/install_ipython.yml
     - include: tasks/install_icecc.yml
     - include: tasks/installwebstormclion.yml
