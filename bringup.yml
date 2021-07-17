@@ -200,6 +200,7 @@
     - include: tasks/install_golang.yml
     - include: tasks/installnscd.yml
     - include: tasks/fixxsessionerrors.yml
+    - include: tasks/install_quartus_7_1.yml
     - name: install x11vnc to allow remote access
       apt: pkg=x11vnc state=installed update_cache=no install_recommends=no
 
@@ -273,15 +274,11 @@
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
-#    - name: install libpng12 for quartus
-#      apt: name=libpng12-0 state=present install_recommends=no update_cache=no #FIXME - this should be quartus15 dependency
 
   - hosts: a439
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
-#    - name: install libpng12 for quartus
-#      apt: name=libpng12-0 state=present install_recommends=no update_cache=no
 
 #  - hosts: a437
 #    remote_user: root
@@ -295,6 +292,7 @@
     tasks:
     - include: tasks/install_texlive.yml
     - include: tasks/install_texmaker.yml
+    - include: tasks/install_quartus_15.yml
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: setup scanner
@@ -305,6 +303,7 @@
   - hosts: a441
     remote_user: root
     tasks:
+    - include: tasks/install_quartus_15.yml
     - include: tasks/install_texlive.yml
     - include: tasks/install_texmaker.yml
     - name: setup scanner
