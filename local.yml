@@ -79,6 +79,8 @@
           - pv
           - ncdu
           - net-tools
+          - snmp
+          - telnet
         state: present
         install_recommends: no
         update_cache: no
