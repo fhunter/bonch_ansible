@@ -10,3 +10,10 @@
 
 #   - name: Fix root access in mysql 2
 #     command: mysql -uroot -p' ' mysql -e 'update user set plugin="" where User="root";flush privileges;'
+   - name: Fix root access in mysql
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11']
+     mysql_user:
+       host: "localhost"
+       user: "user"
+       password: "user"
+       priv: "*.*:ALL,GRANT"

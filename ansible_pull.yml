@@ -39,10 +39,10 @@
 
   tasks:
     - name: Install ansible
-      action: apt name=ansible state=installed
+      action: apt name=ansible state=present
     
     - name: Install git
-      action: apt name=git state=installed
+      action: apt name=git state=present
 
     - name: Create local directory to work from
       action: file path={{workdir}} state=directory owner=root group=root mode=0751

@@ -5,12 +5,12 @@
          - sbcl
          - racket
         state: installed
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
     - name: install common lisp
       apt:
         pkg:
          - clisp
          - clisp-module-*
         state: installed
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11']
 

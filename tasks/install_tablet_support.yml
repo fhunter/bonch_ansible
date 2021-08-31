@@ -1,5 +1,5 @@
     - name: install xournal and xinput
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
       apt:
         pkg:
          - xournal
@@ -14,7 +14,7 @@
         state: installed
         install_recommends: no
     - name: install latests libwacom2 and utilities (for tablet settings)
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
       apt:
         pkg:
          - libwacom2

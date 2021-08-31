@@ -3,7 +3,7 @@
         pkg:
          - graphicsmagick-imagemagick-compat
          - x11-xserver-utils
-        state: installed
+        state: present
         install_recommends: no
         update_cache: no
     - name: install script

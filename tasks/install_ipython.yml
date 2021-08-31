@@ -1,5 +1,5 @@
     - name: install ipython
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == ['9', '10']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == ['9', '10','11']
       apt:
         pkg:
          - ipython
