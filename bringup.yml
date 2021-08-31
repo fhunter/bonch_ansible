@@ -110,7 +110,7 @@
          - eric
          - eric-api-files
          - python3-pyqt5.qtwebengine
-         - python3-rope
+#         - python3-rope
          - pyqt5-dev-tools
          - python-doc
          - python3-doc
