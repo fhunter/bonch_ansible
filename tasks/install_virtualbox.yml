@@ -11,6 +11,6 @@
         - virtualbox-qt
         - virtualbox-dkms
         - virtualbox-source
-       state: installed
+       state: present
        install_recommends: no
        update_cache: no

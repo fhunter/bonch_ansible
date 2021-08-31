@@ -4,5 +4,5 @@
         pkg:
          - ipython
          - ipython3
-        state: installed
+        state: present
         install_recommends: no

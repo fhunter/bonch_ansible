@@ -1,2 +1,2 @@
     - name: install swi prolog
-      apt: pkg=swi-prolog state=installed
+      apt: pkg=swi-prolog state=present

@@ -20,7 +20,7 @@
          - subversion
          - make
          - gdb
-        state: installed
+        state: present
         install_recommends: no
 
     - name: install qtsdk
@@ -29,5 +29,5 @@
         pkg:
          - qt-sdk
          - qt5-default
-        state: installed
+        state: present
         install_recommends: no

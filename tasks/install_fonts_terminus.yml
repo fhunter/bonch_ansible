@@ -4,6 +4,6 @@
           - xfonts-terminus
           - xfonts-terminus-oblique
           - xfonts-terminus-dos
-        state: installed
+        state: present
         install_recommends: no
         update_cache: no

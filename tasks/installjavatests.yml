@@ -2,14 +2,14 @@
       apt:
         pkg:
          - libgtest-dev
-        state: installed
+        state: present
 
     - name: install junit
       apt:
         pkg:
          - junit
          - junit4
-        state: installed
+        state: present
 
     - name: install tomcat8
       apt:
@@ -22,7 +22,7 @@
          - tomcat8-docs
          - libtomcat8-java
          - libecj-java
-        state: installed
+        state: present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
 
     - name: install tomcat9
@@ -36,7 +36,7 @@
          - tomcat9-docs
          - libtomcat9-java
          - libecj-java
-        state: installed
+        state: present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
 
     - name: setup tomcat8 users and roles

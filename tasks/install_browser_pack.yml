@@ -8,11 +8,11 @@
          - elinks
          - w3m
          - lynx
-        state: installed
+        state: present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10','11']
     - name: install google chrome
       apt:
         pkg:
          - google-chrome-stable
-        state: installed
+        state: present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11']

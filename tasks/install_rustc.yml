@@ -5,7 +5,7 @@
          - cargo
          - rust-gdb
          - rust-doc
-        state: installed
+        state: present
         install_recommends: no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
 

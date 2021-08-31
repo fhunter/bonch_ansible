@@ -3,6 +3,6 @@
       apt:
         pkg:
          - dosemu=1.4.0.7+20130105+b028d3f-1
-        state: installed
+        state: present
         install_recommends: no
         force: yes

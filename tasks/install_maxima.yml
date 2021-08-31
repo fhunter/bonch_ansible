@@ -4,5 +4,5 @@
          - wxmaxima
          - maxima
          - maxima-share
-        state: installed
+        state: present
         install_recommends: no

@@ -6,4 +6,4 @@
          - gitk
          - git-gui
          - tig
-        state: installed
+        state: present

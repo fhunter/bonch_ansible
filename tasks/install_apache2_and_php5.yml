@@ -6,7 +6,7 @@
          - libapache2-mod-php
          - libapache2-mod-python
          - php-mysql
-        state: installed
+        state: present
 
     - name: adjust /var/www rights
       action: file mode=777 path=/var/www recurse=yes

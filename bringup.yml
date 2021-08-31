@@ -24,7 +24,7 @@
       apt:
         name:
           - autofs
-        state: installed
+        state: present
 
     - name: update autofs config
       lineinfile: dest=/etc/auto.master line="/net    /etc/auto.net" insertbefore="\+auto.master"
@@ -66,11 +66,11 @@
          - lightdm
          - xserver-xorg
          - x11-xserver-utils
-        state: installed
+        state: present
       notify: restart lightdm
 
     - name: install linux linux-headers
-      apt: pkg=linux-headers-{{ ansible_kernel }} state=installed
+      apt: pkg=linux-headers-{{ ansible_kernel }} state=present
 
     - name: install DCTI packages
       notify: restart apache
@@ -110,7 +110,7 @@
          - eric
          - eric-api-files
          - python3-pyqt5.qtwebengine
-#         - python3-rope
+         - python3-rope
          - pyqt5-dev-tools
          - python-doc
          - python3-doc
@@ -139,7 +139,7 @@
          - pidgin
          - gtk3-nocsd
          - snmp
-        state: installed
+        state: present
         install_recommends: no
         update_cache: yes
 
@@ -161,15 +161,15 @@
          - xfce4-session
          - lazarus
          - fpc
-        state: installed
+        state: present
         install_recommends: no
         update_cache: no
 
 
     - name: install mate desktop
-      apt: pkg=mate-desktop-environment state=installed update_cache=no
+      apt: pkg=mate-desktop-environment state=present update_cache=no
     - name: install mate-tweak
-      apt: pkg=mate-tweak state=installed install_recommends=no update_cache=no
+      apt: pkg=mate-tweak state=present install_recommends=no update_cache=no
 
     - include: tasks/install_libreoffice.yml
     - include: tasks/install_msttfcorefonts.yml
@@ -203,7 +203,7 @@
     - include: tasks/fixxsessionerrors.yml
     - include: tasks/install_quartus_7_1.yml
     - name: install x11vnc to allow remote access
-      apt: pkg=x11vnc state=installed update_cache=no install_recommends=no
+      apt: pkg=x11vnc state=present update_cache=no install_recommends=no
 
     - name: deploy dosemu autoexec.bat
       copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
@@ -213,13 +213,13 @@
         name:
          - openntpd
          - ntpdate
-        state: installed
+        state: present
     - name: install qemu-system
       apt:
         pkg:
          - qemu-system
          - qemu-kvm
-        state: installed
+        state: present
         install_recommends: no
         update_cache: no
     - name: install pulseaudio for audio access
@@ -227,7 +227,7 @@
         pkg:
          - pulseaudio
          - pavucontrol
-        state: installed
+        state: present
         install_recommends: no
         update_cache: no
     - name: Install openntpd config
@@ -299,7 +299,7 @@
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
     - name: install sane-utils
-      apt: pkg=sane-utils state=installed install_recommends=no update_cache=no
+      apt: pkg=sane-utils state=present install_recommends=no update_cache=no
 
   - hosts: a441
     remote_user: root
@@ -312,7 +312,7 @@
     - name: setup scanner2
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: install sane-utils
-      apt: pkg=sane-utils state=installed install_recommends=no update_cache=no
+      apt: pkg=sane-utils state=present install_recommends=no update_cache=no
 
   - hosts: termserver2.dcti.sut.ru
     remote_user: root

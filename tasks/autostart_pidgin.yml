@@ -1,5 +1,5 @@
 - name: Install pidgin
-  action: apt name=pidgin state=installed install_recommends=no
+  action: apt name=pidgin state=present install_recommends=no
 - name: Add pidgin to autostart
   file:
     dest: /etc/xdg/autostart/pidgin.desktop

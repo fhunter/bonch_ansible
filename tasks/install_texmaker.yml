@@ -1,4 +1,4 @@
     - name: install texmaker
-      action: apt name=texmaker state=installed
+      action: apt name=texmaker state=present
     - name: install texlive-lang-cyrillic
-      action: apt name=texlive-lang-cyrillic state=installed
+      action: apt name=texlive-lang-cyrillic state=present
