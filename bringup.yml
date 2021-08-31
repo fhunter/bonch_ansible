@@ -112,7 +112,6 @@
          - python3-pyqt5.qtwebengine
          - python3-rope
          - pyqt5-dev-tools
-         - python-doc
          - python3-doc
          - inkscape
          - xterm
@@ -156,6 +155,7 @@
          - xfdesktop4
   #       - xfprint4
          - libxfce4ui-utils
+         - python-doc
          - xfce4-mount-plugin
          - xfce4-goodies
          - xfce4-session
