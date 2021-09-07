@@ -2,7 +2,6 @@
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11']
       apt:
         pkg:
-         - qt5-default
          - qtcreator
          - qt5-doc
          - qt5-doc-html
@@ -22,6 +21,15 @@
          - gdb
         state: present
         install_recommends: no
+
+    - name: install qt5-default
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
+      apt:
+        pkg:
+         - qt5-default
+        state: present
+        install_recommends: no
+      
 
     - name: install qtsdk
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
