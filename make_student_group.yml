@@ -1,6 +1,7 @@
 # This script is supposed to create users for student group passed in the create_group variable
 # Like this:
 # for i in ist511 ist521 ;do ansible-playbook -e create_group=$i make_student_group.yml ;done
+# pwgen -c -n -B -1 8
 ---
 
   - hosts: 127.0.0.1
@@ -26,7 +27,7 @@
       template: dest=/afs/dcti.sut.ru/homes/students/{{create_group}}/{{item}}/.purple/accounts.xml src=templates/accounts.xml.j2 mode='0600' owner={{item}} group={{create_group}}
 
     - name: add kerberos principal
-      script: scripts/create_principal.sh students {{item}}
+      script: scripts/create_principal.sh students {{item}} {{create_group}}
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
 #    - name: Update database for password resetter script
