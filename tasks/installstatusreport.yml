@@ -1,14 +1,5 @@
    - name: Install python modules
-     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10']
-     apt:
-       name:
-         - python-requests
-         - python-psutil
-         - python-dbus
-       state: present
-       update_cache: no
-   - name: Install python modules
-     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11']
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','10','9']
      apt:
        name:
          - python3-requests

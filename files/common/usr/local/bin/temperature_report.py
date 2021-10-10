@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import requests
 import os
 import subprocess
@@ -14,7 +14,7 @@ def readhddtemp():
     for i in subprocess.check_output(commandline).splitlines():
         temp = int(i.split()[0])
         if temp != 0:
-            temps.append(i)
+            temps.append(i.decode('utf-8'))
     return temps
 
 def readfilecontents(name):
@@ -48,9 +48,9 @@ def sensormatch(name):
     if name == "atk0110": # for a44101
         return True
     if name == "it8720": # for a43904
-	return True
+        return True
     if name == "k10temp": # for termserver2
-	return True
+        return True
     return False
 
 def gethwmon_values(number,name):
