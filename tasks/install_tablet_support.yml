@@ -7,7 +7,7 @@
         state: present
         install_recommends: no
     - name: install mypaint
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9'] #FIXME - needs patch, see issue. after patching - enable it for Debian 10
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','11'] #FIXME - needs patch, see issue. after patching - enable it for Debian 10 (should work for debian 11)
       apt:
         pkg:
          - mypaint
