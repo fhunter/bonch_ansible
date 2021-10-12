@@ -62,7 +62,6 @@
     - include: tasks/install_netbeans.yml
     - include: tasks/install_pycharm.yml
     - include: tasks/autostart_pidgin.yml
-    - include: tasks/add_permission_read_logs_apache2.yml
     - include: tasks/install_unattended_upgrades.yml
     - include: tasks/enable_quota_applet.yml
     - name: remove sudo

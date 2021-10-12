@@ -246,6 +246,7 @@
     - include: tasks/install_internet.yml
     - include: tasks/installjavatests.yml
     - include: tasks/fix_access_mysql.yml
+    - include: tasks/add_permission_read_logs_apache2.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=no install_recommends=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10']
