@@ -244,7 +244,6 @@
       apt: name=hddtemp state=present install_recommends=no update_cache=no
 
     - include: tasks/install_internet.yml
-    - include: tasks/installjavatests.yml
     - include: tasks/fix_access_mysql.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - name: install vncbroadcast to allow remote access
