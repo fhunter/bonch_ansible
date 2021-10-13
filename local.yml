@@ -44,6 +44,7 @@
     - include: tasks/installstatusreport.yml
     - include: tasks/addunburden-home.yml
     - include: tasks/installcodeblocks.yml
+    - include: tasks/uninstalljavatests.yml
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - name: install latest chromium
