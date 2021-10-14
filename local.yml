@@ -128,7 +128,6 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/autostart_pidgin.yml
-    - include: tasks/installjavatests.yml
 
   - hosts: remoteteaching
     remote_user: root

@@ -322,6 +322,7 @@
     - include: tasks/install_texlive.yml
     - include: tasks/install_texmaker.yml
     - include: tasks/install_quartus_15.yml
+    - include: tasks/installjavatests.yml # This is for guacamole
     - name: install coquelicot-upload tool
       apt: pkg=coquelicot-upload state=latest update_cache=no
 
