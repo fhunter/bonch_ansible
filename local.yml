@@ -38,6 +38,7 @@
       action: apt name=ssmtp state=present install_recommends=no update_cache=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10','11']
     - include: tasks/install_latest_backports_kernel.yml
+    - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_tablet_support.yml
     - include: tasks/install_dosemu.yml
     - include: tasks/updatetimezone.yml
