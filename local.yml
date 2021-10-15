@@ -58,7 +58,6 @@
     - include: tasks/install_localca.yml
     - include: tasks/install_netbeans.yml
     - include: tasks/install_pycharm.yml
-    - include: tasks/autostart_pidgin.yml
     - include: tasks/install_unattended_upgrades.yml
     - include: tasks/enable_quota_applet.yml
     - name: remove sudo
@@ -103,7 +102,6 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/autostart_pidgin.yml
 
   - hosts: remoteteaching
     remote_user: root
