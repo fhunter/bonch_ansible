@@ -25,7 +25,6 @@
   - hosts: noremote
     remote_user: root
     tasks:
-    - include: tasks/installlightdmback.yml
     - include: tasks/uninstalljavatests.yml
     - name: add pam group config
       copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"

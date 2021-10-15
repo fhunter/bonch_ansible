@@ -341,6 +341,11 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: install sane-utils
       apt: pkg=sane-utils state=present install_recommends=no update_cache=no
+  
+  - hosts: noremote
+    remote_user: root
+    tasks:
+    - include: tasks/installlightdmback.yml
 
   - hosts: termserver2.dcti.sut.ru
     remote_user: root
