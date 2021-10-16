@@ -1,11 +1,11 @@
     - name: enable quota applet
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','9']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','9','11']
       apt:
         pkg: quota-applet
         state: latest
 
     - name: Add quota-applet to autostart
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','9']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','9','11']
       copy:
         src: /usr/share/applications/quota-applet.desktop
         dest: /etc/xdg/autostart/
