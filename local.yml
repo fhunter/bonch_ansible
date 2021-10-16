@@ -99,6 +99,16 @@
   - hosts: terminalservers
     remote_user: root
     tasks:
+    - name: Install software for 3d development and electronics
+      apt:
+        name:
+          - freecad
+          - kicad
+          - openscad
+          - antimony
+        state: latest
+        install_recommends: no
+        update_cache: no
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
