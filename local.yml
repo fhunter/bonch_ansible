@@ -26,8 +26,8 @@
     remote_user: root
     tasks:
     - include: tasks/uninstalljavatests.yml
-    - name: add pam group config
-      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
+#    - name: add pam group config
+#      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
 
 # All classes, including terminal server
   - hosts: classes
@@ -70,6 +70,8 @@
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_vmshortcuts.yml
+    - name: add pam group config
+      copy: src=files/a445/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
 
   - hosts: a439
     remote_user: root
