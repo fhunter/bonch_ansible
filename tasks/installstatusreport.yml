@@ -14,4 +14,4 @@
    - name: add to periodic execution
      cron: day=* hour=* minute=*/5 month=* weekday=* job=/usr/local/bin/computer_report.py name=computerreport
    - name: add to periodic execution 2
-     cron: day=* hour=* minute=*/10 month=* weekday=* job=/usr/local/bin/temperature_report.py name=temperaturereport
+     cron: day=* hour=* minute=*/10 month=* weekday=* job="/usr/local/bin/temperature_report.py 2>/dev/null" name=temperaturereport
