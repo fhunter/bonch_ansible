@@ -39,6 +39,9 @@ a44302.dcti.sut.ru
 a4430[5:6].dcti.sut.ru
 termserver.dcti.sut.ru
 
+[p4n]
+p4n[00:14].dcti.sut.ru
+
 [boards]
 board445.dcti.sut.ru
 board439.dcti.sut.ru
@@ -67,6 +70,7 @@ a439
 a445
 a441
 a443
+p4n
 
 [classes:children]
 noremote
