@@ -79,6 +79,7 @@ terminalservers
 [py3-hosts]
 a43901.dcti.sut.ru
 a44301.dcti.sut.ru
+termserver2.dcti.sut.ru
 
 [py3-hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
