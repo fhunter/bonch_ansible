@@ -71,7 +71,12 @@
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_vmshortcuts.yml
     - name: add pam group config
-      copy: src=files/a445/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
+      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
+    - name: remove mjpg-streamer
+      apt:
+        name:
+          - mjpg-streamer
+        state: absent
 
   - hosts: a439
     remote_user: root
