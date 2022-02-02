@@ -76,7 +76,7 @@ p4n
 noremote
 terminalservers
 
-[py3-hosts]
+[py3_hosts]
 a43701.dcti.sut.ru
 a44301.dcti.sut.ru
 a44303.dcti.sut.ru
@@ -85,6 +85,6 @@ a44305.dcti.sut.ru
 termserver2.dcti.sut.ru
 a439[01:12].dcti.sut.ru
 
-[py3-hosts:vars]
+[py3_hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
 
