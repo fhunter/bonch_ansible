@@ -23,7 +23,7 @@ a445[01:12].dcti.sut.ru
 a439[01:12].dcti.sut.ru
 
 [a437]
-a437[01:14].dcti.sut.ru
+a437[01:12].dcti.sut.ru
 
 [a441]
 a44104.dcti.sut.ru
@@ -77,7 +77,7 @@ noremote
 terminalservers
 
 [py3_hosts]
-a43701.dcti.sut.ru
+a437[01:12].dcti.sut.ru
 a44301.dcti.sut.ru
 a44303.dcti.sut.ru
 a44105.dcti.sut.ru
