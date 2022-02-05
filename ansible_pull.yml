@@ -47,6 +47,9 @@
     - name: Create local directory to work from
       action: file path={{workdir}} state=directory owner=root group=root mode=0751
 
+    - name: Create directory for ansible hosts
+      action: file path=/etc/ansible state=directory owner=root group=root mode=755
+
     - name: Copy ansible inventory file to client
       action: copy src=/etc/ansible/hosts dest=/etc/ansible/hosts
               owner=root group=root mode=0644
