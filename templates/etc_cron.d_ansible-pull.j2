@@ -1,4 +1,4 @@
 # Cron job to git clone/pull a repo and then run locally
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-{{ schedule }} {{ cron_user }} ansible-pull -d {{ workdir }} -U {{ repo_url }} >>{{ logfile }} 2>&1
+{{ schedule }} {{ cron_user }} flock -n -x /tmp/ansible_lock ansible-pull -d {{ workdir }} -U {{ repo_url }} >>{{ logfile }} 2>&1
