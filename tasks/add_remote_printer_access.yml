@@ -5,7 +5,9 @@
       lineinfile: dest=/etc/default/p910nd regexp="^P910ND_START=" line="P910ND_START=1"
     - name: Set printer for p910nd
       register: p910nd_deploy
-      lineinfile: dest=/etc/default/p910nd regexp="^P910ND_OPTS=" line="P910ND_OPTS=\"-f /dev/usb/lp1 -b\""
+      lineinfile: dest=/etc/default/p910nd regexp="^P910ND_OPTS=" line="P910ND_OPTS=\"-f /dev/usb/hpprinter -b\""
+    - name: Add udev rule
+      copy: src=files/common/etc/udev/rules.d/99-printer-link.rules dest=/etc/udev/rules.d/ mode=0644 owner=root group=root 
     - name: Service p910nd restart
       when: p910nd_deploy.changed
       service: name=p910nd state=restarted
