@@ -17,7 +17,7 @@ littlebig.dcti.sut.ru
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
 [a445]
-a445[01:12].dcti.sut.ru
+a445[01:13].dcti.sut.ru
 
 [a439]
 a439[01:12].dcti.sut.ru
@@ -92,7 +92,7 @@ a44105.dcti.sut.ru
 a44305.dcti.sut.ru
 termserver2.dcti.sut.ru
 a439[01:12].dcti.sut.ru
-a445[01:12].dcti.sut.ru
+a445[01:13].dcti.sut.ru
 a425[01:12].dcti.sut.ru
 
 [py3_hosts:vars]
