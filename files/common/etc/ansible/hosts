@@ -88,6 +88,7 @@ a44105.dcti.sut.ru
 a44305.dcti.sut.ru
 termserver2.dcti.sut.ru
 a439[01:12].dcti.sut.ru
+a445[01:12].dcti.sut.ru
 
 [py3_hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
