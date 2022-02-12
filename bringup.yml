@@ -308,6 +308,11 @@
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
+  
+  - hosts: a425
+    remote_user: root
+    tasks:
+    - include: tasks/install_quartus_15.yml
 
 #  - hosts: a437
 #    remote_user: root
