@@ -92,6 +92,7 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+    - include: tasks/install_vmshortcuts.yml
   
   - hosts: a425
     remote_user: root
