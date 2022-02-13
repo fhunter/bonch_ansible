@@ -45,7 +45,7 @@
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - name: install assembly language IDE state=present install_recommends=no update_cache=no
-      action: apt name=sasm state=present install_recommends=no update_cache=no
+      action: apt name=sasm state=latest install_recommends=no update_cache=no
     - name: install latest chromium
       apt:
         name:
