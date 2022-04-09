@@ -45,6 +45,9 @@ a44303.dcti.sut.ru
 a4430[5:6].dcti.sut.ru
 termserver.dcti.sut.ru
 
+[depo]
+depo12.dcti.sut.ru
+
 [p4n]
 p4n[00:14].dcti.sut.ru
 
@@ -78,7 +81,7 @@ a441
 a443
 a425
 p4n
-depo12.dcti.sut.ru
+depo
 
 [classes:children]
 noremote
