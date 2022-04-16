@@ -25,8 +25,7 @@ a439[01:12].dcti.sut.ru
 [a437]
 a437[01:11].dcti.sut.ru
 uni07.dcti.sut.ru
-depo11.dcti.sut.ru
-depo12.dcti.sut.ru
+depo[01:12].dcti.sut.ru
 
 [a425]
 a425[01:12].dcti.sut.ru
@@ -47,8 +46,7 @@ a4430[5:6].dcti.sut.ru
 termserver.dcti.sut.ru
 
 [depo]
-depo11.dcti.sut.ru
-depo12.dcti.sut.ru
+depo[01:12].dcti.sut.ru
 
 [p4n]
 p4n[00:14].dcti.sut.ru
@@ -99,8 +97,7 @@ a44306.dcti.sut.ru
 a44104.dcti.sut.ru
 a44105.dcti.sut.ru
 a44305.dcti.sut.ru
-depo11.dcti.sut.ru
-depo12.dcti.sut.ru
+depo[01:12].dcti.sut.ru
 termserver2.dcti.sut.ru
 a439[01:12].dcti.sut.ru
 a445[01:13].dcti.sut.ru
