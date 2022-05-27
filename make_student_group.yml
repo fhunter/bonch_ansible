@@ -31,7 +31,7 @@
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
     
     - name: trigger password reset
-      script: scripts/triggerreset.py students {{item}} {{create_group}}
+      script: scripts/triggerreset.py {{item}}
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
     - name: Patch passwd  # to replace password field with *K*
