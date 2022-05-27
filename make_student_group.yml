@@ -29,10 +29,10 @@
     - name: add kerberos principal
       script: scripts/create_principal.sh students {{item}} {{create_group}}
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
-
-#    - name: Update database for password resetter script
-#      command: sqlite3 /var/www/selfreg/database.sqlite3 'insert or ignore into "users" (username, fio, studnum) values ( "{{item}}", "","");insert or ignore into "quota" (username, usedspace, softlimit) values ( "{{item}}", 0, 0);'
-#      with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
+    
+    - name: trigger password reset
+      script: scripts/triggerreset.py students {{item}} {{create_group}}
+      with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
     - name: Patch passwd  # to replace password field with *K*
       command: sed 's/^{{item}}:x:/{{item}}:*K*:/' -i /etc/passwd
@@ -42,13 +42,13 @@
       command: setquota -u {{item}} 450000 500000 0 0 /home
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
-    - name: Setup svn server 1
-      file: path=/srv/svn/{{create_group}} state=directory
-
-    - name: Setup svn server 2
-      command: svnadmin create /srv/svn/{{create_group}}
-      args:
-        creates: /srv/svn/{{create_group}}/db
-
-    - name: Setup svn server 3
-      command: cp /srv/svn/sandbox/conf/svnserve.conf /srv/svn/{{create_group}}/conf
+#    - name: Setup svn server 1
+#      file: path=/srv/svn/{{create_group}} state=directory
+#
+#    - name: Setup svn server 2
+#      command: svnadmin create /srv/svn/{{create_group}}
+#      args:
+#        creates: /srv/svn/{{create_group}}/db
+#
+#    - name: Setup svn server 3
+#      command: cp /srv/svn/sandbox/conf/svnserve.conf /srv/svn/{{create_group}}/conf

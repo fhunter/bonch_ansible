@@ -21,9 +21,6 @@
     - name: add kerberos principal 
       script: scripts/create_principal.sh teachers {{create_username}} {{create_username}}
 
-#    - name: Update database for password resetter script
-#      command: sqlite3 /var/www/selfreg/database.sqlite3 'insert or ignore into "users" (username, fio, studnum) values ( "{{create_username}}", "","");insert or ignore into "quota" (username, usedspace, softlimit) values ( "{{create_username}}", 0, 0);'
-
     - name: Patch passwd  # to replace password field with *K*
       command: sed 's/^{{create_username}}:x:/{{create_username}}:*K*:/' -i /etc/passwd
 
