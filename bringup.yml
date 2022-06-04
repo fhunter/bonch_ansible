@@ -157,6 +157,17 @@
           - net-tools
           - snmp
           - telnet
+          - catdoc
+          - unar
+          - odt2txt
+          - poppler-utils
+          - lynx
+          - w3m
+          - elinks
+          - links2
+          - arj
+          - dbview
+          - epub-utils
         state: present
         install_recommends: no
         update_cache: no
@@ -263,6 +274,9 @@
       apt: name=lm-sensors state=present install_recommends=no update_cache=no
     - name: install hddtemp
       apt: name=hddtemp state=present install_recommends=no update_cache=no
+    
+    - name: remove apparmor
+      apt: name=apparmor state=absent 
 
     - include: tasks/install_internet.yml
     - include: tasks/fix_access_mysql.yml
