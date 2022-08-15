@@ -73,6 +73,7 @@ vladimirpc.dcti.sut.ru
 
 [terminalservers]
 termserver2.dcti.sut.ru
+srv-3.dcti.sut.ru
 
 [noremote:children]
 a437

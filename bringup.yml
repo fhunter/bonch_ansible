@@ -366,7 +366,7 @@
     tasks:
     - include: tasks/installlightdmback.yml
 
-  - hosts: termserver2.dcti.sut.ru
+  - hosts: terminalservers
     remote_user: root
     tasks:
     - include: tasks/install_texlive.yml
