@@ -180,6 +180,7 @@
         name:
           - websockify
           - ttyd
+          - tigervnc-standalone-server
 
 
   - hosts: remoteteaching
