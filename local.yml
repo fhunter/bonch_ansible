@@ -172,6 +172,15 @@
         update_cache: no
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+    - name: deploy remote access
+      apt:
+        state: installed
+        install_recommends: no
+        update_cache: no
+        name:
+          - websockify
+          - ttyd
+
 
   - hosts: remoteteaching
     remote_user: root
