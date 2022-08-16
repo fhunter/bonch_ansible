@@ -11,6 +11,15 @@
       copy: src=files/termserver/etc/default/ttyd dest=/etc/default/ttyd owner=root group=root mode="0644"
     - name: upload websockify service file
       copy: src=files/termserver/lib/systemd/system/websockify.service dest=/lib/systemd/system/websockify.service owner=root group=root mode="0644"
-# Add systemd service enablement
-# ansible.builtin.systemd
 # Add deployment of noVNC files
+    - name: enable and run ttyd
+      systemd:
+        name: ttyd
+        state: started
+        enabled: yes
+    - name: enable and run websockify
+      systemd:
+        name: websockify
+        state: started
+        enabled: yes
+
