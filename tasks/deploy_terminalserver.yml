@@ -25,10 +25,11 @@
         enabled: yes
     - name: Add lightdm config
       blockinfile: dest=/etc/lightdm/lightdm.conf backup=no insertafter="^\[VNCServer\].*$"
-        content="enabled=true
-        command=Xvnc -SecurityTypes None
-        port=5900
-        listen-address=0.0.0.0
-        width=1280
-        height=1024
-        depth=24"
+        content: |
+          enabled=true
+          command=Xvnc -SecurityTypes None
+          port=5900
+          listen-address=0.0.0.0
+          width=1280
+          height=1024
+          depth=24
