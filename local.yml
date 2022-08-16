@@ -174,7 +174,7 @@
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - name: deploy remote access
       apt:
-        state: installed
+        state: present
         install_recommends: no
         update_cache: no
         name:
