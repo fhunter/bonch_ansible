@@ -24,7 +24,10 @@
         state: started
         enabled: yes
     - name: Add lightdm config
-      blockinfile: dest=/etc/lightdm/lightdm.conf backup=no insertafter="^\[VNCServer\].*$"
+      blockinfile:
+        dest: /etc/lightdm/lightdm.conf
+        backup: no
+        insertafter: ^[VNCServer].*$
         content: |
           enabled=true
           command=Xvnc -SecurityTypes None
