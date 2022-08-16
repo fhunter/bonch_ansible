@@ -1,0 +1,11 @@
+[Unit]
+Description=websockify vnc proxy
+Requires=network-online.target
+
+[Service]
+ExecStart=/usr/bin/websockify --web=/usr/share/novnc/ --heartbeat=15 6000 127.0.0.1:5900
+Type=simple
+User=nobody
+
+[Install]
+WantedBy=multi-user.target

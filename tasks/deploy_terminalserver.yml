@@ -1,0 +1,16 @@
+    - name: deploy remote access
+      apt:
+        state: present
+        install_recommends: no
+        update_cache: no
+        name:
+          - websockify
+          - ttyd
+          - tigervnc-standalone-server
+    - name: upload ttyd config
+      copy: src=files/termserver/etc/default/ttyd dest=/etc/default/ttyd owner=root group=root mode="0644"
+    - name: upload websockify service file
+      copy: src=files/termserver/lib/systemd/system/websockify.service desk=/lib/systemd/system/websockify.service owner=root group=root mode="0644"
+# Add systemd service enablement
+# ansible.builtin.systemd
+# Add deployment of noVNC files
