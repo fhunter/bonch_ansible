@@ -14,6 +14,8 @@ walloftears.dcti.sut.ru
 kdc.dcti.sut.ru
 littlebig.dcti.sut.ru
 srv-3.dcti.sut.ru
+srv-1.dcti.sut.ru
+srv-2.dcti.sut.ru
 
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
@@ -66,6 +68,10 @@ a44306.dcti.sut.ru
 a44105.dcti.sut.ru
 a44305.dcti.sut.ru
 a44304.dcti.sut.ru
+
+[fileserver]
+srv-1.dcti.sut.ru
+srv-2.dcti.sut.ru
 
 [a456]
 darkstar.dcti.sut.ru
