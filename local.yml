@@ -40,6 +40,7 @@
     - include: tasks/updatetimezone.yml
     - include: tasks/installdebiankeyring.yml
     - include: tasks/installstatusreport.yml
+    - include: tasks/installtemperaturereport.yml
     - include: tasks/addunburden-home.yml
     - include: tasks/installcodeblocks.yml
     - name: install latest firefox

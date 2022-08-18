@@ -1,0 +1,13 @@
+   - name: Install python modules
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','10','9']
+     apt:
+       name:
+         - python3-requests
+         - python3-psutil
+         - python3-dbus
+       state: present
+       update_cache: no
+   - name: deploy report script 2
+     copy: src=files/common/usr/local/bin/temperature_report.py dest=/usr/local/bin/temperature_report.py owner=root group=root mode=755
+   - name: add to periodic execution 2
+     cron: day=* hour=* minute=*/10 month=* weekday=* job="/usr/local/bin/temperature_report.py 2>/dev/null" name=temperaturereport
