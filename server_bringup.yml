@@ -34,6 +34,8 @@
         - pulseaudio
         - kdeconnect
         - milou
+        - ipp-usb
+        - avahi-daemon
 #deploy file server TODO
     - name: install nfs server
       apt: pkg=nfs-kernel-server state=present
@@ -77,11 +79,31 @@
         owner: root
         group: root
         mode: 0644
-#Deploy network boot service TODO - FIXME - rlinetd заменить на inetd?
+#deploy email client TODO
+#Deploy network boot service DONE
+    - name: install inetd
+      apt:
+        pkg: inetutils-inetd
+        state: present
+        install_recommends: no
     - name: install atftpd
       apt:
         pkg: atftpd
         state: present
+        install_recommends: no
+    - name: make directory for boot files
+      file:
+        path: '/opt/tftpboot'
+        state: directory
+    - name: remove old directory for boot files
+      file:
+        path: '/srv/tftp'
+        state: absent
+    - name: deploy line into /etc/inetd.conf
+      lineinfile:
+        state: present
+        line: 'tftp     dgram   udp4    wait    nobody /usr/sbin/tcpd /usr/sbin/in.tftpd --tftpd-timeout 300 --retry-timeout 5 --mcast-port 1758 --mcast-addr 239.239.239.0-255 --mcast-ttl 1 --maxthread 100 --verbose=5 /opt/tftpboot'
+        path: /etc/inetd.conf
 #Deploy ntp server DONE
     - name: install ntpd
       apt:
@@ -95,7 +117,7 @@
         group: root
         mode: 0644
 # Install cups TODO
-# install rsync service
+# install rsync service DONE
     - name: install rsync
       apt:
         pkg: rsync
@@ -132,3 +154,7 @@
 # gitea TODO
 # 1c license server TODO
 # package repository management TODO
+    - name: deploy aptly package management server
+      apt:
+        pkg: aptly
+        state: present
