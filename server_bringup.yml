@@ -1,0 +1,89 @@
+---
+
+# Labs where no remote access is used
+  - hosts: fileserver
+    remote_user: ewg
+    become: true
+    gather_facts: true
+    become_user: root
+    become_method: ksu
+    tasks:
+    - name: install ansible
+      apt: pkg=ansible state=present
+    - include: tasks/copyansiblehosts.yml
+    - include: tasks/installtemperaturereport.yml
+#server cleanup
+    - name: remove unneeded packages
+      apt:
+        pkg: "{{ item }}"
+        state: absent
+        purge: yes
+      with_items:
+        - firefox-esr
+        - task-desktop
+        - task-kde-desktop
+        - kde-standard
+        - network-manager
+        - wpasupplicant
+        - modemmanager
+        - usb-modeswitch
+        - plasma-desktop
+        - plasma-workspace
+        - dolphin
+        - packagekit
+        - pulseaudio
+        - kdeconnect
+        - milou
+#deploy file server TODO
+    - name: install nfs server
+      apt: pkg=nfs-kernel-server state=present
+    - name: setup exports
+      lineinfile:
+        path: /etc/exports
+        state: present
+        line: "{{ item }}"
+      with_items:
+        - '/srv/nfs4        172.16.64.0/22(rw,sync,crossmnt,no_subtree_check)'
+        - '/srv/nfs4/homes  172.16.64.0/22(rw,crossmnt,sync,no_subtree_check)'
+    - name: Restart nfs-kernel-server.service 
+      systemd:
+        daemon_reload: yes
+        state: started
+        name: nfs-kernel-server.service        
+#deploy dhcp TODO
+    - name: install dhcp server
+      apt: pkg=isc-dhcp-server state=present
+#Deploy email TODO
+    - name: install opensmtpd
+      apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+        - 'opensmtpd'
+        - 'opensmtpd-extras'
+#Deploy network boot service TODO
+    - name: install atftpd
+      apt:
+        pkg: atftpd
+        state: present
+#Deploy ntp server DONE
+    - name: install ntpd
+      apt:
+        pkg: ntp
+        state: present
+    - name: copy ntpd config file
+      copy:
+        src: files/servers/etc/ntp.conf
+        dest: /etc/ntp.conf
+        owner: root
+        group: root
+        mode: 0644
+# Install cups TODO
+# install rsync service TODO
+# install apt-cacher-ng TODO
+# install let'sencrypt certs manager TODO
+# configure NGINX  TODO
+# jetbrains license server TODO
+# gitea TODO
+# 1c license server TODO
+# package repository management TODO
