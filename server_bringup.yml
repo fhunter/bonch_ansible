@@ -37,6 +37,8 @@
 #deploy file server TODO
     - name: install nfs server
       apt: pkg=nfs-kernel-server state=present
+    - name: install quota support
+      apt: pkg=quota state=present
     - name: setup exports
       lineinfile:
         path: /etc/exports
@@ -53,7 +55,7 @@
 #deploy dhcp TODO
     - name: install dhcp server
       apt: pkg=isc-dhcp-server state=present
-#Deploy email TODO
+#Deploy email
     - name: install opensmtpd
       apt:
         pkg: "{{ item }}"
@@ -61,7 +63,21 @@
       with_items:
         - 'opensmtpd'
         - 'opensmtpd-extras'
-#Deploy network boot service TODO
+    - name: copy smtpd config file
+      copy:
+        src: files/servers/etc/smtpd.conf
+        dest: /etc/smtpd.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: copy aliases file
+      copy:
+        src: files/servers/etc/aliases
+        dest: /etc/aliases
+        owner: root
+        group: root
+        mode: 0644
+#Deploy network boot service TODO - FIXME - rlinetd заменить на inetd?
     - name: install atftpd
       apt:
         pkg: atftpd
@@ -79,7 +95,36 @@
         group: root
         mode: 0644
 # Install cups TODO
-# install rsync service TODO
+# install rsync service
+    - name: install rsync
+      apt:
+        pkg: rsync
+        state: present
+    - name: copy rsync config file
+      copy:
+        src: files/servers/etc/rsyncd.conf
+        dest: /etc/rsyncd.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: enable rsyncd
+      lineinfile:
+        state: present
+        regex: '^RSYNC_ENABLE='
+        line: 'RSYNC_ENABLE=true'
+        path: /etc/default/rsync
+    - name: create paths for rsync config
+      file:
+        path: '{{ item }}'
+        state: directory
+      with_items:
+        - '/home/distrib/Linux/quartus/'
+        - '/home/distrib/Linux/vm'
+    - name: Restart rsync.service 
+      systemd:
+        daemon_reload: yes
+        state: started
+        name: rsync.service
 # install apt-cacher-ng TODO
 # install let'sencrypt certs manager TODO
 # configure NGINX  TODO
