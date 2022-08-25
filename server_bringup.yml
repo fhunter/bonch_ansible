@@ -158,3 +158,14 @@
       apt:
         pkg: aptly
         state: present
+    - name: make directory for bonch package repository files
+      file:
+        path: '/opt/bonch_repo_source'
+        state: directory
+    - name: copy aptly config file
+      copy:
+        src: files/servers/root/.aptly.conf
+        dest: /root/.aptly.conf
+        owner: root
+        group: root
+        mode: 0644
