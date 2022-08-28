@@ -1,0 +1,2 @@
+    - name: install dhcp server
+      apt: pkg=isc-dhcp-server state=present

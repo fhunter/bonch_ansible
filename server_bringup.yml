@@ -37,48 +37,11 @@
         - avahi-daemon
 #deploy file server TODO
 #permission scripts not copied yet
-    - name: install nfs server
-      apt: pkg=nfs-kernel-server state=present
-    - name: install quota support
-      apt: pkg=quota state=present
-    - name: setup exports
-      lineinfile:
-        path: /etc/exports
-        state: present
-        line: "{{ item }}"
-      with_items:
-        - '/srv/nfs4        172.16.64.0/22(rw,sync,crossmnt,no_subtree_check)'
-        - '/srv/nfs4/homes  172.16.64.0/22(rw,crossmnt,sync,no_subtree_check)'
-    - name: Restart nfs-kernel-server.service 
-      systemd:
-        daemon_reload: yes
-        state: started
-        name: nfs-kernel-server.service        
+    - include: tasks/servers/nfs_server.yml
 #deploy dhcp TODO
-    - name: install dhcp server
-      apt: pkg=isc-dhcp-server state=present
+    - include: tasks/servers/dhcp_server.yml
 #Deploy email
-    - name: install opensmtpd
-      apt:
-        pkg: "{{ item }}"
-        state: present
-      with_items:
-        - 'opensmtpd'
-        - 'opensmtpd-extras'
-    - name: copy smtpd config file
-      copy:
-        src: files/servers/etc/smtpd.conf
-        dest: /etc/smtpd.conf
-        owner: root
-        group: root
-        mode: 0644
-    - name: copy aliases file
-      copy:
-        src: files/servers/etc/aliases
-        dest: /etc/aliases
-        owner: root
-        group: root
-        mode: 0644
+    - include :tasks/servers/smtp_server.yml
 #deploy email client and imap/pop3 TODO
 #Deploy network boot service DONE
     - name: install inetd

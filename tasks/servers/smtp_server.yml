@@ -1,0 +1,21 @@
+    - name: install opensmtpd
+      apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+        - 'opensmtpd'
+        - 'opensmtpd-extras'
+    - name: copy smtpd config file
+      copy:
+        src: files/servers/etc/smtpd.conf
+        dest: /etc/smtpd.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: copy aliases file
+      copy:
+        src: files/servers/etc/aliases
+        dest: /etc/aliases
+        owner: root
+        group: root
+        mode: 0644

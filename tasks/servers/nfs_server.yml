@@ -1,0 +1,17 @@
+    - name: install nfs server
+      apt: pkg=nfs-kernel-server state=present
+    - name: install quota support
+      apt: pkg=quota state=present
+    - name: setup exports
+      lineinfile:
+        path: /etc/exports
+        state: present
+        line: "{{ item }}"
+      with_items:
+        - '/srv/nfs4        172.16.64.0/22(rw,sync,crossmnt,no_subtree_check)'
+        - '/srv/nfs4/homes  172.16.64.0/22(rw,crossmnt,sync,no_subtree_check)'
+    - name: Restart nfs-kernel-server.service 
+      systemd:
+        daemon_reload: yes
+        state: started
+        name: nfs-kernel-server.service        
