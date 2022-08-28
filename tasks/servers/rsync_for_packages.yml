@@ -1,0 +1,29 @@
+    - name: install rsync
+      apt:
+        pkg: rsync
+        state: present
+    - name: copy rsync config file
+      copy:
+        src: files/servers/etc/rsyncd.conf
+        dest: /etc/rsyncd.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: enable rsyncd
+      lineinfile:
+        state: present
+        regex: '^RSYNC_ENABLE='
+        line: 'RSYNC_ENABLE=true'
+        path: /etc/default/rsync
+    - name: create paths for rsync config
+      file:
+        path: '{{ item }}'
+        state: directory
+      with_items:
+        - '/home/distrib/Linux/quartus/'
+        - '/home/distrib/Linux/vm'
+    - name: Restart rsync.service
+      systemd:
+        daemon_reload: yes
+        state: started
+        name: rsync.service

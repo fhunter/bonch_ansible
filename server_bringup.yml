@@ -44,76 +44,18 @@
     - include: tasks/servers/smtp_server.yml
 #deploy email client and imap/pop3 TODO
 #Deploy network boot service DONE
-    - name: install inetd
-      apt:
-        pkg: inetutils-inetd
-        state: present
-        install_recommends: no
-    - name: install atftpd
-      apt:
-        pkg: atftpd
-        state: present
-        install_recommends: no
-    - name: make directory for boot files
-      file:
-        path: '/opt/tftpboot'
-        state: directory
-    - name: remove old directory for boot files
-      file:
-        path: '/srv/tftp'
-        state: absent
-    - name: deploy line into /etc/inetd.conf
-      lineinfile:
-        state: present
-        line: 'tftp     dgram   udp4    wait    nobody /usr/sbin/tcpd /usr/sbin/in.tftpd --tftpd-timeout 300 --retry-timeout 5 --mcast-port 1758 --mcast-addr 239.239.239.0-255 --mcast-ttl 1 --maxthread 100 --verbose=5 /opt/tftpboot'
-        path: /etc/inetd.conf
-#Deploy ntp server DONE
-    - name: install ntpd
-      apt:
-        pkg: ntp
-        state: present
-    - name: copy ntpd config file
-      copy:
-        src: files/servers/etc/ntp.conf
-        dest: /etc/ntp.conf
-        owner: root
-        group: root
-        mode: 0644
+    - include: tasks/servers/network_boot.yml
 # Install cups TODO
 # install rsync service DONE
-    - name: install rsync
-      apt:
-        pkg: rsync
-        state: present
-    - name: copy rsync config file
-      copy:
-        src: files/servers/etc/rsyncd.conf
-        dest: /etc/rsyncd.conf
-        owner: root
-        group: root
-        mode: 0644
-    - name: enable rsyncd
-      lineinfile:
-        state: present
-        regex: '^RSYNC_ENABLE='
-        line: 'RSYNC_ENABLE=true'
-        path: /etc/default/rsync
-    - name: create paths for rsync config
-      file:
-        path: '{{ item }}'
-        state: directory
-      with_items:
-        - '/home/distrib/Linux/quartus/'
-        - '/home/distrib/Linux/vm'
-    - name: Restart rsync.service
-      systemd:
-        daemon_reload: yes
-        state: started
-        name: rsync.service
+    - include: tasks/servers/rsync_for_packages.yml
 # install apt-cacher-ng TODO
     - include: tasks/servers/apt_cacher_ng.yml
 
 # install let'sencrypt certs manager TODO
+    - name: install lecm
+      apt:
+        pkg: lecm
+        state: present
 # configure NGINX  TODO
 # jetbrains license server TODO
 # gitea TODO
