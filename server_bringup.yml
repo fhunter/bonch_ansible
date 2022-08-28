@@ -67,11 +67,46 @@
     - include: tasks/servers/apt_cacher_ng.yml
 
 # install let'sencrypt certs manager
-# TODO
+# DONE
+# FIXME - check directory premissions, setup NGINX, setup cron renewal
     - name: install lecm
       apt:
         pkg: lecm
         state: present
+    - name: copy lecm.conf config file
+      copy:
+        src: files/servers/etc/lecm.conf
+        dest: /etc/lecm.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: create /etc/letsencrypt
+      file:
+        dest: /etc/letsencrypt
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+    - name: create /etc/letsencrypt/ paths
+      file:
+        dest: "/etc/letsencrypt/{{ item }}"
+        state: directory
+        owner: root
+        group: ssl-cert
+        mode: 0750
+      with_items:
+        - 'csr'
+        - 'challenges'
+        - 'pem'
+        - 'private'
+        - 'certs'
+    - name: create /etc/letsencrypt/private/myhost.key
+      file:
+        dest: /etc/letsencrypt/private/myhost.key
+        state: touch
+        owner: root
+        group: ssl-cert
+        mode: 0600
 # configure NGINX
 # TODO
 
