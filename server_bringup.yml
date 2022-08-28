@@ -39,7 +39,18 @@
 # TODO
     #permission scripts not copied yet FIXME
     - include: tasks/servers/nfs_server.yml
-
+# hesiod setup
+    - name: install hesiod utility
+      apt:
+        pkg: hesiod
+        state: present
+    - name: deploy configs for hesiod
+      copy:
+        src: files/servers/etc/hesiod.conf
+        dest: /etc/hesiod.conf
+        owner: root
+        group: root
+        mode: 0644
 #deploy dhcp
 # TODO
     - include: tasks/servers/dhcp_server.yml
