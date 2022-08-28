@@ -35,30 +35,55 @@
         - milou
         - ipp-usb
         - avahi-daemon
-#deploy file server TODO
-#permission scripts not copied yet
+#deploy file server
+# TODO
+    #permission scripts not copied yet FIXME
     - include: tasks/servers/nfs_server.yml
-#deploy dhcp TODO
+
+#deploy dhcp
+# TODO
     - include: tasks/servers/dhcp_server.yml
+
 #Deploy email
+# DONE
     - include: tasks/servers/smtp_server.yml
-#deploy email client and imap/pop3 TODO
-#Deploy network boot service DONE
+
+#deploy email client and imap/pop3
+# TODO
+
+#Deploy network boot service
+# DONE
     - include: tasks/servers/network_boot.yml
-# Install cups TODO
-# install rsync service DONE
+
+# Install cups
+# TODO
+
+# install rsync service
+# DONE
     - include: tasks/servers/rsync_for_packages.yml
-# install apt-cacher-ng TODO
+
+# install apt-cacher-ng
+# DONE
     - include: tasks/servers/apt_cacher_ng.yml
 
-# install let'sencrypt certs manager TODO
+# install let'sencrypt certs manager
+# TODO
     - name: install lecm
       apt:
         pkg: lecm
         state: present
-# configure NGINX  TODO
-# jetbrains license server TODO
-# gitea TODO
-# 1c license server TODO
+# configure NGINX
+# TODO
+
+# jetbrains license server
+# TODO
+
+# gitea
+# TODO
+
+# 1c license server
+# TODO
+
 # package repository management
+# DONE
     - include: tasks/servers/aptly.yml
