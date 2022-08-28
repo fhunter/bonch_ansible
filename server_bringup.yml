@@ -41,7 +41,7 @@
 #deploy dhcp TODO
     - include: tasks/servers/dhcp_server.yml
 #Deploy email
-    - include :tasks/servers/smtp_server.yml
+    - include: tasks/servers/smtp_server.yml
 #deploy email client and imap/pop3 TODO
 #Deploy network boot service DONE
     - name: install inetd
@@ -105,44 +105,18 @@
       with_items:
         - '/home/distrib/Linux/quartus/'
         - '/home/distrib/Linux/vm'
-    - name: Restart rsync.service 
+    - name: Restart rsync.service
       systemd:
         daemon_reload: yes
         state: started
         name: rsync.service
 # install apt-cacher-ng TODO
-    - name: list files
-      shell: "/usr/sbin/vgdisplay -c|head -n 1|awk -F: '{print $1}'|sed 's/^ *//g'"
-      register: vgname
-    - name: Add aptcacher lvm location
-      action: lvol vg={{ vgname.stdout }} lv=aptcacher size=20G
-    - name: Make filesystem on aptcacher volume
-      action: filesystem fstype=ext4 dev=/dev/mapper/{{ vgname.stdout }}-aptcacher
-    - name: Add scratch to fstab
-      action: mount name=/var/cache/apt-cacher-ng src=/dev/mapper/{{ vgname.stdout }}-aptcacher state=mounted fstype=ext4
-    - name: install apt-cacher-ng
-      apt:
-        pkg: apt-cacher-ng
-        state: present
-    # deploy configs: TODO
+    - include: tasks/servers/apt_cacher_ng.yml
+
 # install let'sencrypt certs manager TODO
 # configure NGINX  TODO
 # jetbrains license server TODO
 # gitea TODO
 # 1c license server TODO
-# package repository management TODO
-    - name: deploy aptly package management server
-      apt:
-        pkg: aptly
-        state: present
-    - name: make directory for bonch package repository files
-      file:
-        path: '/opt/bonch_repo_source'
-        state: directory
-    - name: copy aptly config file
-      copy:
-        src: files/servers/root/.aptly.conf
-        dest: /root/.aptly.conf
-        owner: root
-        group: root
-        mode: 0644
+# package repository management
+    - include: tasks/servers/aptly.yml

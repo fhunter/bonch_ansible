@@ -1,0 +1,14 @@
+    - name: list files
+      shell: "/usr/sbin/vgdisplay -c|head -n 1|awk -F: '{print $1}'|sed 's/^ *//g'"
+      register: vgname
+    - name: Add aptcacher lvm location
+      action: lvol vg={{ vgname.stdout }} lv=aptcacher size=20G
+    - name: Make filesystem on aptcacher volume
+      action: filesystem fstype=ext4 dev=/dev/mapper/{{ vgname.stdout }}-aptcacher
+    - name: Add scratch to fstab
+      action: mount name=/var/cache/apt-cacher-ng src=/dev/mapper/{{ vgname.stdout }}-aptcacher state=mounted fstype=ext4
+    - name: install apt-cacher-ng
+      apt:
+        pkg: apt-cacher-ng
+        state: present
+    # deploy configs: TODO
