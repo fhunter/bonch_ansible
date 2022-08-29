@@ -23,7 +23,7 @@ subnet 172.16.64.0 netmask 255.255.252.0 {
     range 172.16.64.15 172.16.67.254;
     option routers 172.16.64.1;
     option broadcast-address 172.16.67.255;
-    option domain-name-servers {{ ansible_eno0.ipv4.address }};
+    option domain-name-servers {{ ansible_eno1.ipv4.address }};
     option vendor-encapsulated-options 79:07:10:ac:10:ac:10:40:01;
 # route back to vpn
 # 10.11.0.0/16 gw 172.16.64.10
@@ -31,7 +31,7 @@ subnet 172.16.64.0 netmask 255.255.252.0 {
 			    24, 172,16,1, 172,16,64,1,
 			    0, 172,16,64,1;
 
-   next-server {{ ansible_eno0.ipv4.address }};
+   next-server {{ ansible_eno1.ipv4.address }};
 #   if option architecture-type = 00:07 {
 #      filename "shim.efi";
 #   } else {

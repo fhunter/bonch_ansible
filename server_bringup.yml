@@ -141,6 +141,7 @@
 # DONE
     - include: tasks/servers/aptly.yml
 # dns
+# TODO - cron record for passwd/group updates
     - name: install tinydns and unbound
       apt:
         pkg: [ 'tinydns', 'unbound', 'make' ]
@@ -161,5 +162,5 @@
         - "names.conf"
     - name: Enable unbound service
       systemd:
-        state: restarted
+        state: started
         name: unbound.service

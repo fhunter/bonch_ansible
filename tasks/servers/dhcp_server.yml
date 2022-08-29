@@ -1,2 +1,6 @@
     - name: install dhcp server
       apt: pkg=isc-dhcp-server state=present
+    - name: deploy config for dhcp server
+      template:
+        src: files/servers/etc/dhcp/dhcpd.conf.j2
+        dest: /etc/dhcp/dhcpd.conf
