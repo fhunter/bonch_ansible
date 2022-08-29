@@ -54,6 +54,8 @@
 #deploy dhcp
 # TODO
     - include: tasks/servers/dhcp_server.yml
+# TODO - setup config
+# TODO - enable server
 
 #Deploy email
 # DONE
@@ -61,6 +63,11 @@
 
 #deploy email client and imap/pop3
 # TODO
+    - name: install hesiod utility
+      apt:
+        pkg: [ 'dovecot-core', 'dovecot-gssapi', 'dovecot-imapd', 'dovecot-managesieved', 'dovecot-pop3d', 'dovecot-sieve' ]
+        state: present
+# TODO - configs + roundcube
 
 #Deploy network boot service
 # DONE
@@ -133,3 +140,26 @@
 # package repository management
 # DONE
     - include: tasks/servers/aptly.yml
+# dns
+    - name: install tinydns and unbound
+      apt:
+        pkg: [ 'tinydns', 'unbound', 'make' ]
+        state: present
+    - name: Disable bind service
+      systemd:
+        state: stopped
+        name: named.service
+    - name: copy config files
+      copy:
+        src: "files/servers/etc/unbound/unbound.conf.d/{{ item }}"
+        dest: "/etc/unbound/unbound.conf.d/{{ item }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - "qname-minimisation.conf"
+        - "names.conf"
+    - name: Enable unbound service
+      systemd:
+        state: restarted
+        name: unbound.service

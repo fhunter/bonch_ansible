@@ -1,0 +1,556 @@
+# dhcpd.conf
+#
+# Sample configuration file for ISC dhcpd
+#
+option domain-name "dcti.sut.ru";
+option ntp-servers timeserver.dcti.sut.ru;
+option classless-routes code 121 = array of unsigned integer 8;
+option architecture-type code 93 = unsigned integer 16;
+ddns-update-style none;
+
+default-lease-time 86400;
+max-lease-time 86400;
+
+authoritative;
+log-facility local1;
+option space gpxe;
+#option gpxe-encap-opts code 175 = encapsulate gpxe;
+#option gpxe.keep-san code 8 = unsigned integer 8;
+#option gpxe.bus-id code 177 = string;
+
+
+subnet 172.16.64.0 netmask 255.255.252.0 {
+    range 172.16.64.15 172.16.67.254;
+    option routers 172.16.64.1;
+    option broadcast-address 172.16.67.255;
+    option domain-name-servers {{ ansible_eno0.ipv4.address }};
+    option vendor-encapsulated-options 79:07:10:ac:10:ac:10:40:01;
+# route back to vpn
+# 10.11.0.0/16 gw 172.16.64.10
+    option classless-routes 16, 10,11, 172,16,64,10,
+			    24, 172,16,1, 172,16,64,1,
+			    0, 172,16,64,1;
+
+   next-server {{ ansible_eno0.ipv4.address }};
+#   if option architecture-type = 00:07 {
+#      filename "shim.efi";
+#   } else {
+#      filename "pxelinux.0";
+#   }
+
+#   if not exists gpxe.bus-id {
+#     filename "undionly.kpxe";
+#     filename "vesamenu.c32";
+#   } else {
+#     filename "menu.gpxe";
+#   }
+
+    filename "pxelinux.0";
+}
+
+host kdc {
+	hardware ethernet 00:13:8f:3a:2d:f3;
+	fixed-address kdc.dcti.sut.ru;
+}
+
+host kdc2 {
+	hardware ethernet b8:27:eb:ce:9b:60;
+	fixed-address kdc2.dcti.sut.ru;
+}
+
+#host wifi1 {
+#	hardware ethernet D4:6E:0E:96:DA:23;
+#	fixed-address wifi1.dcti.sut.ru;
+#}
+
+host srv-1 {
+	hardware ethernet 00:25:90:7F:73:C4;
+	fixed-address srv-1.dcti.sut.ru;
+}
+
+host srv-2 {
+	hardware ethernet 00:25:90:A1:5A:98;
+	fixed-address srv-2.dcti.sut.ru;
+}
+
+host srv-3 {
+	hardware ethernet 3c:ec:ef:23:80:62;
+	fixed-address srv-3.dcti.sut.ru;
+}
+
+host srv-5 {
+	hardware ethernet 00:25:90:C7:E0:50;
+	fixed-address srv-5.dcti.sut.ru;
+}
+
+host termserver2 {
+	hardware ethernet b4:2e:99:46:f8:dd;
+	fixed-address termserver2.dcti.sut.ru;
+}
+
+host berry {
+	hardware ethernet dc:a6:32:d0:fa:3f;
+	fixed-address berry.dcti.sut.ru;
+}
+
+host littlebig {
+	hardware ethernet 00:1c:c0:6f:21:bb;
+	fixed-address littlebig.dcti.sut.ru;
+}
+
+
+host pistudent1 {
+	hardware ethernet b8:27:eb:9c:78:4f;
+	fixed-address pistudent1.dcti.sut.ru;
+}
+
+host piteacher {
+	hardware ethernet b8:27:eb:46:6e:4d;
+	fixed-address piteacher.dcti.sut.ru;
+}
+
+# Для роботов в a437 - thingworx
+host microtik {
+	hardware ethernet C4:AD:34:2C:6C:A2;
+	fixed-address microtik.dcti.sut.ru;
+}
+
+#[p4n] - old a437
+host p4n01 {
+	hardware ethernet 30:85:a9:46:49:81;
+#00:17:31:c7:4a:94;
+	fixed-address p4n01.dcti.sut.ru;
+}
+
+host p4n02 {
+	hardware ethernet 00:17:31:c7:4a:8a;
+	fixed-address p4n02.dcti.sut.ru;
+}
+
+host p4n03 {
+	hardware ethernet 00:17:31:c7:42:01;
+	fixed-address p4n03.dcti.sut.ru;
+}
+
+host p4n04 {
+	hardware ethernet 00:17:31:c7:41:f7;
+	fixed-address p4n04.dcti.sut.ru;
+}
+
+host p4n05 {
+	hardware ethernet 00:17:31:c7:4a:96;
+	fixed-address p4n05.dcti.sut.ru;
+}
+
+host p4n06 {
+	hardware ethernet 00:17:31:c7:42:05;
+	fixed-address p4n06.dcti.sut.ru;
+}
+
+host p4n07 {
+	hardware ethernet 00:17:31:c7:42:1c;
+	fixed-address p4n07.dcti.sut.ru;
+}
+
+# Перемещена на p4n01 - адреса совпадают
+#host p4n09 {
+#	hardware ethernet 00:17:31:c7:4a:94;
+#	fixed-address p4n09.dcti.sut.ru;
+#}
+host p4n10 {
+	hardware ethernet 00:17:31:c7:4a:89;
+	fixed-address p4n10.dcti.sut.ru;
+}
+
+host p4n11 {
+	hardware ethernet 00:17:31:c7:4a:97;
+	fixed-address p4n11.dcti.sut.ru;
+}
+
+host p4n12 {
+	hardware ethernet 00:17:31:c7:42:4d;
+	fixed-address p4n12.dcti.sut.ru;
+}
+
+host p4n13 {
+	hardware ethernet 00:17:31:c7:41:f3;
+	fixed-address p4n13.dcti.sut.ru;
+}
+
+host p4n14 {
+	hardware ethernet 00:17:31:c7:4a:95;
+	fixed-address p4n14.dcti.sut.ru;
+}
+
+#[a437]
+
+host a43701 {
+	hardware ethernet 8c:89:a5:c7:9f:34;
+	fixed-address a43701.dcti.sut.ru;
+}
+
+host a43702 {
+        hardware ethernet 8c:89:a5:c7:9f:32;
+	fixed-address a43702.dcti.sut.ru;
+}
+
+host a43703 {
+	hardware ethernet 8c:89:a5:c7:9f:39;
+	fixed-address a43703.dcti.sut.ru;
+}
+
+host a43704 {
+        hardware ethernet 8c:89:a5:c7:9f:31;
+	fixed-address a43704.dcti.sut.ru;
+}
+
+host a43705 {
+        hardware ethernet 8c:89:a5:c7:9f:5a;
+	fixed-address a43705.dcti.sut.ru;
+}
+
+host a43706 {
+	hardware ethernet 8c:89:a5:c7:9f:2e;
+	fixed-address a43706.dcti.sut.ru;
+}
+
+host a43707 {
+        hardware ethernet 8c:89:a5:c7:9f:2d;
+	fixed-address a43707.dcti.sut.ru;
+}
+
+host a43708 {
+	hardware ethernet 8c:89:a5:c7:9f:84;
+	fixed-address a43708.dcti.sut.ru;
+}
+
+host a43709 {
+        hardware ethernet 8c:89:a5:c7:b7:8c;
+	fixed-address a43709.dcti.sut.ru;
+}
+
+host a43710 {
+        hardware ethernet 8c:89:a5:c7:b7:d5;
+	fixed-address a43710.dcti.sut.ru;
+}
+
+host a43711 {
+        hardware ethernet 8c:89:a5:c7:b7:90;
+	fixed-address a43711.dcti.sut.ru;
+}
+
+#[/a437]
+
+#[a439]
+host a43901 {
+	hardware ethernet 18:c0:4d:d3:d7:e6;
+	fixed-address a43901.dcti.sut.ru;
+}
+
+host a43902 {
+	hardware ethernet 18:c0:4d:d3:cd:f9;
+        fixed-address a43902.dcti.sut.ru;
+}
+
+host a43903 {
+	hardware ethernet 18:c0:4d:d3:db:2e;
+	fixed-address a43903.dcti.sut.ru;
+}
+
+host a43904 {
+	hardware ethernet 18:c0:4d:d3:d8:23;
+        fixed-address a43904.dcti.sut.ru;
+}
+
+host a43905 {
+	hardware ethernet 18:c0:4d:d3:d8:70;
+        fixed-address a43905.dcti.sut.ru;
+}
+
+host a43906 {
+	hardware ethernet 18:c0:4d:d3:cd:e2;
+        fixed-address a43906.dcti.sut.ru;
+}
+
+#host a43907 {
+#	hardware ethernet 18:c0:4d:d3:d7:40;
+#	fixed-address a43907.dcti.sut.ru;
+#}
+#
+#host a43908 {
+#	hardware ethernet 18:c0:4d:d3:db:2c;
+#        fixed-address a43908.dcti.sut.ru;
+#}
+
+#host a43909 {
+#	hardware ethernet 18:c0:4d:d3:ce:13;
+#	fixed-address a43909.dcti.sut.ru;
+#}
+#
+#host a43910 {
+#	hardware ethernet 18:c0:4d:d3:cd:e3;
+#        fixed-address a43910.dcti.sut.ru;
+#}
+
+host depo07 {
+	hardware ethernet 18:c0:4d:d3:d7:40;
+	fixed-address depo07.dcti.sut.ru;
+}
+
+host depo08 {
+	hardware ethernet 18:c0:4d:d3:db:2c;
+        fixed-address depo08.dcti.sut.ru;
+}
+
+host depo09 {
+	hardware ethernet 18:c0:4d:d3:ce:13;
+	fixed-address depo09.dcti.sut.ru;
+}
+
+host depo10 {
+	hardware ethernet 18:c0:4d:d3:cd:e3;
+        fixed-address depo10.dcti.sut.ru;
+}
+
+#host a43911 {
+#	hardware ethernet 18:c0:4d:d3:cc:ea;
+#        fixed-address a43911.dcti.sut.ru;
+#}
+
+host depo11 {
+	hardware ethernet 18:c0:4d:d3:cc:ea;
+        fixed-address depo11.dcti.sut.ru;
+}
+
+
+#[depo]
+host depo12 {
+	hardware ethernet 18:c0:4d:d2:2a:2e;
+        fixed-address depo12.dcti.sut.ru;
+}
+#[/depo]
+#[universal]
+host uni07 {
+	hardware ethernet 18:c0:4d:c6:f8:08;
+        fixed-address uni07.dcti.sut.ru;
+}
+#[/universal]
+
+#[/a439]
+#[a441]
+host a44101 {
+	hardware ethernet 54:04:a6:03:7d:59;
+	fixed-address a44101.dcti.sut.ru;
+}
+
+host a44102 {
+	hardware ethernet 00:1e:90:47:d0:f4;
+	fixed-address a44102.dcti.sut.ru;
+}
+
+host a44103 {
+	hardware ethernet 00:1e:90:47:cf:6e;
+	fixed-address a44103.dcti.sut.ru;
+}
+
+host a44104 {
+	hardware ethernet 50:e5:49:66:f8:fb;
+	fixed-address a44104.dcti.sut.ru;
+}
+
+host a44105 {
+	hardware ethernet 18:c0:4d:d3:dc:ae;
+	fixed-address a44105.dcti.sut.ru;
+}
+host a44106 {
+	hardware ethernet 00:1e:90:3d:9f:c3;
+	fixed-address a44106.dcti.sut.ru;
+}
+host a44107 {
+	hardware ethernet 00:1e:90:47:cc:da;
+	fixed-address a44107.dcti.sut.ru;
+}
+host a44108 {
+#	hardware ethernet 00:1e:90:47:cc:2e;
+	fixed-address a44108.dcti.sut.ru;
+}
+#[/a441]
+
+#[a443]
+host a44301 {
+	hardware ethernet 18:c0:4d:c7:06:5e;
+	fixed-address a44301.dcti.sut.ru;
+}
+
+host a44302 {
+#	hardware ethernet d0:27:88:cf:df:14;
+#	hardware ethernet 00:1e:90:47:cc:2e;
+	fixed-address a44302.dcti.sut.ru;
+}
+#
+host a44303 {
+	hardware ethernet 18:c0:4d:d3:dd:26;
+	fixed-address a44303.dcti.sut.ru;
+}
+
+host a44304 {
+	hardware ethernet 8c:89:a5:c7:9f:3e;
+	fixed-address a44304.dcti.sut.ru;
+}
+
+host a44305 {
+	hardware ethernet 18:c0:4d:d3:dd:88;
+	fixed-address a44305.dcti.sut.ru;
+}
+
+host a44306 {
+	hardware ethernet d0:27:88:cf:e1:60;
+	fixed-address a44306.dcti.sut.ru;
+}
+
+#host a44307 {
+#	hardware ethernet d0:27:88:cf:df:14;
+#	fixed-address a44307.dcti.sut.ru;
+#}
+#[/a443]
+
+#[a445]
+host a44501 {
+	hardware ethernet d0:27:88:cf:e0:9b;
+	fixed-address a44501.dcti.sut.ru;
+}
+
+host a44502 {
+        hardware ethernet d0:27:88:cf:e2:eb;
+        fixed-address a44502.dcti.sut.ru;
+}
+
+host a44503 {
+	hardware ethernet d0:27:88:cf:e0:cb;
+	fixed-address a44503.dcti.sut.ru;
+}
+
+host a44504 {
+        hardware ethernet d0:27:88:cf:e1:a0;
+        fixed-address a44504.dcti.sut.ru;
+}
+
+host a44505 {
+        hardware ethernet d0:27:88:cf:de:bc;
+        fixed-address a44505.dcti.sut.ru;
+}
+
+host a44506 {
+        hardware ethernet d0:27:88:cf:e0:cf;
+        fixed-address a44506.dcti.sut.ru;
+}
+
+host a44507 {
+	hardware ethernet d0:27:88:cf:e0:33;
+	fixed-address a44507.dcti.sut.ru;
+}
+
+host a44508 {
+        hardware ethernet d0:27:88:cf:e3:04;
+        fixed-address a44508.dcti.sut.ru;
+}
+
+host a44509 {
+	hardware ethernet d0:27:88:cf:e0:f1;
+	fixed-address a44509.dcti.sut.ru;
+}
+
+host a44510 {
+        hardware ethernet d0:27:88:cf:de:a1;
+        fixed-address a44510.dcti.sut.ru;
+}
+
+host a44511 {
+        hardware ethernet d0:27:88:cf:e1:0e;
+        fixed-address a44511.dcti.sut.ru;
+}
+
+host a44512 {
+        hardware ethernet d0:27:88:cf:e0:19;
+        fixed-address a44512.dcti.sut.ru;
+}
+
+host a44513 {
+	hardware ethernet d0:27:88:cf:df:14;
+        fixed-address a44513.dcti.sut.ru;
+}
+
+#[/a445]
+
+#[a425]
+host a42501 {
+        hardware ethernet 18:c0:4d:c6:f9:c2;
+        fixed-address a42501.dcti.sut.ru;
+}
+
+#[/a425]
+
+
+host board445 {
+	hardware ethernet 90:2b:34:b0:f8:34;
+	fixed-address board445.dcti.sut.ru;
+}
+
+
+host vladimirpc {
+	hardware ethernet 00:1e:90:47:cd:ec;
+	fixed-address vladimirpc.dcti.sut.ru;
+}
+
+host darkstar {
+	hardware ethernet 00:13:8f:38:47:18;
+	fixed-address darkstar.dcti.sut.ru;
+}
+
+#host termserver {
+#	hardware ethernet d0:27:88:cf:df:14;
+#	fixed-address termserver.dcti.sut.ru;
+#}
+
+host backups {
+	hardware ethernet 00:17:31:c7:4b:a3;
+	fixed-address backups.dcti.sut.ru;
+}
+
+host cdev {
+#	hardware ethernet 00:1e:90:3d:9f:c3;
+	fixed-address cdev.dcti.sut.ru;
+}
+
+host prn_517_a {
+	hardware ethernet 00:15:99:29:d2:b7;
+	fixed-address prn_517_a.dcti.sut.ru;
+}
+
+
+host prn_517_b {
+	hardware ethernet 00:15:99:29:d2:cd;
+	fixed-address prn_517_b.dcti.sut.ru;
+}
+
+
+host a517svn {
+	hardware ethernet 00:13:8f:3a:2d:f1;
+	fixed-address a517svn.dcti.sut.ru;
+}
+
+host a517mfu {
+	hardware ethernet 00:15:99:A1:09:BE;
+	fixed-address a517mfu.dcti.sut.ru;
+}
+
+host a517mfu2 {
+	hardware ethernet 00:00:F0:A0:00:00;
+	fixed-address a517mfu2.dcti.sut.ru;
+}
+
+host walloftears {
+	hardware ethernet 00:22:4d:1e:c7:49;
+	fixed-address walloftears.dcti.sut.ru;
+}
+
