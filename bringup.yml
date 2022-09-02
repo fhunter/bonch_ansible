@@ -24,10 +24,15 @@
       apt:
         name:
           - autofs
+          - autofs-hesiod
         state: present
 
     - name: update autofs config
       lineinfile: dest=/etc/auto.master line="/net    /etc/auto.net" insertbefore="\+auto.master"
+      notify: restart autofs
+
+    - name: update autofs config2
+      lineinfile: dest=/etc/auto.master line="/afs    hesiod,hesiod:filsys" insertbefore="\+auto.master"
       notify: restart autofs
 
     - name: make /afs directory
@@ -36,8 +41,8 @@
     - name: restart autofs
       service: name=autofs state=restarted
 
-    - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
-      file: dest=/afs/dcti.sut.ru src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes follow=no
+#    - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
+#      file: dest=/afs/dcti.sut.ru src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes follow=no
 
     - name: deploy nsswitch configuration files
       copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
@@ -171,7 +176,7 @@
         state: present
         install_recommends: no
         update_cache: no
-    
+
     - name: Deploy ssmtp
       action: apt name=ssmtp state=present install_recommends=no update_cache=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10','11']
@@ -274,9 +279,9 @@
       apt: name=lm-sensors state=present install_recommends=no update_cache=no
     - name: install hddtemp
       apt: name=hddtemp state=present install_recommends=no update_cache=no
-    
+
     - name: remove apparmor
-      apt: name=apparmor state=absent 
+      apt: name=apparmor state=absent
 
     - include: tasks/install_internet.yml
     - include: tasks/fix_access_mysql.yml
@@ -322,7 +327,7 @@
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
-  
+
   - hosts: a425
     remote_user: root
     tasks:
@@ -360,7 +365,7 @@
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: install sane-utils
       apt: pkg=sane-utils state=present install_recommends=no update_cache=no
-  
+
   - hosts: noremote
     remote_user: root
     tasks:
