@@ -104,7 +104,6 @@
       apt: name=autofs-hesiod state=present
     - name: update autofs config2
       lineinfile: dest=/etc/auto.master line="/afs    hesiod,hesiod:filsys" insertbefore="\+auto.master"
-      notify: restart autofs
       register: autofschange
     - name: unlink /net/eniac.dcti.sut.ru from /afs/dcti.sut.ru
       file: dest=/afs/dcti.sut.ru state=absent follow=no
