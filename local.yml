@@ -110,7 +110,7 @@
       when: autofschange.changed
     - name: restart autofs
       service: name=autofs state=restarted
-      when: autofschanged
+      when: autofschanged.changed
 
   - hosts: a445
     remote_user: root
