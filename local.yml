@@ -34,6 +34,7 @@
     remote_user: root
     tasks:
     - include: tasks/install_latest_backports_kernel.yml
+    - include: tasks/deploy_single_signon_for_browsers.yml
     - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_tablet_support.yml
     - include: tasks/install_dosemu.yml
