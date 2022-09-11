@@ -1,5 +1,5 @@
     - name: Enable domain check in firefox
-      lineinfile: dest=/etc/firefox-esr/firefox-esr.js line="pref(\"network.negotiate-auth.trusted-uris\", \"dcti.sut.ru,pivt.spbgut,ru\");" create=yes
+      lineinfile: dest=/etc/firefox-esr/firefox-esr.js line="pref(\"network.negotiate-auth.trusted-uris\", \"dcti.sut.ru,pivt.spbgut.ru\");" create=yes
     - name: Deploy auth.json for chromium
       copy:
         src: files/common/etc/chromium/policies/recommended/auth.json
