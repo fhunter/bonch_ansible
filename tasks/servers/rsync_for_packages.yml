@@ -15,13 +15,6 @@
         regex: '^RSYNC_ENABLE='
         line: 'RSYNC_ENABLE=true'
         path: /etc/default/rsync
-    - name: create paths for rsync config
-      file:
-        path: '{{ item }}'
-        state: directory
-      with_items:
-        - '/home/distrib/Linux/quartus/'
-        - '/home/distrib/Linux/vm'
     - name: Restart rsync.service
       systemd:
         daemon_reload: yes
