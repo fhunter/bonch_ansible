@@ -54,6 +54,11 @@
         state: latest
         install_recommends: no
         update_cache: no
+    - name: install gtk-nocsd
+      apt:
+        name: gtk3-nocsd
+        state: present
+        install_recommends: no
     - name: install latest chromium
       apt:
         name:
