@@ -23,7 +23,8 @@ subnet 172.16.64.0 netmask 255.255.252.0 {
     range 172.16.64.15 172.16.67.254;
     option routers 172.16.64.1;
     option broadcast-address 172.16.67.255;
-    option domain-name-servers {{ ansible_eno1.ipv4.address }};
+#    option domain-name-servers {{ ansible_eno1.ipv4.address }};
+    option domain-name-servers 172.16.64.16, 172.16.64.18;
     option vendor-encapsulated-options 79:07:10:ac:10:ac:10:40:01;
 # route back to vpn
 # 10.11.0.0/16 gw 172.16.64.10
