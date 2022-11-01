@@ -37,6 +37,7 @@
     - include: tasks/deploy_single_signon_for_browsers.yml
     - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_tablet_support.yml
+    - include: tasks/install_virtualbox.yml
     - include: tasks/install_dosemu.yml
     - include: tasks/updatetimezone.yml
     - include: tasks/installdebiankeyring.yml
