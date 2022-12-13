@@ -51,9 +51,6 @@ termserver.dcti.sut.ru
 [depo]
 depo[01:12].dcti.sut.ru
 
-[p4n]
-p4n[00:14].dcti.sut.ru
-
 [boards]
 board445.dcti.sut.ru
 board439.dcti.sut.ru
@@ -88,7 +85,6 @@ a445
 a441
 a443
 a425
-p4n
 depo
 
 [classes:children]
