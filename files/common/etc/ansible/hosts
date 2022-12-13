@@ -46,7 +46,6 @@ a44301.dcti.sut.ru
 a44302.dcti.sut.ru
 a44303.dcti.sut.ru
 a4430[5:6].dcti.sut.ru
-termserver.dcti.sut.ru
 
 [depo]
 depo[01:12].dcti.sut.ru
@@ -58,7 +57,6 @@ board439.dcti.sut.ru
 [remoteteaching]
 a443[01:06].dcti.sut.ru
 a441[01:07].dcti.sut.ru
-termserver.dcti.sut.ru
 
 [remoteprinters]
 a44306.dcti.sut.ru
