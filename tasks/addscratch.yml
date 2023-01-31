@@ -3,7 +3,7 @@
      register: vgname
 
    - name: Add scratch lvm location
-     when: vgname.stdout != ""
+     when: (vgname.stdout != "") and not ("scratch" in ansible_lvm["lvs"])
      action: lvol vg={{ vgname.stdout }} lv=scratch size=70%FREE
 
    - name: Make filesystem on scratch volume
