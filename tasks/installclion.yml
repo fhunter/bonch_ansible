@@ -1,0 +1,2 @@
+    - name: install clion
+      action: apt name=clion state=present

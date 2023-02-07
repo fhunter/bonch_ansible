@@ -1,4 +1,0 @@
-    - name: install webstorm
-      action: apt name=webstorm state=present update_cache=no
-    - name: install clion
-      action: apt name=clion state=present update_cache=no
