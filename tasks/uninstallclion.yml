@@ -1,0 +1,2 @@
+    - name: uninstall clion
+      action: apt name=clion state=absent

@@ -33,7 +33,6 @@
   - hosts: classes
     remote_user: root
     tasks:
-    - include: tasks/install_latest_backports_kernel.yml
     - include: tasks/deploy_single_signon_for_browsers.yml
     - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_tablet_support.yml
@@ -45,6 +44,7 @@
     - include: tasks/installtemperaturereport.yml
     - include: tasks/addunburden-home.yml
     - include: tasks/installcodeblocks.yml
+    - include: tasks/uninstallclion.yml
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - name: install assembly language IDE
