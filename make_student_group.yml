@@ -30,10 +30,6 @@
       script: scripts/create_principal.sh students {{item}} {{create_group}}
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
     
-    - name: trigger password reset
-      script: scripts/triggerreset.py {{item}}
-      with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
-
     - name: Patch passwd  # to replace password field with *K*
       command: sed 's/^{{item}}:x:/{{item}}:*K*:/' -i /etc/passwd
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
@@ -41,6 +37,11 @@
     - name: Setup quota
       command: setquota -u {{item}} 450000 500000 0 0 /home
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
+    
+    - name: trigger password reset
+      script: scripts/triggerreset.py {{item}}
+      with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
+
 
 #    - name: Setup svn server 1
 #      file: path=/srv/svn/{{create_group}} state=directory
