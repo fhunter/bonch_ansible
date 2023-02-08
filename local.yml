@@ -44,7 +44,11 @@
     - include: tasks/installtemperaturereport.yml
     - include: tasks/addunburden-home.yml
     - include: tasks/installcodeblocks.yml
+    - include: tasks/install_sublimeeditor.yml
     - include: tasks/uninstallclion.yml
+    - include: tasks/uninstallwebstorm.yml
+    - name: install gnuplot
+      action: apt name=gnuplot state=present install_recommends=no update_cache=no
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - name: install assembly language IDE

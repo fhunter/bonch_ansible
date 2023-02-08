@@ -1,0 +1,2 @@
+    - name: uninstall webstorm
+      action: apt name=webstorm state=absent

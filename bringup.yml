@@ -218,7 +218,7 @@
     - include: tasks/install_verilog.yml
     - include: tasks/install_swiprolog.yml
     - include: tasks/installcodeblocks.yml
-    - include: tasks/installwebstorm.yml
+    - include: tasks/install_sublimeeditor.yml
     - include: tasks/installvnc.yml
     - include: tasks/install_netbeans.yml
     - include: tasks/install_subversion_git.yml

@@ -1,0 +1,2 @@
+    - name: install sublime editor
+      action: apt name=sublime-text state=present
