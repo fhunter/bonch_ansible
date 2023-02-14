@@ -31,7 +31,7 @@ uni07.dcti.sut.ru
 depo[01:12].dcti.sut.ru
 
 [a425]
-a425[01:12].dcti.sut.ru
+a425[00:12].dcti.sut.ru
 
 [a441]
 a44104.dcti.sut.ru
@@ -103,7 +103,7 @@ depo[01:12].dcti.sut.ru
 termserver2.dcti.sut.ru
 a439[01:12].dcti.sut.ru
 a445[01:13].dcti.sut.ru
-a425[01:12].dcti.sut.ru
+a425[00:12].dcti.sut.ru
 srv-[1:5].dcti.sut.ru
 
 [py3_hosts:vars]
