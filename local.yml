@@ -38,6 +38,7 @@
     - include: tasks/install_tablet_support.yml
     - include: tasks/install_virtualbox.yml
     - include: tasks/install_dosemu.yml
+    - include: tasks/install_octave.yml
     - include: tasks/updatetimezone.yml
     - include: tasks/installdebiankeyring.yml
     - include: tasks/installstatusreport.yml
