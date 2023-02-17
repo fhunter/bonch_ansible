@@ -233,7 +233,6 @@
     - include: tasks/install_monodevelop.yml
     - include: tasks/install_ipython.yml
     - include: tasks/install_icecc.yml
-    - include: tasks/installwebstormclion.yml
     - include: tasks/install_rustc.yml
     - include: tasks/install_golang.yml
     - include: tasks/installnscd.yml
