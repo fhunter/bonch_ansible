@@ -81,5 +81,5 @@ headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 data['hdd'] = readhddtemp()
 data['cpu'] = readcputemp()
 
-
-t = requests.post("http://eniac.dcti.sut.ru/temperature/post", data = json.dumps(data), headers=headers)
+for i in ['eniac','report']:
+    t = requests.post(f"http://{i}.dcti.sut.ru/temperature/post", data = json.dumps(data), headers=headers)
