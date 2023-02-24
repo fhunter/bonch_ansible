@@ -104,6 +104,7 @@ a439[01:12].dcti.sut.ru
 a445[01:13].dcti.sut.ru
 a425[00:12].dcti.sut.ru
 srv-[1:5].dcti.sut.ru
+littlebig.dcti.sut.ru
 
 [py3_hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
