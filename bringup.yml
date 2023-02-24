@@ -179,29 +179,7 @@
 
     - name: Deploy ssmtp
       action: apt name=ssmtp state=present install_recommends=no update_cache=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10','11']
-
-    - name: install DCTI packages for debian 9
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
-      notify: restart apache
-      apt:
-        pkg:
-         - libpam-ck-connector
-         - xfce4
-         - xfwm4-themes
-         - xfdesktop4
-  #       - xfprint4
-         - libxfce4ui-utils
-         - python-doc
-         - xfce4-mount-plugin
-         - xfce4-goodies
-         - xfce4-session
-         - lazarus
-         - fpc
-        state: present
-        install_recommends: no
-        update_cache: no
-
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11']
 
     - name: install mate desktop
       apt: pkg=mate-desktop-environment state=present update_cache=no
@@ -287,9 +265,9 @@
     - include: tasks/add_permission_read_logs_apache2.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=no install_recommends=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10', '11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11']
     - name: Add vncbroadcast to autostart
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10', '11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11']
       copy:
         src: /usr/share/applications/vncbroadcast.desktop
         dest: /etc/xdg/autostart/
@@ -376,9 +354,6 @@
     - include: tasks/install_texlive.yml
     - include: tasks/install_texmaker.yml
     - include: tasks/install_quartus_15.yml
-    - include: tasks/installjavatests.yml # This is for guacamole
-    - name: install coquelicot-upload tool
-      apt: pkg=coquelicot-upload state=latest update_cache=no
 
   - hosts: all
     remote_user: root
