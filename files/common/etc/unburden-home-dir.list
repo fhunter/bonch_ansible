@@ -26,6 +26,10 @@ m D .ccache ccache
 m D VirtualBox*VMs VirtualBox_VMs
 m D .config/VirtualBox configr_VirtualBox
 
+# xsession errors
+d f .xsession-errors.old
+m F .xsession-errors xsession-errors
+
 # Common browser caches
 #m f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
 #m f .config/google-chrome/*/Thumbnails-journal google-chrome-thumbnails-journal-%1

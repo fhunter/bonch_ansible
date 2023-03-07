@@ -35,6 +35,7 @@
   - hosts: classes
     remote_user: root
     tasks:
+    - include: tasks/fixxsessionerrors.yml
     - include: tasks/deploy_single_signon_for_browsers.yml
     - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_tablet_support.yml
@@ -196,6 +197,13 @@
         update_cache: no
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+    - name: Install libpam-tmpdir
+      apt:
+        name:
+          - libpam-tmpdir
+        state: present
+        install_recommends: no
+        update_cache: no
     - include: tasks/deploy_terminalserver.yml
 
   - hosts: remoteteaching
