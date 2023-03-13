@@ -27,6 +27,7 @@
   - hosts: noremote
     remote_user: root
     tasks:
+    - include: tasks/enable_grub_password.yml
     - include: tasks/uninstalljavatests.yml
 #    - name: add pam group config
 #      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
@@ -128,7 +129,6 @@
   - hosts: a445
     remote_user: root
     tasks:
-    - include: tasks/enable_grub_password.yml
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_vmshortcuts.yml
