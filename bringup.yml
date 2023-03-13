@@ -191,7 +191,7 @@
     - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_jdk.yml
     - include: tasks/installvnc.yml
-    - include: tasks/install_apache2_and_php5.yml
+#    - include: tasks/install_apache2_and_php5.yml
     - include: tasks/install_lisp.yml
     - include: tasks/install_verilog.yml
     - include: tasks/install_swiprolog.yml
@@ -261,7 +261,7 @@
       apt: name=apparmor state=absent
 
     - include: tasks/install_internet.yml
-    - include: tasks/fix_access_mysql.yml
+#    - include: tasks/fix_access_mysql.yml
     - include: tasks/add_permission_read_logs_apache2.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=no install_recommends=no

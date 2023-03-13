@@ -1,0 +1,10 @@
+    - name: uninstall apache2
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
+      apt:
+        pkg:
+         - apache2
+         - libapache2-mod-php
+         - libapache2-mod-python
+         - php-mysql
+        state: absent
+

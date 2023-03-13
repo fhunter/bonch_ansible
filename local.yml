@@ -29,6 +29,8 @@
     tasks:
     - include: tasks/enable_grub_password.yml
     - include: tasks/uninstalljavatests.yml
+    - include: tasks/uninstall_mysql.yml
+    - include: tasks/uninstall_apache2_and_php5.yml
 #    - name: add pam group config
 #      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
 
