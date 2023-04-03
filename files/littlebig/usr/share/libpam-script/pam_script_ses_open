@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$PAM_USER" != "root" ]; then
+
+mysql -u root << EOF
+CREATE USER IF NOT EXISTS '$PAM_USER'@'%' IDENTIFIED VIA pam USING 'mariadb';
+CREATE DATABASE IF NOT EXISTS $PAM_USER;
+GRANT ALL PRIVILEGES ON $PAM_USER.* TO '$PAM_USER'@'%';
+FLUSH PRIVILEGES;
+EOF
+
+fi
+
+exit 0

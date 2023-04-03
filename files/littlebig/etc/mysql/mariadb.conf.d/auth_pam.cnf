@@ -1,0 +1,4 @@
+[mariadb]
+plugin-load-add=auth_pam.so
+pam_use_cleartext_plugin = ON
+
