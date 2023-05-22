@@ -28,9 +28,9 @@
 
    - name: Make filesystem on opt volume
      when: vgname.stdout != ""
-     action: filesystem fstype=ext4 dev=/dev/mapper/{{ vgname.stdout }}-opt
+     action: filesystem fstype=ext4 dev=/dev/{{ vgname.stdout }}/opt
 
    - name: Add opt to fstab
      when: vgname.stdout != ""
-     action: mount name=/opt src=/dev/mapper/{{ vgname.stdout }}-opt state=mounted fstype=ext4
+     action: mount name=/opt src=/dev/{{ vgname.stdout }}/opt state=mounted fstype=ext4
 
