@@ -78,7 +78,6 @@
       apt: pkg=linux-headers-{{ ansible_kernel }} state=present
 
     - name: install DCTI packages
-      notify: restart apache
       apt:
         pkg:
          - nfs4-acl-tools
@@ -278,7 +277,6 @@
     - include: handlers/restartopenntpd.yml
     - include: handlers/restartlightdm.yml
     - include: handlers/restartautofs.yml
-    - include: handlers/restartapache.yml
 
   - hosts: a44306.dcti.sut.ru
     remote_user: root
