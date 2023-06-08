@@ -76,6 +76,12 @@ vladimirpc.dcti.sut.ru
 termserver2.dcti.sut.ru
 srv-3.dcti.sut.ru
 
+[workstations1c]
+termserver2.dcti.sut.ru
+srv-3.dcti.sut.ru
+a43706.dcti.sut.ru
+a44304.dcti.sut.ru
+
 [noremote:children]
 a437
 a439
