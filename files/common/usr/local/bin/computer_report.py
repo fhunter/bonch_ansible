@@ -22,7 +22,11 @@ def cksessions():
     finally:
         return users
 
-
+def get_machineid():
+    machineid = ""
+    with open('/etc/machine-id','r') as f:
+        machineid = f.readline().strip()
+    return machineid
 
 uptime_seconds = 0
 with open('/proc/uptime', 'r') as f:
@@ -52,16 +56,19 @@ for i in loadbycpu:
 
 cpu = {'cores': cores, 'load': load, 'loadavg': loadavg } #load - immediate, in percents. cores - number of processors. loadavg - 5 minute average load
 
-data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 'cpu': cpu }
+machineid = get_machineid()
+data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 'cpu': cpu, 'machineid': machineid }
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
-t = requests.post("http://eniac.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers)
+for i in ['eniac', 'report']:
+    t = requests.post(f"http://{i}.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers)
 
 # upload scratch free space
 temp = os.statvfs('/scratch')
 data = { 'scratch_total': temp.f_frsize*temp.f_blocks, 'scratch_free': temp.f_frsize*temp.f_bavail }
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-t = requests.post("http://eniac.dcti.sut.ru/online/api/scratch", data = json.dumps(data), headers=headers)
+for i in ['eniac', 'report']:
+    t = requests.post(f"http://{i}.dcti.sut.ru/online/api/scratch", data = json.dumps(data), headers=headers)
 
 # upload CMOS battery status
 # Not done currently
@@ -86,4 +93,5 @@ for i in t:
         elif p[0] == 'failed':
             data['failed'] = int(p[1])
 
-t = requests.post("http://eniac.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers)
+for i in ['eniac', 'report']:
+    t = requests.post(f"http://{i}.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers)
