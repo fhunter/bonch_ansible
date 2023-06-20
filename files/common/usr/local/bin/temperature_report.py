@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-import requests
-import os
 import subprocess
 import json
 import glob
+import requests
 
 def readhddtemp():
     temps = []
@@ -18,10 +17,10 @@ def readhddtemp():
     return temps
 
 def readfilecontents(name):
-    f = open(name, "r")
-    contents = f.readline()
+    fname = open(name, "r")
+    contents = fname.readline()
     contents = contents.replace("\n","")
-    f.close()
+    fname.close()
     return contents
 
 def gethwmonnumber(path):
@@ -73,7 +72,7 @@ def readcputemp():
             for k in gethwmon_values(i,dictionary[i]):
                 temps.append(k)
     return temps
- 
+
 data = {}
 
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
@@ -81,5 +80,8 @@ headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 data['hdd'] = readhddtemp()
 data['cpu'] = readcputemp()
 
-for i in ['eniac','report']:
-    t = requests.post(f"http://{i}.dcti.sut.ru/temperature/post", data = json.dumps(data), headers=headers)
+HOST = 'report'
+t = requests.post(
+        f"http://{HOST}.dcti.sut.ru/temperature/post",
+        data = json.dumps(data),
+        headers=headers)
