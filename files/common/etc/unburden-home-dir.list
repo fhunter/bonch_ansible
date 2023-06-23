@@ -5,6 +5,7 @@ m D .config/discord/0.* discord_updates_0.%1
 m D .config/discord/Cache  discord_cache
 m D .config/discord/Code*Cache discord_code_cache
 m D .config/discord/GPUCache discord_gpucache
+m D .config/Code/Cache vscode_cache
 
 m D .cache/mozilla cache_mozilla
 m D .cache/netbeans cache_netbeans
