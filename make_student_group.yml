@@ -37,6 +37,9 @@
     - name: Setup quota
       command: setquota -u {{item}} 450000 500000 0 0 /home
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
+
+    - name: Do update of user lists before password reset
+      script: scripts/triggerupdate.py
     
     - name: trigger password reset
       script: scripts/triggerreset.py {{item}}
