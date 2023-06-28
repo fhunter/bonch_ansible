@@ -54,6 +54,8 @@
     - include: tasks/uninstallwebstorm.yml
     - name: install gnuplot
       action: apt name=gnuplot state=present install_recommends=no update_cache=no
+    - name: install python3-websockets
+      action: apt name=python3-websockets state=present install_recommends=no update_cache=no
     - name: install latest firefox
       action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
     - name: install assembly language IDE
