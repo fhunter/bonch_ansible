@@ -113,6 +113,8 @@
           - arj
           - dbview
           - epub-utils
+          - libsixel-bin
+          - chafa
         state: present
         install_recommends: no
         update_cache: no
