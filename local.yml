@@ -200,6 +200,8 @@
         state: latest
         install_recommends: no
         update_cache: no
+    - name: deploy lrzsz
+      action: apt name=lrzsz state=present install_recommends=no update_cache=no
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - name: Install libpam-tmpdir
