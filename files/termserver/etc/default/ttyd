@@ -1,3 +1,3 @@
 # /etc/default/ttyd
 
-TTYD_OPTIONS="-t enableTrzsz=true -t enableSixel=true -P 30 -p 7681 login"
+TTYD_OPTIONS="-t enableZmodem=true -t enableTrzsz=true -t enableSixel=true -P 30 -p 7681 login"
