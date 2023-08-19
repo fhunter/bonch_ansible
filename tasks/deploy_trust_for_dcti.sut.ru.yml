@@ -20,8 +20,8 @@
       register: nssdb_path_result
     - name: Initialise nssdb
       command: certutil -N -d sql:/etc/pki/nssdb --empty-password
-      when: nssdb_path_result|changed
-    - name: Install certificates to system-wide {{ nssdb_system_path }}
+      when: nssdb_path_result.changed
+    - name: Install certificates to system-wide /etc/pki/nssdb
       command: >
         certutil -A -d 'sql:/etc/pki/nssdb'
         -n 'Local CA'
