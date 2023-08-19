@@ -2,10 +2,6 @@
       lineinfile: dest=/etc/firefox-esr/firefox-esr.js line="pref(\"network.negotiate-auth.trusted-uris\", \"dcti.sut.ru,pivt.spbgut.ru\");" create=yes
     - name: create policies path
       file:
-        path: /etc/chromoum
-        state: absent
-    - name: create policies path
-      file:
         path: /etc/chromium/policies/recommended
         state: directory
     - name: Deploy auth.json for chromium

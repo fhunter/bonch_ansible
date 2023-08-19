@@ -1,0 +1,7 @@
+{
+  "policies": {
+    "Certificates": {
+      "Install": ["/usr/local/share/ca-certificates/PIVT_CA.crt" ]
+    }
+  }
+}

@@ -40,6 +40,7 @@
     tasks:
     - include: tasks/fixxsessionerrors.yml
     - include: tasks/deploy_single_signon_for_browsers.yml
+    - include: tasks/deploy_trust_for_dcti.sut.ru.yml
     - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_tablet_support.yml
     - include: tasks/install_virtualbox.yml

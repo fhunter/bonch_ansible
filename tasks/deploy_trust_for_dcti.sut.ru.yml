@@ -1,0 +1,13 @@
+    - name: Install local CA certificates
+      apt: pkg=ca-certificates-local state=latest    
+    - name: Create policies path for firefox
+      file:
+        path: /etc/firefox/policies/
+        state: directory
+    - name: Deploy policies.json for firefox
+      copy:
+        src: files/common/etc/firefox/policies/policies.json
+        dest: /etc/firefox/policies/policies.json
+        owner: root
+        group: root
+        mode: 0644
