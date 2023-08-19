@@ -1,0 +1,36 @@
+# This script is supposed to remove all content for student group passed in the clean_group variable
+# Like this:
+# for i in ist511 ist521 ;do ansible-playbook -e clean_group=$i clean_student_group.yml ;done
+---
+
+  - hosts: 127.0.0.1
+    remote_user: root
+
+    tasks:
+    - name: Remove home directory
+      file: path=/afs/dcti.sut.ru/homes/students/{{clean_group}}/{{item}} state=absent
+      with_sequence: start=0 end=40 stride=1 format={{clean_group}}n%02d
+    
+    - name: Make home directory
+      file: group={{clean_group}} owner={{item}} mode=0750 path=/afs/dcti.sut.ru/homes/students/{{clean_group}}/{{item}} state=directory
+      with_sequence: start=0 end=40 stride=1 format={{clean_group}}n%02d
+
+    - name: Copy skeleton
+      shell: cp -ar /etc/skel/. /afs/dcti.sut.ru/homes/students/{{clean_group}}/{{item}}
+      with_sequence: start=0 end=40 stride=1 format={{clean_group}}n%02d
+
+    - name: Fix ownership
+      file: group={{clean_group}} owner={{item}} path=/afs/dcti.sut.ru/homes/students/{{clean_group}}/{{item}} recurse=true
+      with_sequence: start=0 end=40 stride=1 format={{clean_group}}n%02d
+
+    - name: Fix jabber configuration
+      with_sequence: start=0 end=40 stride=1 format={{clean_group}}n%02d
+      template: dest=/afs/dcti.sut.ru/homes/students/{{clean_group}}/{{item}}/.purple/accounts.xml src=templates/accounts.xml.j2 mode='0600' owner={{item}} group={{clean_group}}
+    
+    - name: Do update of user lists before password reset
+      script: scripts/triggerupdate.py
+    
+    - name: trigger password reset
+      script: scripts/triggerreset.py {{item}}
+      with_sequence: start=0 end=40 stride=1 format={{clean_group}}n%02d
+
