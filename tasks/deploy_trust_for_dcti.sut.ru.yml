@@ -11,3 +11,20 @@
         owner: root
         group: root
         mode: 0644
+    - name: Install libnss3-tools
+      apt: pkg=libnss3-tools state=present
+    - name: create path for nssdb
+      file:
+        path: /etc/pki
+        state: directory
+      register: nssdb_path_result
+    - name: Initialise nssdb
+      command: certutil -N -d sql:/etc/pki/nssdb --empty-password
+      when: nssdb_path_result|changed
+    - name: Install certificates to system-wide {{ nssdb_system_path }}
+      command: >
+        certutil -A -d 'sql:/etc/pki/nssdb'
+        -n 'Local CA'
+        -t 'CT,c,c'
+        -i "/usr/local/share/ca-certificates/PIVT_CA.crt"
+      changed_when: false
