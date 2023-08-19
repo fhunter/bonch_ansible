@@ -15,7 +15,7 @@
       apt: pkg=libnss3-tools state=present
     - name: create path for nssdb
       file:
-        path: /etc/pki
+        path: /etc/pki/nssdb
         state: directory
       register: nssdb_path_result
     - name: Initialise nssdb
