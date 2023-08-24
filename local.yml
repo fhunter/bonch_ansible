@@ -182,6 +182,15 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
+# move to bringup
+    - name: install scanner driver for katusha m247
+      apt: pkg=sane-katusha-m247 state=present install_recommends=no update_cache=no
+    - name: setup scanner katusha m247
+      action: lineinfile dest=/etc/sane.d/dll.conf state=present line="katusham247"
+    - name: setup scanner katusha m247 katusha1
+      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha1.dcti.sut.ru M247"
+    - name: setup scanner katusha m247 katusha2
+      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha2.dcti.sut.ru M247"
 
   - hosts: terminalservers
     remote_user: root
