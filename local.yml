@@ -187,12 +187,16 @@
         state: present
         install_recommends: no
         update_cache: no
+    - name: setup scanner
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
+    - name: setup scanner
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
     - name: install scanner driver for katusha m247
       apt: pkg=sane-katusha-m247 state=latest install_recommends=no update_cache=no
     - name: setup scanner katusha m247
       action: lineinfile dest=/etc/sane.d/dll.conf state=present line="katusham247"
     - name: setup scanner katusha m247 katusha1
-      action: lineinfile dest=/etc/sane.d/katusham247.conf state=absent line="ip katusha1.dcti.sut.ru M247"
+      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha1.dcti.sut.ru M247"
     - name: setup scanner katusha m247 katusha2
       action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha2.dcti.sut.ru M247"
 
@@ -212,6 +216,10 @@
         state: present
         install_recommends: no
         update_cache: no
+    - name: setup scanner
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
+    - name: setup scanner
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
     - name: install scanner driver for katusha m247
       apt: pkg=sane-katusha-m247 state=latest install_recommends=no update_cache=no
     - name: setup scanner katusha m247
@@ -219,7 +227,7 @@
     - name: setup scanner katusha m247 katusha1
       action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha1.dcti.sut.ru M247"
     - name: setup scanner katusha m247 katusha2
-      action: lineinfile dest=/etc/sane.d/katusham247.conf state=absent line="ip katusha2.dcti.sut.ru M247"
+      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha2.dcti.sut.ru M247"
 
   - hosts: terminalservers
     remote_user: root
