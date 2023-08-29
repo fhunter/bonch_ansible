@@ -177,6 +177,16 @@
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 # move to bringup
+    - name: install scanning utilities
+      apt:
+        name:
+          - xsane 
+          - simple-scan
+          - sane-utils
+          - sane
+        state: present
+        install_recommends: no
+        update_cache: no
     - name: install scanner driver for katusha m247
       apt: pkg=sane-katusha-m247 state=latest install_recommends=no update_cache=no
     - name: setup scanner katusha m247
@@ -192,6 +202,16 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 # move to bringup
+    - name: install scanning utilities
+      apt:
+        name:
+          - xsane 
+          - simple-scan
+          - sane-utils
+          - sane
+        state: present
+        install_recommends: no
+        update_cache: no
     - name: install scanner driver for katusha m247
       apt: pkg=sane-katusha-m247 state=latest install_recommends=no update_cache=no
     - name: setup scanner katusha m247
