@@ -89,6 +89,14 @@
     - include: tasks/enable_quota_applet.yml
     - name: remove sudo
       action: apt pkg=sudo state=absent update_cache=no
+    - name: install video players
+      apt:
+        name:
+          - mplayer-gui
+          - vlc
+        state: present
+        install_recommends: no
+        update_cache: no
     - name: install convenience tools
       apt:
         name:
