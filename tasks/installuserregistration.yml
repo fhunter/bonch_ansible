@@ -1,0 +1,2 @@
+   - name: deploy registration script
+     copy: src=files/common/usr/local/bin/user_registration.sh dest=/usr/local/bin/user_registration.sh owner=root group=root mode=755

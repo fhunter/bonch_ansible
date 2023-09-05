@@ -19,6 +19,7 @@
     - include: tasks/copyansiblehosts.yml
     - include: tasks/installstatusreport.yml
     - include: tasks/installtemperaturereport.yml
+    - include: tasks/installuserregistration.yml
 
   - import_playbook: bringup.yml
     when: (not hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11'])
