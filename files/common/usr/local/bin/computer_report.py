@@ -93,5 +93,5 @@ for i in t:
         elif p[0] == 'failed':
             data['failed'] = int(p[1])
 
-for i in ['eniac', 'report']:
+for i in ['report']:
     t = requests.post(f"http://{i}.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers)
