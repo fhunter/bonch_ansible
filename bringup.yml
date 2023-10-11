@@ -217,6 +217,14 @@
       action: apt name=gnuplot state=present install_recommends=no update_cache=no
     - name: install python3-websockets
       action: apt name=python3-websockets state=present install_recommends=no update_cache=no
+    - name: install video players
+      apt:
+        name:
+          - mplayer-gui
+          - vlc
+        state: present
+        install_recommends: no
+        update_cache: no
     - include: tasks/install_quartus_7_1.yml
     - name: install x11vnc to allow remote access
       apt: pkg=x11vnc state=present update_cache=no install_recommends=no
