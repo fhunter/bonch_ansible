@@ -169,6 +169,8 @@
           - arj
           - dbview
           - epub-utils
+          - libsixel-bin
+          - chafa
         state: present
         install_recommends: no
         update_cache: no
@@ -211,6 +213,10 @@
     - include: tasks/install_golang.yml
     - include: tasks/installnscd.yml
     - include: tasks/fixxsessionerrors.yml
+    - name: install gnuplot
+      action: apt name=gnuplot state=present install_recommends=no update_cache=no
+    - name: install python3-websockets
+      action: apt name=python3-websockets state=present install_recommends=no update_cache=no
     - include: tasks/install_quartus_7_1.yml
     - name: install x11vnc to allow remote access
       apt: pkg=x11vnc state=present update_cache=no install_recommends=no
@@ -294,6 +300,11 @@
     remote_user: root
     tasks:
     - include: tasks/install_quartus_15.yml
+#    - name: remove mjpg-streamer
+#      apt:
+#        name:
+#          - mjpg-streamer
+#        state: absent
 
   - hosts: a439
     remote_user: root
