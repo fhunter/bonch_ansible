@@ -41,9 +41,6 @@
     - name: restart autofs
       service: name=autofs state=restarted
 
-#    - name: link /net/eniac.dcti.sut.ru int /afs/dcti.sut.ru
-#      file: dest=/afs/dcti.sut.ru src=/net/eniac.dcti.sut.ru/srv/nfs4/homes/ owner=root group=root mode=644 state=link force=yes follow=no
-
     - name: deploy nsswitch configuration files
       copy: src=files/a441/etc/hesiod.conf dest=/etc/hesiod.conf owner=root group=root mode="0644"
 
@@ -321,12 +318,29 @@
     - include: tasks/install_texlive.yml
     - include: tasks/install_texmaker.yml
     - include: tasks/install_quartus_15.yml
+    - name: install scanning utilities
+      apt:
+        name:
+          - xsane
+          - simple-scan
+          - sane-utils
+          - sane
+        state: present
+        install_recommends: no
+        update_cache: no
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
-    - name: install sane-utils
-      apt: pkg=sane-utils state=present install_recommends=no update_cache=no
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
+    - name: install scanner driver for katusha m247
+      apt: pkg=sane-katusha-m247 state=latest install_recommends=no update_cache=no
+    - name: setup scanner katusha m247
+      action: lineinfile dest=/etc/sane.d/dll.conf state=present line="katusham247"
+    - name: setup scanner katusha m247 katusha1
+      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha1.dcti.sut.ru M247"
+    - name: setup scanner katusha m247 katusha2
+      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha2.dcti.sut.ru M247"
+
 
   - hosts: a441
     remote_user: root
@@ -334,12 +348,28 @@
     - include: tasks/install_quartus_15.yml
     - include: tasks/install_texlive.yml
     - include: tasks/install_texmaker.yml
+    - name: install scanning utilities
+      apt:
+        name:
+          - xsane
+          - simple-scan
+          - sane-utils
+          - sane
+        state: present
+        install_recommends: no
+        update_cache: no
     - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=absent line="tcp a517mfu2 9400"
+      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
     - name: setup scanner2
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
-    - name: install sane-utils
-      apt: pkg=sane-utils state=present install_recommends=no update_cache=no
+    - name: install scanner driver for katusha m247
+      apt: pkg=sane-katusha-m247 state=present install_recommends=no update_cache=no
+    - name: setup scanner katusha m247
+      action: lineinfile dest=/etc/sane.d/dll.conf state=present line="katusham247"
+    - name: setup scanner katusha m247 katusha1
+      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha1.dcti.sut.ru M247"
+    - name: setup scanner katusha m247 katusha2
+      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha2.dcti.sut.ru M247"
 
   - hosts: noremote
     remote_user: root
@@ -352,6 +382,15 @@
     - include: tasks/install_texlive.yml
     - include: tasks/install_texmaker.yml
     - include: tasks/install_quartus_15.yml
+    - name: deploy lrzsz
+      action: apt name=lrzsz state=present install_recommends=no update_cache=no
+    - name: Install libpam-tmpdir
+      apt:
+        name:
+          - libpam-tmpdir
+        state: present
+        install_recommends: no
+        update_cache: no
 
   - hosts: all
     remote_user: root

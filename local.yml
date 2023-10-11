@@ -185,17 +185,6 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-# move to bringup
-    - name: install scanning utilities
-      apt:
-        name:
-          - xsane 
-          - simple-scan
-          - sane-utils
-          - sane
-        state: present
-        install_recommends: no
-        update_cache: no
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: setup scanner
@@ -214,17 +203,6 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-# move to bringup
-    - name: install scanning utilities
-      apt:
-        name:
-          - xsane 
-          - simple-scan
-          - sane-utils
-          - sane
-        state: present
-        install_recommends: no
-        update_cache: no
     - name: setup scanner
       action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
     - name: setup scanner
@@ -258,17 +236,8 @@
         state: latest
         install_recommends: no
         update_cache: no
-    - name: deploy lrzsz
-      action: apt name=lrzsz state=present install_recommends=no update_cache=no
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - name: Install libpam-tmpdir
-      apt:
-        name:
-          - libpam-tmpdir
-        state: present
-        install_recommends: no
-        update_cache: no
     - include: tasks/deploy_terminalserver.yml
 
   - hosts: remoteteaching
