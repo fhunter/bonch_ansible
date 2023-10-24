@@ -80,8 +80,7 @@ headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 data['hdd'] = readhddtemp()
 data['cpu'] = readcputemp()
 
-HOST = 'report'
 t = requests.post(
-        f"http://{HOST}.dcti.sut.ru/temperature/post",
+        "https://report.dcti.sut.ru/temperature/post",
         data = json.dumps(data),
         headers=headers)
