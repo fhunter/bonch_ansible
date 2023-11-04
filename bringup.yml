@@ -171,6 +171,7 @@
           - epub-utils
           - libsixel-bin
           - chafa
+          - putty
         state: present
         install_recommends: no
         update_cache: no
