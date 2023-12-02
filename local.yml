@@ -200,8 +200,3 @@
     remote_user: root
     tasks:
     - include: tasks/add_remote_printer_access.yml
-
-  - hosts: littlebig.dcti.sut.ru
-    remote_user: root
-    tasks:
-    - include: tasks/installjavatests.yml
