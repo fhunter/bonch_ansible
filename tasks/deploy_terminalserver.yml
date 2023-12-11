@@ -12,6 +12,11 @@
       copy: src=files/termserver/etc/default/ttyd dest=/etc/default/ttyd owner=root group=root mode="0644"
     - name: upload websockify service file
       copy: src=files/termserver/lib/systemd/system/websockify.service dest=/lib/systemd/system/websockify.service owner=root group=root mode="0644"
+    - name: block testing from logging in
+      lineinfile:
+        state: present
+        line: "@testing         -       maxlogins       0"
+        path: /etc/security/limits.conf
 # Add deployment of noVNC files
     - name: enable and run ttyd
       systemd:
