@@ -61,6 +61,8 @@
 
     - include: tasks/install_dosemu.yml
     - include: tasks/fix_autofs_systemd.yml
+    - include: tasks/deploy_trust_for_dcti.sut.ru.yml
+    - include: tasks/install_tablet_support.yml
 
     - name: install base packages
       apt:
@@ -142,6 +144,15 @@
         state: present
         install_recommends: no
         update_cache: yes
+    
+    - name: install assembly language IDE
+      apt:
+        name:
+          - sasm
+          - libc6-dev-i386
+        state: latest
+        install_recommends: no
+        update_cache: no
 
     - include: tasks/install_virtualbox.yml
     - name: install convenience tools
@@ -212,12 +223,21 @@
     - include: tasks/install_icecc.yml
     - include: tasks/install_rustc.yml
     - include: tasks/install_golang.yml
+    - include: tasks/installidea.yml
+    - include: tasks/install_pycharm.yml
     - include: tasks/installnscd.yml
     - include: tasks/fixxsessionerrors.yml
     - name: install gnuplot
       action: apt name=gnuplot state=present install_recommends=no update_cache=no
     - name: install python3-websockets
       action: apt name=python3-websockets state=present install_recommends=no update_cache=no
+    - name: install putty
+      apt:
+        name:
+          - putty
+        state: present
+        install_recommends: no
+        update_cache: no
     - name: install video players
       apt:
         name:
@@ -325,9 +345,10 @@
     tasks:
     - include: tasks/install_quartus_15.yml
 
-#  - hosts: a437
-#    remote_user: root
-#    tasks:
+  - hosts: a437
+    remote_user: root
+    tasks:
+    - include: tasks/install_quartus_15.yml
 #    - include: tasks/install_quartus_15.yml
 #    - name: install libpng12 for quartus
 #      apt: name=libpng12-0 state=present install_recommends=no update_cache=no
