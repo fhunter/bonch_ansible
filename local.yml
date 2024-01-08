@@ -151,6 +151,7 @@
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/deploy_terminalserver.yml
+    - include: tasks/cleantmp.yml
 
   - hosts: remoteteaching
     remote_user: root

@@ -1,0 +1,6 @@
+- name: Add cleaning /tmp from old files to cron
+  cron:
+    special_time: "daily"
+    job: find /tmp -xdev -atime +7 -delete
+    name: clean_tmp
+    state: present
