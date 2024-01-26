@@ -24,12 +24,6 @@
   - import_playbook: bringup.yml
     when: (not hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11'])
 
-# Labs where no remote access is used
-  - hosts: noremote
-    remote_user: root
-    tasks:
-    - include: tasks/enable_grub_password.yml
-
 # All classes, including terminal server
   - hosts: classes
     remote_user: root
@@ -97,36 +91,12 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
-    - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
-    - name: install scanner driver for katusha m247
-      apt: pkg=sane-katusha-m247 state=latest install_recommends=no update_cache=no
-    - name: setup scanner katusha m247
-      action: lineinfile dest=/etc/sane.d/dll.conf state=present line="katusham247"
-    - name: setup scanner katusha m247 katusha1
-      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha1.dcti.sut.ru M247"
-    - name: setup scanner katusha m247 katusha2
-      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha2.dcti.sut.ru M247"
 
   - hosts: a441
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu 9400"
-    - name: setup scanner
-      action: lineinfile dest=/etc/sane.d/xerox_mfp.conf state=present line="tcp a517mfu2 9400"
-    - name: install scanner driver for katusha m247
-      apt: pkg=sane-katusha-m247 state=latest install_recommends=no update_cache=no
-    - name: setup scanner katusha m247
-      action: lineinfile dest=/etc/sane.d/dll.conf state=present line="katusham247"
-    - name: setup scanner katusha m247 katusha1
-      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha1.dcti.sut.ru M247"
-    - name: setup scanner katusha m247 katusha2
-      action: lineinfile dest=/etc/sane.d/katusham247.conf state=present line="ip katusha2.dcti.sut.ru M247"
 
   - hosts: terminalservers
     remote_user: root
@@ -150,8 +120,6 @@
         update_cache: no
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/deploy_terminalserver.yml
-    - include: tasks/cleantmp.yml
 
   - hosts: remoteteaching
     remote_user: root

@@ -416,6 +416,7 @@
     remote_user: root
     tasks:
     - include: tasks/installlightdmback.yml
+    - include: tasks/enable_grub_password.yml
 
   - hosts: terminalservers
     remote_user: root
@@ -425,6 +426,8 @@
     - include: tasks/install_quartus_15.yml
     - name: deploy lrzsz
       action: apt name=lrzsz state=present install_recommends=no update_cache=no
+    - include: tasks/cleantmp.yml
+    - include: tasks/deploy_terminalserver.yml
     - name: Install libpam-tmpdir
       apt:
         name:
