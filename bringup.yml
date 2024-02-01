@@ -208,7 +208,6 @@
     - include: tasks/installcodeblocks.yml
     - include: tasks/install_sublimeeditor.yml
     - include: tasks/installvnc.yml
-    - include: tasks/install_netbeans.yml
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
     - include: tasks/enable_quota_applet.yml

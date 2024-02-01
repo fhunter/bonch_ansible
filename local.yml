@@ -46,7 +46,6 @@
         update_cache: no
     - include: tasks/install_internet.yml
     - include: tasks/install_localca.yml
-    - include: tasks/install_netbeans.yml
     - include: tasks/install_unattended_upgrades.yml
     - include: tasks/enable_quota_applet.yml
     - name: remove sudo
