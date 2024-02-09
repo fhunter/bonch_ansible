@@ -30,7 +30,6 @@
     tasks:
     - include: tasks/deploy_single_signon_for_browsers.yml
     - include: tasks/updatetimezone.yml
-    - include: tasks/installdebiankeyring.yml
     - include: tasks/addunburden-home.yml
     - include: tasks/install_unattended_upgrades.yml
     - name: remove sudo
@@ -43,28 +42,24 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_vmshortcuts.yml
 
   - hosts: a439
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_vmshortcuts.yml
 
   - hosts: a437
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_vmshortcuts.yml
 
   - hosts: a425
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a425/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_vmshortcuts.yml
 
   - hosts: a443
     remote_user: root
@@ -81,23 +76,6 @@
   - hosts: terminalservers
     remote_user: root
     tasks:
-    - name: Install software for 3d development and electronics
-      apt:
-        name:
-          - freecad
-          - kicad
-          - kicad-doc-en
-          - kicad-doc-ru
-          - kicad-demos
-          - kicad-footprints
-          - kicad-symbols
-          - kicad-templates
-          - kicad-libraries
-          - openscad
-          - antimony
-        state: latest
-        install_recommends: no
-        update_cache: no
     - name: deploy admin access
       copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
