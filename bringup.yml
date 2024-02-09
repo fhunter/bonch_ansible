@@ -291,6 +291,7 @@
       apt: name=apparmor state=absent
 
     - include: tasks/install_internet.yml
+    - include: tasks/install_localca.yml
 #    - include: tasks/fix_access_mysql.yml
 #    - include: tasks/add_permission_read_logs_apache2.yml
     - name: install vncbroadcast to allow remote access
@@ -434,6 +435,11 @@
         state: present
         install_recommends: no
         update_cache: no
+  
+  - hosts: workstations1c
+    remote_user: root
+    tasks:
+    - include: tasks/install_1c.yml
 
   - hosts: all
     remote_user: root

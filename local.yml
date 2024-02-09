@@ -29,25 +29,10 @@
     remote_user: root
     tasks:
     - include: tasks/deploy_single_signon_for_browsers.yml
-    - include: tasks/install_virtualbox.yml
     - include: tasks/updatetimezone.yml
     - include: tasks/installdebiankeyring.yml
     - include: tasks/addunburden-home.yml
-    - include: tasks/installcodeblocks.yml
-    - name: install latest firefox
-      action: apt name=firefox-esr state=latest install_recommends=no update_cache=no
-    - name: install latest chromium
-      apt:
-        name:
-          - chromium
-          - chromium-l10n
-        state: latest
-        install_recommends: no
-        update_cache: no
-    - include: tasks/install_internet.yml
-    - include: tasks/install_localca.yml
     - include: tasks/install_unattended_upgrades.yml
-    - include: tasks/enable_quota_applet.yml
     - name: remove sudo
       action: apt pkg=sudo state=absent update_cache=no
     - name: update kerberos configs
@@ -59,8 +44,6 @@
     - name: deploy admin access
       copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_vmshortcuts.yml
-    - name: add pam group config
-      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
 
   - hosts: a439
     remote_user: root
@@ -82,8 +65,6 @@
     - name: deploy admin access
       copy: src=files/a425/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
     - include: tasks/install_vmshortcuts.yml
-    - name: add pam group config
-      copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
 
   - hosts: a443
     remote_user: root
@@ -133,11 +114,6 @@
     tasks:
     - name: setup scanner permissions
       copy: src=files/a44304/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
-
-  - hosts: workstations1c
-    remote_user: root
-    tasks:
-    - include: tasks/install_1c.yml
 
   - hosts: remoteprinters
     remote_user: root
