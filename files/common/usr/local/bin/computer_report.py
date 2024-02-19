@@ -60,13 +60,13 @@ machineid = get_machineid()
 data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 'cpu': cpu, 'machineid': machineid }
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
-t = requests.post("https://report.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers)
+t = requests.post("https://report.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers, allow_redirects=True)
 
 # upload scratch free space
 temp = os.statvfs('/scratch')
 data = { 'scratch_total': temp.f_frsize*temp.f_blocks, 'scratch_free': temp.f_frsize*temp.f_bavail }
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-t = requests.post("https://report.dcti.sut.ru/online/api/scratch", data = json.dumps(data), headers=headers)
+t = requests.post("https://report.dcti.sut.ru/online/api/scratch", data = json.dumps(data), headers=headers, allow_redirects=True)
 
 # upload CMOS battery status
 # Not done currently
@@ -91,4 +91,4 @@ for i in t:
         elif p[0] == 'failed':
             data['failed'] = int(p[1])
 
-t = requests.post("https://report.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers)
+t = requests.post("https://report.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers, allow_redirects=True)

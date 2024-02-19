@@ -83,4 +83,4 @@ data['cpu'] = readcputemp()
 t = requests.post(
         "https://report.dcti.sut.ru/temperature/post",
         data = json.dumps(data),
-        headers=headers)
+        headers=headers, allow_redirects=True)
