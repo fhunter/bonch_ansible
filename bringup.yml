@@ -320,6 +320,7 @@
     remote_user: root
     tasks:
     - include: tasks/autostart_pidgin.yml
+    - include: tasks/install_hardwarereports.yml
 
   - hosts: remoteprinters
     remote_user: root
