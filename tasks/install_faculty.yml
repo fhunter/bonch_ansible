@@ -1,0 +1,5 @@
+    - name: Install remmina
+      apt:
+        pkg: remmina
+        state: present
+        install_recommends: no
