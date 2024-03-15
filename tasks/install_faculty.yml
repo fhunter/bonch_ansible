@@ -1,5 +1,7 @@
     - name: Install remmina
       apt:
-        pkg: remmina
+        pkg:
+          - remmina
+          - remmina-plugin-rdp
         state: present
         install_recommends: no
