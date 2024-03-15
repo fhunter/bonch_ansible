@@ -1,0 +1,4 @@
+    - name: Install telegram-desktop client
+      apt:
+        pkg: telegram-desktop=4.6.5+ds-1~bpo11+1
+        state: present

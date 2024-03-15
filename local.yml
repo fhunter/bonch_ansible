@@ -93,6 +93,7 @@
   - hosts: a44304.dcti.sut.ru
     remote_user: root
     tasks:
+    - include: tasks/install_telegram.yml
     - name: setup scanner permissions
       copy: src=files/a44304/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
 
