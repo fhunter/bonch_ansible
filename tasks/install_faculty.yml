@@ -5,3 +5,15 @@
           - remmina-plugin-rdp
         state: present
         install_recommends: no
+    - name: Install network-manager
+      apt:
+        pkg:
+          - network-manager-gnome
+          - network-manager-l2tp-gnome
+        state: present
+        install_recommends: no
+    - name: stop and disable xl2tpd service
+      systemd_service:
+        enabled: false
+        state: stopped
+        name: xl2tpd
