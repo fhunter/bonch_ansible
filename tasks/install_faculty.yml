@@ -13,7 +13,7 @@
         state: present
         install_recommends: no
     - name: stop and disable xl2tpd service
-      systemd_service:
+      systemd:
         enabled: false
         state: stopped
         name: xl2tpd
