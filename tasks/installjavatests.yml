@@ -37,7 +37,7 @@
          - libtomcat9-java
          - libecj-java
         state: present
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
 
     - name: setup tomcat8 users and roles
       action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat8/tomcat-users.xml
@@ -50,7 +50,7 @@
 
     - name: setup tomcat8 users and roles
       action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat9/tomcat-users.xml
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
       with_items:
         - { line: '<role rolename=\"tomcat\" />' }
         - { line: '<role rolename=\"manager-gui\" />' }

@@ -1,6 +1,6 @@
     - name: install octave
       apt: pkg=octave state=present install_recommends=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11','12']
     - name: install fonts for octave
       apt:
         name:

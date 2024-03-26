@@ -1,5 +1,5 @@
     - name: install 1c packages
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
       apt:
         pkg:
          - 1c-enterprise-8.3.18.1959-client

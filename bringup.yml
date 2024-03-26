@@ -144,7 +144,7 @@
         state: present
         install_recommends: no
         update_cache: yes
-    
+
     - name: install assembly language IDE
       apt:
         name:
@@ -189,7 +189,7 @@
 
     - name: Deploy ssmtp
       action: apt name=ssmtp state=present install_recommends=no update_cache=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
 
     - name: install mate desktop
       apt: pkg=mate-desktop-environment state=present update_cache=no
@@ -297,9 +297,9 @@
 #    - include: tasks/add_permission_read_logs_apache2.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=no install_recommends=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11', '12']
     - name: Add vncbroadcast to autostart
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11', '12']
       copy:
         src: /usr/share/applications/vncbroadcast.desktop
         dest: /etc/xdg/autostart/
@@ -450,7 +450,7 @@
         state: present
         install_recommends: no
         update_cache: no
-  
+
   - hosts: workstations1c
     remote_user: root
     tasks:

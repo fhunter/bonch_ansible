@@ -1,5 +1,5 @@
     - name: Install local CA certificates
-      apt: pkg=ca-certificates-local state=latest    
+      apt: pkg=ca-certificates-local state=latest
     - name: Create policies path for firefox
       file:
         path: /etc/firefox/policies/

@@ -22,7 +22,7 @@
     - include: tasks/installuserregistration.yml
 
   - import_playbook: bringup.yml
-    when: (not hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11'])
+    when: (not hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12'])
 
 # All classes, including terminal server
   - hosts: classes
@@ -102,7 +102,7 @@
     remote_user: root
     tasks:
     - include: tasks/add_remote_printer_access.yml
-  
+
   - hosts: a44105.dcti.sut.ru
     remote_user: root
     tasks:

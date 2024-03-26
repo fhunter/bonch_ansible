@@ -1,5 +1,5 @@
     - name: install xournal and xinput
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11','12']
       apt:
         pkg:
          - xournal
@@ -7,14 +7,15 @@
         state: present
         install_recommends: no
     - name: install mypaint
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','11'] #FIXME - needs patch, see issue. after patching - enable it for Debian 10 (should work for debian 11)
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','11','12']
+      #FIXME - needs patch, see issue. after patching - enable it for Debian 10 (should work for debian 11)
       apt:
         pkg:
          - mypaint
         state: present
         install_recommends: no
     - name: install latests libwacom2 and utilities (for tablet settings)
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11','12']
       apt:
         pkg:
          - libwacom2
