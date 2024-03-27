@@ -6,6 +6,15 @@
          - python3-dbus
        state: present
        update_cache: no
+   - name: enable drivetemp module on debian12
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12']
+     lineinfile:
+       path: /etc/modules-load.d/temp-mon.conf
+       create: yes
+       line: drivetemp
+       owner: root
+       group: root
+       mode: '0644'
    - name: deploy report script 2
      copy: src=files/common/usr/local/bin/temperature_report.py dest=/usr/local/bin/temperature_report.py owner=root group=root mode=755
    - name: add to periodic execution 2

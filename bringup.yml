@@ -287,6 +287,7 @@
       apt: name=lm-sensors state=present install_recommends=no update_cache=no
     - name: install hddtemp
       apt: name=hddtemp state=present install_recommends=no update_cache=no
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11']
 
     - name: remove apparmor
       apt: name=apparmor state=absent

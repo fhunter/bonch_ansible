@@ -2,18 +2,26 @@
 import subprocess
 import json
 import glob
+import os
 import requests
 
 def readhddtemp():
     temps = []
-    drives = glob.glob("/dev/sd[a-z]")
-    commandline = ["/usr/sbin/hddtemp", "-n", "-q" ]
-    for i in drives:
-        commandline.append(i)
-    for i in subprocess.check_output(commandline).splitlines():
-        temp = int(i.split()[0])
-        if temp != 0:
-            temps.append(i.decode('utf-8'))
+    if os.path.exists('/usr/sbin/hddtemp'):
+        # run hddtemp
+        drives = glob.glob("/dev/sd[a-z]")
+        commandline = ["/usr/sbin/hddtemp", "-n", "-q" ]
+        for i in drives:
+            commandline.append(i)
+        for i in subprocess.check_output(commandline).splitlines():
+            temp = int(i.split()[0])
+            if (temp > 0) and (temp < 120) :
+                temps.append(i.decode('utf-8'))
+    dictionary = gethwmon()
+    for i in dictionary:
+        if hddsensormatch(dictionary[i]):
+            for k in gethwmon_values(i,dictionary[i]):
+                temps.append(k)
     return temps
 
 def readfilecontents(name):
@@ -26,8 +34,7 @@ def readfilecontents(name):
 def gethwmonnumber(path):
     if "/device/" in path:
         return int(path.replace("/sys/class/hwmon/hwmon","").replace("/device/name",""))
-    else:
-        return int(path.replace("/sys/class/hwmon/hwmon","").replace("/name",""))
+    return int(path.replace("/sys/class/hwmon/hwmon","").replace("/name",""))
 
 def gethwmon():
     temp = {}
@@ -49,6 +56,11 @@ def sensormatch(name):
     if name == "it8720": # for a43904
         return True
     if name == "k10temp": # for termserver2
+        return True
+    return False
+
+def hddsensormatch(name):
+    if name == "drivetemp":
         return True
     return False
 
