@@ -75,7 +75,7 @@ t = requests.post("https://report.dcti.sut.ru/online/api/scratch", data = json.d
 t = subprocess.check_output('tail -n 3 /var/log/ansible-pull.log',shell=True).splitlines()
 try:
     t = t[1].decode('utf-8')
-    t = t.split(':')[1].split()
+    t = t.split('|')[-1:].split(':')[1].split()
 except:
     exit()
 data = {}
