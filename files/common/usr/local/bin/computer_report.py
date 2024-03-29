@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-import requests
 import os
-import psutil
 import subprocess
 import json
-import dbus
 import pwd
+import dbus
+import psutil
+import requests
 
 def cksessions():
     users = []
     try:
         system_bus = dbus.SystemBus()
-        proxy = system_bus.get_object('org.freedesktop.ConsoleKit','/org/freedesktop/ConsoleKit/Manager')
+        proxy = system_bus.get_object(
+            'org.freedesktop.ConsoleKit',
+            '/org/freedesktop/ConsoleKit/Manager')
         sessions=proxy.GetSessions(dbus_interface='org.freedesktop.ConsoleKit.Manager')
         for session in sessions:
             proxy1=system_bus.get_object('org.freedesktop.ConsoleKit', str(session))
@@ -20,76 +22,124 @@ def cksessions():
                 username=pwd.getpwuid(userid).pw_name
                 users.append(username)
     finally:
-        return users
+        pass
+    return users
 
 def get_machineid():
     machineid = ""
-    with open('/etc/machine-id','r') as f:
-        machineid = f.readline().strip()
+    with open('/etc/machine-id','r') as datafile:
+        machineid = datafile.readline().strip()
     return machineid
 
-uptime_seconds = 0
-with open('/proc/uptime', 'r') as f:
-        uptime_seconds = float(f.readline().split()[0])
+def getuptime():
+    uptime_seconds = 0
+    with open('/proc/uptime', 'r') as datafile:
+        uptime_seconds = float(datafile.readline().split()[0])
+    return uptime_seconds
 
-hostname = os.uname()[1]
-loggedusers = []
-for i in subprocess.check_output('who').splitlines():
-    user = i.split()[0]
-    if not user in loggedusers:
-        loggedusers.append(user.decode('utf-8'))
-for j in cksessions():
-    if not j in loggedusers:
-        loggedusers.append(j)
+def getloadavg():
+    loadavg = 0
+    with open('/proc/loadavg', 'r') as datafile:
+        loadavg = float(datafile.readline().split()[1])
+    return loadavg
+
+def getcoresnload():
+    loadbycpu = psutil.cpu_percent(2.0,True) #over 2 seconds. all cores
+    cores = 0
+    load = 0
+    for i in loadbycpu:
+        load+=i
+        cores+=1
+    return (cores, load)
+
+def getloggedusers():
+    loggedusers = []
+    for i in subprocess.check_output('who').splitlines():
+        user = i.split()[0]
+        if not user in loggedusers:
+            loggedusers.append(user.decode('utf-8'))
+    for i in cksessions():
+        if not i in loggedusers:
+            loggedusers.append(i)
+    return loggedusers
+
+def getscratchsize():
+    temp = os.statvfs('/scratch')
+    total = temp.f_frsize*temp.f_blocks
+    free = temp.f_frsize*temp.f_bavail
+    return (total, free)
+
+def getansibleline():
+    temp = subprocess.check_output('tail -n 3 /var/log/ansible-pull.log',shell=True).splitlines()
+    line = ""
+    for i in enumerate(temp):
+        if "PLAY RECAP" in i[1].decode('utf-8'):
+            if i[0] < (len(temp)-1):
+                line = temp[i[0]+1].decode('utf-8')
+    return line
+
+def post_data(data_list):
+    headers = {
+        'Content-type': 'application/json',
+        'Accept': 'text/plain'
+        }
+    session = requests.Session()
+    # list of tuples - url, data
+    for i in data_list:
+        session.post(i[0], data = json.dumps(i[1]), headers=headers,allow_redirects=True)
 
 
-loadavg = 0
-with open('/proc/loadavg', 'r') as f:
-    loadavg = float(f.readline().split()[1])
+def main():
+    # list of tuples - url, data
+    data_to_send = []
 
-loadbycpu = psutil.cpu_percent(2.0,True) #over 2 seconds. all cores
-cores = 0
-load = 0
-for i in loadbycpu:
-    load+=i
-    cores+=1
+    # load - immediate, in percents.
+    # cores - number of processors.
+    # loadavg - 5 minute average load
+    cores, load = getcoresnload()
+    cpu = {
+        'cores': cores,
+        'load': load,
+        'loadavg': getloadavg()
+        }
 
-cpu = {'cores': cores, 'load': load, 'loadavg': loadavg } #load - immediate, in percents. cores - number of processors. loadavg - 5 minute average load
+    data = {
+        'hostname': os.uname()[1],
+        'uptime': getuptime(),
+        'users' : getloggedusers(),
+        'cpu': cpu,
+        'machineid': get_machineid()
+        }
+    data_to_send.append(("https://report.dcti.sut.ru/online/api/data", data))
 
-machineid = get_machineid()
-data = { 'hostname': hostname, 'uptime': uptime_seconds, 'users' : loggedusers, 'cpu': cpu, 'machineid': machineid }
-headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    # upload scratch free space
+    temp = getscratchsize()
+    data = {
+        'scratch_total': temp[0],
+        'scratch_free': temp[1]
+        }
+    data_to_send.append(("https://report.dcti.sut.ru/online/api/scratch", data))
 
-t = requests.post("https://report.dcti.sut.ru/online/api/data", data = json.dumps(data), headers=headers, allow_redirects=True)
+    # upload ansible status
+    line = getansibleline()
+    try:
+        line = line.split('|')[-1:][0]
+        line = line.split(':')[1].split()
+    except IndexError:
+        line=[]
+    data = {}
+    for i in line:
+        parts=i.split('=')
+        if len(parts)>1:
+            for key in ['ok','changed','unreachable', 'failed']:
+                if parts[0] == key:
+                    data[key]=int(parts[1])
+    data_to_send.append(("https://report.dcti.sut.ru/online/api/ansible", data))
+    post_data(data_to_send)
 
-# upload scratch free space
-temp = os.statvfs('/scratch')
-data = { 'scratch_total': temp.f_frsize*temp.f_blocks, 'scratch_free': temp.f_frsize*temp.f_bavail }
-headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-t = requests.post("https://report.dcti.sut.ru/online/api/scratch", data = json.dumps(data), headers=headers, allow_redirects=True)
+    return 0
 
-# upload CMOS battery status
-# Not done currently
 
-# upload ansible status
-t = subprocess.check_output('tail -n 3 /var/log/ansible-pull.log|grep -A 1 PLAY\ RECAP',shell=True).splitlines()
-try:
-    t = t[1].decode('utf-8')
-    t = t.split('|')[-1:][0]
-    t = t.split(':')[1].split()
-except:
-    exit()
-data = {}
-for i in t:
-    p=i.split('=')
-    if len(p)>1:
-        if p[0] == 'ok':
-            data['ok']=int(p[1])
-        elif p[0] == 'changed':
-            data['change']=int(p[1])
-        elif p[0] == 'unreachable':
-            data['unreachable']=int(p[1])
-        elif p[0] == 'failed':
-            data['failed'] = int(p[1])
 
-t = requests.post("https://report.dcti.sut.ru/online/api/ansible", data = json.dumps(data), headers=headers, allow_redirects=True)
+if __name__ == "__main__":
+    main()
