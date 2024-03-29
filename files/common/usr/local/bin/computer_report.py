@@ -22,8 +22,7 @@ def cksessions():
                 username=pwd.getpwuid(userid).pw_name
                 users.append(username)
     finally:
-        pass
-    return users
+        return users
 
 def get_machineid():
     machineid = ""
