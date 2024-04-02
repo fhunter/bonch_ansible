@@ -224,6 +224,7 @@
     - include: tasks/install_pycharm.yml
     - include: tasks/installnscd.yml
     - include: tasks/fixxsessionerrors.yml
+    - include: tasks/install_hardwarereports.yml
     - name: install gnuplot
       action: apt name=gnuplot state=present install_recommends=no update_cache=no
     - name: install python3-websockets

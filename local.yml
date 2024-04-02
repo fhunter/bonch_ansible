@@ -48,14 +48,12 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_hardwarereports.yml
 
   - hosts: a437
     remote_user: root
     tasks:
     - name: deploy admin access
       copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_hardwarereports.yml
 
   - hosts: a425
     remote_user: root
@@ -69,7 +67,6 @@
     tasks:
     - name: deploy admin access
       copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-    - include: tasks/install_hardwarereports.yml
 
   - hosts: a441
     remote_user: root
@@ -103,7 +100,7 @@
     tasks:
     - include: tasks/add_remote_printer_access.yml
 
-  - hosts: a44105.dcti.sut.ru
+  - hosts: a43707.dcti.sut.ru,a43905.dcti.sut.ru,depo07.dcti.sut.ru,depo08.dcti.sut.ru
     remote_user: root
     tasks:
-    - include: tasks/install_faculty.yml
+    - include: tasks/install_hardwarereports.yml
