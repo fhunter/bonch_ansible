@@ -1,4 +1,4 @@
     - name: preconfigure msttfcorefonts
-      action: debconf name=ttf-mscorefonts-installer question=msttcorefonts/dlurl vtype=string value="http://eniac.dcti.sut.ru/corefonts/"
+      action: debconf name=ttf-mscorefonts-installer question=msttcorefonts/dlurl vtype=string value="http://srv-1.dcti.sut.ru/corefonts/"
     - name: install msttfcorefonts
       action: apt pkg=ttf-mscorefonts-installer state=present install_recommends=no update_cache=no

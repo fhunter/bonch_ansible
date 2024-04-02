@@ -105,9 +105,6 @@
          - ntfs-3g
          - eject
          - gvfs
-#         - thunar-archive-plugin
-#         - thunar-vcs-plugin
-#         - thunar-volman
          - xdg-user-dirs
          - dosfstools
          - eric
@@ -118,7 +115,7 @@
          - python3-doc
          - inkscape
          - xterm
-         - rxvt-unicode-256color
+         - rxvt-unicode
          - fakeroot
          - gnome-extra-icons
          - gnome-icon-theme
@@ -267,7 +264,8 @@
         state: present
         install_recommends: no
         update_cache: no
-    - name: install pulseaudio for audio access
+    - name: install pulseaudio for audio access  # FIXME - replace with pipewire on Debian 12
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11']
       apt:
         pkg:
          - pulseaudio

@@ -4,6 +4,7 @@
         pkg:
          - sqlite3
          - libsqlite3-dev
+         - libsqlitecpp-dev
         state: present
         install_recommends: no
     - name: install sql databases (mysql)

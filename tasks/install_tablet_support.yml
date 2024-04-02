@@ -15,10 +15,18 @@
         state: present
         install_recommends: no
     - name: install latests libwacom2 and utilities (for tablet settings)
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11']
       apt:
         pkg:
          - libwacom2
+         - libwacom-bin
+        state: latest
+        install_recommends: no
+    - name: install latests libwacom2 and utilities (for tablet settings)
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12']
+      apt:
+        pkg:
+         - libwacom9
          - libwacom-bin
         state: latest
         install_recommends: no

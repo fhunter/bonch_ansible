@@ -16,7 +16,6 @@
          - qttools5-dev
          - qtxmlpatterns5-dev-tools
          - cmake
-         - subversion
          - make
          - gdb
         state: present

@@ -1,8 +1,7 @@
-   - name: Install ghc7
+   - name: Install ghc8/9
      apt:
        name:
         - ghc
-        - ghc-dynamic
         - ghc-doc
        state: present
        update_cache: no
