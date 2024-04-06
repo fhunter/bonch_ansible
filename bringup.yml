@@ -62,7 +62,6 @@
     - include: tasks/install_dosemu.yml
     - include: tasks/fix_autofs_systemd.yml
     - include: tasks/deploy_trust_for_dcti.sut.ru.yml
-    - include: tasks/install_tablet_support.yml
 
     - name: install base packages
       apt:
@@ -126,7 +125,7 @@
          - gimp-plugin-registry
          - xsane
          - vim
-         - vim-gtk
+         - vim-gtk3
          - gdb
          - ruby
          - evince
@@ -142,6 +141,7 @@
         install_recommends: no
         update_cache: yes
 
+    - include: tasks/install_tablet_support.yml
     - name: install assembly language IDE
       apt:
         name:
