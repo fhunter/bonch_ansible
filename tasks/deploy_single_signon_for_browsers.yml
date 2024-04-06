@@ -1,13 +1,18 @@
     - name: Enable domain check in firefox
-      lineinfile: dest=/etc/firefox-esr/firefox-esr.js line="pref(\"network.negotiate-auth.trusted-uris\", \"dcti.sut.ru,pivt.spbgut.ru\");" create=yes
+      lineinfile:
+        dest: "/etc/firefox-esr/firefox-esr.js"
+        line: "pref(\"network.negotiate-auth.trusted-uris\", \"dcti.sut.ru,pivt.spbgut.ru\");"
+        create: yes
+        mode: "0644"
     - name: create policies path
       file:
         path: /etc/chromium/policies/recommended
         state: directory
+        mode: "0755"
     - name: Deploy auth.json for chromium
       copy:
         src: files/common/etc/chromium/policies/recommended/auth.json
         dest: /etc/chromium/policies/recommended/auth.json
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"

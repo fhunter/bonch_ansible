@@ -9,7 +9,7 @@
         dest: /etc/apt/apt.conf.d/50unattended-upgrades
         insertafter: "Unattended-Upgrade::Package-Blacklist.*{.*"
         state: present
-        line: "{{item.line}}"
+        line: "{{ item.line }}"
       with_items:
         - { line: 'dosemu;' }
     - name: Install dedicated cron task for updates
@@ -18,6 +18,6 @@
       lineinfile:
         dest: /etc/apt/apt.conf.d/20auto-upgrades
         state: present
-        line: "{{item.line}}"
+        line: "{{ item.line }}"
       with_items:
         - { line: 'APT::Periodic::AutocleanInterval "7";' }

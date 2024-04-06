@@ -9,13 +9,13 @@
      action: file path=/usr/sbin/pptp mode=104755
 
    - name: Put config files in proper places
-     template: dest=/etc/ppp/peers/internet src=files/common/etc/ppp/peers/internet.j2 owner=root
+     template: dest=/etc/ppp/peers/internet src=files/common/etc/ppp/peers/internet.j2 owner=root mode="0644" # FIXME - check correct permissions
 
    - name: Put config files in proper places
-     template: dest=/etc/ppp/peers/internet_old src=files/common/etc/ppp/peers/internet_old.j2 owner=root
+     template: dest=/etc/ppp/peers/internet_old src=files/common/etc/ppp/peers/internet_old.j2 owner=root mode="0644" # FIXME - check correct permissions
 
    - name: Put config files in proper places
-     template: dest=/etc/ppp/options.pptp src=files/common/etc/ppp/options.pptp.j2 owner=root
+     template: dest=/etc/ppp/options.pptp src=files/common/etc/ppp/options.pptp.j2 owner=root mode="0644"
 
    - name: Install routing script 1
      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']

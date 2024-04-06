@@ -2,4 +2,4 @@
     - name: Enable proper scanner firmware
       lineinfile: dest=/etc/sane.d/snapscan.conf regexp="^firmware" line="firmware /lib/firmware/u176v046.bin"
     - name: Copy firmware file
-      copy: dest=/lib/firmware/u176v046.bin src=./files/common/lib/firmware/u176v046.bin
+      copy: dest=/lib/firmware/u176v046.bin src=./files/common/lib/firmware/u176v046.bin mode='0644'

@@ -5,14 +5,13 @@
 
     remote_user: root
     tasks:
-    - include: tasks/fixpartitionsizes.yml
-    - include: tasks/addscratch.yml
+    - include: tasks/fix_partition_sizes.yml
+    - include: tasks/add_scratch.yml
     - include: tasks/enable_kerberos_ssh.yml
 
     - include: tasks/add_i386_architecture_support.yml
 
-    - include: tasks/addlocalrepo.yml
-    - include: tasks/addstretchbackports.yml
+    - include: tasks/add_localrepo.yml
     - include: tasks/aptgetupdate.yml
     - include: tasks/create_rc_local.yml
     - include: tasks/logrotate.yml
@@ -197,22 +196,20 @@
     - include: tasks/install_msttfcorefonts.yml
     - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_jdk.yml
-    - include: tasks/installvnc.yml
-#    - include: tasks/install_apache2_and_php5.yml
     - include: tasks/install_lisp.yml
     - include: tasks/install_verilog.yml
     - include: tasks/install_swiprolog.yml
-    - include: tasks/installcodeblocks.yml
+    - include: tasks/install_codeblocks.yml
     - include: tasks/install_sublimeeditor.yml
-    - include: tasks/installvnc.yml
-    - include: tasks/installdebiankeyring.yml
+    - include: tasks/install_vnc.yml
+    - include: tasks/install_debiankeyring.yml
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
     - include: tasks/enable_quota_applet.yml
     - include: tasks/install_browser_pack.yml
     - include: tasks/install_maxima.yml
     - include: tasks/install_sql_databases.yml
-    - include: tasks/installhaskell.yml
+    - include: tasks/install_haskell.yml
     - include: tasks/install_qtsdk.yml
     - include: tasks/install_octave.yml
     - include: tasks/install_monodevelop.yml
@@ -220,10 +217,10 @@
     - include: tasks/install_icecc.yml
     - include: tasks/install_rustc.yml
     - include: tasks/install_golang.yml
-    - include: tasks/installidea.yml
+    - include: tasks/install_idea.yml
     - include: tasks/install_pycharm.yml
-    - include: tasks/installnscd.yml
-    - include: tasks/fixxsessionerrors.yml
+    - include: tasks/install_nscd.yml
+    - include: tasks/fix_xsession_errors.yml
     - include: tasks/install_hardwarereports.yml
     - name: install gnuplot
       action: apt name=gnuplot state=present install_recommends=no update_cache=no
@@ -275,11 +272,11 @@
         install_recommends: no
         update_cache: no
     - name: Install openntpd config
-      template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf
+      template: src=templates/etc_openntpd_ntpd.conf.j2 dest=/etc/openntpd/ntpd.conf mode='0644' group=root owner=root
       notify: restart openntpd
 
     - name: Install openntpd defaults
-      copy: src=files/a441/etc/default/openntpd dest=/etc/default/openntpd
+      copy: src=files/a441/etc/default/openntpd dest=/etc/default/openntpd group=root owner=root mode='0644'
       notify: restart openntpd
 
     - name: install lm-sensors
@@ -326,6 +323,8 @@
     remote_user: root
     tasks:
     - include: tasks/add_remote_printer_access.yml
+    handlers:
+    - include: handlers/restartp910nd.yml
 
   - hosts: a445
     remote_user: root
@@ -413,7 +412,7 @@
   - hosts: noremote
     remote_user: root
     tasks:
-    - include: tasks/installlightdmback.yml
+    - include: tasks/install_lightdm_back.yml
     - include: tasks/enable_grub_password.yml
 
   - hosts: terminalservers

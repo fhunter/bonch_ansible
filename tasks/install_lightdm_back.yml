@@ -12,12 +12,14 @@
         dest: /etc/lightdm/display.sh
         owner: root
         group: root
-        mode: 0755
+        mode: "0755"
     - name: update configs 1
       copy:
         src: files/a437/etc/lightdm/lightdm.conf
         dest: /etc/lightdm/lightdm.conf
+        mode: "0644"
     - name: update configs 2
       copy:
         src: files/a437/etc/lightdm/lightdm-gtk-greeter.conf
         dest: /etc/lightdm/lightdm-gtk-greeter.conf
+        mode: "0644"

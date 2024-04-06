@@ -17,9 +17,9 @@
     remote_user: root
     tasks:
     - include: tasks/copyansiblehosts.yml
-    - include: tasks/installstatusreport.yml
-    - include: tasks/installtemperaturereport.yml
-    - include: tasks/installuserregistration.yml
+    - include: tasks/install_status_report.yml
+    - include: tasks/install_temperature_report.yml
+    - include: tasks/install_user_registration.yml
 
   - import_playbook: bringup.yml
     when: (not hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12'])
@@ -29,8 +29,8 @@
     remote_user: root
     tasks:
     - include: tasks/deploy_single_signon_for_browsers.yml
-    - include: tasks/updatetimezone.yml
-    - include: tasks/addunburden-home.yml
+    - include: tasks/update_timezone.yml
+    - include: tasks/add_unburden-home.yml
     - include: tasks/install_unattended_upgrades.yml
     - name: remove sudo
       action: apt pkg=sudo state=absent update_cache=no
@@ -99,6 +99,8 @@
     remote_user: root
     tasks:
     - include: tasks/add_remote_printer_access.yml
+    handlers:
+    - include: handlers/restartp910nd.yml
 
   - hosts: a43707.dcti.sut.ru,a43905.dcti.sut.ru,depo07.dcti.sut.ru,depo08.dcti.sut.ru
     remote_user: root

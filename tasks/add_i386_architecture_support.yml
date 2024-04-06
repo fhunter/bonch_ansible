@@ -1,13 +1,10 @@
     - name: Check if amd64 is present
-      lineinfile: dest=/var/lib/dpkg/arch line="amd64" create=yes
+      lineinfile: dest=/var/lib/dpkg/arch line="amd64" create=yes mode='0644'
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
     - name: Add i386 architecture support
-      lineinfile: dest=/var/lib/dpkg/arch line="i386" create=yes
+      lineinfile: dest=/var/lib/dpkg/arch line="i386" create=yes mode='0644'
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
       register: add_i386
-    - name: Add i386 architecture support
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
-      shell: dpkg --add-architecture i386
     - name: Update package cache
       apt: update_cache={{ add_i386.changed }}
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']

@@ -1,0 +1,74 @@
+#   - name: list files
+#     shell: "vgdisplay -c|head -n 1|awk -F: '{print $1}'|sed 's/^ *//g'"
+#     register: vgname
+
+   - name: Unmount /home
+     when: (len(ansible_lvm["vgs"]) > 0)
+     mount:
+       name: /home
+       src: "/dev/mapper/{{ list(ansible_lvm['vgs'])[0] }}-home"
+       state: absent
+
+   - name: Delete home volume
+     when: (len(ansible_lvm["vgs"]) > 0)
+     lvol:
+       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       lv: home
+       state: absent
+       force: yes
+
+   - name: Resize root
+     when: (len(ansible_lvm["vgs"]) > 0)
+     lvol:
+       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       lv: root
+       state: present
+       size: 35g
+       resizefs: yes
+       shrink: no
+       force: yes
+
+   - name: Resize var
+     when: (len(ansible_lvm["vgs"]) > 0)
+     lvol:
+       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       lv: var
+       state: present
+       size: 10g
+       resizefs: yes
+       shrink: no
+       force: yes
+
+   - name: Resize tmp
+     when: (len(ansible_lvm["vgs"]) > 0)
+     lvol:
+       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       lv: tmp
+       state: present
+       size: 10g
+       resizefs: yes
+       shrink: no
+       force: yes
+
+   - name: Add opt lvm location
+     when: (len(ansible_lvm["vgs"]) > 0)
+     lvol:
+       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       lv: opt
+       size: 40g
+       shrink: no
+
+   - name: Make filesystem on opt volume
+     when: (len(ansible_lvm["vgs"]) > 0)
+     filesystem:
+       fstype: ext4
+       dev: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/opt"
+
+   - name: Add opt to fstab
+     when: (len(ansible_lvm["vgs"]) > 0)
+     mount:
+       name: /opt
+       src: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/opt"
+       state: mounted
+       fstype: ext4
+

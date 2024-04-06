@@ -7,7 +7,7 @@
           - krb5-user
           - libpam-krb5
         state: present
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10','11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
     - name: enable gssapi authentication 1
       lineinfile:
         state: present

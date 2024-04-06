@@ -28,13 +28,3 @@
          - qt5-default
         state: present
         install_recommends: no
-
-
-    - name: install qtsdk
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
-      apt:
-        pkg:
-         - qt-sdk
-         - qt5-default
-        state: present
-        install_recommends: no

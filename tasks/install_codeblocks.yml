@@ -3,7 +3,7 @@
     - name: install codeblocks
       action: apt name=codeblocks-contrib state=latest install_recommends=no
     - name: install codeblocks-contrib and dependencies
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9','10']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
       apt:
         name:
          - libwxbase3.0-dev

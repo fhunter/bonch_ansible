@@ -1,16 +1,10 @@
-    - name: install lisp
+    - name: install lisp and common lisp
       apt:
         pkg:
          - cl-launch
          - sbcl
          - racket
-        state: present
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11','12']
-    - name: install common lisp
-      apt:
-        pkg:
          - clisp
          - clisp-module-*
         state: present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
-

@@ -1,0 +1,45 @@
+#   - name: list vgs
+#     shell: "vgdisplay -c|head -n 1|awk -F: '{print $1}'|sed 's/^ *//g'"
+## list(t["ansible_facts"]["ansible_lvm"]["vgs"])[0] - should be this
+#     register: vgname
+
+   - name: Add scratch lvm location
+     when: (len(ansible_lvm["vgs"]) > 0) and not ("scratch" in ansible_lvm["lvs"])
+     lvol:
+       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       lv: scratch
+       size: 70%FREE
+
+   - name: Make filesystem on scratch volume
+     when: (len(ansible_lvm["vgs"]) > 0)
+     filesystem:
+       fstype: ext4
+       dev: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/scratch"
+
+   - name: Add scratch to fstab
+     when: (len(ansible_lvm["vgs"]) > 0)
+     mount:
+       name: /scratch/
+       src: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/scratch"
+       state: mounted
+       fstype: ext4
+
+   - name: deploy libpam-script script for directory creation
+     apt: name=libpam-script state=present
+
+   - name: add libpam-script in pam.d
+     lineinfile:
+       line: 'session required pam_script.so'
+       insertafter: EOF
+       state: present
+       dest: '/etc/pam.d/common-session'
+
+   - name: deploy link creation script
+     copy:
+       src: files/pam_script_ses_open
+       dest: /usr/share/libpam-script/pam_script_ses_open
+       force: yes
+       owner: root
+       group: root
+       mode: 0755
+

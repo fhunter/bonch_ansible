@@ -1,0 +1,2 @@
+    - name: restart p910nd
+      service: name=p910nd state=restarted

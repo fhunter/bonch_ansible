@@ -8,22 +8,8 @@
       apt:
         pkg:
          - junit
-         - junit4
+         - junit4   # junit 5 is available for debian 12 - FIXME
         state: present
-
-    - name: install tomcat8
-      apt:
-        pkg:
-         - tomcat8
-         - tomcat8-admin
-         - tomcat8-common
-         - tomcat8-examples
-         - tomcat8-user
-         - tomcat8-docs
-         - libtomcat8-java
-         - libecj-java
-        state: present
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
 
     - name: install tomcat9
       apt:
@@ -39,16 +25,7 @@
         state: present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
 
-    - name: setup tomcat8 users and roles
-      action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat8/tomcat-users.xml
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9']
-      with_items:
-        - { line: '<role rolename=\"tomcat\" />' }
-        - { line: '<role rolename=\"manager-gui\" />' }
-        - { line: '<role rolename=\"admin-gui\" />' }
-        - { line: '<user username=\"tomcat\" password=\"tomcat\" roles=\"tomcat,manager-gui,admin-gui\"/>' }
-
-    - name: setup tomcat8 users and roles
+    - name: setup tomcat9 users and roles
       action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat9/tomcat-users.xml
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
       with_items:

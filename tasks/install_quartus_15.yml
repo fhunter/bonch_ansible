@@ -1,10 +1,10 @@
     - name: install quartus
       action: apt pkg=quartus15.0 state=latest install_recommends=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
 
     - name: add lines to rc.local
       lineinfile: dest=/etc/rc.local insertbefore="exit 0" line="{{ item.line }}" state=present
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['9', '10','11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
       with_items:
        - { line: 'mount -t debugfs none /sys/kernel/debug' }
        - { line: 'ln -s /sys/kernel/debug/usb/devices /dev/bus/usb/' }
