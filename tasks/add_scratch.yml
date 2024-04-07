@@ -4,20 +4,20 @@
 #     register: vgname
 
    - name: Add scratch lvm location
-     when: (len(ansible_lvm["vgs"]) > 0) and not ("scratch" in ansible_lvm["lvs"])
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0) and not ("scratch" in ansible_lvm["lvs"])
      lvol:
        vg: "{{ list(ansible_lvm['vgs'])[0] }}"
        lv: scratch
        size: 70%FREE
 
    - name: Make filesystem on scratch volume
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      filesystem:
        fstype: ext4
        dev: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/scratch"
 
    - name: Add scratch to fstab
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      mount:
        name: /scratch/
        src: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/scratch"

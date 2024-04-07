@@ -3,14 +3,14 @@
 #     register: vgname
 
    - name: Unmount /home
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      mount:
        name: /home
        src: "/dev/mapper/{{ list(ansible_lvm['vgs'])[0] }}-home"
        state: absent
 
    - name: Delete home volume
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
        vg: "{{ list(ansible_lvm['vgs'])[0] }}"
        lv: home
@@ -18,7 +18,7 @@
        force: yes
 
    - name: Resize root
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
        vg: "{{ list(ansible_lvm['vgs'])[0] }}"
        lv: root
@@ -29,7 +29,7 @@
        force: yes
 
    - name: Resize var
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
        vg: "{{ list(ansible_lvm['vgs'])[0] }}"
        lv: var
@@ -40,7 +40,7 @@
        force: yes
 
    - name: Resize tmp
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
        vg: "{{ list(ansible_lvm['vgs'])[0] }}"
        lv: tmp
@@ -51,7 +51,7 @@
        force: yes
 
    - name: Add opt lvm location
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
        vg: "{{ list(ansible_lvm['vgs'])[0] }}"
        lv: opt
@@ -59,13 +59,13 @@
        shrink: no
 
    - name: Make filesystem on opt volume
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      filesystem:
        fstype: ext4
        dev: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/opt"
 
    - name: Add opt to fstab
-     when: (len(ansible_lvm["vgs"]) > 0)
+     when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      mount:
        name: /opt
        src: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/opt"
