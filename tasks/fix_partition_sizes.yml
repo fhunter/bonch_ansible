@@ -6,13 +6,13 @@
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      mount:
        name: /home
-       src: "/dev/mapper/{{ list(ansible_lvm['vgs'])[0] }}-home"
+       src: "/dev/mapper/{{ (ansible_lvm['vgs']|list)[0] }}-home"
        state: absent
 
    - name: Delete home volume
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
-       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       vg: "{{ (ansible_lvm['vgs']|list)[0] }}"
        lv: home
        state: absent
        force: yes
@@ -20,7 +20,7 @@
    - name: Resize root
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
-       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       vg: "{{ (ansible_lvm['vgs']|list)[0] }}"
        lv: root
        state: present
        size: 35g
@@ -31,7 +31,7 @@
    - name: Resize var
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
-       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       vg: "{{ (ansible_lvm['vgs']|list)[0] }}"
        lv: var
        state: present
        size: 10g
@@ -42,7 +42,7 @@
    - name: Resize tmp
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
-       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       vg: "{{ (ansible_lvm['vgs']|list)[0] }}"
        lv: tmp
        state: present
        size: 10g
@@ -53,7 +53,7 @@
    - name: Add opt lvm location
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      lvol:
-       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       vg: "{{ (ansible_lvm['vgs']|list)[0] }}"
        lv: opt
        size: 40g
        shrink: no
@@ -62,13 +62,13 @@
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      filesystem:
        fstype: ext4
-       dev: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/opt"
+       dev: "/dev/{{ (ansible_lvm['vgs']|list)[0] }}/opt"
 
    - name: Add opt to fstab
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      mount:
        name: /opt
-       src: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/opt"
+       src: "/dev/{{ (ansible_lvm['vgs']|list)[0] }}/opt"
        state: mounted
        fstype: ext4
 

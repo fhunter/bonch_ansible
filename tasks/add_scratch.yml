@@ -6,7 +6,7 @@
    - name: Add scratch lvm location
      when: ((ansible_lvm["vgs"]|default([]))|length > 0) and not ("scratch" in ansible_lvm["lvs"])
      lvol:
-       vg: "{{ list(ansible_lvm['vgs'])[0] }}"
+       vg: "{{ (ansible_lvm['vgs']|list)[0] }}"
        lv: scratch
        size: 70%FREE
 
@@ -14,13 +14,13 @@
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      filesystem:
        fstype: ext4
-       dev: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/scratch"
+       dev: "/dev/{{ (ansible_lvm['vgs']|list)[0] }}/scratch"
 
    - name: Add scratch to fstab
      when: ((ansible_lvm["vgs"]|default([]))|length > 0)
      mount:
        name: /scratch/
-       src: "/dev/{{ list(ansible_lvm['vgs'])[0] }}/scratch"
+       src: "/dev/{{ (ansible_lvm['vgs']|list)[0] }}/scratch"
        state: mounted
        fstype: ext4
 
