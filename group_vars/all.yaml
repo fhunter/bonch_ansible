@@ -1,5 +1,13 @@
 admins:
-  - a445:
+  terminalservers:
+    - automator/admin@DCTI.SUT.RU
+    - automator1/admin@DCTI.SUT.RU
+    - automator2/admin@DCTI.SUT.RU
+    - eshur@DCTI.SUT.RU
+    - fhunter@DCTI.SUT.RU
+    - op@DCTI.SUT.RU
+    - Maxim_Rozhkov@DCTI.SUT.RU
+  a445:
     - automator/admin@DCTI.SUT.RU
     - automator1/admin@DCTI.SUT.RU
     - automator2/admin@DCTI.SUT.RU
@@ -8,7 +16,7 @@ admins:
     - hawk@DCTI.SUT.RU
     - op@DCTI.SUT.RU
     - Maxim_Rozhkov@DCTI.SUT.RU
-  - a439:
+  a439:
     - automator/admin@DCTI.SUT.RU
     - automator1/admin@DCTI.SUT.RU
     - automator2/admin@DCTI.SUT.RU
@@ -16,7 +24,7 @@ admins:
     - fhunter@DCTI.SUT.RU
     - op@DCTI.SUT.RU
     - Maxim_Rozhkov@DCTI.SUT.RU
-  - a425:
+  a425:
     - automator/admin@DCTI.SUT.RU
     - automator1/admin@DCTI.SUT.RU
     - automator2/admin@DCTI.SUT.RU
@@ -25,8 +33,9 @@ admins:
     - op@DCTI.SUT.RU
     - eshur@DCTI.SUT.RU
     - Maxim_Rozhkov@DCTI.SUT.RU
+  a42509.dcti.sut.ru:
     - a.seregin@DCTI.SUT.RU
-  - a443:
+  a443:
     - automator/admin@DCTI.SUT.RU
     - automator1/admin@DCTI.SUT.RU
     - automator2/admin@DCTI.SUT.RU
@@ -34,7 +43,7 @@ admins:
     - fhunter@DCTI.SUT.RU
     - op@DCTI.SUT.RU
     - Maxim_Rozhkov@DCTI.SUT.RU
-  - a441:
+  a441:
     - automator/admin@DCTI.SUT.RU
     - automator1/admin@DCTI.SUT.RU
     - automator2/admin@DCTI.SUT.RU

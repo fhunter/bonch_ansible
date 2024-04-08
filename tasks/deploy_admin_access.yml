@@ -1,0 +1,8 @@
+    - name: deploy admins
+      when: admins[outer_item] is defined and (admins[outer_item]|length > 0)
+      lineinfile:
+        line: "{{ item }}"
+        create: true
+        state: present
+        path: "/root/.k5login"
+      loop: "{{ admins[outer_item] }}"

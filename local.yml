@@ -20,6 +20,10 @@
     - include: tasks/install_status_report.yml
     - include: tasks/install_temperature_report.yml
     - include: tasks/install_user_registration.yml
+    - include_tasks: tasks/deploy_admin_access.yml
+      loop: "{{ group_names }} + ['{{inventory_hostname}}']"
+      loop_control:
+        loop_var: outer_item
 
   - import_playbook: bringup.yml
     when: (not hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12'])
@@ -37,48 +41,10 @@
     - name: update kerberos configs
       copy: src=files/common/etc/krb5.conf dest=/etc/krb5.conf owner=root group=root mode="0644"
 
-  - hosts: a445
-    remote_user: root
-    tasks:
-    - name: deploy admin access
-      copy: src=files/a445/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-
-  - hosts: a439
-    remote_user: root
-    tasks:
-    - name: deploy admin access
-      copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-
-  - hosts: a437
-    remote_user: root
-    tasks:
-    - name: deploy admin access
-      copy: src=files/a439/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-
   - hosts: a425
     remote_user: root
     tasks:
     - include: tasks/install_faculty.yml
-    - name: deploy admin access
-      copy: src=files/a425/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-
-  - hosts: a443
-    remote_user: root
-    tasks:
-    - name: deploy admin access
-      copy: src=files/a443/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-
-  - hosts: a441
-    remote_user: root
-    tasks:
-    - name: deploy admin access
-      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
-
-  - hosts: terminalservers
-    remote_user: root
-    tasks:
-    - name: deploy admin access
-      copy: src=files/a441/root/.k5login dest=/root/.k5login owner=root group=root mode="0644"
 
   - hosts: remoteteaching
     remote_user: root
