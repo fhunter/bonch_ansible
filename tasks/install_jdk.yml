@@ -1,5 +1,5 @@
     - name: install JDK
-      apt: pkg=openjdk-11-jdk state=present
+      apt: pkg=openjdk-17-jdk state=present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12']
 
     - name: install JDK
