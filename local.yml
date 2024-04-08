@@ -22,7 +22,7 @@
     - include: tasks/install_user_registration.yml
 
   - import_playbook: bringup.yml
-    when: (not hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12'])
+    when: (not hostvars.localhost.bringup) and (ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12'])
 
 # All classes, including terminal server
   - hosts: classes

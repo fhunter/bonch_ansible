@@ -10,7 +10,7 @@
     - name: install ansible
       apt: pkg=ansible state=present
     - include: tasks/copyansiblehosts.yml
-    - include: tasks/installtemperaturereport.yml
+    - include: tasks/install_temperature_report.yml
 #server cleanup
     - name: remove unneeded packages
       apt:

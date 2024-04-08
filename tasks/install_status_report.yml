@@ -1,5 +1,5 @@
    - name: Install python modules
-     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12','11','10']
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12','11']
      apt:
        name:
          - python3-requests

@@ -1,5 +1,5 @@
     - name: install libreoffice
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
       apt:
         pkg:
          - libreoffice
@@ -12,12 +12,6 @@
          - libreoffice-math
          - libreoffice-writer
          - libreoffice-nlpsolver
-        state: present
-    - name: install libreoffice-pdfimport
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
-      apt:
-        pkg:
-         - libreoffice-pdfimport
         state: present
     - name: install libreoffice lightproof
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']

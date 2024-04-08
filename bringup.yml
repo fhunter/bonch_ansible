@@ -185,7 +185,7 @@
 
     - name: Deploy ssmtp
       action: apt name=ssmtp state=present install_recommends=no update_cache=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
 
     - name: install mate desktop
       apt: pkg=mate-desktop-environment state=present update_cache=no
@@ -212,7 +212,6 @@
     - include: tasks/install_haskell.yml
     - include: tasks/install_qtsdk.yml
     - include: tasks/install_octave.yml
-    - include: tasks/install_monodevelop.yml
     - include: tasks/install_ipython.yml
     - include: tasks/install_icecc.yml
     - include: tasks/install_rustc.yml
@@ -263,7 +262,7 @@
         install_recommends: no
         update_cache: no
     - name: install pulseaudio for audio access  # FIXME - replace with pipewire on Debian 12
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11']
       apt:
         pkg:
          - pulseaudio
@@ -283,7 +282,7 @@
       apt: name=lm-sensors state=present install_recommends=no update_cache=no
     - name: install hddtemp
       apt: name=hddtemp state=present install_recommends=no update_cache=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11']
 
     - name: remove apparmor
       apt: name=apparmor state=absent
@@ -294,9 +293,9 @@
 #    - include: tasks/add_permission_read_logs_apache2.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=no install_recommends=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11', '12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11', '12']
     - name: Add vncbroadcast to autostart
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10', '11', '12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11', '12']
       copy:
         src: /usr/share/applications/vncbroadcast.desktop
         dest: /etc/xdg/autostart/

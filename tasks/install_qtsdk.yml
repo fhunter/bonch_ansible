@@ -1,5 +1,5 @@
     - name: install qtsdk
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10','11','12'] # FIXME - update to qt6 on debian 12
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12'] # FIXME - update to qt6 on debian 12
       apt:
         pkg:
          - qtcreator
@@ -18,13 +18,5 @@
          - cmake
          - make
          - gdb
-        state: present
-        install_recommends: no
-
-    - name: install qt5-default
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
-      apt:
-        pkg:
-         - qt5-default
         state: present
         install_recommends: no

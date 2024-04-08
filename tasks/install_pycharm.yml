@@ -2,15 +2,6 @@
       action: apt name=pycharm state=latest update_cache=no
 
     - name: install virtualenvironment
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['10']
-      apt:
-        pkg:
-         - python-virtualenv
-         - python3-virtualenv
-         - virtualenv
-        state: present
-        update_cache: no
-    - name: install virtualenvironment
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
       apt:
         pkg:
