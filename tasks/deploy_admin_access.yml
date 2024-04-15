@@ -5,4 +5,7 @@
         create: true
         state: present
         path: "/root/.k5login"
+        mode: "0644"
+        owner: "root"
+        group: "root"
       loop: "{{ admins[outer_item] }}"
