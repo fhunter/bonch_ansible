@@ -203,6 +203,7 @@
     - include: tasks/install_subversion_git.yml
     - include: tasks/install_archive_tools.yml
     - include: tasks/enable_quota_applet.yml
+    - include: tasks/enable_mail_applet.yml
     - include: tasks/install_browser_pack.yml
     - include: tasks/install_maxima.yml
     - include: tasks/install_sql_databases.yml
