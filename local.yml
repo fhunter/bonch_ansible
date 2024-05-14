@@ -37,6 +37,7 @@
     - include: tasks/add_unburden-home.yml
     - include: tasks/enable_mail_applet.yml
     - include: tasks/install_unattended_upgrades.yml
+    - include: tasks/install_backports_kernel.yml
     - name: remove sudo
       action: apt pkg=sudo state=absent update_cache=no
     - name: update kerberos configs
