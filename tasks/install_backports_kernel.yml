@@ -1,4 +1,7 @@
-    - name: install linux-image from backports
-      apt: name=linux-image-amd64 state=latest default_release=bullseye-backports
-    - name: install linux-headers from backports
-      apt: name=linux-headers-amd64 state=latest default_release=bullseye-backports
+    - name: install linux-headers from backports and linux-image
+      apt:
+        name:
+          - linux-headers-amd64
+          - linux-image-amd64
+        state: latest
+        default_release: bullseye-backports
