@@ -1,10 +1,10 @@
-    - name: enable quota applet
+    - name: enable mail applet
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
       apt:
         pkg: pivtmailnotify
         state: latest
 
-    - name: Add quota-applet to autostart
+    - name: Add mail-applet to autostart
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
       copy:
         src: /usr/share/applications/mailnotify.desktop
