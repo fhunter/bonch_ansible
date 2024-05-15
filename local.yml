@@ -70,7 +70,7 @@
     handlers:
     - include: handlers/restartp910nd.yml
 
-  - hosts: a43707.dcti.sut.ru,a43905.dcti.sut.ru,depo08.dcti.sut.ru
+  - hosts: a43707.dcti.sut.ru,a43905.dcti.sut.ru
     remote_user: root
     tasks:
     - include: tasks/install_hardwarereports.yml
