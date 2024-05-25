@@ -5,10 +5,13 @@
           - linux-image-amd64=6.1.69-1~bpo11+1-pivt
         state: present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11']
-    - name: set hold to linux-headers-amd64 and linux-image-amd64 (to prevent breaking upgrades for nvidia)
+    - name: set hold to linux-headers-amd64 (to prevent breaking upgrades for nvidia)
       dpkg_selections:
-        name:
-          - linux-headers-amd64
-          - linux-image-amd64
+        name: linux-headers-amd64
+        selection: hold
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11']
+    - name: set hold to linux-image-amd64 (to prevent breaking upgrades for nvidia)
+      dpkg_selections:
+        name: linux-image-amd64
         selection: hold
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11']
