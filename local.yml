@@ -69,6 +69,11 @@
     - include: tasks/add_remote_printer_access.yml
     handlers:
     - include: handlers/restartp910nd.yml
+  
+  - hosts: workstations1c
+    remote_user: root
+    tasks:
+    - include: tasks/install_1c.yml
 
   - hosts: a43707.dcti.sut.ru,a43905.dcti.sut.ru
     remote_user: root
