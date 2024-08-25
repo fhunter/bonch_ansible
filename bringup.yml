@@ -259,11 +259,20 @@
         state: present
         install_recommends: no
         update_cache: no
-    - name: install pulseaudio for audio access  # FIXME - replace with pipewire on Debian 12
+    - name: install pulseaudio for audio access
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11']
       apt:
         pkg:
          - pulseaudio
+         - pavucontrol
+        state: present
+        install_recommends: no
+        update_cache: no
+    - name: install pipewire for audio access
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '12']
+      apt:
+        pkg:
+         - pipewire
          - pavucontrol
         state: present
         install_recommends: no
