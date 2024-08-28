@@ -10,6 +10,7 @@
         src: /etc/apt/sources.list
         mode: 0644
         owner: root
+        force: false
     - name: switch bullseye to bookworm
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11']
       copy:
@@ -32,10 +33,12 @@
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '11'
       apt:
         upgrade: safe
+        force_apt_get: true
     - name: apt-get dist-upgrade
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '11'
       apt:
         upgrade: dist
+        force_apt_get: true
     - name: remove backup old.list
       file:
         path: /etc/apt/sources.list.d/old.list
