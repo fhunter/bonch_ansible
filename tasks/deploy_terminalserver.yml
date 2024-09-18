@@ -10,6 +10,8 @@
           - novnc=1:1.3.0-pivt
     - name: upload ttyd config
       copy: src=files/termserver/etc/default/ttyd dest=/etc/default/ttyd owner=root group=root mode="0644"
+    - name: upload lightdm open descriptor config
+      copy: src=files/termserver/etc/systemd/system/lightdm.service.d/limits.conf dest=/etc/systemd/system/lightdm.service.d/limits.conf owner=root group=root mode="0644"
     - name: upload websockify service file
       copy: src=files/termserver/lib/systemd/system/websockify.service dest=/lib/systemd/system/websockify.service owner=root group=root mode="0644"
     - name: block testing from logging in
