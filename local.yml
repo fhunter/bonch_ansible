@@ -35,8 +35,8 @@
     - include: tasks/deploy_single_signon_for_browsers.yml
     - include: tasks/update_timezone.yml
     - include: tasks/add_unburden-home.yml
+    - include: tasks/cleanup_scratch.yml
     - include: tasks/install_unattended_upgrades.yml
-    - include: tasks/install_backports_kernel.yml
     - include: tasks/enable_mail_applet.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=yes cache_valid_time=86400 install_recommends=no
