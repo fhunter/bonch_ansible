@@ -15,6 +15,7 @@ srv-3.dcti.sut.ru
 srv-1.dcti.sut.ru
 srv-2.dcti.sut.ru
 srv-4.dcti.sut.ru
+srv462.dcti.sut.ru
 
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
@@ -110,6 +111,7 @@ a445[01:13].dcti.sut.ru
 a425[00:12].dcti.sut.ru
 srv-[1:5].dcti.sut.ru
 littlebig.dcti.sut.ru
+srv462.dcti.sut.ru
 
 [py3_hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
