@@ -1,12 +1,12 @@
 - name: Add cleaning /scratch from unowned files to cron
   cron:
     special_time: "weekly"
-    job: "sleep 60;id testingn00 && time find /scratch/ -xdev -nouser -delete"
+    job: "sleep 60;id testingn00 && find /scratch/ -xdev -nouser -delete"
     name: clean_scratch_1
     state: present
 - name: Add cleaning /scratch from files older than 4 years to cron
   cron:
     special_time: "weekly"
-    job: "time find /scratch/ -xdev -atime +1460 -delete"
+    job: "find /scratch/ -xdev -atime +1460 -delete"
     name: clean_scratch_2
     state: present
