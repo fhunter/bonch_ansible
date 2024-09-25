@@ -33,7 +33,6 @@
     remote_user: root
     tasks:
     - include: tasks/deploy_single_signon_for_browsers.yml
-    - include: tasks/install_internet.yml # Temporary
     - include: tasks/update_timezone.yml
     - include: tasks/add_unburden-home.yml
     - include: tasks/cleanup_scratch.yml
@@ -50,6 +49,7 @@
   - hosts: a425
     remote_user: root
     tasks:
+    - include: tasks/install_internet.yml # Temporary
     - include: tasks/install_faculty.yml
 
   - hosts: remoteteaching
