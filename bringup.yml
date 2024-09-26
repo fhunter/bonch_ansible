@@ -176,6 +176,7 @@
           - libsixel-bin
           - chafa
           - putty
+          - ncal
         state: present
         install_recommends: no
         update_cache: no
