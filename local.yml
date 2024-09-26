@@ -20,6 +20,8 @@
     - include: tasks/install_status_report.yml
     - include: tasks/install_temperature_report.yml
     - include: tasks/install_user_registration.yml
+    - name: remove cups-browsed
+      action: apt pkg=cups-browsed state=absent update_cache=no
     - include_tasks: tasks/deploy_admin_access.yml
       loop: "{{ group_names | union([inventory_hostname,]) }}"
       loop_control:
