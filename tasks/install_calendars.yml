@@ -6,6 +6,7 @@
          - khard
          - vdirsyncer
          - todoman
+         - calcurse
         state: present
     - name: install khal/khard/vdirsyncer/todoman
       apt: pkg=ncal state=present
