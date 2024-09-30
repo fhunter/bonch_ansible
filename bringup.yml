@@ -176,7 +176,6 @@
           - libsixel-bin
           - chafa
           - putty
-          - ncal
         state: present
         install_recommends: no
         update_cache: no
@@ -191,6 +190,7 @@
       apt: pkg=mate-tweak state=present install_recommends=no update_cache=no
 
     - include: tasks/install_libreoffice.yml
+    - include: tasks/install_calendars.yml
     - include: tasks/install_msttfcorefonts.yml
     - include: tasks/install_fonts_terminus.yml
     - include: tasks/install_jdk.yml

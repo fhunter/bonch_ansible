@@ -40,11 +40,10 @@
     - include: tasks/cleanup_scratch.yml
     - include: tasks/install_unattended_upgrades.yml
     - include: tasks/enable_mail_applet.yml
+    - include: tasks/install_calendars.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=yes cache_valid_time=86400 install_recommends=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11', '12']
-    - name: install ncal calendar tool
-      apt: pkg=ncal state=latest install_recommends=no
     - name: remove sudo
       action: apt pkg=sudo state=absent update_cache=no
     - name: update kerberos configs
