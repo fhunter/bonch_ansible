@@ -20,8 +20,6 @@
     - include: tasks/install_status_report.yml
     - include: tasks/install_temperature_report.yml
     - include: tasks/install_user_registration.yml
-    - name: remove cups-browsed
-      action: apt pkg=cups-browsed state=absent update_cache=no
     - include_tasks: tasks/deploy_admin_access.yml
       loop: "{{ group_names | union([inventory_hostname,]) }}"
       loop_control:
@@ -40,7 +38,6 @@
     - include: tasks/cleanup_scratch.yml
     - include: tasks/install_unattended_upgrades.yml
     - include: tasks/enable_mail_applet.yml
-    - include: tasks/install_calendars.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=yes cache_valid_time=86400 install_recommends=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11', '12']
@@ -52,7 +49,6 @@
   - hosts: a425
     remote_user: root
     tasks:
-    - include: tasks/install_internet.yml # Temporary
     - include: tasks/install_faculty.yml
 
   - hosts: remoteteaching
