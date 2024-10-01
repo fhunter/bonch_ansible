@@ -15,12 +15,12 @@
     src: files/common/etc/cron.weekly/cleanscratch
     dest: /etc/cron.weekly/cleanscratch
     group: root
-    user: root
+    owner: root
     mode: "0755"
 - name: copy cron.weekly jobs2
   copy:
     src: files/common/etc/cron.weekly/cleanunowned
     dest: /etc/cron.weekly/cleanunowned
     group: root
-    user: root
+    owner: root
     mode: "0755"
