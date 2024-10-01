@@ -1,0 +1,5 @@
+#!/bin/sh
+df -h /scratch
+sleep 60
+id testingn00 && find /scratch/ -xdev -nouser -delete
+df -h /scratch
