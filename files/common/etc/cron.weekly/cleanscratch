@@ -1,5 +1,10 @@
 #!/bin/sh
 
-df -h /scratch
+FREE_OLD=$(df -k /scratch --output=avail|tail -n 1)
 find /scratch/ -xdev -atime +1460 -delete
-df -h /scratch
+FREE_NEW=$(df -k /scratch --output=avail|tail -n 1)
+if [ $((FREE_NEW-FREE_OLD)) -gt 0 ]; then
+    echo "Очистка файлов старше 1460 дней в /scratch"
+    echo "Освобождено: $(( (FREE_NEW-FREE_OLD)/1024)) мегабайт"
+    echo ""
+fi
