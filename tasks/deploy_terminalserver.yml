@@ -19,6 +19,22 @@
         state: present
         line: "@testing         -       maxlogins       0"
         path: /etc/security/limits.conf
+    - name: limit students number of processes to 500
+      lineinfile:
+        state: present
+        line: "@students         hard    nproc       500"
+        path: /etc/security/limits.conf
+    - name: limit students cpu time to 3 hours
+      lineinfile:
+        state: present
+        line: "@students         hard    cpu         180"
+        path: /etc/security/limits.conf
+    - name: limit students data segment to 8 gigs
+      lineinfile:
+        state: present
+        line: "@students         hard    data    8388608"
+        path: /etc/security/limits.conf
+
 # Add deployment of noVNC files
     - name: enable and run ttyd
       systemd:
