@@ -1,7 +1,7 @@
 #!/bin/sh
 FREE_OLD=$(df -k /scratch --output=avail|tail -n 1)
 sleep 60
-id testingn00 && find /scratch/ -xdev -nouser -delete
+id testingn00 >/dev/null && find /scratch/ -xdev -nouser -delete
 FREE_NEW=$(df -k /scratch --output=avail|tail -n 1)
 if [ $((FREE_NEW-FREE_OLD)) -gt 0 ]; then
     echo "Очистка файлов без владельцев в /scratch"
