@@ -218,6 +218,7 @@
     - include: tasks/install_idea.yml
     - include: tasks/install_pycharm.yml
     - include: tasks/install_nscd.yml
+    - include: tasks/cleanup_scratch.yml
     - include: tasks/fix_xsession_errors.yml
     - include: tasks/install_hardwarereports.yml
     - name: install gnuplot
