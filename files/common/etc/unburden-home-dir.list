@@ -1,8 +1,8 @@
 # Generic cache locations
 m D .cache/chromium cache_chromium
-m D .config/google-chrome/Safe\ Browsing google_chrome_safebrowsing
-m D .config/google-chrome/*/Service\ Worker/CacheStorage google_chrome_serviceworker_cache-%1
-m D .config/chromium/*/Service\ Worker/CacheStorage chromium_serviceworker_cache-%1
+m D .config/google-chrome/Safe*Browsing google_chrome_safebrowsing
+m D .config/google-chrome/*/Service*Worker/CacheStorage google_chrome_serviceworker_cache-%1
+m D .config/chromium/*/Service*Worker/CacheStorage chromium_serviceworker_cache-%1
 
 m D .config/discord/0.* discord_updates_0.%1
 m D .config/discord/Cache  discord_cache
