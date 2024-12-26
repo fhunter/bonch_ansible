@@ -35,6 +35,9 @@ m D .config/VirtualBox configr_VirtualBox
 m f .xsession-errors.old xsession-errors.old
 m f .xsession-errors xsession-errors
 
+# maven repos
+m D .m2/repository maven_repository
+
 # Common browser caches
 m f .config/google-chrome/*/Thumbnails google-chrome-thumbnails-%1
 m f .config/google-chrome/*/Thumbnails-journal google-chrome-thumbnails-journal-%1
