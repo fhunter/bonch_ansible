@@ -1,6 +1,7 @@
 # Generic cache locations
 m D .cache/chromium cache_chromium
 m D .config/google-chrome/Safe*Browsing google_chrome_safebrowsing
+m D .config/google-chrome/component_crx_cache google_chrome_crx_cache
 m D .config/google-chrome/*/Service*Worker/CacheStorage google_chrome_serviceworker_cache-%1
 m D .config/chromium/*/Service*Worker/CacheStorage chromium_serviceworker_cache-%1
 
