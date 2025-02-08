@@ -33,7 +33,8 @@
     remote_user: root
     tasks:
     - include: tasks/update_timezone.yml
-    - include: tasks/add_unburden-home.yml
+    - name: update rules for unburden
+      action: copy dest=/etc/unburden-home-dir.list src=files/common/etc/unburden-home-dir.list mode="0644"
     - name: remove sudo
       action: apt pkg=sudo state=absent update_cache=no
     - name: update kerberos configs
@@ -44,13 +45,13 @@
 #    tasks:
 #    - include: tasks/install_faculty.yml
 
-  - hosts: remoteteaching
-    remote_user: root
-    tasks:
-    - name: install discord
-      action: apt pkg=discord state=latest install_recommends=no update_cache=no
-    - name: install zoom
-      action: apt pkg=zoom state=latest install_recommends=no update_cache=no
+#  - hosts: remoteteaching
+#    remote_user: root
+#    tasks:
+#    - name: install discord
+#      action: apt pkg=discord state=latest install_recommends=no update_cache=no
+#    - name: install zoom
+#      action: apt pkg=zoom state=latest install_recommends=no update_cache=no
 
   - hosts: a44304.dcti.sut.ru
     remote_user: root
@@ -66,8 +67,8 @@
     handlers:
     - include: handlers/restartp910nd.yml
   
-  - hosts: workstations1c
-    remote_user: root
-    tasks:
-    - include: tasks/install_1c.yml
+#  - hosts: workstations1c
+#    remote_user: root
+#    tasks:
+#    - include: tasks/install_1c.yml
 

@@ -328,6 +328,7 @@
     - include: tasks/install_hardwarereports.yml
     - include: tasks/deploy_single_signon_for_browsers.yml
     - include: tasks/install_unattended_upgrades.yml
+    - include: tasks/add_unburden-home.yml
 
   - hosts: remoteprinters
     remote_user: root
