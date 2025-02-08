@@ -32,13 +32,8 @@
   - hosts: classes
     remote_user: root
     tasks:
-    - include: tasks/deploy_single_signon_for_browsers.yml
     - include: tasks/update_timezone.yml
     - include: tasks/add_unburden-home.yml
-    - include: tasks/install_unattended_upgrades.yml
-    - name: install vncbroadcast to allow remote access
-      apt: pkg=vncbroadcast state=latest update_cache=yes cache_valid_time=86400 install_recommends=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11', '12']
     - name: remove sudo
       action: apt pkg=sudo state=absent update_cache=no
     - name: update kerberos configs

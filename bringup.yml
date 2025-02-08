@@ -326,6 +326,8 @@
     tasks:
     - include: tasks/autostart_pidgin.yml
     - include: tasks/install_hardwarereports.yml
+    - include: tasks/deploy_single_signon_for_browsers.yml
+    - include: tasks/install_unattended_upgrades.yml
 
   - hosts: remoteprinters
     remote_user: root
