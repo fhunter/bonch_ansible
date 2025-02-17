@@ -35,7 +35,7 @@
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
     - name: Setup quota
-      command: setquota -u {{item}} 450000 500000 0 0 /home
+      command: setquota -u {{item}} 500000 550000 0 0 /home
       with_sequence: start=0 end=40 stride=1 format={{create_group}}n%02d
 
     - name: Do update of user lists before password reset
