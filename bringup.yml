@@ -11,7 +11,7 @@
 
     - include: tasks/add_i386_architecture_support.yml
 
-    - include: tasks/add_localrepo.yml
+#    - include: tasks/add_localrepo.yml
     - include: tasks/aptgetupdate.yml
     - include: tasks/create_rc_local.yml
     - include: tasks/logrotate.yml
