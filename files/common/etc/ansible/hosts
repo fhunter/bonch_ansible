@@ -48,6 +48,10 @@ a44303.dcti.sut.ru
 a44305.dcti.sut.ru
 a44306.dcti.sut.ru
 
+[a462]
+srv462test.dcti.sut.ru
+srv462test2.dcti.sut.ru
+
 [depo]
 depo[07:12].dcti.sut.ru
 
@@ -88,6 +92,7 @@ a441
 a443
 a425
 depo
+a462
 
 [classes:children]
 noremote
@@ -111,6 +116,8 @@ a425[00:12].dcti.sut.ru
 srv-[1:5].dcti.sut.ru
 littlebig.dcti.sut.ru
 srv462.dcti.sut.ru
+a462test2.dcti.sut.ru
+a462test.dcti.sut.ru
 
 [py3_hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
