@@ -18,6 +18,7 @@
       lineinfile:
         dest: /etc/apt/apt.conf.d/20auto-upgrades
         state: present
+        create: true
         line: "{{ item.line }}"
       with_items:
         - { line: 'APT::Periodic::AutocleanInterval "7";' }
