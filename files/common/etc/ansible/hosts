@@ -20,54 +20,66 @@ srv462.dcti.sut.ru
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
 [a445]
+a43703.dcti.sut.ru
 a445[01:13].dcti.sut.ru
 
 [a439]
-a4390[1:6].dcti.sut.ru
-a437[04:11].dcti.sut.ru
+a43704.dcti.sut.ru
+a43705.dcti.sut.ru
+a43707.dcti.sut.ru
+a43708.dcti.sut.ru
+a43709.dcti.sut.ru
+a43710.dcti.sut.ru
+a43711.dcti.sut.ru
+a43901.dcti.sut.ru
+a43902.dcti.sut.ru
+a43903.dcti.sut.ru
+a43904.dcti.sut.ru
+a44104.dcti.sut.ru
+a44306.dcti.sut.ru
 depo12.dcti.sut.ru
 
 [a437]
-a4370[1:3].dcti.sut.ru
+a43701.dcti.sut.ru
+a43902.dcti.sut.ru
+a43905.dcti.sut.ru
+a43906.dcti.sut.ru
 depo[07:11].dcti.sut.ru
 
 [a425]
 a425[00:12].dcti.sut.ru
 
 [a441]
-a44104.dcti.sut.ru
+a43702.dcti.sut.ru
 a44105.dcti.sut.ru
 a44106.dcti.sut.ru
-a44107.dcti.sut.ru
 a44304.dcti.sut.ru
 
 [a443]
+a43706.dcti.sut.ru
 a44301.dcti.sut.ru
-a44302.dcti.sut.ru
 a44303.dcti.sut.ru
 a44305.dcti.sut.ru
-a44306.dcti.sut.ru
 
 [a462]
 srv462test.dcti.sut.ru
 srv462test2.dcti.sut.ru
 
-[depo]
-depo[07:12].dcti.sut.ru
-
 [boards]
 board445.dcti.sut.ru
 board439.dcti.sut.ru
 
-[remoteteaching]
-a443[01:06].dcti.sut.ru
-a441[01:07].dcti.sut.ru
+[remoteteaching:children]
+a443
+a441
 
 [remoteprinters]
 a44301.dcti.sut.ru
-a44306.dcti.sut.ru
 a44305.dcti.sut.ru
 a44304.dcti.sut.ru
+
+[remoteprinter_lbp1120]
+a44105.dcti.sut.ru
 
 [fileserver]
 srv-1.dcti.sut.ru
@@ -90,7 +102,6 @@ a445
 a441
 a443
 a425
-depo
 a462
 
 [classes:children]
