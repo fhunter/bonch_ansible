@@ -1,5 +1,5 @@
     - name: install dosemu
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12','13']
       apt:
         pkg:
          - dosemu=1.4.0.7+20130105+b028d3f-1

@@ -34,3 +34,26 @@
         - { line: '<role rolename=\"admin-gui\" />' }
         - { line: '<user username=\"tomcat\" password=\"tomcat\" roles=\"tomcat,manager-gui,admin-gui\"/>' }
 
+    - name: install tomcat11
+      apt:
+        pkg:
+         - tomcat11
+         - tomcat11-admin
+         - tomcat11-common
+         - tomcat11-examples
+         - tomcat11-user
+         - tomcat11-docs
+         - libtomcat11-java
+         - libecj-java
+        state: present
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['13']
+
+    - name: setup tomcat11 users and roles
+      action: lineinfile insertbefore="</tomcat-users>" state=present line="{{item.line}}" dest=/etc/tomcat11/tomcat-users.xml
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['13']
+      with_items:
+        - { line: '<role rolename=\"tomcat\" />' }
+        - { line: '<role rolename=\"manager-gui\" />' }
+        - { line: '<role rolename=\"admin-gui\" />' }
+        - { line: '<user username=\"tomcat\" password=\"tomcat\" roles=\"tomcat,manager-gui,admin-gui\"/>' }
+

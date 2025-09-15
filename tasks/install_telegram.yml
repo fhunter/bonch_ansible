@@ -4,7 +4,7 @@
         pkg: telegram-desktop=4.6.5+ds-1~bpo11+1
         state: present
     - name: Install telegram-desktop client
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12','13']
       apt:
         pkg: telegram-desktop
         state: present

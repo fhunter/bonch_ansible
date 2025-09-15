@@ -6,7 +6,7 @@
           - xfonts-terminus-dos
         state: present
     - name: install terminus fonts (debian 11)
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12','13']
       apt:
         pkg:
           - fonts-terminus

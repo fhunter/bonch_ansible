@@ -1,11 +1,11 @@
     - name: enable mail applet
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12', '13']
       apt:
         pkg: pivtmailnotify
         state: latest
 
     - name: Add mail-applet to autostart
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12', '13']
       copy:
         src: /usr/share/applications/mailnotify.desktop
         dest: /etc/xdg/autostart/

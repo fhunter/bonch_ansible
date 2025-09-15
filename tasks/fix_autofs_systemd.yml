@@ -1,9 +1,9 @@
    - name: Set _netdev flag in autofs mount
-     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12','13']
      lineinfile:
        dest: /etc/auto.net
        regexp: '^opts='
        line: 'opts="-fstype=nfs,hard,intr,nodev,nosuid,_netdev"'
    - name: Set KillUserProcesses to yes
-     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12','13']
      ini_file: section=Login dest=/etc/systemd/logind.conf option=KillUserProcesses value=yes state=present mode="0644"

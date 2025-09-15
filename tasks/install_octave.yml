@@ -3,7 +3,7 @@
     name: octave
     state: present
     install_recommends: false
-  when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+  when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12','13']
 - name: Install fonts for octave
   ansible.builtin.apt:
     name:
