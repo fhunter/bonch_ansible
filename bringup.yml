@@ -312,9 +312,9 @@
         remote_src: yes
 
     handlers:
-    - include_tasks: handlers/restartopenntpd.yml
-    - include_tasks: handlers/restartlightdm.yml
-    - include_tasks: handlers/restartautofs.yml
+    - include: handlers/restartopenntpd.yml
+    - include: handlers/restartlightdm.yml
+    - include: handlers/restartautofs.yml
 
   - hosts: a44306.dcti.sut.ru
     remote_user: root
@@ -335,7 +335,7 @@
     tasks:
     - include_tasks: tasks/add_remote_printer_access.yml
     handlers:
-    - include_tasks: handlers/restartp910nd.yml
+    - include: handlers/restartp910nd.yml
 
   - hosts: a445
     remote_user: root
