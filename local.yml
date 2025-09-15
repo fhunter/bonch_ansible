@@ -17,6 +17,8 @@
     remote_user: root
     tasks:
     - include_tasks: tasks/copyansiblehosts.yml
+    - name: Add key for local PIVT repo to machine
+      action: apt_key url=http://apt.dcti.sut.ru/apt.gpg state=present
     - include_tasks: tasks/install_status_report.yml
     - include_tasks: tasks/install_temperature_report.yml
     - include_tasks: tasks/install_user_registration.yml
