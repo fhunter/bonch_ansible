@@ -1,7 +1,7 @@
-    - name: install verilog
-      apt:
-        pkg:
-         - gtkwave
-         - iverilog
-        state: present
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+- name: Install verilog
+  ansible.builtin.apt:
+    pkg:
+      - gtkwave
+      - iverilog
+    state: present
+  when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']

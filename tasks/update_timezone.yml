@@ -1,6 +1,6 @@
-   - name: Install latest timezone data
-     apt:
-       name: tzdata
-       state: latest
-       update_cache: no
-       install_recommends: no
+- name: Install latest timezone data
+  ansible.builtin.apt:
+    name: tzdata
+    state: latest
+    update_cache: false
+    install_recommends: false

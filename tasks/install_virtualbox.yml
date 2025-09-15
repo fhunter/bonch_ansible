@@ -1,10 +1,10 @@
-   - name: Install virtualbox
-     apt:
-       pkg:
-        - virtualbox
-        - virtualbox-qt
-        - virtualbox-dkms
-        - virtualbox-source
-       state: latest
-       install_recommends: no
-     when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+- name: Install virtualbox
+  ansible.builtin.apt:
+    pkg:
+      - virtualbox
+      - virtualbox-qt
+      - virtualbox-dkms
+      - virtualbox-source
+    state: latest
+    install_recommends: false
+  when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
