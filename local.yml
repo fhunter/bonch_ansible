@@ -16,10 +16,10 @@
   - hosts: all
     remote_user: root
     tasks:
-    - include: tasks/copyansiblehosts.yml
-    - include: tasks/install_status_report.yml
-    - include: tasks/install_temperature_report.yml
-    - include: tasks/install_user_registration.yml
+    - include_tasks: tasks/copyansiblehosts.yml
+    - include_tasks: tasks/install_status_report.yml
+    - include_tasks: tasks/install_temperature_report.yml
+    - include_tasks: tasks/install_user_registration.yml
     - include_tasks: tasks/deploy_admin_access.yml
       loop: "{{ group_names | union([inventory_hostname,]) }}"
       loop_control:
@@ -32,8 +32,8 @@
   - hosts: classes
     remote_user: root
     tasks:
-    - include: tasks/update_timezone.yml
-    - include: tasks/install_octave.yml
+    - include_tasks: tasks/update_timezone.yml
+    - include_tasks: tasks/install_octave.yml
     - name: update rules for unburden
       action: copy dest=/etc/unburden-home-dir.list src=files/common/etc/unburden-home-dir.list mode="0644"
     - name: remove sudo
@@ -44,7 +44,7 @@
 #  - hosts: a425
 #    remote_user: root
 #    tasks:
-#    - include: tasks/install_faculty.yml
+#    - include_tasks: tasks/install_faculty.yml
 
 #  - hosts: remoteteaching
 #    remote_user: root
@@ -57,19 +57,19 @@
   - hosts: a44304.dcti.sut.ru
     remote_user: root
     tasks:
-    - include: tasks/install_telegram.yml
+    - include_tasks: tasks/install_telegram.yml
     - name: setup scanner permissions
       copy: src=files/a44304/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
 
   - hosts: remoteprinters
     remote_user: root
     tasks:
-    - include: tasks/add_remote_printer_access.yml
+    - include_tasks: tasks/add_remote_printer_access.yml
     handlers:
-    - include: handlers/restartp910nd.yml
+    - include_tasks: handlers/restartp910nd.yml
   
 #  - hosts: workstations1c
 #    remote_user: root
 #    tasks:
-#    - include: tasks/install_1c.yml
+#    - include_tasks: tasks/install_1c.yml
 

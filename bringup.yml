@@ -5,16 +5,16 @@
 
     remote_user: root
     tasks:
-    - include: tasks/fix_partition_sizes.yml
-    - include: tasks/add_scratch.yml
-    - include: tasks/enable_kerberos_ssh.yml
+    - include_tasks: tasks/fix_partition_sizes.yml
+    - include_tasks: tasks/add_scratch.yml
+    - include_tasks: tasks/enable_kerberos_ssh.yml
 
-    - include: tasks/add_i386_architecture_support.yml
+    - include_tasks: tasks/add_i386_architecture_support.yml
 
-#    - include: tasks/add_localrepo.yml
-    - include: tasks/aptgetupdate.yml
-    - include: tasks/create_rc_local.yml
-    - include: tasks/logrotate.yml
+#    - include_tasks: tasks/add_localrepo.yml
+    - include_tasks: tasks/aptgetupdate.yml
+    - include_tasks: tasks/create_rc_local.yml
+    - include_tasks: tasks/logrotate.yml
 
     - name: add pam_group to configs
       lineinfile: dest=/etc/pam.d/common-auth line="auth optional pam_group.so" state=present insertafter=EOF
@@ -55,9 +55,9 @@
 #    - name: fix pam configs for auth
 #      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
 
-    - include: tasks/install_dosemu.yml
-    - include: tasks/fix_autofs_systemd.yml
-    - include: tasks/deploy_trust_for_dcti.sut.ru.yml
+    - include_tasks: tasks/install_dosemu.yml
+    - include_tasks: tasks/fix_autofs_systemd.yml
+    - include_tasks: tasks/deploy_trust_for_dcti.sut.ru.yml
 
     - name: install base packages
       apt:
@@ -137,7 +137,7 @@
         install_recommends: no
         update_cache: yes
 
-    - include: tasks/install_tablet_support.yml
+    - include_tasks: tasks/install_tablet_support.yml
     - name: install assembly language IDE
       apt:
         name:
@@ -147,7 +147,7 @@
         install_recommends: no
         update_cache: no
 
-    - include: tasks/install_virtualbox.yml
+    - include_tasks: tasks/install_virtualbox.yml
     - name: install convenience tools
       apt:
         name:
@@ -189,38 +189,38 @@
     - name: install mate-tweak
       apt: pkg=mate-tweak state=present install_recommends=no update_cache=no
 
-    - include: tasks/install_libreoffice.yml
-    - include: tasks/install_calendars.yml
-    - include: tasks/install_msttfcorefonts.yml
-    - include: tasks/install_fonts_terminus.yml
-    - include: tasks/install_jdk.yml
-    - include: tasks/install_lisp.yml
-    - include: tasks/install_verilog.yml
-    - include: tasks/install_swiprolog.yml
-    - include: tasks/install_codeblocks.yml
-    - include: tasks/install_sublimeeditor.yml
-    - include: tasks/install_vnc.yml
-    - include: tasks/install_debiankeyring.yml
-    - include: tasks/install_subversion_git.yml
-    - include: tasks/install_archive_tools.yml
-    - include: tasks/enable_quota_applet.yml
-    - include: tasks/enable_mail_applet.yml
-    - include: tasks/install_browser_pack.yml
-    - include: tasks/install_maxima.yml
-    - include: tasks/install_sql_databases.yml
-    - include: tasks/install_haskell.yml
-    - include: tasks/install_qtsdk.yml
-    - include: tasks/install_octave.yml
-    - include: tasks/install_ipython.yml
-    - include: tasks/install_icecc.yml
-    - include: tasks/install_rustc.yml
-    - include: tasks/install_golang.yml
-    - include: tasks/install_idea.yml
-    - include: tasks/install_pycharm.yml
-    - include: tasks/install_nscd.yml
-    - include: tasks/cleanup_scratch.yml
-    - include: tasks/fix_xsession_errors.yml
-    - include: tasks/install_hardwarereports.yml
+    - include_tasks: tasks/install_libreoffice.yml
+    - include_tasks: tasks/install_calendars.yml
+    - include_tasks: tasks/install_msttfcorefonts.yml
+    - include_tasks: tasks/install_fonts_terminus.yml
+    - include_tasks: tasks/install_jdk.yml
+    - include_tasks: tasks/install_lisp.yml
+    - include_tasks: tasks/install_verilog.yml
+    - include_tasks: tasks/install_swiprolog.yml
+    - include_tasks: tasks/install_codeblocks.yml
+    - include_tasks: tasks/install_sublimeeditor.yml
+    - include_tasks: tasks/install_vnc.yml
+    - include_tasks: tasks/install_debiankeyring.yml
+    - include_tasks: tasks/install_subversion_git.yml
+    - include_tasks: tasks/install_archive_tools.yml
+    - include_tasks: tasks/enable_quota_applet.yml
+    - include_tasks: tasks/enable_mail_applet.yml
+    - include_tasks: tasks/install_browser_pack.yml
+    - include_tasks: tasks/install_maxima.yml
+    - include_tasks: tasks/install_sql_databases.yml
+    - include_tasks: tasks/install_haskell.yml
+    - include_tasks: tasks/install_qtsdk.yml
+    - include_tasks: tasks/install_octave.yml
+    - include_tasks: tasks/install_ipython.yml
+    - include_tasks: tasks/install_icecc.yml
+    - include_tasks: tasks/install_rustc.yml
+    - include_tasks: tasks/install_golang.yml
+    - include_tasks: tasks/install_idea.yml
+    - include_tasks: tasks/install_pycharm.yml
+    - include_tasks: tasks/install_nscd.yml
+    - include_tasks: tasks/cleanup_scratch.yml
+    - include_tasks: tasks/fix_xsession_errors.yml
+    - include_tasks: tasks/install_hardwarereports.yml
     - name: install gnuplot
       action: apt name=gnuplot state=present install_recommends=no update_cache=no
     - name: install python3-websockets
@@ -240,7 +240,7 @@
         state: present
         install_recommends: no
         update_cache: no
-    - include: tasks/install_quartus_7_1.yml
+    - include_tasks: tasks/install_quartus_7_1.yml
     - name: install x11vnc to allow remote access
       apt: pkg=x11vnc state=present update_cache=no install_recommends=no
 
@@ -296,10 +296,10 @@
     - name: remove apparmor
       apt: name=apparmor state=absent
 
-    - include: tasks/install_internet.yml
-    - include: tasks/install_localca.yml
-#    - include: tasks/fix_access_mysql.yml
-#    - include: tasks/add_permission_read_logs_apache2.yml
+    - include_tasks: tasks/install_internet.yml
+    - include_tasks: tasks/install_localca.yml
+#    - include_tasks: tasks/fix_access_mysql.yml
+#    - include_tasks: tasks/add_permission_read_logs_apache2.yml
     - name: install vncbroadcast to allow remote access
       apt: pkg=vncbroadcast state=latest update_cache=no install_recommends=no
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in [ '11', '12', '13']
@@ -312,61 +312,61 @@
         remote_src: yes
 
     handlers:
-    - include: handlers/restartopenntpd.yml
-    - include: handlers/restartlightdm.yml
-    - include: handlers/restartautofs.yml
+    - include_tasks: handlers/restartopenntpd.yml
+    - include_tasks: handlers/restartlightdm.yml
+    - include_tasks: handlers/restartautofs.yml
 
   - hosts: a44306.dcti.sut.ru
     remote_user: root
     tasks:
-    - include: tasks/add_scanner_snapscan.yml
+    - include_tasks: tasks/add_scanner_snapscan.yml
 
   - hosts: classes
     remote_user: root
     tasks:
-    - include: tasks/autostart_pidgin.yml
-    - include: tasks/install_hardwarereports.yml
-    - include: tasks/deploy_single_signon_for_browsers.yml
-    - include: tasks/install_unattended_upgrades.yml
-    - include: tasks/add_unburden-home.yml
+    - include_tasks: tasks/autostart_pidgin.yml
+    - include_tasks: tasks/install_hardwarereports.yml
+    - include_tasks: tasks/deploy_single_signon_for_browsers.yml
+    - include_tasks: tasks/install_unattended_upgrades.yml
+    - include_tasks: tasks/add_unburden-home.yml
 
   - hosts: remoteprinters
     remote_user: root
     tasks:
-    - include: tasks/add_remote_printer_access.yml
+    - include_tasks: tasks/add_remote_printer_access.yml
     handlers:
-    - include: handlers/restartp910nd.yml
+    - include_tasks: handlers/restartp910nd.yml
 
   - hosts: a445
     remote_user: root
     tasks:
-    - include: tasks/install_quartus_15.yml
-    - include: tasks/install_vmshortcuts.yml
+    - include_tasks: tasks/install_quartus_15.yml
+    - include_tasks: tasks/install_vmshortcuts.yml
 
   - hosts: a439
     remote_user: root
     tasks:
-    - include: tasks/install_quartus_15.yml
-    - include: tasks/install_vmshortcuts.yml
+    - include_tasks: tasks/install_quartus_15.yml
+    - include_tasks: tasks/install_vmshortcuts.yml
 
   - hosts: a425
     remote_user: root
     tasks:
-    - include: tasks/install_quartus_15.yml
-    - include: tasks/install_vmshortcuts.yml
+    - include_tasks: tasks/install_quartus_15.yml
+    - include_tasks: tasks/install_vmshortcuts.yml
 
   - hosts: a437
     remote_user: root
     tasks:
-    - include: tasks/install_quartus_15.yml
-    - include: tasks/install_vmshortcuts.yml
+    - include_tasks: tasks/install_quartus_15.yml
+    - include_tasks: tasks/install_vmshortcuts.yml
 
   - hosts: a443
     remote_user: root
     tasks:
-    - include: tasks/install_texlive.yml
-    - include: tasks/install_texmaker.yml
-    - include: tasks/install_quartus_15.yml
+    - include_tasks: tasks/install_texlive.yml
+    - include_tasks: tasks/install_texmaker.yml
+    - include_tasks: tasks/install_quartus_15.yml
     - name: install scanning utilities
       apt:
         name:
@@ -394,9 +394,9 @@
   - hosts: a441
     remote_user: root
     tasks:
-    - include: tasks/install_quartus_15.yml
-    - include: tasks/install_texlive.yml
-    - include: tasks/install_texmaker.yml
+    - include_tasks: tasks/install_quartus_15.yml
+    - include_tasks: tasks/install_texlive.yml
+    - include_tasks: tasks/install_texmaker.yml
     - name: install scanning utilities
       apt:
         name:
@@ -423,19 +423,19 @@
   - hosts: noremote
     remote_user: root
     tasks:
-    - include: tasks/install_lightdm_back.yml
-    - include: tasks/enable_grub_password.yml
+    - include_tasks: tasks/install_lightdm_back.yml
+    - include_tasks: tasks/enable_grub_password.yml
 
   - hosts: terminalservers
     remote_user: root
     tasks:
-    - include: tasks/install_texlive.yml
-    - include: tasks/install_texmaker.yml
-    - include: tasks/install_quartus_15.yml
+    - include_tasks: tasks/install_texlive.yml
+    - include_tasks: tasks/install_texmaker.yml
+    - include_tasks: tasks/install_quartus_15.yml
     - name: deploy lrzsz
       action: apt name=lrzsz state=present install_recommends=no update_cache=no
-    - include: tasks/cleantmp.yml
-    - include: tasks/deploy_terminalserver.yml
+    - include_tasks: tasks/cleantmp.yml
+    - include_tasks: tasks/deploy_terminalserver.yml
     - name: Install software for 3d development and electronics
       apt:
         name:
@@ -464,7 +464,7 @@
   - hosts: workstations1c
     remote_user: root
     tasks:
-    - include: tasks/install_1c.yml
+    - include_tasks: tasks/install_1c.yml
 
   - hosts: all
     remote_user: root
