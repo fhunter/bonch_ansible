@@ -142,9 +142,16 @@
       apt:
         name:
           - sasm
+        state: latest
+        install_recommends: no
+        update_cache: no
+    - name: install assembly language IDE deps
+      apt:
+        name:
           - libc6-dev-i386
         state: latest
         install_recommends: no
+        when: ansible_architecture == 'x86_64'
         update_cache: no
 
     - include_tasks: tasks/install_virtualbox.yml
