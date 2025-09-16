@@ -1,2 +1,3 @@
     - name: install sublime editor
       action: apt name=sublime-text state=present
+      when: ansible_architecture == 'x86_64'
