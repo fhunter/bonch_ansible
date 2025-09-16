@@ -1,2 +1,3 @@
     - name: install intelliJ Idea
       action: apt name=intellijidea state=latest update_cache=no
+      when: ansible_architecture == 'x86_64'
