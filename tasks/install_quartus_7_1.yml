@@ -1,6 +1,6 @@
     - name: install quartus
       action: apt pkg=quartus7.1 state=latest install_recommends=no
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12','13']
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12','13'] and ansible_architecture == 'x86_64'
 
     - name: add lines to rc.local
       lineinfile: dest=/etc/rc.local insertbefore="exit 0" line="{{ item.line }}" state=present
