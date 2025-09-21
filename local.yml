@@ -19,6 +19,9 @@
     - include_tasks: tasks/copyansiblehosts.yml
     - name: Add key for local PIVT repo to machine
       action: apt_key url=http://apt.dcti.sut.ru/apt.gpg state=present
+    - name: Update cache if it is older than 1 day
+      action: apt update_cache=yes cache_valid_time=86400
+    - include_tasks: tasks/remove_aptgetupdatecron.yml
     - include_tasks: tasks/install_status_report.yml
     - include_tasks: tasks/install_temperature_report.yml
     - include_tasks: tasks/install_user_registration.yml
