@@ -38,6 +38,7 @@
     remote_user: root
     tasks:
     - include_tasks: tasks/update_timezone.yml
+    - include_tasks: task/limitsshaccess.yml
     - include_tasks: tasks/install_octave.yml
     - name: update rules for unburden
       action: copy dest=/etc/unburden-home-dir.list src=files/common/etc/unburden-home-dir.list mode="0644"
@@ -72,7 +73,7 @@
     - include_tasks: tasks/add_remote_printer_access.yml
     handlers:
     - import_tasks: handlers/restartp910nd.yml
-  
+
 #  - hosts: workstations1c
 #    remote_user: root
 #    tasks:

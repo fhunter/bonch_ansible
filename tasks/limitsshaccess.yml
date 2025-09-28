@@ -1,0 +1,5 @@
+    - name: add ssh protections to hosts.allow
+      lineinfile: dest=/etc/hosts.allow line="sshd: 127.0.0.1 172.16.64. 172.16.65. 172.16.66. 172.16.67." state=present insertafter=EOF
+
+    - name: add ssh protections to hosts.deny
+      lineinfile: dest=/etc/hosts.allow line="sshd: ALL" state=present insertafter=EOF
