@@ -1,0 +1,14 @@
+- name: Install nftables config
+  ansible.builtin.copy:
+    src: files/common/etc/nftables.conf
+    dest: /etc/nftables.conf
+    owner: root
+    group: root
+    mode: '0755'
+    backup: true
+
+- name: Enable nftables service
+  ansible.builtin.service:
+    name: "nftables"
+    enabled: true
+    state: "started"
