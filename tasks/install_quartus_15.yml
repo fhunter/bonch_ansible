@@ -6,7 +6,7 @@
       lineinfile: dest=/etc/rc.local insertbefore="exit 0" line="{{ item.line }}" state=present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12','13']
       with_items:
-       - { line: 'mount -t debugfs none /sys/kernel/debug' }
-       - { line: 'ln -s /sys/kernel/debug/usb/devices /dev/bus/usb/' }
+       - { line: 'mount -t debugfs none /sys/kernel/debug || echo "Mount failed"' }
+       - { line: 'ln -f -s /sys/kernel/debug/usb/devices /dev/bus/usb/' }
        - { line: 'mount -o bind /dev/bus/ /proc/bus/' }
 
