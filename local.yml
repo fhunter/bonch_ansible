@@ -38,6 +38,13 @@
   - hosts: classes
     remote_user: root
     tasks:
+    - name: install browser extensions
+      apt:
+        pkg:
+         - webext-ublock-origin-chromium
+         - webext-ublock-origin-firefox
+        state: present
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12','13']
     - include_tasks: tasks/update_timezone.yml
     - include_tasks: tasks/limitsshaccess.yml
     - include_tasks: tasks/deploy_firewall.yml
