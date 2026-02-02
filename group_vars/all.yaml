@@ -33,6 +33,15 @@ admins:
     - op@DCTI.SUT.RU
     - eshur@DCTI.SUT.RU
     - Maxim_Rozhkov@DCTI.SUT.RU
+  a233:
+    - automator/admin@DCTI.SUT.RU
+    - automator1/admin@DCTI.SUT.RU
+    - automator2/admin@DCTI.SUT.RU
+    - fhunter@DCTI.SUT.RU
+    - hawk@DCTI.SUT.RU
+    - op@DCTI.SUT.RU
+    - eshur@DCTI.SUT.RU
+    - Maxim_Rozhkov@DCTI.SUT.RU
   a42509.dcti.sut.ru:
     - a.seregin@DCTI.SUT.RU
   a443:
