@@ -362,6 +362,12 @@
     - include_tasks: tasks/install_quartus_15.yml
     - include_tasks: tasks/install_vmshortcuts.yml
   
+  - hosts: a237
+    remote_user: root
+    tasks:
+    - include_tasks: tasks/install_quartus_15.yml
+    - include_tasks: tasks/install_vmshortcuts.yml
+  
   - hosts: a235
     remote_user: root
     tasks:

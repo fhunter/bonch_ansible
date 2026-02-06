@@ -22,9 +22,6 @@ srv462.dcti.sut.ru
 [a260]
 a260[01:13].dcti.sut.ru
 
-[a235]
-a235[01:12].dcti.sut.ru
-
 #[a445]
 #a43703.dcti.sut.ru
 #a445[01:13].dcti.sut.ru
@@ -54,6 +51,12 @@ depo[07:11].dcti.sut.ru
 
 [a233]
 a233[00:12].dcti.sut.ru
+
+[a235]
+a235[01:12].dcti.sut.ru
+
+[a237]
+a237[01:10].dcti.sut.ru
 
 [a441]
 a43702.dcti.sut.ru
@@ -108,6 +111,7 @@ a441
 a443
 a233
 a235
+a237
 a260
 a462
 
@@ -131,6 +135,7 @@ a439[01:12].dcti.sut.ru
 a445[01:13].dcti.sut.ru
 a233[00:12].dcti.sut.ru
 a235[01:12].dcti.sut.ru
+a237[01:10].dcti.sut.ru
 a260[01:13].dcti.sut.ru
 srv-[1:5].dcti.sut.ru
 littlebig.dcti.sut.ru
