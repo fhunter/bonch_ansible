@@ -19,9 +19,12 @@ srv462.dcti.sut.ru
 
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
-[a445]
-a43703.dcti.sut.ru
-a445[01:13].dcti.sut.ru
+[a260]
+a260[01:13].dcti.sut.ru
+
+#[a445]
+#a43703.dcti.sut.ru
+#a445[01:13].dcti.sut.ru
 
 [a439]
 a43704.dcti.sut.ru
@@ -98,10 +101,10 @@ a44304.dcti.sut.ru
 [noremote:children]
 a437
 a439
-a445
 a441
 a443
 a233
+a260
 a462
 
 [classes:children]
@@ -123,6 +126,7 @@ termserver2.dcti.sut.ru
 a439[01:12].dcti.sut.ru
 a445[01:13].dcti.sut.ru
 a233[00:12].dcti.sut.ru
+a260[01:13].dcti.sut.ru
 srv-[1:5].dcti.sut.ru
 littlebig.dcti.sut.ru
 srv462.dcti.sut.ru

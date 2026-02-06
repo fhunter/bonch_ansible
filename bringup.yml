@@ -344,7 +344,13 @@
     handlers:
     - import_tasks: handlers/restartp910nd.yml
 
-  - hosts: a445
+#  - hosts: a445
+#    remote_user: root
+#    tasks:
+#    - include_tasks: tasks/install_quartus_15.yml
+#    - include_tasks: tasks/install_vmshortcuts.yml
+  
+  - hosts: a260
     remote_user: root
     tasks:
     - include_tasks: tasks/install_quartus_15.yml
