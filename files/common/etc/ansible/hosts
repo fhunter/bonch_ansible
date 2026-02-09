@@ -49,6 +49,13 @@ a43905.dcti.sut.ru
 a43906.dcti.sut.ru
 depo[07:11].dcti.sut.ru
 
+[a229]
+a22901.dcti.sut.ru
+
+[a231]
+a231[01:04].dcti.sut.ru
+
+
 [a233]
 a233[00:12].dcti.sut.ru
 
@@ -56,7 +63,11 @@ a233[00:12].dcti.sut.ru
 a235[01:12].dcti.sut.ru
 
 [a237]
-a237[01:11].dcti.sut.ru
+a237[01:12].dcti.sut.ru
+
+[a252]
+a25201.dcti.sut.ru
+
 
 [a441]
 a43702.dcti.sut.ru
@@ -109,6 +120,8 @@ a437
 a439
 a441
 a443
+a229
+a231
 a233
 a235
 a237
