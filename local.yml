@@ -69,7 +69,7 @@
 #    - name: install zoom
 #      action: apt pkg=zoom state=latest install_recommends=no update_cache=no
 
-  - hosts: a44304.dcti.sut.ru
+  - hosts: a25201.dcti.sut.ru
     remote_user: root
     tasks:
     - include_tasks: tasks/install_telegram.yml
