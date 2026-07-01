@@ -63,13 +63,13 @@
 #    tasks:
 #    - include_tasks: tasks/install_faculty.yml
 
-#  - hosts: remoteteaching
-#    remote_user: root
-#    tasks:
-#    - name: install discord
-#      action: apt pkg=discord state=latest install_recommends=no update_cache=no
-#    - name: install zoom
-#      action: apt pkg=zoom state=latest install_recommends=no update_cache=no
+  - hosts: classes
+    remote_user: root
+    tasks:
+    - name: uninstall discord
+      action: apt pkg=discord state=absent
+    - name: uninstall zoom
+      action: apt pkg=zoom state=absent
 
   - hosts: a25201.dcti.sut.ru
     remote_user: root
