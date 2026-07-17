@@ -6,5 +6,5 @@ case "$HOST" in
     "srv-2") PRINCIPAL="automator2" ;;
 esac
 kadmin -p ${PRINCIPAL}/admin -k -t /etc/krb5.keytab << EOF
-delprinc "$2"
+delprinc -force "$2"
 EOF
