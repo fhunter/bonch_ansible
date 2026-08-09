@@ -53,7 +53,7 @@ def getcoresnload():
 
 def getloggedusers():
     loggedusers = []
-    for i in subprocess.check_output('who').splitlines():
+    for i in subprocess.check_output(['w','-h','--short']).splitlines():
         user = i.split()[0]
         if not user in loggedusers:
             loggedusers.append(user.decode('utf-8'))
