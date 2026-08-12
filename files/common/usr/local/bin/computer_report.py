@@ -55,13 +55,14 @@ def getloggedusers():
     loggedusers = []
     for i in subprocess.check_output(['who']).splitlines():
         user = i.split()[0]
-        if user == 'lightdm':
+        if user == b"lightdm":
             continue
         if not user in loggedusers:
             loggedusers.append(user.decode('utf-8'))
     for i in cksessions():
         if not i in loggedusers:
-            loggedusers.append(i)
+            if i != "lightdm":
+                loggedusers.append(i)
     return loggedusers
 
 def getscratchsize():
