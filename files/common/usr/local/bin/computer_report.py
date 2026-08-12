@@ -53,8 +53,10 @@ def getcoresnload():
 
 def getloggedusers():
     loggedusers = []
-    for i in subprocess.check_output(['w','-h','--short']).splitlines():
+    for i in subprocess.check_output(['who']).splitlines():
         user = i.split()[0]
+        if user == 'lightdm':
+            continue
         if not user in loggedusers:
             loggedusers.append(user.decode('utf-8'))
     for i in cksessions():
