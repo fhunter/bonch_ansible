@@ -2,6 +2,13 @@
 - hosts: a237
   remote_user: root
   tasks:
+    - name: remove virtualbox
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12']
+      apt:
+        pkg:
+         - virtualbox-source
+         - virtualbox-dkms
+        state: absent
     - name: copy sources.list to sources.list.d/old.list
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12']
       copy:
@@ -19,20 +26,20 @@
         mode: 0644
         owner: root
     - name: Add new repo
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '12'
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12', '13']
       action: apt_repository repo='deb http://apt.dcti.sut.ru/debian/ bonch13 main' state=present
     - name: apt-get update
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '12'
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12', '13']
       apt:
         update_cache: yes
         cache_valid_time: 1
     - name: apt-get upgrade
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '12'
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12','13']
       apt:
         upgrade: safe
         force_apt_get: true
     - name: apt-get dist-upgrade
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '12'
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12','13']
       apt:
         upgrade: dist
         force_apt_get: true
@@ -41,5 +48,15 @@
         path: /etc/apt/sources.list.d/old.list
         state: absent
     - name: Remove old repo
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12', '13']
       action: apt_repository repo='deb http://apt.dcti.sut.ru/debian/ bonch12 main' state=absent
+    - name: install libavcodec-extra61 and ntpsec-ntpdate
+      apt:
+        pkg:
+         - ntpsec-ntpdate
+         - libavcodec-extra61
+        state: present
+    - name: remove libavcodec-extra59
+      apt:
+        pkg:
+         - libavcodec-extra59
+        state: absent
