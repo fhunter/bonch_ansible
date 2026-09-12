@@ -95,7 +95,6 @@
          - librecad
          - ristretto
          - libsasl2-modules-gssapi-mit
-         - policykit-1-gnome
          - udisks2
          - ntfs-3g
          - eject
@@ -136,6 +135,14 @@
         state: present
         install_recommends: no
         update_cache: yes
+    - name: install DCTI packages
+      apt:
+        pkg:
+         - policykit-1-gnome
+        state: present
+        install_recommends: no
+        update_cache: yes
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
 
     - include_tasks: tasks/install_tablet_support.yml
     - name: install assembly language IDE
