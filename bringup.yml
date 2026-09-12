@@ -117,7 +117,6 @@
          - dfu-util
          - minicom
          - gimp
-         - gimp-plugin-registry
          - xsane
          - vim
          - vim-gtk3
@@ -139,6 +138,7 @@
       apt:
         pkg:
          - policykit-1-gnome
+         - gimp-plugin-registry
         state: present
         install_recommends: no
         update_cache: yes
