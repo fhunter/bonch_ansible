@@ -162,6 +162,8 @@
         update_cache: no
 
     - include_tasks: tasks/install_virtualbox.yml
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12']
+
     - name: install convenience tools
       apt:
         name:
