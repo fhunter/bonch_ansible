@@ -304,7 +304,7 @@
       notify: restart openntpd
 
     - name: Install openntpd defaults
-      copy: src=files/a441/etc/default/openntpd dest=/etc/default/openntpd group=root owner=root mode='0644'
+      copy: src=files/common/etc/default/openntpd dest=/etc/default/openntpd group=root owner=root mode='0644'
       notify: restart openntpd
 
     - name: install lm-sensors

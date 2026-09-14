@@ -38,7 +38,7 @@
     remote_user: root
     tasks:
     - name: Install browser pack
-      apt: pkg=task-pivt-browser-bundle state=present update_cache=no
+      apt: pkg=task-pivt-browser-bundle state=latest update_cache=no
     - name: reinstall libreoffice
       apt:
         pkg:
