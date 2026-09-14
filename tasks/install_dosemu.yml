@@ -6,3 +6,5 @@
         state: present
         install_recommends: no
         force: yes
+    - name: deploy dosemu autoexec.bat
+      copy: src=files/common/etc/dosemu/freedos/autoexec.bat dest=/etc/dosemu/freedos/autoexec.bat owner=root group=root mode="0644"
