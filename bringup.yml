@@ -52,9 +52,6 @@
     - name: add pam group config
       copy: src=files/a441/etc/security/group.conf dest=/etc/security/group.conf owner=root group=distrib mode="0664"
 
-#    - name: fix pam configs for auth
-#      copy: src=files/a441/etc/pam.d/common-auth dest=/etc/pam.d/commion-auth owner=root group=root mode="0644"
-
     - include_tasks: tasks/install_dosemu.yml
     - include_tasks: tasks/fix_autofs_systemd.yml
     - include_tasks: tasks/deploy_trust_for_dcti.sut.ru.yml
@@ -219,7 +216,9 @@
     - include_tasks: tasks/install_archive_tools.yml
     - include_tasks: tasks/enable_quota_applet.yml
     - include_tasks: tasks/enable_mail_applet.yml
-    - include_tasks: tasks/install_browser_pack.yml
+#    - include_tasks: tasks/install_browser_pack.yml
+    - name: Install browser pack
+      apt: pkg=task-pivt-browser-bundle state=present update_cache=no
     - include_tasks: tasks/install_maxima.yml
     - include_tasks: tasks/install_sql_databases.yml
     - include_tasks: tasks/install_haskell.yml
@@ -348,7 +347,7 @@
     tasks:
     - include_tasks: tasks/autostart_pidgin.yml
     - include_tasks: tasks/install_hardwarereports.yml
-    - include_tasks: tasks/deploy_single_signon_for_browsers.yml
+#    - include_tasks: tasks/deploy_single_signon_for_browsers.yml # replaced with task-pivt-browser-bundle
     - include_tasks: tasks/install_unattended_upgrades.yml
     - include_tasks: tasks/add_unburden-home.yml
 

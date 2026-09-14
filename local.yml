@@ -37,13 +37,8 @@
   - hosts: classes
     remote_user: root
     tasks:
-    - name: install browser extensions
-      apt:
-        pkg:
-         - webext-ublock-origin-chromium
-         - webext-ublock-origin-firefox
-        state: present
-      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['12','13']
+    - name: Install browser pack
+      apt: pkg=task-pivt-browser-bundle state=present update_cache=no
     - name: reinstall libreoffice
       apt:
         pkg:
