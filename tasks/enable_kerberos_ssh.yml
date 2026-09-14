@@ -8,6 +8,13 @@
           - libpam-krb5
         state: present
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['11','12', '13']
+    - name: enable kerberos ssh 2
+      apt:
+        pkg:
+          - openssh-client-gssapi
+          - openssh-server-gssapi
+        state: present
+      when: ansible_distribution == 'Debian' and ansible_distribution_major_version in ['13']
     - name: enable gssapi authentication 1
       lineinfile:
         state: present
